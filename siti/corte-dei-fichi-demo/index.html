@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Corte dei Fichi · Ostuni</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="B&B di quattro camere in una casa a volte del Settecento nel centro storico di Ostuni. Si prenota direttamente.">
+<meta property="og:title" content="Corte dei Fichi · Ostuni">
+<meta property="og:description" content="Quattro camere e un fico, nel centro storico di Ostuni.">
+<meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160705_36fd5ef2-5dd9-4f52-9bdf-3cce92690dff_min.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Split stage: a fixed photograph of the courtyard on the right that changes with the fig's seasons,
+   a calm reading column on whitewash on the left; contact and footer break the split full width. */
+:root {
+  --ground: #ECECE7;      /* lime whitewash, a touch of stone */
+  --paper: #F4F5F3;       /* the printed card and sheet */
+  --ink: #1C1B19;
+  --muted: #45433E;
+  --accent: #3B5A2C;      /* fig leaf green: the one action */
+  --accent-ink: #FFFFFF;
+  --field: #26231F;       /* dusk stone, the late dark band */
+  --field-ink: #F4F5F3;
+  --tone: #E1E0DA;        /* one step down from the ground */
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.5rem + 1.6vw, 2.75rem);
+  --step-hero: clamp(2.5rem, 1.6rem + 3vw, 3.75rem);
+  --gap: 12px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font: 400 var(--step-body)/1.55 var(--text);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+figure { margin: 0; }
+a { color: inherit; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.98; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ---------- the split ---------- */
+.stage {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap);
+  padding: var(--gap) max(var(--gap), env(safe-area-inset-right, 0px)) 0 max(var(--gap), env(safe-area-inset-left, 0px));
+}
+.reading { min-width: 0; display: flex; flex-direction: column; }
+.photo {
+  position: sticky; top: calc(var(--gap) + env(safe-area-inset-top, 0px));
+  height: calc(100svh - 2 * var(--gap)); overflow: hidden; background: var(--tone);
+}
+.photo img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.6s var(--ease-in-out);
+}
+.photo img.on { opacity: 1; animation: drift 24s linear infinite alternate; }
+@keyframes drift { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+.photo figcaption {
+  position: absolute; left: 0; bottom: 0; padding: 10px 14px; background: var(--paper); color: var(--ink);
+  font-size: var(--step-small); transition: opacity .4s ease;
+}
+
+/* ---------- hero card ---------- */
+.card {
+  background: var(--paper); min-height: calc(100svh - 2 * var(--gap));
+  display: flex; flex-direction: column; text-align: center;
+}
+.stripe { display: flex; height: 56px; flex: none; overflow: hidden; }
+.stripe span { flex: 0 0 28px; background: var(--ink); }
+.stripe span:nth-child(even) { background: var(--paper); }
+.card-body {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px; padding: 64px 32px 40px;
+}
+.wordmark { font-family: var(--display); font-size: var(--step-lead); letter-spacing: -0.01em; }
+.card h1 { font-size: var(--step-hero); max-width: 13ch; }
+.card .lede { max-width: 36ch; color: var(--ink); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 28px; border: 0; border-radius: 0; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink); font: 600 var(--step-body)/1 var(--text); text-decoration: none;
+  transition: transform .14s var(--ease-out), background-color .2s ease;
+}
+.btn:hover { background: #2F4A23; }
+.btn:active { transform: scale(0.97); }
+.btn.alt { background: var(--tone); color: var(--ink); }
+.btn.alt:hover { background: #D5D4CD; }
+.card-links { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; padding: 0 24px 28px; font-size: var(--step-small); }
+.card-links a, .link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: text-decoration-color .2s ease, color .2s ease; }
+.card-links a:hover, .link:hover { color: var(--accent); }
+
+/* ---------- reading sections ---------- */
+.sec { padding: clamp(96px, 12vw, 180px) clamp(24px, 6vw, 72px) 0; }
+.intro { display: grid; gap: 1.2em; max-width: 34ch; margin-left: 15%; padding-left: 0; padding-right: 0; }
+.intro p:first-child { font-weight: 600; }
+.intro p { color: var(--muted); }
+.intro p:first-child { color: var(--ink); }
+
+/* the printed room sheet */
+.sheet-wrap { padding-left: clamp(0px, 3vw, 40px); padding-right: clamp(0px, 3vw, 40px); }
+.sheet {
+  position: relative; background: var(--paper); padding: 72px clamp(24px, 4vw, 56px) 64px; text-align: center;
+  margin-block: 14px;
+}
+/* scalloped top and bottom edges, drawn as a row of paper-coloured half circles */
+.sheet::before, .sheet::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Ccircle cx='14' cy='14' r='14' fill='%23F4F5F3'/%3E%3C/svg%3E") repeat-x center bottom / 28px 14px;
+}
+.sheet::before { top: -14px; }
+.sheet::after { bottom: -14px; transform: scaleY(-1); }
+.sheet h2 { font-size: var(--step-head); }
+.sheet .note { margin-top: 12px; font-size: var(--step-small); color: var(--muted); }
+.group { margin-top: 56px; }
+.group h3 { font-size: var(--step-lead); margin-bottom: 20px; }
+.items { list-style: none; margin: 0 auto; padding: 0; max-width: 440px; display: grid; gap: 18px; text-align: left; }
+.items li { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; }
+.items .name { font-weight: 600; }
+.items .price { font-variant-numeric: tabular-nums; }
+.items .desc { grid-column: 1 / -1; font-size: var(--step-small); color: var(--muted); line-height: 1.45; }
+.hours { margin-top: 48px; font-size: var(--step-small); color: var(--muted); }
+
+/* the seasons: the live thing */
+.seasons { display: grid; gap: 28px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab {
+  font: 400 var(--step-body)/1 var(--text); color: var(--muted); background: transparent; border: 0;
+  padding: 12px 16px; min-height: 44px; cursor: pointer; transition: background-color .2s ease, color .2s ease;
+}
+.tab:hover { color: var(--ink); background: var(--tone); }
+.tab[aria-selected="true"] { color: var(--accent-ink); background: var(--ink); }
+.seasons h2 { font-size: var(--step-head); }
+.seasons .desc { max-width: 40ch; }
+.season-figure { display: none; }
+.from { font-family: var(--display); font-size: var(--step-lead); }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.actions .btn { min-height: 72px; }
+
+/* prices like a menu + the calculator */
+.prices h2 { font-size: var(--step-head); }
+.prices > p { margin-top: 20px; max-width: 40ch; }
+.price-groups { margin-top: 24px; display: grid; gap: 0; }
+.pg { padding-top: 40px; }
+.pg h3 { font-family: var(--text); font-weight: 600; font-size: var(--step-lead); letter-spacing: 0; line-height: 1.2; margin-bottom: 14px; }
+.pg h3 span { font-weight: 400; color: var(--muted); font-size: var(--step-body); }
+.rows { display: grid; gap: 12px; }
+.row { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
+.pg.current h3 { color: var(--accent); }
+.calc { margin-top: 56px; background: var(--paper); padding: 32px clamp(20px, 3vw, 36px); display: grid; gap: 22px; }
+.calc h3 { font-size: var(--step-lead); }
+.field { display: grid; gap: 8px; }
+.field label { font-size: var(--step-small); color: var(--muted); }
+.field select {
+  font: 400 var(--step-body)/1.2 var(--text); color: var(--ink); background: var(--ground); border: 0; border-radius: 0;
+  min-height: 48px; padding: 0 14px;
+}
+.stepper { display: flex; align-items: center; gap: 0; }
+.stepper button {
+  width: 48px; height: 48px; border: 0; background: var(--ink); color: var(--paper); font: 400 1.5rem/1 var(--text); cursor: pointer;
+  transition: transform .14s var(--ease-out);
+}
+.stepper button:active { transform: scale(0.94); }
+.stepper output { min-width: 96px; text-align: center; font-variant-numeric: tabular-nums; }
+.total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.total strong { white-space: nowrap; font-family: var(--display); font-weight: 400; font-size: var(--step-head); font-variant-numeric: tabular-nums; }
+.calc .small { font-size: var(--step-small); color: var(--muted); }
+.reading .end { height: clamp(96px, 12vw, 180px); }
+
+/* ---------- full width: arriving ---------- */
+.arrive { position: relative; margin-top: var(--gap); min-height: 100svh; overflow: hidden; }
+.arrive > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: drift 30s linear infinite alternate; }
+.visit {
+  position: relative; margin: 60px max(60px, env(safe-area-inset-right, 0px)) 60px auto; width: min(400px, 100%);
+  background: var(--paper); padding: 32px 32px 0; display: grid; gap: 18px; z-index: 1;
+}
+.visit h2 { font-size: var(--step-head); }
+.visit .addr { color: var(--muted); }
+.visit dl { margin: 0; display: grid; gap: 10px; }
+.visit dl div { display: flex; justify-content: space-between; gap: 12px; font-variant-numeric: tabular-nums; }
+.visit dt { color: var(--muted); }
+.visit dd { margin: 0; text-align: right; }
+.visit .btn { margin: 8px -32px 0; min-height: 56px; }
+
+/* ---------- footer ---------- */
+.foot { position: relative; min-height: 100svh; color: var(--field-ink); background: var(--field); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+.foot > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.62); }
+.foot-top, .foot-bottom { position: relative; padding: 32px max(24px, env(safe-area-inset-right, 0px)) 32px max(24px, env(safe-area-inset-left, 0px)); }
+.foot-top { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-size: var(--step-body); }
+.foot-top nav { display: grid; gap: 6px; }
+.foot-top a { text-decoration: none; }
+.foot-top a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.foot-top address { font-style: normal; text-align: right; }
+.bigname { font-family: var(--display); font-size: clamp(3rem, 12.5vw, 13rem); line-height: 0.9; letter-spacing: -0.03em; white-space: nowrap; margin: 0; }
+.legal { margin-top: 14px; font-size: var(--step-small); }
+.legal a { color: inherit; }
+
+/* ---------- entrances (content is visible at rest; the animation only plays on entry) ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.js .in > .r { animation: rise .8s var(--ease-out) both; }
+.js .in > .r:nth-child(2) { animation-delay: 80ms; }
+.js .in > .r:nth-child(3) { animation-delay: 160ms; }
+.js .in > .r:nth-child(4) { animation-delay: 240ms; }
+.js .in > .r:nth-child(5) { animation-delay: 320ms; }
+.js .in .items li { animation: rise .6s var(--ease-out) both; }
+.js .in .items li:nth-child(2) { animation-delay: 70ms; }
+.js .in .items li:nth-child(3) { animation-delay: 140ms; }
+.js .in .items li:nth-child(4) { animation-delay: 210ms; }
+.js .in > .sheet.r { animation: settle .9s var(--ease-out) both; }
+@keyframes settle { from { opacity: 0; transform: translateY(32px) scale(0.98); } to { opacity: 1; transform: none; } }
+.swap { animation: rise .5s var(--ease-out); }
+
+/* ---------- phone ---------- */
+@media (max-width: 860px) {
+  .stage { grid-template-columns: 1fr; padding: var(--gap) max(var(--gap), env(safe-area-inset-right, 0px)) 0 max(var(--gap), env(safe-area-inset-left, 0px)); }
+  .photo { order: -1; position: relative; top: 0; height: 52svh; }
+  .card { min-height: 0; margin-top: -24px; position: relative; margin-inline: 12px; }
+  .stripe { height: 40px; }
+  .card-body { padding: 44px 20px 28px; gap: 22px; }
+  .card h1 { font-size: clamp(2.25rem, 9vw, 3rem); }
+  .sec { padding: 88px 8px 0; }
+  .intro { margin-left: 8px; max-width: 30ch; }
+  .sheet-wrap { padding-left: 0; padding-right: 0; }
+  .sheet { padding: 56px 20px 48px; }
+  .season-figure { display: block; aspect-ratio: 1; overflow: hidden; background: var(--tone); }
+  .season-figure img { width: 100%; height: 100%; object-fit: cover; }
+  .actions { grid-template-columns: 1fr; }
+  .actions .btn { min-height: 60px; }
+  .arrive { min-height: 0; padding-top: 70svh; }
+  .arrive > img { height: 70svh; }
+  .visit { position: relative; top: 0; margin: -80px 16px 0; width: auto; }
+  .foot { min-height: 88svh; }
+  .foot-top address { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .photo img, .photo img.on, .arrive > img { animation: none; transition: none; }
+  .js .in > .r, .js .in .items li, .swap { animation: none; }
+}
+</style>
+
+</head>
+<body>
+<div class="stage">
+  <main class="reading">
+    <header class="card" id="top">
+      <div class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="card-body">
+        <p class="wordmark">Corte dei Fichi</p>
+        <h1>Quattro camere e un fico</h1>
+        <p class="lede">Un B&amp;B nel centro storico di Ostuni: una casa a volte del Settecento con il cortile al centro. Si prenota qui, direttamente con noi.</p>
+        <a class="btn" href="#prenota">Scegli le date</a>
+      </div>
+      <nav class="card-links" aria-label="Sezioni">
+        <a href="#camere">Le camere</a><a href="#stagioni">Le stagioni</a><a href="#arrivare">Come arrivare</a>
+      </nav>
+    </header>
+
+    <section class="sec intro reveal" data-photo="estate" aria-label="La casa">
+      <p class="r">La casa è del Settecento: volte in pietra, muri spessi quasi un metro, imbiancati a calce come tutta la città vecchia.</p>
+      <p class="r">Al centro c'è il cortile, e nel cortile un fico che c'era prima di noi. Il nome viene da lui, e d'estate anche la marmellata della colazione.</p>
+      <p class="r">Le camere sono quattro. Poche apposta: la mattina ci si conosce, e il cortile non è mai affollato.</p>
+      <p class="r">La piazza è a pochi minuti a piedi, tra scale e vicoli; il mare a un quarto d'ora in macchina. <a class="link" href="#camere">Guarda le camere</a></p>
+    </section>
+
+    <section class="sec sheet-wrap reveal" id="camere" data-photo="camera">
+      <div class="sheet r">
+        <h2>Le quattro camere</h2>
+        <p class="note">A notte, per due persone, colazione compresa.</p>
+        <div class="group">
+          <h3>Piano terra, sul cortile</h3>
+          <ul class="items">
+            <li><span class="name">Camera del Fico</span><span class="price">da € 70</span><span class="desc">La finestra dà sull'albero. Volta a stella, doccia nella pietra.</span></li>
+            <li><span class="name">Camera della Calce</span><span class="price">da € 65</span><span class="desc">La più fresca d'estate, con i muri più spessi della casa.</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>Primo piano</h3>
+          <ul class="items">
+            <li><span class="name">Camera delle Volte</span><span class="price">da € 80</span><span class="desc">La più grande: volta a botte alta quattro metri e un letto in più per un terzo ospite.</span></li>
+            <li><span class="name">Camera della Terrazza</span><span class="price">da € 90</span><span class="desc">Una piccola terrazza privata sui tetti bianchi e sulla piana degli ulivi.</span></li>
+          </ul>
+        </div>
+        <div class="group">
+          <h3>La colazione</h3>
+          <ul class="items">
+            <li><span class="name">In cortile, sotto il fico</span><span class="price">compresa</span><span class="desc">Pane di Ostuni, ricotta, taralli, mandorle e marmellate fatte in casa.</span></li>
+            <li><span class="name">D'inverno, in camera</span><span class="price">compresa</span><span class="desc">Stessa colazione, portata su un vassoio quando fuori fa freddo.</span></li>
+          </ul>
+        </div>
+        <p class="hours num">Arrivo dalle 14 alle 20<br>Partenza entro le 11</p>
+      </div>
+    </section>
+
+    <section class="sec seasons reveal" id="stagioni" data-photo="season">
+      <div class="tabs r" role="tablist" aria-label="Stagione">
+        <button class="tab" role="tab" id="tab-inverno" aria-selected="true" data-season="inverno">Inverno</button>
+        <button class="tab" role="tab" id="tab-primavera" aria-selected="false" data-season="primavera">Primavera</button>
+        <button class="tab" role="tab" id="tab-estate" aria-selected="false" data-season="estate">Estate</button>
+      </div>
+      <figure class="season-figure r" aria-hidden="true"><img id="season-img" src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160817_b8a2f347-9fe1-4f92-89e1-5942f3302dc8_min.webp" alt="" width="1200" height="1200" loading="lazy"></figure>
+      <div class="r" id="season-panel" role="tabpanel" aria-labelledby="tab-inverno">
+        <h2 id="season-title">Ostuni senza la folla</h2>
+        <p class="desc" id="season-desc" style="margin-top:24px">Da novembre a marzo la città vecchia torna a chi ci vive. In campagna si raccolgono le olive e i frantoi lavorano fino a sera. Le camere costano meno e la colazione si fa al caldo.</p>
+        <p class="from num" id="season-from" style="margin-top:24px">Camere da € 65 a notte</p>
+      </div>
+      <div class="actions r">
+        <a class="btn" id="season-ask" href="#prenota">Chiedi una camera</a>
+        <a class="btn alt" href="#prenota">Vedi tutti i prezzi</a>
+      </div>
+    </section>
+
+    <section class="sec prices reveal" id="prenota" data-photo="primavera">
+      <h2 class="r">Prenotare diretto</h2>
+      <p class="r">Scrivendoci non passi da nessun portale: il prezzo è quello qui sotto e la camera la scegli tu.</p>
+      <div class="price-groups r">
+        <div class="pg" data-season="inverno"><h3>Inverno <span>novembre – marzo</span></h3>
+          <div class="rows"><div class="row"><span>Camera del Fico</span><span>€ 70</span></div><div class="row"><span>Camera della Calce</span><span>65</span></div><div class="row"><span>Camera delle Volte</span><span>80</span></div><div class="row"><span>Camera della Terrazza</span><span>90</span></div></div></div>
+        <div class="pg" data-season="primavera"><h3>Primavera e ottobre <span>aprile – maggio, ottobre</span></h3>
+          <div class="rows"><div class="row"><span>Camera del Fico</span><span>€ 85</span></div><div class="row"><span>Camera della Calce</span><span>80</span></div><div class="row"><span>Camera delle Volte</span><span>95</span></div><div class="row"><span>Camera della Terrazza</span><span>110</span></div></div></div>
+        <div class="pg" data-season="estate"><h3>Estate <span>giugno – settembre</span></h3>
+          <div class="rows"><div class="row"><span>Camera del Fico</span><span>€ 105</span></div><div class="row"><span>Camera della Calce</span><span>95</span></div><div class="row"><span>Camera delle Volte</span><span>120</span></div><div class="row"><span>Camera della Terrazza</span><span>140</span></div></div></div>
+      </div>
+      <form class="calc r" id="calc" aria-labelledby="calc-title">
+        <h3 id="calc-title">Quanto costa il tuo soggiorno</h3>
+        <div class="field">
+          <label for="room">Camera</label>
+          <select id="room">
+            <option value="0">Camera del Fico</option>
+            <option value="1">Camera della Calce</option>
+            <option value="2">Camera delle Volte</option>
+            <option value="3">Camera della Terrazza</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="season">Quando</label>
+          <select id="season">
+            <option value="inverno">Inverno, novembre – marzo</option>
+            <option value="primavera">Primavera e ottobre</option>
+            <option value="estate">Estate, giugno – settembre</option>
+          </select>
+        </div>
+        <div class="field">
+          <span class="label" id="nights-label" style="font-size:var(--step-small);color:var(--muted)">Notti</span>
+          <div class="stepper" role="group" aria-labelledby="nights-label">
+            <button type="button" id="minus" aria-label="Una notte in meno">−</button>
+            <output id="nights" aria-live="polite">3 notti</output>
+            <button type="button" id="plus" aria-label="Una notte in più">+</button>
+          </div>
+        </div>
+        <div class="total"><span>Totale, colazione compresa</span><strong id="total">€ 210</strong></div>
+        <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Manda la richiesta su WhatsApp</a>
+        <p class="small">Il messaggio è già scritto con camera, stagione e notti: lo modifichi e lo invii tu. Rispondiamo noi, senza intermediari.</p>
+      </form>
+    </section>
+    <div class="end" aria-hidden="true"></div>
+  </main>
+
+  <figure class="photo" aria-label="Il cortile della casa">
+    <img data-key="estate" src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160705_36fd5ef2-5dd9-4f52-9bdf-3cce92690dff_min.webp" alt="Il cortile imbiancato a calce con il vecchio fico in piena estate e un tavolino sotto i rami" width="1792" height="2240" class="on">
+    <img data-key="camera" src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160704_5159fc7b-1f9c-4ef7-be0c-e93534335070_min.webp" alt="Una camera con la volta a stella, i muri a calce e il letto in lino" width="1792" height="2240" loading="lazy">
+    <img data-key="inverno" src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160817_b8a2f347-9fe1-4f92-89e1-5942f3302dc8_min.webp" alt="Lo stesso cortile d'inverno, il fico spoglio e il sole basso sui muri bianchi" width="1792" height="2240" loading="lazy">
+    <img data-key="primavera" src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160818_dd0cd84f-828a-4162-9c7c-97f9200a0cb5_min.webp" alt="Lo stesso cortile in primavera, le prime foglie sul fico e i vasi di rosmarino sulla scala" width="1792" height="2240" loading="lazy">
+    <figcaption id="photo-cap">Il cortile, in estate</figcaption>
+  </figure>
+</div>
+
+<section class="arrive reveal" id="arrivare" aria-labelledby="visit-title">
+  <img src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_160704_bfabff9a-7be0-4535-8da0-3acccc67cabf_min.webp" alt="Un vicolo bianco del centro storico di Ostuni con gli scalini in pietra" width="2688" height="1520" loading="lazy">
+  <div class="visit r">
+    <h2 id="visit-title">Come arrivare</h2>
+    <p class="addr">Centro storico di Ostuni (BR)<br>Indirizzo esatto alla conferma</p>
+    <dl>
+      <div><dt>Aeroporto di Brindisi</dt><dd>35 min</dd></div>
+      <div><dt>Aeroporto di Bari</dt><dd>1 ora</dd></div>
+      <div><dt>Stazione di Ostuni</dt><dd>10 min</dd></div>
+      <div><dt>Telefono</dt><dd>da inserire</dd></div>
+    </dl>
+    <a class="btn" href="#prenota">Scegli le date</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <img src="https://d8j0ntlcm91z4.cloudfront.net/user_36TUec4YwGoGB26Q0PlaTiJj9lW/hf_20261023_161710_7b526c3a-4e9c-4ef4-b393-b7576efc5faf_min.webp" alt="I tetti bianchi di Ostuni al tramonto e la piana degli ulivi fino al mare" width="2688" height="1520" loading="lazy">
+  <div class="foot-top">
+    <nav aria-label="Pagina"><a href="#camere">Le camere</a><a href="#stagioni">Le stagioni</a><a href="#prenota">Prezzi</a><a href="#arrivare">Come arrivare</a></nav>
+    <address>Centro storico, Ostuni<br>Brindisi, Puglia</address>
+  </div>
+  <div class="foot-bottom">
+    <p class="bigname">Corte dei Fichi</p>
+    <p class="legal">Foto generate per l'anteprima. Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it" target="_blank" rel="noopener">prismapixel.it</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var PRICES = { inverno: [70, 65, 80, 90], primavera: [85, 80, 95, 110], estate: [105, 95, 120, 140] };
+  var ROOMS = ['Camera del Fico', 'Camera della Calce', 'Camera delle Volte', 'Camera della Terrazza'];
+  var SEASONS = {
+    inverno: { title: 'Ostuni senza la folla', from: 65, cap: "Il cortile, d'inverno", when: 'in inverno',
+      desc: 'Da novembre a marzo la città vecchia torna a chi ci vive. In campagna si raccolgono le olive e i frantoi lavorano fino a sera. Le camere costano meno e la colazione si fa al caldo.' },
+    primavera: { title: 'Il fico rimette le foglie', from: 80, cap: 'Il cortile, in primavera', when: 'in primavera',
+      desc: 'Aprile e maggio: giornate lunghe, il mare ancora vuoto, le campagne fiorite. Il periodo giusto per camminare tra gli ulivi e tornare in cortile per l’aperitivo.' },
+    estate: { title: "Colazione all'ombra", from: 95, cap: 'Il cortile, in estate', when: "d'estate",
+      desc: 'Da giugno a settembre il fico è carico e il cortile resta fresco anche a mezzogiorno. Il mare la mattina, la città bianca la sera.' }
+  };
+  var state = { season: 'inverno', room: 0, nights: 3 };
+  var $ = function (id) { return document.getElementById(id); };
+
+  // the fixed photograph follows the section in view
+  var imgs = {};
+  document.querySelectorAll('.photo img').forEach(function (im) { imgs[im.dataset.key] = im; });
+  var current = 'estate';
+  var caps = { estate: 'Il cortile, in estate', camera: 'Camera del Fico', inverno: "Il cortile, d'inverno", primavera: 'Il cortile, in primavera' };
+  function showPhoto(key) {
+    if (!imgs[key] || key === current) return;
+    imgs[current].classList.remove('on'); imgs[key].classList.add('on'); current = key;
+    $('photo-cap').textContent = caps[key];
+  }
+
+  function render(swap) {
+    var s = SEASONS[state.season];
+    document.querySelectorAll('.tab').forEach(function (t) {
+      var on = t.dataset.season === state.season;
+      t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+    });
+    $('season-panel').setAttribute('aria-labelledby', 'tab-' + state.season);
+    $('season-title').textContent = s.title;
+    $('season-desc').textContent = s.desc;
+    $('season-from').textContent = 'Camere da € ' + s.from + ' a notte';
+    $('season-img').src = imgs[state.season].getAttribute('src');
+    $('season').value = state.season;
+    $('room').value = String(state.room);
+    $('nights').textContent = state.nights + (state.nights === 1 ? ' notte' : ' notti');
+    var total = PRICES[state.season][state.room] * state.nights;
+    $('total').textContent = '€ ' + total.toLocaleString('it-IT');
+    document.querySelectorAll('.pg').forEach(function (g) { g.classList.toggle('current', g.dataset.season === state.season); });
+    var msg = 'Ciao! Vorrei la ' + ROOMS[state.room] + ' alla Corte dei Fichi ' + s.when + ', per ' + state.nights +
+      (state.nights === 1 ? ' notte' : ' notti') + ' (circa € ' + total + '). Le date che preferisco sono: ';
+    var wa = 'https://wa.me/?text=' + encodeURIComponent(msg);
+    $('wa').href = wa; $('season-ask').href = wa; $('season-ask').target = '_blank'; $('season-ask').rel = 'noopener';
+    if (swap && !reduce) { var p = $('season-panel'); p.classList.remove('swap'); void p.offsetWidth; p.classList.add('swap'); }
+  }
+
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () { state.season = t.dataset.season; render(true); showPhoto(state.season); });
+    t.addEventListener('keydown', function (e) {
+      var order = ['inverno', 'primavera', 'estate'], i = order.indexOf(state.season);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault(); i = (i + (e.key === 'ArrowRight' ? 1 : 2)) % 3; state.season = order[i];
+        render(true); showPhoto(state.season); $('tab-' + state.season).focus();
+      }
+    });
+  });
+  $('room').addEventListener('change', function (e) { state.room = +e.target.value; render(); });
+  $('season').addEventListener('change', function (e) { state.season = e.target.value; render(); showPhoto(state.season); });
+  $('minus').addEventListener('click', function () { state.nights = Math.max(1, state.nights - 1); render(); });
+  $('plus').addEventListener('click', function () { state.nights = Math.min(21, state.nights + 1); render(); });
+  $('calc').addEventListener('submit', function (e) { e.preventDefault(); });
+  render();
+
+  // sections: entrance once, and switch the fixed photograph
+  if ('IntersectionObserver' in window) {
+    var enter = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); enter.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { enter.observe(el); });
+    var follow = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var k = en.target.dataset.photo; showPhoto(k === 'season' ? state.season : k);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('[data-photo]').forEach(function (el) { follow.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>
