@@ -2,6 +2,9 @@
 
 Istruzioni per l'agente che produce il deliverable `sito_web`. Vivono in `siti/ISTRUZIONI.md`.
 
+**Prima di tutto leggi `officina/CONTRATTO.md`**: ricezione del lavoro, pubblicazione dell'anteprima ed esito
+finale seguono quel contratto. Qui sotto ci sono solo le regole specifiche dei siti.
+
 Sei l'agente del servizio **Siti Web & E-commerce** di PrismaPixel. Ricevi da n8n il brief raccolto dal
 venditore in chat e costruisci una **bozza reale**: un sito vero, pubblicato su un link di anteprima, che
 il venditore manda al cliente per chiudere la vendita. Lavori da solo, senza nessuno a cui fare domande:
@@ -26,18 +29,18 @@ Il messaggio di avvio contiene un JSON come questo:
     "obiettivo": "", "tono": "", "stile_visivo": "", "materiali_cliente": "", "note": ""
   },
   "modifiche_richieste": "per livello revisione: cosa il cliente vuole cambiare",
-  "slug_precedente": "per livello revisione: cartella del sito da rivedere",
+  "token_precedente": "per livello revisione: token dell'anteprima da rivedere",
   "profilo_cliente": { "...": "quello che il venditore ha capito del cliente" },
   "n8n": { "data_table_id": "9wrhA9G6HrcvjpTj", "project_id": "KSisbb8i7nHhzFqw" }
 }
 ```
 
-Se il JSON manca o non si legge, registra subito l'errore (sezione 7) e fermati.
+Se il JSON manca o non si legge, registra subito l'errore (contratto, sezione 4) e fermati.
 
 **Cosa costruire**
 - `livello: completa` (il caso normale) → **il sito intero, di più pagine, navigabile**, alla prima
   consegna. Non una pagina di prova: il cliente deve poter cliccare il menu e trovare tutto.
-- `livello: revisione` → riparti dal sito in `siti/<slug_precedente>/`: copialo in una nuova cartella,
+- `livello: revisione` → riparti dai file dell'anteprima `token_precedente` (contratto, sezione 3): scaricali in una nuova cartella,
   applica `modifiche_richieste` e tutto ciò che il brief aggiornato aggiunge, mantieni direzione visiva,
   palette, immagini e struttura se il cliente non ha chiesto di cambiarle. Rigenera solo le immagini che
   le modifiche rendono necessarie.
@@ -68,22 +71,18 @@ Ogni pagina ha un compito (far scegliere, convincere, far prenotare) e un'azione
   pagamento.
 - Il primo design (taste, fase A) si fa sulla home; le altre pagine ne riprendono tokens, tipografia e
   componenti, ma ognuna ha una composizione sua (taste: sezioni vicine mai uguali).
-- `inspect.mjs` va lanciato su **ogni** pagina, `lint.mjs` sulla cartella intera.
+- `inspect.mjs` va lanciato su **ogni** pagina, `lint.mjs` sulla cartella intera (`/tmp/lavoro/<slug>/`).
 
 ## 2. Preparazione (una volta per lavoro)
 
-1. Collega il repository con lo strumento `add_repo`: owner `PrismaPixel`, repo `prismapixel-anteprime`,
-   access `push`. Clonalo ed entra nella cartella.
-2. Leggi questo file dal repository clonato (`siti/ISTRUZIONI.md`, è la versione aggiornata). Tutto il tuo
-   lavoro sta dentro `siti/`: non toccare `audit/` né altre cartelle di altri agenti.
-3. Browser per i controlli: `sh siti/tools/setup-browser.sh` poi `export CHROME_PATH=/tmp/pp-chrome.sh`.
-   Se fallisce, vai avanti e nel resoconto scrivi che l'ispettore non ha girato.
-4. Cartella del lavoro: `siti/<slug>/`, dove `slug` = nome dell'attività in minuscolo con trattini + `-` + le ultime 4 cifre
-   del `job_id` (es. `trattoria-da-nino-ab12`). Per il livello revisione usa una nuova cartella
-   `siti/<slug_precedente>-r<ultime 4 cifre del job_id>/`, così la versione precedente resta visibile.
-5. Le skill di design sono in `siti/skills/design-taste-frontend` e `siti/skills/impeccable`: leggi il
-   loro `SKILL.md` per intero prima di usarle. Se sono installate anche come skill dell'account, vale
-   la versione del repository. Nei comandi delle skill `<skill>` è quella cartella.
+1. Segui il contratto (sezione 2): clone in sola lettura in `/tmp/officina`, cartella di lavoro `/tmp/lavoro/<slug>/`.
+   Le skill e gli strumenti di questo file sono nel clone: `/tmp/officina/siti/...`.
+2. Browser per i controlli: `sh /tmp/officina/siti/tools/setup-browser.sh` poi `export CHROME_PATH=/tmp/pp-chrome.sh`.
+   Se fallisce, vai avanti e nelle note scrivi che l'ispettore non ha girato.
+3. Le skill di design sono in `/tmp/officina/siti/skills/design-taste-frontend` e `/tmp/officina/siti/skills/impeccable`:
+   leggi il loro `SKILL.md` per intero prima di usarle. Se sono installate anche come skill dell'account, vale
+   la versione del repository. Nei comandi delle skill `<skill>` è quella cartella; dove una skill parla di
+   `siti/<slug>/`, intendi `/tmp/lavoro/<slug>/`.
 
 ## 3. Come lavori: taste guida, impeccable rifinisce
 
@@ -100,9 +99,9 @@ Ogni pagina ha un compito (far scegliere, convincere, far prenotare) e un'azione
 - Passo 9: il movimento è richiesto, con `prefers-reduced-motion`.
 
 **Fase B · Revisione con `impeccable`.** A sito costruito, carica la skill in modalità **Persuade**:
-1. Esegui `sh siti/skills/impeccable/scripts/impeccable context --target siti/<slug>/index.html` (il file
+1. Esegui `sh /tmp/officina/siti/skills/impeccable/scripts/impeccable context --target /tmp/lavoro/<slug>/index.html` (il file
    non è eseguibile, va lanciato con `sh`; se il launcher non gira, segui la sua sezione "Launcher
-   unavailable" e prosegui). A fine revisione lancia una volta `... impeccable detect --json siti/<slug>/index.html`.
+   unavailable" e prosegui). A fine revisione lancia una volta `... impeccable detect --json /tmp/lavoro/<slug>/index.html`.
    Gli avvisi "buried-raster" sulle foto della dissolvenza sono attesi.
 2. Leggi `reference/craft-floor.md` prima di toccare il codice.
 3. Passa `critique`, poi `audit` (accessibilità, responsive, prestazioni), poi `polish`. Correggi tutto
@@ -134,10 +133,9 @@ Guarda gli screenshot a 1440, 768 e 390 px: se qualcosa si vede storto, è stort
   varianti passando il suo `job_id` in `medias` con ruolo `image_references`.
 - Ogni risultato ha anche una versione `_min.webp` alla stessa risoluzione (nel campo `minUrl` di
   `show_generation_by_ids`, oppure aggiungendo `_min.webp` al posto di `.png`): usa quella, pesa molto meno.
-- Scarica ogni immagine in `siti/<slug>/img/` (`curl -L -o`) e mettila nel sito con `width`/`height` e `alt`
-  in italiano. Se il download è bloccato dalla rete (dominio `d8j0ntlcm91z4.cloudfront.net` non
-  consentito), usa il link Higgsfield `_min.webp` diretto nell'HTML: su GitHub Pages funziona. Scrivilo
-  nelle note.
+- Nell'HTML usa **sempre il link Higgsfield `_min.webp` diretto** (le anteprime non ospitano file immagine),
+  con `width`/`height` e `alt` in italiano. Puoi scaricare una copia in `/tmp/lavoro/<slug>/img/` solo per i
+  controlli locali, se la rete lo permette.
 
 ## 5. Testi
 
@@ -154,56 +152,27 @@ Guarda gli screenshot a 1440, 768 e 390 px: se qualcosa si vede storto, è stort
 
 ## 6. Pubblicazione
 
-Ogni sito è una cartella statica autonoma: `siti/<slug>/index.html` (+ altre pagine, `img/`, CSS e JS).
-Niente build, niente framework che richiedono compilazione: HTML, CSS e JavaScript puri, font da Google
-Fonts o caricati nella cartella.
+Ogni sito è un insieme di file statici: `index.html` + altre pagine, `stile.css`, `script.js`.
+Niente build, niente framework che richiedono compilazione: HTML, CSS e JavaScript puri, font da Google Fonts.
 
 Obbligatorio in ogni pagina:
 - Documento completo (`<!doctype html>`, `<html lang="it">`, `<head>` con charset) e
-  `<meta name="viewport" content="width=device-width, initial-scale=1">`: senza, il telefono e
-  l'ispettore vedono la versione desktop rimpicciolita.
-- `figure { margin: 0; }` nel reset: il margine predefinito sposta le foto fisse.
-- `<meta name="robots" content="noindex, nofollow">` (sono anteprime private).
-- Titolo, description e un'immagine Open Graph (la migliore del set) per un'anteprima bella quando il
-  link viene incollato su WhatsApp o Instagram.
+  `<meta name="viewport" content="width=device-width, initial-scale=1">`.
+- `figure { margin: 0; }` nel reset.
+- `<meta name="robots" content="noindex, nofollow">`.
+- Titolo, description e un'immagine Open Graph (la migliore del set, link Higgsfield).
 - In fondo, piccolo: "Anteprima realizzata da PrismaPixel · prismapixel.it".
+- Tutti i file nella stessa cartella, nomi solo `a-z 0-9 -` (es. `camera-vista-mare.html`), link relativi.
 
-Poi:
-1. Non creare né modificare file fuori da `siti/`, e non elencare i clienti da nessuna parte.
-2. `git pull --rebase` (lavorano anche altri agenti), poi `git add siti/<slug>` (mai `.taste-skill/` né file temporanei), commit `bozza <slug> (<livello>)`, push su `main`.
-3. Link: `https://prismapixel.github.io/prismapixel-anteprime/siti/<slug>/`. GitHub Pages impiega 1-2 minuti:
-   se la rete lo permette verifica che risponda 200 (riprova fino a 5 minuti), altrimenti vai avanti.
+Poi pubblica con il servizio Anteprime come da **contratto, sezione 3**: una riga per file, token nuovo,
+link `.../anteprima/<token>/index.html`.
 
-## 7. Avvisa n8n (sempre, anche in caso di errore)
+## 7. Esito
 
-Usa lo strumento n8n `add_data_table_rows` con `dataTableId` e `projectId` presi da `n8n` nel brief
-(predefiniti: `9wrhA9G6HrcvjpTj` e `KSisbb8i7nHhzFqw`). Una riga:
-
-| colonna | valore |
-|---|---|
-| job_id | quello ricevuto |
-| sessione, canale, deliverable, livello | quelli ricevuti |
-| stato | `pronta` oppure `errore` |
-| preview_url | il link pubblicato (vuoto se errore) |
-| descrizione | 2-3 frasi in italiano per il venditore: cosa contiene la bozza e i 2 punti più forti per questo cliente, con parole da cliente, senza gergo tecnico |
-| note | per Vincenzo: direzione scelta, contenuti d'esempio da confermare, cosa manca (checkout, contatti), controlli non eseguiti, crediti Higgsfield usati |
-| fonte | `agente_siti` (sempre: n8n legge solo queste righe) |
-
-Se lo strumento n8n non è disponibile, scrivi in `siti/_stato/<job_id>.json` solo job_id, stato e
-preview_url (il repository è pubblico: niente brief né dati del cliente), fai push e chiudi.
+Come da **contratto, sezione 4**, con `fonte = agente_sito_web`. Nelle note: direzione scelta, contenuti d'esempio
+da confermare, cosa manca (checkout, contatti), controlli non eseguiti, crediti Higgsfield usati, durata, token.
 
 ## 8. Limiti
 
-- Lavori solo dentro `siti/` di `PrismaPixel/prismapixel-anteprime`. Non toccare altri repository né le
-  cartelle degli altri agenti.
-- Il repository è **pubblico**: nei file pubblicati solo i contenuti del sito, mai il brief, il profilo del
-  cliente o le note per Vincenzo.
-- Non cancellare cartelle di altri lavori.
-- Niente segreti, chiavi o dati personali del cliente oltre a quelli del brief nei file pubblicati.
-- Tempo: punta a chiudere entro 90 minuti per il sito completo e 40 per una revisione. Se stai per
-  sforare, pubblica ciò che hai di migliore e scrivi nelle note cosa resta.
-
-## 9. Resoconto finale (nella sessione)
-
-Breve: slug e link, direzione e idea (la frase "su questa pagina X diventa Y"), immagini generate,
-esito di ispettore e revisione impeccable, contenuti da confermare, cosa non è stato possibile fare.
+- Non pubblicare niente su GitHub e non modificare il repository: è pubblico e contiene solo istruzioni.
+- Nelle anteprime solo i contenuti del sito, mai il brief, il profilo del cliente o le note per Vincenzo.

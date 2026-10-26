@@ -1,6 +1,9 @@
 # Agente Audit digitale e strategia · PrismaPixel
 
-Istruzioni per l'agente che produce il deliverable `audit_strategia`. Lo avvia n8n con il JSON del lavoro:
+Istruzioni per l'agente che produce il deliverable `audit_strategia`.
+
+**Prima di tutto leggi `officina/CONTRATTO.md`**: ricezione del lavoro, pubblicazione dell'anteprima ed esito finale
+seguono quel contratto. Qui sotto ci sono solo le regole specifiche dell'audit. Il JSON del lavoro:
 
 ```
 { job_id, sessione, canale, deliverable: "audit_strategia", livello, brief, profilo_cliente,
@@ -68,25 +71,15 @@ Divieti:
 
 ## 3. Pubblicazione
 
-- Slug: nome dell'attività in minuscolo con trattini + ultime 4 cifre del job_id (es. `pizzeria-da-mario-a1b2`).
-- Copia `audit/_modello/index.html` in `audit/<slug>/index.html` e riempilo. Tieni il `<meta name="robots" content="noindex">`.
-- Nessuna immagine esterna, nessuno script esterno: solo i font Google già nel modello.
+- Copia `/tmp/officina/audit/_modello/index.html` in `/tmp/lavoro/<slug>/index.html` e riempilo. Tieni il `<meta name="robots" content="noindex, nofollow">`.
+- Nessuna immagine esterna, nessuno script esterno: solo i font Google già nel modello. Tutto in un solo file `index.html`.
 - Controlla che si legga bene a 375 px di larghezza (niente scroll orizzontale: tabelle con al massimo 3 colonne).
-- `git add`, commit "Audit <slug>", `git fetch origin main && git rebase origin/main`, `git push origin HEAD:main`.
-- Link: `https://prismapixel.github.io/prismapixel-anteprime/audit/<slug>/`. Aspetta fino a 3 minuti che risponda (controlla con curl); se non risponde, scrivi comunque la riga e annotalo in `note`.
+- Pubblica con il servizio Anteprime come da **contratto, sezione 3**: token nuovo, una riga con `pagina = index.html`.
+- L'audit contiene dati sul cliente e sui concorrenti: **mai su GitHub**, solo nella tabella Anteprime.
 
-## 4. Riga nella tabella n8n (sempre, anche in caso di errore)
+## 4. Esito (sempre, anche in caso di errore)
 
-Con lo strumento n8n `add_data_table_rows` sulla tabella e il progetto del JSON:
-
-| colonna | valore |
-|---|---|
-| job_id, sessione, canale, deliverable, livello | dal JSON |
-| fonte | `agente_audit` |
-| stato | `pronta` oppure `errore` |
-| preview_url | il link (solo se pronta) |
-| descrizione | 2 righe con le 3 priorità (solo se pronta) |
-| brief_json | il brief come stringa JSON |
-| note | `crediti Manifold: <N> · durata: <minuti> min` + eventuali controlli saltati o motivo dell'errore |
-
-Se il JSON del lavoro manca o è illeggibile: riga con `stato = "errore"`, `fonte = "agente_audit"`, `note = "JSON del lavoro mancante o illeggibile"` nella tabella `9wrhA9G6HrcvjpTj` (progetto `KSisbb8i7nHhzFqw`), poi fermati.
+Come da **contratto, sezione 4**, con `fonte = agente_audit_strategia`:
+- `descrizione`: 2 righe con le 3 priorità (solo se pronta).
+- `note`: `durata: <N> min · crediti: manifold <N> · token: <token>` + controlli saltati, dati "da verificare" o motivo dell'errore.
+- In più, per il passaggio di testimone: aggiungi in fondo alle note una riga `PASSA_A: <deliverable>` con il servizio della priorità n°1 (es. `PASSA_A: sito_web`).

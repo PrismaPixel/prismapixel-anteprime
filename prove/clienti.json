@@ -1,0 +1,51 @@
+{
+  "nota": "Clienti del banco di prova. I primi quattro sono inventati (nessun dato reale): servono per i servizi che producono contenuti. Per l'audit si usano attività vere di Vincenzo (Puglienzo, PrismaPixel) e un caso senza sito.",
+  "creativi": [
+    {
+      "id": "bb-ostuni",
+      "brief": {
+        "attivita": "Masseria Lamacupa", "settore": "B&B in masseria", "area": "Ostuni (BR), campagna verso il mare",
+        "offerta": "5 camere in pietra, colazione con prodotti dell'orto, piscina, biciclette per arrivare al mare (8 km)",
+        "pubblico": "coppie 30-55 anni, molti stranieri (Germania, Francia), anche bassa stagione",
+        "obiettivo": "prenotazioni dirette invece che da Booking", "tono": "caldo, essenziale, niente lusso ostentato",
+        "stile_visivo": "pietra bianca, ulivi, luce del tardo pomeriggio", "materiali_cliente": "nessun logo", "note": "aperta da marzo a novembre"
+      },
+      "profilo_cliente": { "problema_dichiarato": "paga troppe commissioni a Booking", "ecosistema": { "sito": "nessuno", "social": "Instagram poco usato" } }
+    },
+    {
+      "id": "clinica-bari",
+      "brief": {
+        "attivita": "Studio Dentistico Murat", "settore": "studio dentistico", "area": "Bari, quartiere Murat",
+        "offerta": "igiene, ortodonzia invisibile, implantologia, odontoiatria pediatrica", "pubblico": "famiglie e professionisti del quartiere",
+        "obiettivo": "richieste di prima visita online", "tono": "sobrio, rassicurante, chiaro",
+        "stile_visivo": "pulito, luminoso, niente stock con sorrisi finti", "materiali_cliente": "logo blu e bianco", "note": "settore sanitario: nessuna promessa di risultato"
+      },
+      "profilo_cliente": { "problema_dichiarato": "le richieste arrivano solo per telefono", "ecosistema": { "sito": "vecchio, non mobile" } }
+    },
+    {
+      "id": "ristorante-monopoli",
+      "brief": {
+        "attivita": "Osteria del Porto Vecchio", "settore": "ristorante di pesce", "area": "Monopoli (BA), centro storico vicino al porto",
+        "offerta": "crudi, pesce del giorno, pasta fresca, cantina di vini pugliesi", "pubblico": "turisti d'estate, locali d'inverno",
+        "obiettivo": "prenotazioni dei tavoli", "tono": "verace, accogliente, un po' ironico",
+        "stile_visivo": "blu del porto, legno delle barche, tovaglie bianche", "materiali_cliente": "nessuno", "note": "chiuso il martedì"
+      },
+      "profilo_cliente": { "problema_dichiarato": "d'inverno sala mezza vuota", "ecosistema": { "social": "Instagram attivo, sito assente" } }
+    },
+    {
+      "id": "negozio-online",
+      "brief": {
+        "attivita": "Ceramiche Grottaglie Lab", "settore": "e-commerce artigianale", "area": "Grottaglie (TA), spedizioni in tutta Italia",
+        "offerta": "piatti, ciotole e pumi in ceramica dipinta a mano, liste nozze", "pubblico": "donne 28-50 anni, regali e casa",
+        "obiettivo": "vendere online", "tono": "artigianale, curato, mai rustico-kitsch",
+        "stile_visivo": "smalti blu e verde ramina, sfondo argilla", "materiali_cliente": "nessuno", "note": "oggi vende solo su Etsy"
+      },
+      "profilo_cliente": { "problema_dichiarato": "dipende da Etsy e dalle sue commissioni", "ecosistema": { "sito": "nessuno", "social": "Instagram 4.000 follower" } }
+    }
+  ],
+  "audit": [
+    { "id": "audit-puglienzo", "brief": { "attivita": "Puglienzo", "settore": "tour in barca alle grotte", "area": "Monopoli e Polignano a Mare", "sito": "https://puglienzo.it", "instagram": "puglienzo.it", "obiettivo": "più prenotazioni dirette dal sito", "concorrenti": "" } },
+    { "id": "audit-prismapixel", "brief": { "attivita": "PrismaPixel", "settore": "agenzia di marketing digitale", "area": "Puglia (Gioia del Colle) e clienti in tutta Italia", "sito": "https://prismapixel.it", "instagram": "prismapixel.it", "obiettivo": "farsi trovare da PMI pugliesi", "concorrenti": "" } },
+    { "id": "audit-senza-sito", "brief": { "attivita": "Osteria del Porto Vecchio", "settore": "ristorante di pesce", "area": "Monopoli (BA)", "sito": "", "instagram": "", "obiettivo": "prenotazioni d'inverno", "concorrenti": "" } }
+  ]
+}
