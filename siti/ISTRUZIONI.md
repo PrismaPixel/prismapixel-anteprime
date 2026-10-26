@@ -20,13 +20,13 @@ Il messaggio di avvio contiene un JSON come questo:
   "sessione": "id della conversazione",
   "canale": "demo|whatsapp|instagram|...",
   "deliverable": "sito_web",
-  "livello": "prima|completa",
+  "livello": "completa|revisione|prima",
   "brief": {
     "attivita": "", "settore": "", "area": "", "offerta": "", "pubblico": "",
     "obiettivo": "", "tono": "", "stile_visivo": "", "materiali_cliente": "", "note": ""
   },
-  "modifiche_richieste": "solo per livello completa",
-  "slug_precedente": "solo per livello completa: cartella della prima bozza",
+  "modifiche_richieste": "per livello revisione: cosa il cliente vuole cambiare",
+  "slug_precedente": "per livello revisione: cartella del sito da rivedere",
   "profilo_cliente": { "...": "quello che il venditore ha capito del cliente" },
   "n8n": { "data_table_id": "9wrhA9G6HrcvjpTj", "project_id": "KSisbb8i7nHhzFqw" }
 }
@@ -35,15 +35,40 @@ Il messaggio di avvio contiene un JSON come questo:
 Se il JSON manca o non si legge, registra subito l'errore (sezione 7) e fermati.
 
 **Cosa costruire**
-- `livello: prima` → **una pagina sola** (homepage/landing completa): il primo schermo, la sezione che
-  dimostra l'offerta, la parte che spinge all'azione richiesta (chiamare, prenotare, comprare), contatti.
-  Pochi blocchi fatti benissimo, non un sito intero abbozzato.
-- `livello: completa` → **sito multipagina**: home, servizi o prodotti, chi siamo, contatti/prenotazione.
-  Parti dalla prima bozza (`slug_precedente`), applica `modifiche_richieste`, mantieni la direzione visiva
-  se il cliente non ha chiesto di cambiarla.
+- `livello: completa` (il caso normale) → **il sito intero, di più pagine, navigabile**, alla prima
+  consegna. Non una pagina di prova: il cliente deve poter cliccare il menu e trovare tutto.
+- `livello: revisione` → riparti dal sito in `siti/<slug_precedente>/`: copialo in una nuova cartella,
+  applica `modifiche_richieste` e tutto ciò che il brief aggiornato aggiunge, mantieni direzione visiva,
+  palette, immagini e struttura se il cliente non ha chiesto di cambiarle. Rigenera solo le immagini che
+  le modifiche rendono necessarie.
+- `livello: prima` (solo se arriva ancora) → trattalo come `completa`.
+
+**Le pagine del sito.** Decidile prima di qualsiasi design, partendo dal settore e dalle voci del brief.
+Ogni pagina ha un compito (far scegliere, convincere, far prenotare) e un'azione principale. Di base:
+
+| Settore | Pagine |
+|---|---|
+| B&B, hotel, case vacanza | Home · una pagina per camera o alloggio · Colazione e servizi · Dintorni e stagioni · Prenota · FAQ · Contatti |
+| Tour, esperienze, noleggi | Home · una pagina per esperienza · Come funziona · Prenota · FAQ · Contatti |
+| Ristorante, bar, food | Home · Menu (completo, con prezzi d'esempio) · La cucina o chi siamo · Prenota un tavolo · Contatti |
+| Studio medico, clinica, professionista | Home · una pagina per servizio o specialità · Chi siamo (senza nomi inventati) · Prenota una visita · FAQ · Contatti |
+| Concessionaria, negozio fisico | Home · Catalogo o stock · scheda tipo · Servizi · Chi siamo · Contatti |
+| E-commerce | Home · Catalogo con filtri · 3-4 schede prodotto · Carrello · Spedizioni e resi · Chi siamo · Contatti |
+| Servizi B2B, agenzie | Home · una pagina per servizio · Metodo · Chi siamo · Contatti |
+
+- Le voci del brief (servizi, prodotti, camere, piatti) diventano pagine o schede vere, ognuna con il suo
+  testo. Se il brief non le elenca, scrivine di plausibili e mettile nelle note "da confermare".
+- 5-8 pagine: meglio poche complete che tante vuote. Ogni pagina rispetta le regole di taste (pieno
+  contenuto, almeno un'immagine vera, niente sezioni vuote).
+- Un unico file `stile.css` e `script.js` condivisi, stessa barra di navigazione e stesso piede su tutte
+  le pagine, link tra le pagine relativi (`camere.html`, non `/camere.html`), la pagina corrente evidenziata.
 - **E-commerce** (l'offerta è vendere prodotti online, o il brief parla di negozio/shop): catalogo con
-  filtri semplici, scheda prodotto, carrello visivo. Il pagamento non esiste: il pulsante di acquisto porta
-  a `#checkout` e nel resoconto scrivi che va collegato. Mai finti moduli di pagamento.
+  filtri semplici, schede prodotto, carrello visivo che funziona nella pagina. Il pagamento non esiste: il
+  pulsante di acquisto porta a `#checkout` e nel resoconto scrivi che va collegato. Mai finti moduli di
+  pagamento.
+- Il primo design (taste, fase A) si fa sulla home; le altre pagine ne riprendono tokens, tipografia e
+  componenti, ma ognuna ha una composizione sua (taste: sezioni vicine mai uguali).
+- `inspect.mjs` va lanciato su **ogni** pagina, `lint.mjs` sulla cartella intera.
 
 ## 2. Preparazione (una volta per lavoro)
 
@@ -54,8 +79,8 @@ Se il JSON manca o non si legge, registra subito l'errore (sezione 7) e fermati.
 3. Browser per i controlli: `sh siti/tools/setup-browser.sh` poi `export CHROME_PATH=/tmp/pp-chrome.sh`.
    Se fallisce, vai avanti e nel resoconto scrivi che l'ispettore non ha girato.
 4. Cartella del lavoro: `siti/<slug>/`, dove `slug` = nome dell'attività in minuscolo con trattini + `-` + le ultime 4 cifre
-   del `job_id` (es. `trattoria-da-nino-ab12`). Per il livello completa usa una nuova cartella
-   `siti/<slug_precedente>-completa/`, così la prima bozza resta visibile.
+   del `job_id` (es. `trattoria-da-nino-ab12`). Per il livello revisione usa una nuova cartella
+   `siti/<slug_precedente>-r<ultime 4 cifre del job_id>/`, così la versione precedente resta visibile.
 5. Le skill di design sono in `siti/skills/design-taste-frontend` e `siti/skills/impeccable`: leggi il
    loro `SKILL.md` per intero prima di usarle. Se sono installate anche come skill dell'account, vale
    la versione del repository. Nei comandi delle skill `<skill>` è quella cartella.
@@ -93,7 +118,7 @@ Guarda gli screenshot a 1440, 768 e 390 px: se qualcosa si vede storto, è stort
 - Prima di generare chiama `get_preferences` di Higgsfield: crea un progetto solo se
   `auto_create_project` è attivo. Non pagare mai con generazioni gratuite/unlimited senza istruzioni
   (`use_unlim: false`).
-- Budget: **prima bozza 4-6 immagini**, **bozza completa 8-12**. Controlla il costo con `get_cost: true`
+- Budget: **sito completo 8-12 immagini** (almeno una per pagina, più il set della home), **revisione 0-4**. Controlla il costo con `get_cost: true`
   sul primo prompt; se il saldo (`balance`) non basta, genera il minimo indispensabile (2-3) e scrivilo
   nelle note.
 - Modelli: `gpt_image_2_5` per luoghi, ambienti, dettagli e foto realistiche; `marketing_studio_image`
@@ -175,7 +200,7 @@ preview_url (il repository è pubblico: niente brief né dati del cliente), fai 
   cliente o le note per Vincenzo.
 - Non cancellare cartelle di altri lavori.
 - Niente segreti, chiavi o dati personali del cliente oltre a quelli del brief nei file pubblicati.
-- Tempo: punta a chiudere entro 40 minuti per la prima bozza e 90 per la completa. Se stai per
+- Tempo: punta a chiudere entro 90 minuti per il sito completo e 40 per una revisione. Se stai per
   sforare, pubblica ciò che hai di migliore e scrivi nelle note cosa resta.
 
 ## 9. Resoconto finale (nella sessione)
