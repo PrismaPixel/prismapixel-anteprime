@@ -25,6 +25,8 @@ await p.evaluate(() => document.fonts.ready);
 const info = await p.evaluate(() => {
   const SICUREZZA = 64;
   const ris = [];
+  // le slide fuori dal binario scorrevole verrebbero tagliate: le mettiamo una sotto l'altra, a misura reale
+  document.querySelectorAll('.binario').forEach(b => { b.style.cssText = 'display:block;overflow:visible;scroll-snap-type:none'; });
   document.querySelectorAll('.tela').forEach((t, i) => {
     t.style.transform = 'none';
     t.closest('.cornice').style.cssText = 'width:1080px;height:1350px;flex:0 0 1080px;aspect-ratio:auto';

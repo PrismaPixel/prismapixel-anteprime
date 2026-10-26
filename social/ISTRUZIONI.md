@@ -109,7 +109,7 @@ Leggi tutto `social/skills/kallaway-copywriting.md`, in particolare le sezioni 3
 |---|---|
 | 1 · copertina | **text hook**: soggetto + stakes, massimo 2 righe, numeri specifici, niente congiunzioni né punteggiatura. Un sottotitolo breve è opzionale. Visual allineato all'hook. |
 | 2 · lock-in | conferma la promessa e dà un motivo per fidarsi (Trasformazione, Contrasto rapido o Magic Box: niente prove inventate) |
-| 3-5 · corpo | un punto per slide: titolo + 1-2 frasi. Tra una slide e l'altra "ma" o "quindi", mai "e poi". Ogni 2-3 slide un loop opener ("E non è nemmeno la parte più importante"). Ordine: il secondo punto migliore per primo. |
+| 3-5 · corpo | un punto per slide: titolo + 1-2 frasi. Il legame "ma/quindi" è una regola per costruire la scaletta (ogni slide nasce da un conflitto o da una conseguenza della precedente), **non parole da incollare all'inizio del testo**: una slide che comincia con "Ma…" o "Quindi…" senza un appiglio nella slide prima suona sbagliata. Ogni 2-3 slide un loop opener che porta alla slide successiva e ha senso da solo. Ordine: il secondo punto migliore per primo. |
 | 6 · payoff | la risposta non ovvia che chiude il loop della copertina |
 | 7 · CTA | CTA nativa e vera: salva, commenta una parola chiave, scrivici in DM, prenota dal link in bio. Mai promettere cose che il cliente non ha detto di offrire. |
 
@@ -127,6 +127,13 @@ Leggi tutto `social/skills/kallaway-copywriting.md`, in particolare le sezioni 3
 
 Per ogni carosello scrivi anche **3 hook alternativi** di copertina, etichettati per formato (Insegnante,
 Contrarian…). Vanno solo nelle note per Vincenzo, non nella pagina.
+
+Rileggi ogni slide **da sola e in sequenza**: deve suonare come la direbbe una persona, non come un esercizio di
+tecnica.
+
+Non aggiungere caratteristiche del servizio che il brief non dice: orari, modalità di prenotazione, "anche la
+sera", "senza telefonate", consegne, garanzie. Se una CTA ne ha bisogno, scrivila in modo neutro e mettila tra le
+cose da confermare.
 
 Prima di passare al design, rileggi ogni contenuto con la **Checklist QA** (sezione 11 della skill) e correggi.
 
@@ -166,6 +173,10 @@ classi `.s-` e i font della scheda di stile.
 - **Margini di sicurezza**: tutto il testo sta ad almeno 64 px dai bordi. Un elemento decorativo che deve uscire
   dal margine va marcato con `data-fuori-ok`.
 - **Coerenza**: le slide interne seguono tutte lo stesso schema della scheda di stile.
+- **Composizione piena**: la slide usa tutta la tela come nei riferimenti. Niente metà slide vuota per caso: lo
+  spazio vuoto c'è solo se è una scelta del riferimento, e deve sembrare voluto.
+- **Peso del testo**: il testo di lettura non va sotto il peso 400. I pesi sottili (300 e meno) sono solo per
+  parole grandi.
 - **Ultima slide (CTA)**: handle del cliente ben visibile e l'azione in una riga.
 - **Immagini**:
   - generale solo se i riferimenti scelti usano la foto;
