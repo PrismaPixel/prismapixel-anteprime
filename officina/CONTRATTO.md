@@ -39,6 +39,9 @@ Il messaggio di avvio contiene un JSON:
 3. Cartella di lavoro: `/tmp/lavoro/<slug>/`, con `slug` = nome dell'attività in minuscolo con trattini
    (solo `a-z`, `0-9`, `-`, massimo 40 caratteri).
 4. Leggi per intero le istruzioni del servizio e le skill che indicano, dal clone.
+5. **Registra il lavoro nell'Agent OS** (sezione 4b, inizio) e leggi il contesto che ti restituisce: memoria del
+   cliente, note di Vincenzo, lavori già fatti e il risultato del lavoro precedente se è un passaggio di testimone.
+   Usalo: non contraddire ciò che è già stato scoperto o deciso.
 
 ## 3. Pubblicare l'anteprima (servizio Anteprime su n8n)
 
@@ -95,6 +98,22 @@ presi da `n8n` nel JSON (predefiniti `9wrhA9G6HrcvjpTj` e `KSisbb8i7nHhzFqw`).
 
 Se qualcosa si rompe a metà, scrivi comunque l'esito `errore` con il motivo: un lavoro senza esito blocca il
 venditore.
+
+## 4b. Agent OS (database Supabase condiviso da tutti gli agenti)
+
+Con lo strumento Supabase `execute_sql`, progetto **`oshnvlkwuclxbbjdaupt`**. Se Supabase non risponde, vai avanti
+lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un lavoro.
+
+- **Inizio** (subito dopo aver letto il JSON): `select officina_inizio('<JSON del lavoro>'::jsonb);`
+  Restituisce `contesto` con la scheda cliente (`cliente.memoria`, `cliente.note_vincenzo`, `cliente.lavori`) e
+  `job.dal_lavoro_precedente`.
+- **Fine** (subito dopo l'esito nella tabella n8n): `select officina_fine('<JSON>'::jsonb);` con
+  `{job_id, stato: "pronta"|"errore", preview_url, descrizione, note, crediti, risultato, fatti, passa_a}`:
+  - `crediti`: numero intero dei crediti usati (Higgsfield o Manifold);
+  - `risultato`: oggetto con ciò che serve ai prossimi agenti (es. audit: `{"priorita": [...], "piano_90_giorni": {...}}`; sito: `{"pagine": [...], "palette": [...], "token": "..."}`);
+  - `fatti`: 2-5 fatti utili sul cliente, `[{"tipo": "problema|fatto|obiettivo|preferenza|risultato", "testo": "..."}]`, solo cose verificate;
+  - `passa_a`: il lavoro successivo consigliato, `[{"deliverable": "sito_web", "brief": {...}}]` (l'audit indica sempre il servizio della priorità n°1; gli altri solo se ha senso). Il lavoro non parte da solo: aspetta l'approvazione di Vincenzo.
+- Nell'SQL scrivi il JSON come stringa tra apici singoli, raddoppiando ogni apice interno (`l'orto` → `l''orto`).
 
 ## 5. Servizi e istruzioni
 
