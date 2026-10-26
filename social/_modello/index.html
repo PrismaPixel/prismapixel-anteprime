@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contenuti social per NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="Anteprima dei caroselli e dei post preparati per NOME ATTIVITÀ.">
+<meta property="og:title" content="Contenuti social per NOME ATTIVITÀ">
+<meta property="og:description" content="Caroselli e post pronti da pubblicare, in anteprima.">
+<meta property="og:image" content="URL_IMMAGINE_COPERTINA_min.webp">
+<!--
+  MODELLO DELL'AGENTE CAROSELLI E POST · PrismaPixel
+  - La pagina (cornice) resta neutra: cambia solo i colori della sezione :root "pagina" se serve.
+  - Le slide sono tele da 1080x1350 (4:5) dentro .tela: le scrivi a misura reale, lo script le rimpicciolisce.
+  - Lo stile delle slide è del CLIENTE: variabili --b-* qui sotto + classi tue con prefisso .s-
+  - Un carosello = un <article class="post" data-tipo="carosello">; un post singolo = data-tipo="singolo" con una sola .tela
+  - Sostituisci tutti i testi MAIUSCOLI segnaposto. Cancella i commenti di istruzione prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=FONT+TITOLI:wght@600;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- pagina (cornice neutra, non è il brand del cliente) ---------- */
+:root {
+  --p-bg: #f4f5f3; --p-card: #ffffff; --p-ink: #141616; --p-muted: #5d6463; --p-line: #e2e5e3; --p-accent: #00777b;
+  /* ---------- brand del cliente: usati SOLO dentro le slide ---------- */
+  --b-bg: #0f1d24; --b-bg2: #f3eee6; --b-ink: #f6f2ea; --b-ink2: #10202a; --b-accent: #e8a33d;
+  --b-font-titoli: 'FONT TITOLI', Georgia, serif; --b-font-testo: 'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--p-bg); color: var(--p-ink); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 680px; margin: 0 auto 40px; text-align: center; }
+header.intro .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--p-accent); font-weight: 600; }
+header.intro h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+header.intro p { color: var(--p-muted); margin: 0; }
+h2.sezione { font-size: 20px; margin: 48px 0 16px; text-align: center; }
+.griglia { display: grid; gap: 28px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); align-items: start; }
+
+/* card in stile Instagram */
+.post { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; overflow: hidden; max-width: 460px; width: 100%; margin: 0 auto; }
+.post .testa { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.post .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--b-accent); color: var(--b-ink2); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.post .handle { font-weight: 600; font-size: 14px; }
+.post .etichetta { margin-left: auto; font-size: 12px; color: var(--p-muted); }
+.binario { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; touch-action: pan-x pan-y; }
+.binario::-webkit-scrollbar { display: none; }
+.binario.trascina { cursor: grabbing; scroll-snap-type: none; }
+.cornice { flex: 0 0 100%; aspect-ratio: 4 / 5; position: relative; overflow: hidden; scroll-snap-align: start; background: #ddd; }
+.tela { position: absolute; top: 0; left: 0; width: 1080px; height: 1350px; transform-origin: 0 0; overflow: hidden;
+  font-family: var(--b-font-testo); color: var(--b-ink); background: var(--b-bg); }
+.puntini { display: flex; justify-content: center; gap: 5px; padding: 10px 0 2px; }
+.puntini button { width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0; background: #c9cecc; cursor: pointer; }
+.puntini button[aria-current="true"] { background: var(--p-accent); }
+.post .didascalia { padding: 8px 14px 14px; font-size: 14px; }
+.post .didascalia .testo { white-space: pre-line; max-height: 4.6em; overflow: hidden; }
+.post .didascalia.aperta .testo { max-height: none; }
+.post .azioni { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.post .azioni button { font: inherit; font-size: 13px; border: 1px solid var(--p-line); background: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.post .azioni button:hover { border-color: var(--p-accent); }
+.nota-post { padding: 0 14px 14px; font-size: 13px; color: var(--p-muted); }
+footer.fine { margin-top: 56px; text-align: center; font-size: 12px; color: var(--p-muted); }
+footer.fine a { color: inherit; }
+
+/* ---------- SLIDE DEL CLIENTE (esempio da sostituire) ---------- */
+.s-copertina { display: flex; flex-direction: column; justify-content: flex-end; padding: 96px; }
+.s-copertina .s-hook { font-family: var(--b-font-titoli); font-size: 118px; line-height: 1.02; font-weight: 800; margin: 0; letter-spacing: -0.02em; }
+.s-copertina .s-sotto { font-size: 40px; margin-top: 36px; opacity: .85; }
+.s-chiara { background: var(--b-bg2); color: var(--b-ink2); }
+.s-interna { padding: 110px 96px 96px; display: flex; flex-direction: column; }
+.s-interna .s-num { font-family: var(--b-font-titoli); font-size: 150px; line-height: 1; color: var(--b-accent); }
+.s-interna h3 { font-family: var(--b-font-titoli); font-size: 76px; line-height: 1.08; margin: 40px 0 28px; }
+.s-interna p { font-size: 42px; line-height: 1.38; margin: 0; max-width: 860px; }
+.s-piede { position: absolute; left: 96px; right: 96px; bottom: 72px; display: flex; justify-content: space-between; font-size: 28px; opacity: .7; }
+.s-barra { position: absolute; left: 0; bottom: 0; height: 10px; background: var(--b-accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Anteprima PrismaPixel</div>
+    <h1>I contenuti di NOME ATTIVITÀ, pronti da pubblicare</h1>
+    <p>FRASE CHE DICE COSA C'È E PER CHI È PENSATO. Scorri le slide come su Instagram: con il dito, trascinando o con le frecce.</p>
+  </header>
+
+  <h2 class="sezione">Caroselli</h2>
+  <div class="griglia">
+    <!-- CAROSELLO: una .cornice > .tela per slide -->
+    <article class="post" data-tipo="carosello">
+      <div class="testa"><div class="avatar">NA</div><div class="handle">@HANDLE_CLIENTE</div><div class="etichetta">Carosello · 7 slide</div></div>
+      <div class="binario">
+        <div class="cornice"><div class="tela s-copertina">
+          <p class="s-hook">HOOK<br>IN DUE RIGHE</p>
+          <div class="s-sotto">sottotitolo breve che conferma la promessa</div>
+          <div class="s-barra" style="width:14%"></div>
+        </div></div>
+        <div class="cornice"><div class="tela s-interna s-chiara">
+          <div class="s-num">01</div>
+          <h3>TITOLO DEL PUNTO</h3>
+          <p>Testo breve: una o due frasi al massimo, ritmo variato.</p>
+          <div class="s-piede"><span>@HANDLE_CLIENTE</span><span>2 / 7</span></div>
+          <div class="s-barra" style="width:28%"></div>
+        </div></div>
+      </div>
+      <div class="puntini" aria-label="Slide"></div>
+      <div class="didascalia">
+        <div class="testo">PRIMA RIGA DELLA CAPTION = HOOK.
+Corpo della caption con ritmo variato.
+CTA nativa.
+
+#hashtag #pertinenti</div>
+        <div class="azioni"><button type="button" data-azione="altro">Leggi tutto</button><button type="button" data-azione="copia">Copia la didascalia</button></div>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="sezione">Post singoli</h2>
+  <div class="griglia">
+    <article class="post" data-tipo="singolo">
+      <div class="testa"><div class="avatar">NA</div><div class="handle">@HANDLE_CLIENTE</div><div class="etichetta">Post singolo</div></div>
+      <div class="binario">
+        <div class="cornice"><div class="tela s-copertina s-chiara">
+          <p class="s-hook">UN SOLO<br>MESSAGGIO</p>
+        </div></div>
+      </div>
+      <div class="didascalia">
+        <div class="testo">CAPTION DEL POST SINGOLO</div>
+        <div class="azioni"><button type="button" data-azione="altro">Leggi tutto</button><button type="button" data-azione="copia">Copia la didascalia</button></div>
+      </div>
+    </article>
+  </div>
+
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+<script>
+// Rimpicciolisce le tele 1080x1350 alla larghezza della card
+function scala() {
+  document.querySelectorAll('.cornice').forEach(c => {
+    const t = c.querySelector('.tela');
+    if (t) t.style.transform = 'scale(' + (c.clientWidth / 1080) + ')';
+  });
+}
+new ResizeObserver(scala).observe(document.body);
+window.addEventListener('load', scala);
+scala();
+
+document.querySelectorAll('.post').forEach(post => {
+  const bin = post.querySelector('.binario');
+  const slides = [...bin.querySelectorAll('.cornice')];
+  const dots = post.querySelector('.puntini');
+  const vai = i => bin.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * bin.clientWidth, behavior: 'smooth' });
+  const attuale = () => Math.round(bin.scrollLeft / Math.max(1, bin.clientWidth));
+  if (dots && slides.length > 1) {
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Slide ' + (i + 1));
+      b.addEventListener('click', () => vai(i));
+      dots.appendChild(b);
+    });
+    const aggiorna = () => [...dots.children].forEach((b, i) => b.setAttribute('aria-current', String(i === attuale())));
+    bin.addEventListener('scroll', aggiorna, { passive: true });
+    aggiorna();
+  } else if (dots) dots.remove();
+  // trascinamento col mouse (su telefono basta lo scorrimento nativo)
+  let x0 = null, s0 = 0, mosso = false;
+  bin.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; x0 = e.clientX; s0 = bin.scrollLeft; mosso = false; bin.classList.add('trascina'); bin.setPointerCapture(e.pointerId); });
+  bin.addEventListener('pointermove', e => { if (x0 === null) return; const d = e.clientX - x0; if (Math.abs(d) > 4) mosso = true; bin.scrollLeft = s0 - d; });
+  const fine = e => { if (x0 === null) return; const d = e.clientX - x0; x0 = null; bin.classList.remove('trascina'); const i = Math.round(s0 / bin.clientWidth) + (d < -40 ? 1 : d > 40 ? -1 : 0); vai(i); };
+  bin.addEventListener('pointerup', fine); bin.addEventListener('pointercancel', fine);
+  bin.tabIndex = 0;
+  bin.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); vai(attuale() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); vai(attuale() - 1); } });
+  // didascalia
+  const did = post.querySelector('.didascalia');
+  if (did) did.addEventListener('click', e => {
+    const a = e.target.closest('button'); if (!a) return;
+    if (a.dataset.azione === 'altro') { did.classList.toggle('aperta'); a.textContent = did.classList.contains('aperta') ? 'Riduci' : 'Leggi tutto'; }
+    if (a.dataset.azione === 'copia') { const t = did.querySelector('.testo').innerText; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { a.textContent = 'Copiata ✓'; setTimeout(() => a.textContent = 'Copia la didascalia', 1800); }).catch(() => {}); }
+  });
+});
+</script>
+</body>
+</html>

@@ -122,7 +122,7 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
 | `sito_web` | `siti/ISTRUZIONI.md` | attivo |
 | `audit_strategia` | `audit/ISTRUZIONI.md` | attivo |
 | `landing_page` | `landing/ISTRUZIONI.md` | da costruire |
-| `carosello_social` | `social/ISTRUZIONI.md` | da costruire |
+| `carosello_social` | `social/ISTRUZIONI.md` | attivo (in prova) |
 | `piano_seo` | `seo/ISTRUZIONI.md` | da costruire |
 | `annunci_ads` | `ads/ISTRUZIONI.md` | da costruire |
 | `roadmap` | `roadmap/ISTRUZIONI.md` | da costruire |
