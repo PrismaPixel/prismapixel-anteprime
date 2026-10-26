@@ -36,7 +36,7 @@ const info = await p.evaluate(() => {
       if (!b.width || !b.height) return;
       const testo = el.textContent.trim().slice(0, 40);
       if (b.left < r.left + SICUREZZA - 1 || b.right > r.right - SICUREZZA + 1 || b.top < r.top + SICUREZZA - 1 || b.bottom > r.bottom - SICUREZZA + 1) {
-        if (!el.closest('.s-barra')) fuori.push(testo);
+        if (!el.closest('[data-fuori-ok]')) fuori.push(testo); // data-fuori-ok: elementi decorativi voluti oltre il margine
       }
       if (parseFloat(getComputedStyle(el).fontSize) < 28) piccoli.push(testo);
       if (el.scrollWidth > el.clientWidth + 2 && getComputedStyle(el).overflow !== 'visible') fuori.push('taglio: ' + testo);

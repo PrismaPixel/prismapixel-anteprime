@@ -15,8 +15,9 @@ quello di un tour in barca ai turisti.
 
 Due cose decidono la qualità:
 - **Il copy segue il metodo Kallaway** (`social/skills/kallaway-copywriting.md`, da leggere tutto prima di scrivere).
-- **Il design parte dai migliori caroselli del settore su Pinterest** (sezione 3), riletti e adattati al brand del
-  cliente. Non si copia mai.
+- **Il design nasce solo dai migliori caroselli del settore su Pinterest** (sezione 3), riletti e adattati al brand
+  del cliente. Non esiste uno stile di casa: niente modelli grafici predefiniti, niente skill di caroselli
+  (`carousel`, `ladder-carousel` o simili), niente stile PrismaPixel. Non si copia mai.
 
 ## 1. Cosa produrre
 
@@ -78,9 +79,10 @@ diario, numeri giganti...).
 **Cosa non prendi mai**: testi, illustrazioni, foto, loghi, marchi, composizioni identiche. Il risultato deve essere
 riconoscibile come brand del cliente, non come il pin.
 
-Scegli **una direzione**: una delle tre proposte, oppure una tua sintesi. Deve essere coerente con brand, settore e
-tono, e va scritta in `brief.md` con i numeri dei riferimenti che la ispirano. Nel livello `completa` tutti i
-contenuti seguono la stessa direzione: la serie deve sembrare un feed coerente.
+Scegli **una direzione**: una delle tre proposte, oppure una tua sintesi. Deve partire dai riferimenti con
+`qualita` 4 o 5 ed essere coerente con brand, settore e tono. Se nessun riferimento ha qualità 4 o più, rifai la
+ricerca (punto 5). Scrivila in `brief.md` con i numeri dei riferimenti che la ispirano. Nel livello `completa`
+tutti i contenuti seguono la stessa direzione: la serie deve sembrare un feed coerente.
 
 ## 4. Strategia dei contenuti
 
@@ -130,34 +132,43 @@ Prima di passare al design, rileggi ogni contenuto con la **Checklist QA** (sezi
 
 ## 6. Design delle slide
 
-Parti da `social/_modello/index.html` e copialo in `/tmp/lavoro/<slug>/index.html`.
+**Il design nasce dai riferimenti, non da un modello.** Prima di scrivere codice, scrivi in `brief.md` una
+**scheda di stile** ricavata dai riferimenti migliori (qualità 4-5) della direzione scelta. Nella scheda va scritto
+da quale riferimento viene ogni scelta (es. "rif. 2"):
+1. **idea grafica** che tiene unita la serie (es. cartolina, diario, numeri giganti, foto a tutto campo con testo nel cielo);
+2. **gerarchia e layout**: dove sta il titolo, quanto spazio occupa il testo, rapporto tra testo e immagine, griglia
+   delle slide interne, come cambia la copertina;
+3. **tipografia**: il tipo di abbinamento e il contrasto di scala dei riferimenti, tradotti in font Google simili
+   (massimo 2 famiglie);
+4. **palette**: lo schema dei riferimenti (quanti colori, dove va l'accento) applicato ai colori del brand del cliente.
+   Se il brand non ha colori, usa la palette dei riferimenti adattata al settore;
+5. **elementi grafici**: texture, forme, cornici, icone, segni a mano che i riferimenti usano;
+6. **segnali di carosello** (numero di slide, barra, freccia, card che spunta): solo quelli che usano i riferimenti.
 
-Nel modello ci sono già:
-- la cornice della pagina, neutra;
-- le card stile Instagram con lo scorrimento (dito, trascinamento, frecce e puntini);
-- la didascalia con "Leggi tutto" e "Copia";
-- le tele 1080×1350 che lo script rimpicciolisce.
+Ogni scelta deve venire dai riferimenti. Fanno eccezione i colori del brand e le regole tecniche qui sotto. Il
+risultato deve essere riconoscibile come brand del cliente, e nessuna slide deve essere la copia di un pin.
 
-**Tu scrivi le slide** dentro `.tela`, a misura reale. Lo stile delle slide va nelle variabili `--b-*` e in classi
-tue con prefisso `.s-`. Cancella gli esempi del modello.
+**Il visore.** `social/_modello/index.html` contiene solo la pagina di anteprima:
+- card stile Instagram, scorrimento con dito, trascinamento, frecce e puntini;
+- didascalia con "Leggi tutto" e "Copia";
+- tele 1080×1350 che lo script rimpicciolisce.
 
-Regole:
-- **Massimo 2 famiglie di font**, da Google Fonts, scelte per la direzione. Evita i default anonimi (Arial, Roboto,
-  Open Sans) a meno che il brand li usi già.
+Copialo in `/tmp/lavoro/<slug>/index.html`. Dentro ogni `.tela` costruisci tu la slide, a misura reale, con le tue
+classi `.s-` e i font della scheda di stile.
+
+**Regole tecniche** (valgono per qualsiasi direzione):
 - **Leggibilità da telefono** (la tela viene vista larga circa 360 px, cioè un terzo):
-  - hook in copertina tra 96 e 150 px;
-  - titoli interni tra 64 e 90 px;
-  - testo tra 38 e 46 px;
-  - niente sotto i 28 px (handle e numero di slide compresi);
-  - contrasto AA, e il testo su foto ha sempre un velo o un'area pulita.
-- **Margini di sicurezza**: tutto il testo sta ad almeno 64 px dai bordi. Meglio 90-100 px ai lati.
-- **Sistema coerente**: stessa griglia, stessa posizione di titolo, numero di slide e handle in tutte le slide
-  interne. La copertina e la CTA possono rompere la griglia.
-- **Segnali di carosello**: numero "2 / 7" o una barra di avanzamento. Un piccolo invito a scorrere in copertina
-  ("scorri →") solo se la direzione lo regge.
+  - testo di lettura almeno 38 px;
+  - niente sotto i 28 px;
+  - titoli e hook abbastanza grandi da leggersi in 2 secondi;
+  - contrasto AA;
+  - il testo su foto ha sempre un velo o un'area pulita.
+- **Margini di sicurezza**: tutto il testo sta ad almeno 64 px dai bordi. Un elemento decorativo che deve uscire
+  dal margine va marcato con `data-fuori-ok`.
+- **Coerenza**: le slide interne seguono tutte lo stesso schema della scheda di stile.
 - **Ultima slide (CTA)**: handle del cliente ben visibile e l'azione in una riga.
 - **Immagini**:
-  - preferisci grafica e tipografia; servono foto solo dove portano emozione (copertina, post sull'esperienza);
+  - generale solo se i riferimenti scelti usano la foto;
   - generale con Higgsfield. Prima usa `models_explore` (`action: "recommend"`) e poi `generate_image`, sempre con
     `max_credits`;
   - budget: **4 crediti** per `prima`, **10 crediti** per `completa`;
@@ -165,7 +176,6 @@ Regole:
   - niente persone riconoscibili, niente loghi o marchi altrui, niente testo nelle immagini generate;
   - le foto generate sono "immagini d'esempio": scrivilo nelle note. Il cliente userà le sue foto vere.
 - Illustrazioni semplici, icone e forme: SVG scritto nel codice.
-- Per evitare l'effetto template puoi consultare `siti/skills/design-taste-frontend/SKILL.md` (la parte su tipografia, colore e composizione).
 
 **Pagina** (`index.html`):
 - in alto, 2 righe per il cliente: cosa c'è e per chi è pensato;
@@ -190,7 +200,8 @@ Un solo file `index.html`, con CSS e JS dentro. Se diventa più grande di 350 KB
    - che non ci siano parole spezzate male o vedove di una parola;
    - che il testo non copra il soggetto della foto;
    - che il contrasto regga;
-   - che le slide interne siano coerenti con la copertina.
+   - che le slide interne siano coerenti con la copertina;
+   - che la serie rispetti la scheda di stile e non sia la copia di un pin.
 3. Guarda `pagina-390.png`: la pagina deve funzionare da telefono.
 4. Rileggi tutti i testi: niente prove, prezzi, contatti o promesse inventate. Italiano corretto.
 
@@ -207,7 +218,7 @@ Segui il contratto:
   e i 2 punti più forti per questo cliente, con parole da cliente.
 - `note` (per Vincenzo), in quest'ordine:
   1. `durata: <N> min · crediti: higgsfield <N> · token: <token>`;
-  2. direzione scelta e i link delle immagini Pinterest che l'hanno ispirata (2-4);
+  2. direzione scelta, scheda di stile in breve e i link delle immagini Pinterest che l'hanno ispirata (2-4);
   3. per ogni carosello, i 3 hook alternativi;
   4. cosa confermare con il cliente: palette, handle, foto vere, offerte o CTA;
   5. controlli non eseguiti o problemi.

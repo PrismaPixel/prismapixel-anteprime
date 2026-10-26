@@ -13,20 +13,19 @@
   MODELLO DELL'AGENTE CAROSELLI E POST · PrismaPixel
   - La pagina (cornice) resta neutra: cambia solo i colori della sezione :root "pagina" se serve.
   - Le slide sono tele da 1080x1350 (4:5) dentro .tela: le scrivi a misura reale, lo script le rimpicciolisce.
-  - Lo stile delle slide è del CLIENTE: variabili --b-* qui sotto + classi tue con prefisso .s-
+  - Questo modello è SOLO il visore (card stile Instagram, scorrimento, didascalia). Non contiene nessuno stile di slide:
+    il design delle slide nasce dai riferimenti Pinterest scelti (ISTRUZIONI.md, sezione 6), con classi tue prefisso .s-
   - Un carosello = un <article class="post" data-tipo="carosello">; un post singolo = data-tipo="singolo" con una sola .tela
   - Sostituisci tutti i testi MAIUSCOLI segnaposto. Cancella i commenti di istruzione prima di pubblicare.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=FONT+TITOLI:wght@600;800&display=swap" rel="stylesheet">
+<!-- Inter serve solo alla cornice della pagina. Aggiungi qui i font delle slide scelti dalla direzione. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ---------- pagina (cornice neutra, non è il brand del cliente) ---------- */
 :root {
   --p-bg: #f4f5f3; --p-card: #ffffff; --p-ink: #141616; --p-muted: #5d6463; --p-line: #e2e5e3; --p-accent: #00777b;
-  /* ---------- brand del cliente: usati SOLO dentro le slide ---------- */
-  --b-bg: #0f1d24; --b-bg2: #f3eee6; --b-ink: #f6f2ea; --b-ink2: #10202a; --b-accent: #e8a33d;
-  --b-font-titoli: 'FONT TITOLI', Georgia, serif; --b-font-testo: 'Inter', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -42,15 +41,14 @@ h2.sezione { font-size: 20px; margin: 48px 0 16px; text-align: center; }
 /* card in stile Instagram */
 .post { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; overflow: hidden; max-width: 460px; width: 100%; margin: 0 auto; }
 .post .testa { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
-.post .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--b-accent); color: var(--b-ink2); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.post .avatar { width: 32px; height: 32px; border-radius: 50%; background: #d8dcda; color: var(--p-ink); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
 .post .handle { font-weight: 600; font-size: 14px; }
 .post .etichetta { margin-left: auto; font-size: 12px; color: var(--p-muted); }
 .binario { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; touch-action: pan-x pan-y; }
 .binario::-webkit-scrollbar { display: none; }
 .binario.trascina { cursor: grabbing; scroll-snap-type: none; }
 .cornice { flex: 0 0 100%; aspect-ratio: 4 / 5; position: relative; overflow: hidden; scroll-snap-align: start; background: #ddd; }
-.tela { position: absolute; top: 0; left: 0; width: 1080px; height: 1350px; transform-origin: 0 0; overflow: hidden;
-  font-family: var(--b-font-testo); color: var(--b-ink); background: var(--b-bg); }
+.tela { position: absolute; top: 0; left: 0; width: 1080px; height: 1350px; transform-origin: 0 0; overflow: hidden; background: #fff; }
 .puntini { display: flex; justify-content: center; gap: 5px; padding: 10px 0 2px; }
 .puntini button { width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0; background: #c9cecc; cursor: pointer; }
 .puntini button[aria-current="true"] { background: var(--p-accent); }
@@ -64,17 +62,7 @@ h2.sezione { font-size: 20px; margin: 48px 0 16px; text-align: center; }
 footer.fine { margin-top: 56px; text-align: center; font-size: 12px; color: var(--p-muted); }
 footer.fine a { color: inherit; }
 
-/* ---------- SLIDE DEL CLIENTE (esempio da sostituire) ---------- */
-.s-copertina { display: flex; flex-direction: column; justify-content: flex-end; padding: 96px; }
-.s-copertina .s-hook { font-family: var(--b-font-titoli); font-size: 118px; line-height: 1.02; font-weight: 800; margin: 0; letter-spacing: -0.02em; }
-.s-copertina .s-sotto { font-size: 40px; margin-top: 36px; opacity: .85; }
-.s-chiara { background: var(--b-bg2); color: var(--b-ink2); }
-.s-interna { padding: 110px 96px 96px; display: flex; flex-direction: column; }
-.s-interna .s-num { font-family: var(--b-font-titoli); font-size: 150px; line-height: 1; color: var(--b-accent); }
-.s-interna h3 { font-family: var(--b-font-titoli); font-size: 76px; line-height: 1.08; margin: 40px 0 28px; }
-.s-interna p { font-size: 42px; line-height: 1.38; margin: 0; max-width: 860px; }
-.s-piede { position: absolute; left: 96px; right: 96px; bottom: 72px; display: flex; justify-content: space-between; font-size: 28px; opacity: .7; }
-.s-barra { position: absolute; left: 0; bottom: 0; height: 10px; background: var(--b-accent); }
+/* ---------- SLIDE: il tuo stile qui (classi .s-...), derivato dai riferimenti ---------- */
 </style>
 </head>
 <body>
@@ -89,20 +77,11 @@ footer.fine a { color: inherit; }
   <div class="griglia">
     <!-- CAROSELLO: una .cornice > .tela per slide -->
     <article class="post" data-tipo="carosello">
-      <div class="testa"><div class="avatar">NA</div><div class="handle">@HANDLE_CLIENTE</div><div class="etichetta">Carosello · 7 slide</div></div>
+      <div class="testa"><div class="avatar">NA</div><div class="handle">@HANDLE_CLIENTE</div><div class="etichetta">Carosello · N slide</div></div>
       <div class="binario">
-        <div class="cornice"><div class="tela s-copertina">
-          <p class="s-hook">HOOK<br>IN DUE RIGHE</p>
-          <div class="s-sotto">sottotitolo breve che conferma la promessa</div>
-          <div class="s-barra" style="width:14%"></div>
-        </div></div>
-        <div class="cornice"><div class="tela s-interna s-chiara">
-          <div class="s-num">01</div>
-          <h3>TITOLO DEL PUNTO</h3>
-          <p>Testo breve: una o due frasi al massimo, ritmo variato.</p>
-          <div class="s-piede"><span>@HANDLE_CLIENTE</span><span>2 / 7</span></div>
-          <div class="s-barra" style="width:28%"></div>
-        </div></div>
+        <!-- una .cornice > .tela per slide, a misura reale 1080x1350 -->
+        <div class="cornice"><div class="tela">SLIDE 1</div></div>
+        <div class="cornice"><div class="tela">SLIDE 2</div></div>
       </div>
       <div class="puntini" aria-label="Slide"></div>
       <div class="didascalia">
@@ -121,9 +100,7 @@ CTA nativa.
     <article class="post" data-tipo="singolo">
       <div class="testa"><div class="avatar">NA</div><div class="handle">@HANDLE_CLIENTE</div><div class="etichetta">Post singolo</div></div>
       <div class="binario">
-        <div class="cornice"><div class="tela s-copertina s-chiara">
-          <p class="s-hook">UN SOLO<br>MESSAGGIO</p>
-        </div></div>
+        <div class="cornice"><div class="tela">POST</div></div>
       </div>
       <div class="didascalia">
         <div class="testo">CAPTION DEL POST SINGOLO</div>
