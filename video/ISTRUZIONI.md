@@ -49,10 +49,13 @@ Per ogni video consegni:
 
 ## 3. Con faccia o senza faccia
 
-Decidi dal brief, che conta più del resto:
-- **con faccia** se dice che il cliente o il suo staff vogliono apparire, o se il valore è la persona (professionisti,
-  artigiani, guide);
-- **senza faccia** se dice di no, o se il cliente "non ha tempo" o "non si vuole mostrare";
+È una scelta di **posizionamento**: il business ha un volto oppure è un brand slegato da una persona? Decidi dal brief
+(campo sul volto del brand, obiettivi e note), che conta più del resto:
+- **con faccia** se il cliente vuole che il brand abbia un volto: lui, qualcuno del team o una persona scelta per
+  parlare in camera. Succede di solito quando il valore è la persona (professionisti, artigiani, guide). Usa il volto
+  indicato nel brief;
+- **senza faccia** se vuole un brand che cammini senza una persona davanti, che parla con il lavoro, i luoghi e i
+  prodotti;
 - **se non lo dice**: nel livello `prima` fai un video per tipo, nel livello `completa` alternali. Scrivi la scelta
   nelle note.
 
