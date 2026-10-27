@@ -28,6 +28,7 @@ const info = await p.evaluate(() => {
   const ris = [];
   // le slide fuori dal binario scorrevole verrebbero tagliate: le mettiamo una sotto l'altra, a misura reale
   document.querySelectorAll('.binario').forEach(b => { b.style.cssText = 'display:block;overflow:visible;scroll-snap-type:none'; });
+  document.querySelectorAll('.media.grafica').forEach(m => { m.style.cssText = 'overflow:visible;aspect-ratio:auto;background:none'; }); // grafiche degli annunci
   document.querySelectorAll('.tela').forEach((t, i) => {
     t.style.transform = 'none';
     const W = t.offsetWidth, H = t.offsetHeight;
@@ -47,8 +48,8 @@ const info = await p.evaluate(() => {
       if (parseFloat(getComputedStyle(el).fontSize) < 28) piccoli.push(testo);
       if (el.scrollWidth > el.clientWidth + 2 && getComputedStyle(el).overflow !== 'visible') fuori.push('taglio: ' + testo);
     });
-    const post = t.closest('.post, .video');
-    ris.push({ i, post: [...document.querySelectorAll('.post, .video')].indexOf(post) + 1, slide: [...post.querySelectorAll('.tela')].indexOf(t) + 1, fuori, piccoli });
+    const post = t.closest('.post, .video, .ad');
+    ris.push({ i, post: [...document.querySelectorAll('.post, .video, .ad')].indexOf(post) + 1, slide: [...post.querySelectorAll('.tela')].indexOf(t) + 1, fuori, piccoli });
   });
   const immaginiRotte = [...document.images].filter(im => !im.complete || !im.naturalWidth).map(im => im.src.slice(0, 80));
   const fontMancanti = [...document.fonts].filter(f => f.status === 'error').map(f => f.family);

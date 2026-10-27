@@ -14,6 +14,10 @@
   - Pagina = visore neutro. Ogni annuncio è un <article class="ad"> come appare nel feed di Facebook/Instagram.
   - L'immagine è una foto Higgsfield (link _min.webp) dentro .media. Cerchi, frecce e note scritte a mano vanno nel
     livello .note-grafiche SOPRA la foto (SVG o testo in un font calligrafico), mai dentro l'immagine generata.
+  - GRAFICHE (annunci statici disegnati): .media.grafica contiene .cornice > .tela (1080x1350, o 1080x1080 con
+    .quadrato). Dentro la tela: la foto Higgsfield come sfondo o parte della composizione e, SOPRA, titolo, testo di
+    supporto, logo e forme in HTML/CSS, con lo stile ricavato dai riferimenti Pinterest (classi .g-, font e colori
+    tuoi). Il testo non si genera mai dentro l'immagine. Margini di sicurezza 64 px (data-margini).
   - .etichette: tipo (Indiretto/Diretto), tipo di immagine, attacco del testo, fase del funnel, codice del test.
   - Sostituisci i segnaposto MAIUSCOLI e cancella questi commenti prima di pubblicare.
 -->
@@ -49,6 +53,9 @@ p.sotto { text-align: center; color: var(--p-muted); margin: 0 auto 18px; max-wi
 .media { position: relative; aspect-ratio: 4 / 5; background: #ddd; overflow: hidden; }
 .media.quadrato { aspect-ratio: 1 / 1; }
 .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.media.grafica .cornice { position: absolute; inset: 0; overflow: hidden; }
+.media.grafica .tela { position: absolute; top: 0; left: 0; width: 1080px; height: 1350px; transform-origin: 0 0; overflow: hidden; background: #fff; }
+.media.grafica.quadrato .tela { height: 1080px; }
 .note-grafiche { position: absolute; inset: 0; pointer-events: none; }
 .note-grafiche svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .nota-mano { position: absolute; font: 700 clamp(18px, 5vw, 26px)/1.1 'Caveat', cursive; color: #d6202a; transform: rotate(-4deg); text-shadow: 0 1px 2px rgba(255,255,255,.6); }
@@ -115,6 +122,18 @@ RESTO DEL TESTO LUNGO (150-400 PAROLE).</span> <button type="button">…Altro</b
       <div class="barra-link"><div class="dati"><div class="dominio">SITO.IT</div><div class="titolo">TITOLO</div><div class="descrizione">DESCRIZIONE BREVE</div></div><button class="cta" type="button">Prenota ora</button></div>
       <div class="perche">Perché funziona: UNA FRASE.</div>
     </article>
+    <!-- GRAFICA: annuncio statico disegnato (diretto o indiretto "titolo sopra la foto") -->
+    <article class="ad">
+      <div class="etichette"><span class="diretto">Diretto</span><span>Grafica</span><span>Principio: NOME</span><span>Test G1</span></div>
+      <div class="testa"><div class="avatar">NA</div><div><div class="nome">NOME PAGINA</div><div class="sponsor">Sponsorizzato · 🌐</div></div></div>
+      <div class="testo">TESTO BREVE, 2-4 RIGHE.</div>
+      <div class="media grafica"><div class="cornice"><div class="tela" data-margini="64,64,64,64">
+        <!-- la tua composizione: <img> Higgsfield _min.webp + titolo, supporto, logo in HTML -->
+        TITOLO DELLA GRAFICA
+      </div></div></div>
+      <div class="barra-link"><div class="dati"><div class="dominio">SITO.IT</div><div class="titolo">TITOLO</div><div class="descrizione">DESCRIZIONE BREVE</div></div><button class="cta" type="button">Scopri di più</button></div>
+      <div class="perche">Perché funziona: UNA FRASE.</div>
+    </article>
   </div>
 
   <h2 class="sezione">La strategia</h2>
@@ -141,6 +160,8 @@ RESTO DEL TESTO LUNGO (150-400 PAROLE).</span> <button type="button">…Altro</b
   <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
 </div>
 <script>
+function scala() { document.querySelectorAll('.media.grafica').forEach(m => { const t = m.querySelector('.tela'); if (t) t.style.transform = `scale(${m.clientWidth / 1080})`; }); }
+scala(); addEventListener('resize', scala);
 document.querySelectorAll('.ad .testo').forEach(t => {
   const b = t.querySelector('button');
   if (!t.querySelector('.resto')) { if (b) b.remove(); return; }

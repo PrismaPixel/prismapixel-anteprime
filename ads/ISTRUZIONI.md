@@ -64,8 +64,8 @@ il regalo che sa di già visto, il tavolo che non si trova.
 
 | livello | creatività | strategia | tempo indicativo |
 |---|---|---|---|
-| `prima` | **2 indiretti** (stesso testo, 2 tipi di immagine diversi: il primo test) + **2 diretti** (2 angoli diversi) | percorso, primi 2 test, metriche e regole, prime 4 settimane | 25-35 min |
-| `completa` | **4-5 indiretti** (3 tipi di immagine + 2 attacchi del testo sull'immagine più forte) + **3 diretti** (uno per il remarketing di chi ha letto l'articolo) | strategia completa: pubblici, sequenza dei test, budget in percentuale, convenzione dei nomi, piano di 4 settimane, brief dell'advertorial | 45-60 min |
+| `prima` | **2 indiretti** (stesso testo, 2 tipi di immagine diversi: il primo test) + **2 diretti come grafiche** (sezione 5b: 2 principi diversi) | percorso, primi 2 test, metriche e regole, prime 4 settimane | 25-35 min |
+| `completa` | **4-5 indiretti** (3 tipi di immagine + 2 attacchi del testo sull'immagine più forte) + **4 grafiche** (diretti e remarketing, una per principio scelto) | strategia completa: pubblici, sequenza dei test, budget in percentuale, convenzione dei nomi, piano di 4 settimane, brief dell'advertorial | 45-60 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | | 10-20 min |
 
 Per ogni creatività:
@@ -128,10 +128,69 @@ L'annuncio indiretto fallisce nel momento in cui sembra un annuncio o sembra fat
   testo dentro.
 - Modelli: `gpt_image_2_5` per le scene realistiche, `marketing_studio_image` per i prodotti dei diretti. Se non
   sei sicuro, `models_explore` (`action: "recommend"`). Usa sempre `max_credits` e i link `_min.webp`.
-- **Budget**: **6 crediti** per `prima`, **15** per `completa`. Prima di generare, controlla il costo con
+- **Budget** (foto e grafiche insieme): **8 crediti** per `prima`, **18** per `completa`. Prima di generare, controlla il costo con
   `get_cost: true`.
 - Guarda ogni immagine con Read. Se sembra finta (pelle di plastica, mani strane, lettere inventate), rigenerala una
   volta. Se resta finta, scartala e scrivilo nelle note.
+
+## 5b. Le grafiche (annunci statici disegnati)
+
+Accanto agli annunci "foto vera", l'agente prepara **grafiche**: annunci statici composti, con un'immagine
+Higgsfield e sopra titolo, testo di supporto, logo e forme. Servono soprattutto per i **diretti** e il remarketing,
+e per il tipo indiretto "Titolo sopra la foto". Il metodo nasce da due fonti: i migliori annunci del settore su
+Pinterest (come si presenta il settore) e cinque principi di psicologia degli annunci statici, riassunti qui con
+parole nostre.
+
+**1. Riferimenti da Pinterest** (prima di disegnare)
+- Workflow n8n **Riferimenti Pinterest** (`1oek9PrhT8PB9Oa5`, `execute_workflow` in modalità `production`,
+  trigger "Richiesta riferimenti") con `{"queries": [...4 ricerche in inglese...], "formato": "annuncio",
+  "settore": "...", "n": 8}`. Ricerche tipo: "<settore> facebook ad design", "<settore> static ad",
+  "<categoria vicina> meta ads creative", "<brand noto del settore> instagram ad".
+- La risposta dà per ogni riferimento qualità (1-5), gerarchia, layout, tipografia, palette, **principio** usato,
+  **angolo** e quanto testo c'è; più `pattern_comuni`, `da_evitare` e 3 direzioni.
+- I riferimenti servono a **due cose**: imparare la qualità dai migliori (4-5) e capire **lo schema del settore**
+  (`pattern_comuni`), cioè proprio quello da cui le grafiche devono staccarsi. Non si copia niente: né layout
+  identici, né testi, né marchi.
+- Scrivi in `/tmp/lavoro/<slug>/stile.md` la scheda: lo schema del settore, cosa prendi dai migliori, palette, font
+  (Google Fonts), griglia, e il motivo. Colori e logo del cliente vincono, se ci sono.
+
+**2. I cinque principi** (ogni grafica ne dichiara **uno**, nelle etichette)
+1. **Rottura dello schema, con uno scopo**: chi scorre ignora ciò che somiglia agli annunci che ha già visto.
+   Fai una grafica che non somiglia allo schema del settore (un disegno a mano, una nota, un foglio, un testo
+   lungo su fondo pieno, un oggetto fuori posto), ma che attiri **chi compra**: la differenza deve portare al
+   prodotto, non solo all'attenzione. Anche una grafica che "sembra fatta in cinque minuti" va bene, se l'idea è
+   giusta. Se chi compra è diverso da chi usa (genitori e figli), il titolo parla a chi compra.
+2. **Un solo messaggio**: logo, un titolo, una riga di supporto, un'immagine. Al massimo **una promessa** per
+   grafica. Gerarchia evidente: si capisce cosa leggere per primo. Niente tre vantaggi, frecce dappertutto, sconto
+   e testimonianza nella stessa grafica. Se vuoi dire tre cose, fai tre grafiche (e testale).
+3. **Curiosità legata al prodotto**: mostra abbastanza da far nascere una domanda, non tutto. La domanda deve
+   portare all'offerta, altrimenti attiri chi non comprerà mai. Il prodotto si può nominare senza mostrarlo.
+4. **Il desiderio profondo**, non la caratteristica: chi compra pensa a cosa cambierà nella sua vita (sentirsi al
+   sicuro, accettato, libero, rilassato, all'altezza). Parti dai **desideri** di `voce_clienti` e mostra quello,
+   non la scheda tecnica. Evita i modi del settore che fanno sentire in colpa o giudicati.
+5. **Identità e nicchia**: parla a **una persona precisa**, con 2-3 dettagli della sua vita che riconosce
+   all'istante (i suoi momenti, le sue frasi). Chi non è lui si sente escluso, ed è il punto: nei settori affollati
+   vince chi è specifico.
+
+Variante utile, **solo se vera**: l'onestà disarmante. Dire per primi un limite reale del prodotto e spiegare perché
+è voluto ("non c'è la spiaggia attrezzata sotto casa: c'è una caletta dove arrivi in bici"). Mai un difetto
+inventato.
+
+**3. Composizione**
+- Nel modello è `<div class="media grafica"><div class="cornice"><div class="tela">`: tela 1080×1350 (o 1080×1080
+  con `.quadrato`), margini di sicurezza 64 px.
+- L'immagine Higgsfield (link `_min.webp`) sta **dentro la tela** come sfondo o come elemento. Il prompt descrive la
+  scena e lascia lo spazio per il testo ("negative space in the upper third"). **Il testo è sempre HTML**, mai
+  generato nell'immagine.
+- Titolo leggibile sul telefono: almeno 72 px sulla tela, testo di supporto almeno 36 px, nulla sotto 28 px.
+  Contrasto alto, al massimo 2 font.
+- Gli annunci con molto testo oggi funzionano su Meta: va bene un titolo lungo o un breve paragrafo nella grafica,
+  purché la gerarchia resti chiara.
+- Le grafiche dello stesso cliente hanno un'aria comune (palette, font), ma ognuna ha la sua idea: due grafiche
+  uguali con titoli diversi non sono un test di principio.
+
+**4. Nei test**: il test C (diretti) confronta **due principi diversi** con la stessa offerta (es. desiderio contro
+identità). Scrivi nella strategia quale principio vince e cosa si prova dopo.
 
 ## 6. I testi
 
@@ -218,20 +277,25 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
 - **Controlli**:
   1. con Playwright, la pagina a 390 e 1280 px: niente scorrimento orizzontale, immagini caricate, testi che si
      aprono con "Altro";
-  2. guarda ogni creatività con Read, intera, come la vedrebbe chi scorre il feed;
-  3. per ogni indiretto: la prima riga riprende la domanda dell'immagine? Ci sono le sei tappe dello schema? Il
+  2. `node /tmp/officina/social/tools/controlla-slide.mjs /tmp/lavoro/<slug>/index.html /tmp/lavoro/<slug>/controlli`
+     per le grafiche: salva ogni tela a misura reale e segnala testo fuori dai margini o sotto 28 px. Correggi
+     finché è `OK` (le immagini delle foto vere non sono tele e lo script non le tocca);
+  3. guarda ogni creatività con Read, intera, come la vedrebbe chi scorre il feed. Per ogni grafica: si capisce il
+     messaggio in un secondo? È diversa dallo schema del settore? Il principio dichiarato si vede?
+  4. per ogni indiretto: la prima riga riprende la domanda dell'immagine? Ci sono le sei tappe dello schema? Il
      testo è tra 150 e 400 parole?
-  4. scorri la checklist della sezione 6 (onestà e policy) annuncio per annuncio.
+  5. scorri la checklist della sezione 6 (onestà e policy) annuncio per annuncio.
 - Pubblicazione, esito e Agent OS come da contratto (sezioni 3, 4 e 4b), con `fonte: agente_annunci_ads`.
   - `descrizione` (per il venditore, 2-3 frasi): quante creatività, il problema scelto per gli indiretti e il primo test.
   - `note`, in quest'ordine:
     1. `durata: <N> min · crediti: higgsfield <N>, manifold <N> · token: <token>`;
-    2. base usata (audit o brief) e parole dei clienti trovate, con la fonte;
+    2. base usata (audit o brief) e parole dei clienti trovate, con la fonte; per le grafiche: le query Pinterest, lo
+       schema del settore trovato e da cosa ti sei staccato;
     3. prove del riconoscimento e del prodotto;
     4. rischi di policy individuati;
     5. cosa confermare con il cliente: offerte, budget, pagina Facebook, Pixel, storie del titolare;
     6. problemi.
   - `officina_fine.risultato`:
-    `{"problema": "...", "creativita": [{"codice": "A1", "tipo": "indiretto", "immagine": "Momento rubato", "attacco": "Storia", "titolo": "...", "cta": "Scopri di più", "destinazione": "advertorial"}], "test": ["A: immagine", "B: attacco"], "pixel": true|false, "token": "..."}`
+    `{"problema": "...", "creativita": [{"codice": "A1", "tipo": "indiretto", "immagine": "Momento rubato|Grafica", "principio": "solo per le grafiche", "attacco": "Storia", "titolo": "...", "cta": "Scopri di più", "destinazione": "advertorial"}], "test": ["A: immagine", "B: attacco"], "pixel": true|false, "token": "..."}`
   - `passa_a`: se il cliente non ha un advertorial o una landing dell'offerta (quasi sempre), indica
     `{"deliverable": "landing_page", "brief": {... "modo": "advertorial" e/o "offerta", problema, meccanismo, titoli degli annunci, parole dei clienti, offerta ...}}`.
