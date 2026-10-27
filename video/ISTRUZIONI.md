@@ -45,19 +45,57 @@ che una persona può girare e montare senza farti domande.
   4. **Soluzione**;
   5. **Prova**, solo se reale e presente nel brief, altrimenti mostra il processo o il risultato senza numeri;
   6. **CTA**.
+- I video **sull'offerta** raccontati da una persona usano di preferenza il formato **Racconto di scoperta**
+  (sezione 1b), che riempie le stesse battute con una storia in prima persona.
 - La durata dipende dalla voce, mai il contrario: in italiano conta circa **2,5 parole al secondo**. 75 parole
   durano circa 30 secondi. Durata ideale tra 15 e 35 secondi.
+
+## 1b. Formato "Racconto di scoperta" (stile UGC)
+
+È il formato delle pubblicità più guardate girate "da utente": una persona racconta in camera, in 25-35 secondi, come
+ha cambiato idea su qualcosa grazie al prodotto. Non sembra una pubblicità perché è una confessione. Il metodo è
+ricavato dall'analisi di una pubblicità di questo tipo e scritto con parole nostre.
+
+**Le 5 mosse**, nelle battute di WATCH:
+
+| mossa | battuta WATCH / vendita | cosa fa | regola Kallaway per le parole |
+|---|---|---|---|
+| 1. **La convinzione sbagliata** | hook (0-3 s) | chi parla confessa ciò che credeva, ed è ciò che crede chi guarda ("Pensavo che … fosse solo per …") e subito la smentisce ("Mi sbagliavo") | formato **Contrarian**, contrasto A contro B, frame negativo |
+| 2. **Chi sono io** | lock-in (3-7 s) | un dettaglio concreto che fa dire a chi guarda "è come me" (da quanto tempo, quanto è piccolo, da dove parte). La credibilità viene dalla somiglianza, non dall'autorità | lock-in: conferma la promessa e dà un motivo per fidarsi |
+| 3. **La scoperta** | soluzione | il prodotto entra come qualcosa che ha scoperto, con **1-2 caratteristiche concrete** dette col loro nome, ognuna tradotta subito in cosa gli cambia | parole di contrasto ("in realtà", "invece"), niente aggettivi vuoti |
+| 4. **La vita, adesso** | prova / payoff | il risultato mostrato in **3 scene** diverse e rapide della sua vita (lavoro, svago, riposo), elencate in una sola frase. Ogni scena è un cambio di immagine | ritmo frastagliato: tre pezzi brevi, l'ultimo il più inatteso |
+| 5. **La frase da ricordare** | CTA / chiusura in loop | una frase breve e ripetibile che riassume il cambiamento, eventualmente riprende l'inizio; poi la CTA di 2 secondi | frase in contrasto ("di meno … di più"), massimo 7 parole |
+
+**Quando usarlo**
+- C'è una persona **vera** che può raccontarlo: il titolare (come ha scoperto il modo di lavorare che oggi offre), un
+  membro del team, oppure un **cliente reale** che accetta di raccontarlo con le sue parole.
+- Con faccia è la versione naturale. Senza faccia: voce in prima persona del titolare su B-roll, e le 3 scene della
+  mossa 4 diventano 3 riprese.
+
+**Regole di onestà (più forti di qualunque efficacia)**
+- **Mai clienti inventati**, mai un attore o una persona generata che finge di essere un cliente. Se il racconto è di
+  un cliente, nel copione scrivi "da far raccontare a un cliente reale, con le sue parole, con il suo consenso" e
+  segnalo nelle note.
+- I dettagli della mossa 2 e i risultati della mossa 4 devono essere **veri e nel brief**. Se non ci sono, scrivili
+  come segnaposto da confermare ("[da quanti anni]"), mai inventati.
+- Nessun numero di guadagno, di prenotazioni o di risultato che il brief non dica.
+- Se la persona ha un vantaggio (è il titolare, è pagata, ha uno sconto), il post va segnato come contenuto
+  promozionale o collaborazione: scrivilo nelle note.
+
+**Prova del formato** (si aggiunge ai controlli della sezione 6): chi guarda deve potersi riconoscere nella mossa 1
+(la convinzione è davvero comune nel pubblico del cliente?) e nella mossa 2; la mossa 3 nomina qualcosa di concreto;
+la mossa 4 ha 3 immagini diverse; la frase finale si può ripetere a memoria.
 
 ## 2. Cosa produrre
 
 | livello | contenuti | tempo indicativo |
 |---|---|---|
-| `prima` | **2 video**: uno educativo o di valore sul dolore principale del pubblico e uno sull'offerta del cliente | 20-30 min |
-| `completa` | **5 video** per le prime due settimane, con un mini calendario: giorno, piattaforma e obiettivo | 40-60 min |
+| `prima` | **2 video**: uno educativo o di valore sul dolore principale del pubblico e uno sull'offerta del cliente (di preferenza come Racconto di scoperta) | 20-30 min |
+| `completa` | **5 video** per le prime due settimane, con un mini calendario: giorno, piattaforma e obiettivo. Almeno uno è un Racconto di scoperta | 40-60 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | 10-20 min |
 
 Per ogni video consegni:
-1. **5 hook da provare**, etichettati con il formato Kallaway.
+1. **5 hook da provare**, etichettati con il formato Kallaway, e il **formato del video** (es. "Racconto di scoperta", "Educativo", "Vendita a battute").
 2. **Copione a battute** su tre tracce: tempo · cosa si vede · testo a schermo · voce.
 3. **Storyboard**: un fotogramma 9:16 per battuta (4-7 per video).
 4. **Didascalia** del post.
@@ -90,12 +128,7 @@ Per ogni video consegni:
 - Movimenti del testo sobri: dissolvenza, piccolo ingrandimento, piccolo scorrimento. Niente effetti a caso.
 - Voce: scrivi lo stile (calda, diretta, ritmo) e chi la registra, di solito il cliente. Se il cliente userà una voce
   AI, va dichiarato nel post: scrivilo nelle note.
-- Fotogrammi dello storyboard:
-  - immagini generate con Higgsfield **solo per le scene chiave**, oppure scene composte in HTML con forme, testo e SVG;
-  - budget: **4 crediti** per `prima`, **10 crediti** per `completa`;
-  - usa i link `_min.webp` (contratto, sezione 3);
-  - niente persone riconoscibili e niente testo dentro le immagini generate;
-  - le immagini generate sono "d'esempio", da sostituire con riprese vere: scrivilo nelle note.
+- Fotogrammi dello storyboard: vedi sezione 5 (niente immagini generate).
 
 ## 4. Scrittura (regole del metodo, applicate)
 
@@ -135,6 +168,11 @@ Parti da `video/_modello/index.html` e copialo in `/tmp/lavoro/<slug>/index.html
   - Stile dei fotogrammi coerente con il brand del cliente: colori e font se noti, altrimenti una proposta sobria del
     settore, da segnare come "da confermare".
   - Sotto ogni fotogramma: tempo e battuta (es. "0-3 s · hook").
+  - **Niente immagini generate (niente Higgsfield)**: lo storyboard è un disegno di lavoro, non una foto. Ogni
+    fotogramma è composto in HTML, CSS e SVG: la scena in forme semplici (sagoma neutra della persona, oggetti e luogo
+    stilizzati, inquadratura indicata con cornici o frecce), una riga in piccolo con l'inquadratura ("primo piano
+    mani", "campo largo dal mare") e il **testo a schermo vero**, nella sua posizione e dimensione reale. Deve far
+    capire a chi gira cosa riprendere e come, non sembrare il video finito.
 - In alto, 2 righe per il cliente: quanti video, per chi, con o senza faccia.
 - Niente note interne nella pagina: quelle vanno nell'esito.
 
@@ -145,6 +183,7 @@ Un solo file `index.html`, con CSS e JS dentro.
 1. `node /tmp/officina/social/tools/controlla-slide.mjs /tmp/lavoro/<slug>/index.html /tmp/lavoro/<slug>/controlli`
    - Lo script salva ogni fotogramma e la pagina a 390 e 1280 px, e segnala testo fuori dalle zone sicure, font o
      immagini mancanti e scorrimento orizzontale.
+   - Nessun link a immagini generate nella pagina: lo storyboard è solo HTML, CSS e SVG.
    - Se è bloccato dai permessi, scrivi tu un controllo equivalente con Playwright.
    - Correggi finché l'esito è `OK`.
 2. Guarda con Read ogni fotogramma e `pagina-390.png`.
@@ -164,7 +203,7 @@ Segui il contratto:
 
 - `descrizione` (per il venditore, 2-3 frasi): quanti video, con o senza faccia, e i 2 punti più forti per questo cliente.
 - `note` (per Vincenzo), in quest'ordine:
-  1. `durata: <N> min · crediti: higgsfield <N> · token: <token>`;
+  1. `durata: <N> min · token: <token>`;
   2. scelta con o senza faccia, e perché;
   3. per ogni video, l'hook scelto e perché;
   4. cosa confermare con il cliente: chi parla, voce, luoghi da riprendere, offerta, CTA, handle;
@@ -179,5 +218,6 @@ Valgono tutte le regole del contratto (sezione 6), più queste:
 - mai statistiche, numeri, recensioni o risultati inventati, né nell'hook né nella prova;
 - nessuna promessa di viralità o di visualizzazioni;
 - nessun volto AI che somigli a persone reali; per mostrare una persona serve il suo consenso, quindi scrivilo nelle note;
-- voce o immagini AI vanno dichiarate nel post: scrivilo nelle note;
+- una voce AI va dichiarata nel post: scrivilo nelle note;
+- nel Racconto di scoperta, mai far passare per cliente chi non lo è (sezione 1b);
 - l'audio di tendenza è solo un suggerimento di genere: si sceglie nell'app.
