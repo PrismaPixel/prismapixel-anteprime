@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Consulenza strategica · {{NOME_ATTIVITA}}</title>
+<!--
+  MODELLO DELLA CONSULENZA STRATEGICA · solo STRUTTURA (sezioni e classi). Non contiene uno stile:
+  la grafica nasce dai riferimenti Pinterest del settore (strategia/ISTRUZIONI.md, sezione 5).
+  1. Scegli i font della scheda di stile (Google Fonts, massimo 2 famiglie) e mettili nel <link> qui sotto.
+  2. Riempi le variabili :root con la palette della scheda di stile.
+  3. Ridisegna liberamente schede, tabelle, numeri delle priorità, piano e chiusura come suggeriscono i riferimenti:
+     le classi sono solo un punto di partenza, la struttura delle sezioni invece resta.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={{FONT_TITOLI}}&family={{FONT_TESTO}}&display=swap" rel="stylesheet">
+<style>
+  /* Variabili da riempire con la scheda di stile (valori qui sotto = neutri, solo per vedere la struttura) */
+  :root {
+    --bg: #ffffff; --surface: #f4f4f4; --line: #dddddd;
+    --text: #1a1a1a; --muted: #5c5c5c;
+    --accent: #333333; --accent-text: #ffffff;
+    --ok: #2e7d4f; --ko: #b4532a; --check: #8a6d00;
+    --font-titoli: Georgia, serif; --font-testo: system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--text); font: 400 17px/1.6 var(--font-testo); }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1, h2, h3 { font-family: var(--font-titoli); line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); margin: 8px 0 16px; }
+  h2 { font-size: 1.6rem; margin: 48px 0 16px; }
+  h3 { font-size: 1.15rem; margin-bottom: 6px; }
+  p + p { margin-top: 12px; }
+  .eyebrow { color: var(--muted); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; }
+  .lead { color: var(--muted); font-size: 1.1rem; }
+  .card { background: var(--surface); border: 1px solid var(--line); padding: 18px; margin-top: 12px; }
+  .card .dato { color: var(--muted); font-size: .95rem; margin-top: 6px; }
+  .ok { border-left: 4px solid var(--ok); }
+  .ko { border-left: 4px solid var(--ko); }
+  .tag { display: inline-block; font-size: .8rem; padding: 3px 10px; margin-top: 10px; border: 1px solid var(--line); }
+  .verifica { color: var(--check); font-weight: 600; }
+  .prio { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .num { width: 44px; height: 44px; background: var(--accent); color: var(--accent-text); display: grid; place-items: center; font-family: var(--font-titoli); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  ul { padding-left: 20px; } li + li { margin-top: 6px; }
+  .mesi { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .mesi { grid-template-columns: repeat(3, 1fr); } }
+  .cta { margin-top: 48px; padding: 24px; background: var(--accent); color: var(--accent-text); }
+  .cta h2 { margin-top: 0; }
+  .leve { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .leve { grid-template-columns: repeat(2, 1fr); } }
+  .voto { font-family: var(--font-titoli); font-size: 1.6rem; }
+  .proposta { font-size: .85rem; color: var(--muted); }
+  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Consulenza strategica</p>
+  <h1>{{NOME_ATTIVITA}}</h1>
+  <p class="lead">{{IN_BREVE: l'offerta di oggi in una frase e cosa cambia con questa consulenza}}</p>
+
+  <h2>La tua offerta oggi</h2>
+  <p>{{FRASE: un'offerta vale di più quanto più il risultato è chiaro e credibile, e quanto meno tempo e fatica chiede. Ecco dove sei.}}</p>
+  <div class="leve">
+    <div class="card"><h3>Il risultato che prometti</h3><p class="voto">{{N}}/5</p><p class="dato">{{PERCHE}}</p></div>
+    <div class="card"><h3>Quanto è credibile</h3><p class="voto">{{N}}/5</p><p class="dato">{{PERCHE}}</p></div>
+    <div class="card"><h3>Quanto bisogna aspettare</h3><p class="voto">{{N}}/5</p><p class="dato">{{PERCHE}}</p></div>
+    <div class="card"><h3>Quanta fatica chiede</h3><p class="voto">{{N}}/5</p><p class="dato">{{PERCHE}}</p></div>
+  </div>
+  <!-- i 3 punti deboli più gravi -->
+  <div class="card ko"><h3>{{PUNTO_DEBOLE}}</h3><p class="dato">{{DATO_DA_CUI_LO_RICAVI}}</p></div>
+
+  <h2>L'offerta che proponiamo</h2>
+  <p class="proposta">Proposta da decidere insieme: nome, contenuto, garanzia e prezzo sono da confermare.</p>
+  <div class="card ok">
+    <h3>{{NOME_OFFERTA}}</h3>
+    <p>{{PER_CHI_E_RISULTATO_PROMESSO}}</p>
+  </div>
+  <table>
+    <thead><tr><th>Cosa c'è dentro</th><th>Cosa risolve</th></tr></thead>
+    <tbody><tr><td>{{ELEMENTO}}</td><td>{{LEVA_E_PERCHE}}</td></tr></tbody>
+  </table>
+  <div class="card"><h3>La prima cosa che ottiene subito</h3><p>{{PRIMA_VITTORIA}}</p></div>
+  <div class="card"><h3>La garanzia</h3><p>{{GARANZIA_MANTENIBILE}}</p></div>
+  <div class="card"><h3>Il prezzo</h3><p>{{PREZZO_O_LOGICA_DEL_PREZZO}}</p></div>
+
+  <h2>I dubbi dei tuoi clienti</h2>
+  <!-- ripeti per ogni obiezione (2 nel livello prima) -->
+  <div class="card">
+    <h3>«{{OBIEZIONE}}»</h3>
+    <p class="dato">Cosa pensano davvero: {{CONVINZIONE}}</p>
+    <p>Cosa deve diventare vero: {{NUOVA_CONVINZIONE}} · {{PROVA_VERA_O_prova da costruire}}</p>
+    <p class="dato">Risposta breve: «{{RISPOSTA_PRONTA}}»</p>
+  </div>
+
+  <!-- SOLO LIVELLO COMPLETA -->
+  <h2>Livelli e prezzi</h2>
+  <table>
+    <thead><tr><th>Livello</th><th>Cosa include</th><th>Per chi</th></tr></thead>
+    <tbody><tr><td>{{LIVELLO}}</td><td>{{CONTENUTO}}</td><td>{{PER_CHI}}</td></tr></tbody>
+  </table>
+
+  <!-- SOLO LIVELLO COMPLETA -->
+  <h2>Come raccontarla</h2>
+  <div class="card"><h3>In una frase</h3><p>{{PRESENTAZIONE_BREVE}}</p></div>
+  <table>
+    <thead><tr><th>Angolo</th><th>Titolo d'esempio</th><th>Dove usarlo</th></tr></thead>
+    <tbody><tr><td>{{ANGOLO}}</td><td>{{TITOLO}}</td><td>{{CANALE}}</td></tr></tbody>
+  </table>
+
+  <h2>Le priorità</h2>
+  <p>Tre priorità, in ordine di impatto.</p>
+  <div class="card prio">
+    <div class="num">1</div>
+    <div>
+      <h3>{{PRIORITA}}</h3>
+      <p>{{PERCHE_E_PRIMO_PASSO}}</p>
+      <span class="tag">{{SERVIZIO_PRISMAPIXEL}}</span>
+    </div>
+  </div>
+
+  <!-- SOLO LIVELLO COMPLETA -->
+  <h2>La roadmap a 90 giorni</h2>
+  <div class="mesi">
+    <div class="card"><h3>Giorni 1-30</h3><ul><li>{{ATTIVITA · chi · come si misura}}</li></ul></div>
+    <div class="card"><h3>Giorni 31-60</h3><ul><li>{{ATTIVITA · chi · come si misura}}</li></ul></div>
+    <div class="card"><h3>Giorni 61-90</h3><ul><li>{{ATTIVITA · chi · come si misura}}</li></ul></div>
+  </div>
+
+  <div class="cta">
+    <h2>Il prossimo passo</h2>
+    <p>{{INVITO_A_PARLARNE_IN_CHAT}}</p>
+  </div>
+
+  <footer>Consulenza preparata da PrismaPixel il {{DATA}}. Le proposte sull'offerta sono da decidere insieme; i punti segnati "da verificare" vanno confermati. · Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</main>
+</body>
+</html>
