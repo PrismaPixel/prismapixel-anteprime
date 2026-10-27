@@ -29,6 +29,7 @@ Ordine dei controlli (max_credits indicativo):
 
 | # | Controllo | Strumento | max_credits |
 |---|---|---|---|
+| 0 | **Scansione del sito**: strumenti davvero presenti (prenotazione o acquisto online, moduli, chat, tracciamento, banner cookie, CMS), anche quelli caricati dal codice JavaScript | workflow n8n **"PrismaPixel · Scansione sito"** (sotto) | gratis |
 | 1 | Home del sito + 1-2 pagine chiave (servizi, contatti, prodotti) | `seo_get_page` | gratis |
 | 2 | Pronto per le AI | `aeo_get_site_readiness` | gratis |
 | 3 | Concorrenti e scheda su Google Maps nella zona (1 ricerca: "<attività> <zona>") | `maps_search_places` | 5 |
@@ -40,6 +41,25 @@ Ordine dei controlli (max_credits indicativo):
 | 9 | **Voce della nicchia: di cosa parlano le recensioni** del cliente e di 2 concorrenti (argomenti e menzioni, distribuzione delle stelle) | `maps_get_place` (con `place_id` da Maps, `language: "it"`) | 2 ciascuno |
 | 10 | **Voce della nicchia: le parole dei clienti**: commenti al post più commentato del cliente e di 1 concorrente (Instagram o Facebook) | `instagram_get_posts` già fatto → `instagram_get_comments` / `facebook_get_comments` | 1 ciascuno |
 | 11 | **Voce della nicchia: le domande prima di comprare**: 1 ricerca nei commenti di Reddit (in inglese se il pubblico è straniero, es. "masseria Puglia worth it") | `reddit_search_comments` | 1 |
+
+**Scansione del sito (controllo 0).** `seo_get_page` legge il testo della pagina ma non esegue il JavaScript, quindi
+non vede i widget di prenotazione, i carrelli e le chat caricati dal codice. Per questo, prima di tutto:
+- avvia il workflow con lo strumento n8n `execute_workflow`: `workflowId: "wpWXlrLMafvO1viE"`,
+  `executionMode: "production"`, `triggerNodeName: "Richiesta scansione"`,
+  `inputs: { "webhookData": { "method": "POST", "body": { "url": "<sito>", "pagine": ["<pagina chiave>"] } } }`;
+- leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames: ["Rileva strumenti"]`). Richiede
+  pochi secondi.
+- Il workflow segue da solo i link "Prenota", "Acquista" e "Contatti" e legge fino a 3 file JavaScript del sito.
+
+**Regola sulle assenze** (vale per tutto l'audit). Prima di scrivere che il sito **non ha** qualcosa (prenotazione o
+acquisto online, modulo, chat, tracciamento, banner cookie):
+1. la scansione deve averlo cercato e non trovato (`ha.<voce>: false`), su pagine lette davvero (`pagine_lette` ≥ 2,
+   `pochi_contenuti: false`);
+2. anche `seo_get_page` non deve mostrarne traccia (testi come "prenota", "acquista", "aggiungi al carrello").
+
+Se una delle due condizioni manca, o se la scansione non risponde, scrivi **"da verificare"** e mai "manca".
+Se la scansione trova una "prenotazione o pagamento integrati nel sito", il cliente **ha** un sistema di
+prenotazione: valuta quanto è facile da usare, non dire che manca.
 
 Prima di una chiamata nuova o di cui non conosci il costo, usa `dry_run: true` per leggere `est_credits`.
 Per `aeo_run_ai_answers` scegli 1 sola domanda e i motori più rilevanti in Italia (chatgpt, gemini, ai_overview); se la stima supera 30, riduci i motori. Poi chiama `get_task` finché non è pronto (al massimo 10 tentativi, con pause).
