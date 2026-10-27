@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Video per NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="Copioni e storyboard dei video social preparati per NOME ATTIVITÀ.">
+<meta property="og:title" content="I video di NOME ATTIVITÀ, pronti da girare">
+<meta property="og:description" content="Copioni, testi a schermo e storyboard in anteprima.">
+<meta property="og:image" content="URL_IMMAGINE_min.webp">
+<!--
+  MODELLO DELL'AGENTE SCRIPT VIDEO · PrismaPixel
+  - Pagina = visore neutro. Lo stile dei FOTOGRAMMI (.tela 1080x1920) è tuo: classi .s-, font e colori del brand del cliente.
+  - Un video = un <article class="video">. Dentro: hook da provare, copione a battute, storyboard, didascalia, note di ripresa.
+  - Ogni .tela ha data-margini="alto,destra,basso,sinistra": zone coperte dall'interfaccia di Reels/TikTok. Non cambiarli.
+  - Sostituisci i testi MAIUSCOLI segnaposto e cancella questi commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --p-bg: #f4f5f3; --p-card: #ffffff; --p-ink: #141616; --p-muted: #5d6463; --p-line: #e2e5e3; --p-accent: #00777b; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--p-bg); color: var(--p-ink); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 680px; margin: 0 auto 36px; text-align: center; }
+header.intro .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--p-accent); font-weight: 600; }
+header.intro h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+header.intro p { color: var(--p-muted); margin: 0; }
+.video { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 16px; padding: 20px 16px; margin: 0 auto 32px; }
+.video > h2 { font-size: 22px; line-height: 1.25; margin: 6px 0 4px; }
+.etichette { display: flex; flex-wrap: wrap; gap: 6px; }
+.etichette span { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #eef2f1; color: var(--p-muted); }
+.video h3 { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-accent); margin: 26px 0 10px; }
+.perche { color: var(--p-muted); margin: 6px 0 0; }
+ol.hook { margin: 0; padding-left: 22px; } ol.hook li + li { margin-top: 6px; }
+ol.hook .tipo { font-size: 12px; color: var(--p-muted); }
+/* copione a battute: card su telefono, tabella da 760 px */
+.copione { display: grid; gap: 10px; }
+.battuta { border: 1px solid var(--p-line); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.battuta .t { font-weight: 700; font-size: 13px; color: var(--p-accent); }
+.battuta .campo { font-size: 15px; }
+.battuta .campo b { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-muted); }
+@media (min-width: 760px) {
+  .battuta { grid-template-columns: 70px 1fr 1fr 1.2fr; align-items: start; gap: 14px; }
+}
+/* storyboard: fotogrammi 9:16 che scorrono */
+.binario { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: thin; }
+.fotogramma { flex: 0 0 min(62%, 220px); scroll-snap-align: start; }
+.cornice { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 10px; background: #ddd; }
+.tela { position: absolute; top: 0; left: 0; width: 1080px; height: 1920px; transform-origin: 0 0; overflow: hidden; background: #fff; }
+.fotogramma .didascalia-f { font-size: 12px; color: var(--p-muted); margin-top: 6px; }
+.didascalia { white-space: pre-line; border-left: 3px solid var(--p-line); padding-left: 12px; }
+.azioni { margin-top: 10px; }
+.azioni button { font: inherit; font-size: 13px; border: 1px solid var(--p-line); background: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+ul.note { margin: 0; padding-left: 20px; } ul.note li + li { margin-top: 4px; }
+footer.fine { margin-top: 48px; text-align: center; font-size: 12px; color: var(--p-muted); }
+footer.fine a { color: inherit; }
+/* ---------- FOTOGRAMMI: il tuo stile qui (classi .s-...), con font e colori del brand ---------- */
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Anteprima PrismaPixel</div>
+    <h1>I video di NOME ATTIVITÀ, pronti da girare</h1>
+    <p>FRASE: QUANTI VIDEO, PER CHI, CON O SENZA FACCIA. Per ogni video trovi gli hook da provare, il copione con quello che si dice e si vede, lo storyboard e la didascalia.</p>
+  </header>
+
+  <article class="video">
+    <div class="etichette"><span>Video 1</span><span>CON FACCIA | SENZA FACCIA</span><span>~30 secondi</span><span>Reels · TikTok · Shorts</span></div>
+    <h2>TITOLO DI LAVORO DEL VIDEO</h2>
+    <p class="perche">UNA FRASE: A CHI PARLA E PERCHÉ LO GUARDA FINO ALLA FINE.</p>
+
+    <h3>Hook da provare</h3>
+    <ol class="hook">
+      <li>HOOK 1 (quello usato nel copione) <span class="tipo">· TIPO</span></li>
+      <li>HOOK 2 <span class="tipo">· TIPO</span></li>
+    </ol>
+
+    <h3>Copione</h3>
+    <div class="copione">
+      <div class="battuta">
+        <div class="t">0-3 s</div>
+        <div class="campo"><b>Si vede</b>INQUADRATURA O SCENA</div>
+        <div class="campo"><b>Testo a schermo</b>TESTO</div>
+        <div class="campo"><b>Voce</b>PAROLE DETTE</div>
+      </div>
+    </div>
+
+    <h3>Storyboard</h3>
+    <div class="binario">
+      <div class="fotogramma">
+        <div class="cornice"><div class="tela" data-margini="250,90,450,90">FOTOGRAMMA</div></div>
+        <div class="didascalia-f">0-3 s · hook</div>
+      </div>
+    </div>
+
+    <h3>Didascalia</h3>
+    <div class="didascalia">PRIMA RIGA = HOOK.
+Corpo breve.
+CTA.
+
+#hashtag #pertinenti</div>
+    <div class="azioni"><button type="button" data-copia>Copia la didascalia</button></div>
+
+    <h3>Come girarlo</h3>
+    <ul class="note">
+      <li>NOTA DI RIPRESA (luce, inquadratura, cosa preparare)</li>
+      <li>Audio: SUGGERIMENTO DI GENERE, da scegliere nella libreria dell'app</li>
+    </ul>
+  </article>
+
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+<script>
+function scala() {
+  document.querySelectorAll('.cornice').forEach(c => {
+    const t = c.querySelector('.tela');
+    if (t) t.style.transform = 'scale(' + (c.clientWidth / t.offsetWidth) + ')';
+  });
+}
+new ResizeObserver(scala).observe(document.body);
+window.addEventListener('load', scala);
+scala();
+document.querySelectorAll('[data-copia]').forEach(b => b.addEventListener('click', () => {
+  const t = b.closest('.video').querySelector('.didascalia').innerText;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => {
+    b.textContent = 'Copiata ✓'; setTimeout(() => b.textContent = 'Copia la didascalia', 1800);
+  }).catch(() => {});
+}));
+</script>
+</body>
+</html>

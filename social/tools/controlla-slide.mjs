@@ -1,6 +1,7 @@
 // Controllo delle slide · PrismaPixel
 // Uso: node controlla-slide.mjs /tmp/lavoro/<slug>/index.html /tmp/lavoro/<slug>/controlli
-// - salva ogni tela a 1080x1350 come PNG (da guardare con Read, una per una)
+// - salva ogni tela a misura reale come PNG (1080x1350 per i post, 1080x1920 per i fotogrammi video), da guardare con Read
+// - margini di sicurezza: 64 px, oppure quelli scritti sulla tela con data-margini="alto,destra,basso,sinistra"
 // - salva la pagina a 390 px e a 1280 px
 // - segnala testo che esce dalla tela o dai margini di sicurezza (64 px), font non caricati, immagini rotte,
 //   testo sotto i 28 px nelle tele e scorrimento orizzontale della pagina
@@ -29,22 +30,25 @@ const info = await p.evaluate(() => {
   document.querySelectorAll('.binario').forEach(b => { b.style.cssText = 'display:block;overflow:visible;scroll-snap-type:none'; });
   document.querySelectorAll('.tela').forEach((t, i) => {
     t.style.transform = 'none';
-    t.closest('.cornice').style.cssText = 'width:1080px;height:1350px;flex:0 0 1080px;aspect-ratio:auto';
+    const W = t.offsetWidth, H = t.offsetHeight;
+    t.closest('.cornice').style.cssText = `width:${W}px;height:${H}px;flex:0 0 ${W}px;aspect-ratio:auto`;
     const r = t.getBoundingClientRect();
+    const [mT, mR, mB, mL] = (t.dataset.margini || '').split(',').map(Number).length === 4 && !(t.dataset.margini || '').split(',').some(x => isNaN(Number(x)))
+      ? t.dataset.margini.split(',').map(Number) : [SICUREZZA, SICUREZZA, SICUREZZA, SICUREZZA];
     const fuori = [], piccoli = [];
     t.querySelectorAll('*').forEach(el => {
       if (!el.childNodes.length || ![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
       const b = el.getBoundingClientRect();
       if (!b.width || !b.height) return;
       const testo = el.textContent.trim().slice(0, 40);
-      if (b.left < r.left + SICUREZZA - 1 || b.right > r.right - SICUREZZA + 1 || b.top < r.top + SICUREZZA - 1 || b.bottom > r.bottom - SICUREZZA + 1) {
+      if (b.left < r.left + mL - 1 || b.right > r.right - mR + 1 || b.top < r.top + mT - 1 || b.bottom > r.bottom - mB + 1) {
         if (!el.closest('[data-fuori-ok]')) fuori.push(testo); // data-fuori-ok: elementi decorativi voluti oltre il margine
       }
       if (parseFloat(getComputedStyle(el).fontSize) < 28) piccoli.push(testo);
       if (el.scrollWidth > el.clientWidth + 2 && getComputedStyle(el).overflow !== 'visible') fuori.push('taglio: ' + testo);
     });
-    const post = t.closest('.post');
-    ris.push({ i, post: [...document.querySelectorAll('.post')].indexOf(post) + 1, slide: [...post.querySelectorAll('.tela')].indexOf(t) + 1, fuori, piccoli });
+    const post = t.closest('.post, .video');
+    ris.push({ i, post: [...document.querySelectorAll('.post, .video')].indexOf(post) + 1, slide: [...post.querySelectorAll('.tela')].indexOf(t) + 1, fuori, piccoli });
   });
   const immaginiRotte = [...document.images].filter(im => !im.complete || !im.naturalWidth).map(im => im.src.slice(0, 80));
   const fontMancanti = [...document.fonts].filter(f => f.status === 'error').map(f => f.family);
