@@ -21,6 +21,22 @@ che una persona può girare e montare senza farti domande.
   - **C**: mantenere la promessa dell'hook.
   - **H**: chiudere in loop con una CTA giusta.
   - La skill cita WoopSocial e altre skill del suo repository: **qui non valgono**. Al loro posto valgono queste istruzioni e il contratto (vedi `FONTE.md`).
+- `social/skills/kallaway-copywriting.md` (metodo **Kallaway**): leggilo tutto, in particolare le sezioni 3, 4, 6 e 7.
+
+**Chi comanda cosa** (le due skill si sovrappongono: segui questa gerarchia e non mescolarle):
+1. **WATCH comanda la struttura del video**: battute, tempi, versione muta prima, cambi di immagine ogni 2-4
+   secondi, payoff, loop finale e CTA. Se una regola di Kallaway sulla struttura (es. rehook ogni 20-30 secondi,
+   arco dei video lunghi) è diversa, vale WATCH.
+2. **Kallaway comanda le parole dentro le battute**:
+   - testo dell'hook: 4 S, contrasto A contro B, text hook di massimo 2 righe senza congiunzioni;
+   - **lock-in** subito dopo l'hook: conferma la promessa e dà un motivo per fidarsi, senza prove inventate;
+   - parole di contrasto ("ma", "in realtà", "invece"), verità incorporate (solo per cose vere) e frame negativi;
+   - ritmo frastagliato delle frasi dette: tanto "tu", quasi zero "noi".
+3. **I 5 hook da provare** usano i formati di Kallaway (Insegnante, Contrarian, Investigatore, Sperimentatore,
+   Indovino, Mago) e vanno etichettati così.
+4. Il legame **"ma/quindi"** tra le battute serve a costruire la scaletta, **non sono parole da incollare** all'inizio
+   delle frasi.
+
 - I video **di vendita** (sull'offerta del cliente) seguono le battute della risposta diretta, ognuna con un solo
   messaggio e un solo elemento visivo forte:
   1. **Hook**;
@@ -41,7 +57,7 @@ che una persona può girare e montare senza farti domande.
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | 10-20 min |
 
 Per ogni video consegni:
-1. **5 hook da provare**, etichettati per tipo: affermazione forte, curiosità, problema prima, risultato prima, numerato.
+1. **5 hook da provare**, etichettati con il formato Kallaway.
 2. **Copione a battute** su tre tracce: tempo · cosa si vede · testo a schermo · voce.
 3. **Storyboard**: un fotogramma 9:16 per battuta (4-7 per video).
 4. **Didascalia** del post.
@@ -132,7 +148,7 @@ Un solo file `index.html`, con CSS e JS dentro.
 2. Guarda con Read ogni fotogramma e `pagina-390.png`.
 3. **Prova del muto**: rileggi solo la colonna "testo a schermo" di ogni video. Se la storia non si capisce, riscrivila.
 4. **Prova del tempo**: conta le parole della voce, dividi per 2,5 e confronta con i tempi delle battute. Lo scarto massimo è di 2 secondi a video.
-5. Rileggi la checklist della skill (Definition of done), poi controlla le regole fisse:
+5. Rileggi la checklist di WATCH (Definition of done) e la Checklist QA di Kallaway (sezione 11), poi controlla le regole fisse:
    - nessun dato, statistica o risultato inventato;
    - nessuna promessa di viralità;
    - settore sanitario: niente promesse di cura.
