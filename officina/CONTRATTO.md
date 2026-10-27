@@ -44,6 +44,9 @@ Il messaggio di avvio contiene un JSON:
    Usalo: non contraddire ciò che è già stato scoperto o deciso.
    Se il contesto contiene un **posizionamento** e una **voce dei clienti** (dall'audit), i contenuti partono da lì:
    la stessa promessa di fondo e le parole dei clienti. Non inventarne un'altra.
+   Se contiene una **consulenza strategica** (`deliverable = roadmap`), usa anche `risultato.offerta_proposta`,
+   `obiezioni` e `angoli`: l'offerta da promuovere, i dubbi da sciogliere e gli angoli da testare. Sono proposte: se
+   le note dicono che il cliente non le ha ancora confermate, segnalo anche tu come "da confermare".
 
 ## 3. Pubblicare l'anteprima (servizio Anteprime su n8n)
 
