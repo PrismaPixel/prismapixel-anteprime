@@ -139,6 +139,12 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
 - **Mai inventare contatti**: telefono, email e indirizzo solo se sono nel brief, altrimenti segnaposto chiaro
   ("Telefono · da inserire").
 - Mai prezzi di PrismaPixel, mai garanzie di risultato (posizioni su Google, comparire nelle AI, fatturato).
+- **Gli obiettivi del cliente non si dicono al pubblico.** Ciò che il brief chiama obiettivo (es. "prenotazioni
+  dirette invece che da Booking", "riempire la sala d'inverno", "più richieste online") orienta la strategia e la
+  scelta della CTA, ma non finisce mai nei testi: niente "prenota diretto", "senza intermediari", "niente commissioni"
+  e simili, che sono vantaggi per l'attività e non per chi guarda. La CTA dice **cosa ottiene la persona** facendo quel
+  gesto, con parole sue (es. "Scrivici: ti diciamo quale camera prende il tramonto"; "Mandaci le tue date, ti
+  rispondiamo noi, non un call center").
 - Ciò che non è confermato da dati o dal brief: "da verificare" o "da confermare con il cliente" nelle note.
 - Settore sanitario: niente promesse di risultato, linguaggio sobrio.
 - Il repository è pubblico: non scriverci mai niente. Brief, profilo e note vanno solo nelle tabelle n8n.

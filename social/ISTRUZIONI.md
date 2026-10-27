@@ -111,7 +111,7 @@ Leggi tutto `social/skills/kallaway-copywriting.md`, in particolare le sezioni 3
 | 2 · lock-in | conferma la promessa e dà un motivo per fidarsi (Trasformazione, Contrasto rapido o Magic Box: niente prove inventate) |
 | 3-5 · corpo | un punto per slide: titolo + 1-2 frasi. Il legame "ma/quindi" è una regola per costruire la scaletta (ogni slide nasce da un conflitto o da una conseguenza della precedente), **non parole da incollare all'inizio del testo**: una slide che comincia con "Ma…" o "Quindi…" senza un appiglio nella slide prima suona sbagliata. Ogni 2-3 slide un loop opener che porta alla slide successiva e ha senso da solo. Ordine: il secondo punto migliore per primo. |
 | 6 · payoff | la risposta non ovvia che chiude il loop della copertina |
-| 7 · CTA | CTA nativa e vera: salva, commenta una parola chiave, scrivici in DM, prenota dal link in bio. Mai promettere cose che il cliente non ha detto di offrire. |
+| 7 · CTA | CTA nativa e vera, con il vantaggio per chi legge: salva, commenta una parola chiave, scrivici in DM, prenota dal link in bio. Mai promettere cose che il cliente non ha detto di offrire, e mai l'obiettivo del cliente come slogan ("prenota diretto", "niente commissioni": vedi contratto, sezione 6). |
 
 - Testo per slide: **brevissimo**. Al massimo 25 parole nelle slide interne e al massimo 12 in copertina.
 - Ritmo frastagliato tra le slide: alterna frasi corte e medie.

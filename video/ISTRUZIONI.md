@@ -109,8 +109,10 @@ Per ogni video consegni:
    nessuna delle tre, va tolta.
 6. **Payoff** che mantiene esattamente la promessa dell'hook.
 7. **Chiusura in loop**: l'ultima frase o immagine richiama la prima.
-8. **Una sola CTA di circa 2 secondi**, legata al valore: salva, manda a chi serve, scrivi in DM, prenota dal link
-   in bio. Mai "metti like e iscriviti". Mai promettere ciò che il cliente non offre.
+8. **Una sola CTA di circa 2 secondi**, legata al valore **per chi guarda**: salva, manda a chi serve, scrivi in DM,
+   prenota dal link in bio, sempre con il motivo per farlo. Mai "metti like e iscriviti". Mai promettere ciò che il
+   cliente non offre. Mai trasformare l'obiettivo del cliente in uno slogan (vedi contratto, sezione 6: niente
+   "prenota diretto").
 9. Italiano parlato, del tu. Le parole della voce si devono poter dire in un fiato.
 
 **Didascalia**:
