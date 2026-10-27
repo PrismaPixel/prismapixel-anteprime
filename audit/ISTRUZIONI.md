@@ -69,17 +69,51 @@ Divieti:
 - Nessun dato inventato: ciò che Manifold non ha confermato va scritto come **"da verificare"**.
 - Niente dati personali di persone (nomi di dipendenti, email, telefoni privati).
 
-## 3. Pubblicazione
+## 3. Grafica: dai riferimenti Pinterest del settore
+
+La pagina dell'audit **non ha uno stile fisso**: il modello dà solo la struttura. La grafica nasce dai riferimenti
+Pinterest del settore del cliente, così l'audit "sembra suo" fin dal primo colpo d'occhio. Niente stile
+PrismaPixel di casa e niente skill di design predefinite.
+
+1. Prepara **4 ricerche in inglese**:
+   - 2 sull'**atmosfera del settore**, per esempio `<settore> brand identity` (es. `boat tour brand identity`,
+     `dental clinic brand identity`) e `<settore> website design`;
+   - 2 sull'**impaginazione di un report**, per esempio `editorial report web design` e `marketing report layout`.
+2. Avvia il workflow n8n **"PrismaPixel · Riferimenti Pinterest"** con `execute_workflow`:
+   - `workflowId: "1oek9PrhT8PB9Oa5"`, `executionMode: "production"`, `triggerNodeName: "Richiesta riferimenti"`;
+   - `inputs: { "webhookData": { "method": "POST", "body": { "queries": [...], "formato": "report", "settore": "<settore in italiano>", "n": 8 } } }`.
+3. Leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames: ["Risultato"]`). Ci vuole circa un
+   minuto: finché lo stato è `running` aspetta e riprova, e fermati dopo 4 minuti. Se `ok` è `false`, rifai una volta
+   con ricerche diverse. Se va male anche la seconda volta, usa una grafica sobria con i colori del brand e scrivilo
+   nelle note.
+4. Scegli una delle 3 `direzioni`, oppure una tua sintesi, partendo dai riferimenti con `qualita` 4-5. Scrivi in
+   `/tmp/lavoro/<slug>/stile.md` una **scheda di stile** in cui accanto a ogni scelta c'è il numero del riferimento
+   da cui viene:
+   - palette: quella dei riferimenti, applicata ai colori del brand del cliente se si conoscono. Mantieni i 3 colori
+     di stato (va bene, da migliorare, da verificare) ben distinguibili;
+   - tipografia: massimo 2 famiglie Google Fonts, scelte per somiglianza con i riferimenti;
+   - forma di schede, tabelle, numeri delle priorità, piano a 90 giorni e chiusura;
+   - elementi grafici: forme, linee, texture e icone in SVG scritto nel codice.
+5. Applicala al modello: riempi `:root` e il `<link>` dei font, e ridisegna i componenti. La **struttura delle
+   sezioni** (sezione 2) e la leggibilità restano obbligatorie:
+   - testo almeno 16 px;
+   - contrasto AA;
+   - a 375 px niente scorrimento orizzontale e tabelle con al massimo 3 colonne.
+
+Non copiare mai testi, loghi o composizioni dai riferimenti. Nelle note scrivi la direzione scelta e i link di
+2-3 immagini Pinterest che l'hanno ispirata.
+
+## 4. Pubblicazione
 
 - Copia `/tmp/officina/audit/_modello/index.html` in `/tmp/lavoro/<slug>/index.html` e riempilo. Tieni il `<meta name="robots" content="noindex, nofollow">`.
-- Nessuna immagine esterna, nessuno script esterno: solo i font Google già nel modello. Tutto in un solo file `index.html`.
+- Nessuna immagine esterna e nessuno script esterno. Ammessi solo i font Google della scheda di stile. Tutto in un solo file `index.html`.
 - Controlla che si legga bene a 375 px di larghezza (niente scroll orizzontale: tabelle con al massimo 3 colonne).
 - Pubblica con il servizio Anteprime come da **contratto, sezione 3**: token nuovo, una riga con `pagina = index.html`.
 - L'audit contiene dati sul cliente e sui concorrenti: **mai su GitHub**, solo nella tabella Anteprime.
 
-## 4. Esito (sempre, anche in caso di errore)
+## 5. Esito (sempre, anche in caso di errore)
 
 Come da **contratto, sezione 4**, con `fonte = agente_audit_strategia`:
 - `descrizione`: 2 righe con le 3 priorità (solo se pronta).
-- `note`: `durata: <N> min · crediti: manifold <N> · token: <token>` + controlli saltati, dati "da verificare" o motivo dell'errore.
+- `note`: `durata: <N> min · crediti: manifold <N> · token: <token>` + direzione grafica e link dei riferimenti Pinterest + controlli saltati, dati "da verificare" o motivo dell'errore.
 - In più, per il passaggio di testimone: aggiungi in fondo alle note una riga `PASSA_A: <deliverable>` con il servizio della priorità n°1 (es. `PASSA_A: sito_web`).
