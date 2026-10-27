@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Annunci per NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="Le creatività e la strategia di test preparate per NOME ATTIVITÀ.">
+<meta property="og:title" content="Gli annunci di NOME ATTIVITÀ, pronti da lanciare">
+<meta property="og:description" content="Creatività dirette e indirette, testi e piano di test in anteprima.">
+<meta property="og:image" content="URL_IMMAGINE_min.webp">
+<!--
+  MODELLO DELL'AGENTE ADS · PrismaPixel
+  - Pagina = visore neutro. Ogni annuncio è un <article class="ad"> come appare nel feed di Facebook/Instagram.
+  - L'immagine è una foto Higgsfield (link _min.webp) dentro .media. Cerchi, frecce e note scritte a mano vanno nel
+    livello .note-grafiche SOPRA la foto (SVG o testo in un font calligrafico), mai dentro l'immagine generata.
+  - .etichette: tipo (Indiretto/Diretto), tipo di immagine, attacco del testo, fase del funnel, codice del test.
+  - Sostituisci i segnaposto MAIUSCOLI e cancella questi commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root { --p-bg: #f0f2f5; --p-card: #ffffff; --p-ink: #050505; --p-muted: #65676b; --p-line: #dddfe2; --p-accent: #00777b; --fb-btn: #e4e6eb; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--p-bg); color: var(--p-ink); font: 15px/1.45 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 700px; margin: 0 auto 28px; text-align: center; }
+header.intro .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--p-accent); font-weight: 600; }
+header.intro h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+header.intro p { color: var(--p-muted); margin: 0; font-size: 16px; }
+h2.sezione { font-size: 22px; margin: 44px 0 6px; text-align: center; }
+p.sotto { text-align: center; color: var(--p-muted); margin: 0 auto 18px; max-width: 640px; }
+.griglia { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); align-items: start; }
+/* annuncio nel feed */
+.ad { background: var(--p-card); border-radius: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.15); overflow: hidden; max-width: 500px; width: 100%; margin: 0 auto; }
+.ad .etichette { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px 12px 0; }
+.ad .etichette span { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #eef2f1; color: #4b5150; }
+.ad .etichette span.indiretto { background: #e7f3ff; color: #0b5cad; }
+.ad .etichette span.diretto { background: #fff1e0; color: #9a4b00; }
+.ad .testa { display: flex; align-items: center; gap: 8px; padding: 10px 12px 6px; }
+.ad .avatar { width: 40px; height: 40px; border-radius: 50%; background: #c9ccd1; display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #fff; }
+.ad .nome { font-weight: 600; font-size: 15px; line-height: 1.2; }
+.ad .sponsor { font-size: 13px; color: var(--p-muted); }
+.ad .testo { padding: 0 12px 10px; white-space: pre-line; }
+.ad .testo .resto { display: none; }
+.ad .testo.aperto .resto { display: inline; }
+.ad .testo button { font: inherit; color: var(--p-muted); font-weight: 600; background: none; border: 0; padding: 0; cursor: pointer; }
+.media { position: relative; aspect-ratio: 4 / 5; background: #ddd; overflow: hidden; }
+.media.quadrato { aspect-ratio: 1 / 1; }
+.media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.note-grafiche { position: absolute; inset: 0; pointer-events: none; }
+.note-grafiche svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.nota-mano { position: absolute; font: 700 clamp(18px, 5vw, 26px)/1.1 'Caveat', cursive; color: #d6202a; transform: rotate(-4deg); text-shadow: 0 1px 2px rgba(255,255,255,.6); }
+.ad .barra-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #f0f2f5; }
+.ad .barra-link .dati { flex: 1; min-width: 0; }
+.ad .dominio { font-size: 12px; color: var(--p-muted); text-transform: uppercase; }
+.ad .titolo { font-weight: 600; font-size: 16px; line-height: 1.25; }
+.ad .descrizione { font-size: 14px; color: var(--p-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ad .cta { flex: none; font: 600 15px 'Inter', sans-serif; background: var(--fb-btn); border: 0; border-radius: 6px; padding: 8px 12px; }
+.ad .perche { padding: 10px 12px 14px; font-size: 13px; color: var(--p-muted); border-top: 1px solid var(--p-line); }
+/* strategia */
+.strategia { background: var(--p-card); border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.1); padding: 20px 16px; margin-top: 16px; }
+.strategia h3 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-accent); margin: 22px 0 8px; }
+.strategia h3:first-child { margin-top: 0; }
+.funnel { display: grid; gap: 10px; }
+@media (min-width: 760px) { .funnel { grid-template-columns: repeat(3, 1fr); } }
+.funnel div { border: 1px solid var(--p-line); border-radius: 10px; padding: 12px; }
+.funnel b { display: block; margin-bottom: 4px; }
+.tabella { overflow-x: auto; }
+.strategia table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+.strategia th, .strategia td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--p-line); }
+.strategia ul { margin: 0; padding-left: 20px; } .strategia li + li { margin-top: 4px; }
+footer.fine { margin-top: 48px; text-align: center; font-size: 12px; color: var(--p-muted); }
+footer.fine a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Anteprima PrismaPixel</div>
+    <h1>Gli annunci di NOME ATTIVITÀ, pronti da lanciare</h1>
+    <p>FRASE: COSA C'È (ANNUNCI PER CHI NON VI CONOSCE ANCORA E PER CHI VI CONOSCE GIÀ) E IL PIANO PER CAPIRE QUALE FUNZIONA. Tocca "Altro" per leggere il testo intero.</p>
+  </header>
+
+  <h2 class="sezione">Per chi non vi conosce ancora</h2>
+  <p class="sotto">Annunci che non sembrano annunci: una scena vera che fa fermare, un testo che racconta, un articolo che spiega.</p>
+  <div class="griglia">
+    <article class="ad">
+      <div class="etichette"><span class="indiretto">Indiretto</span><span>TIPO DI IMMAGINE</span><span>Attacco: TIPO</span><span>Test A1</span></div>
+      <div class="testa"><div class="avatar">NA</div><div><div class="nome">NOME PAGINA</div><div class="sponsor">Sponsorizzato · 🌐</div></div></div>
+      <div class="testo">PRIMA RIGA CHE RISPONDE ALLA DOMANDA DELL'IMMAGINE.<span class="resto">
+RESTO DEL TESTO LUNGO (150-400 PAROLE).</span> <button type="button">…Altro</button></div>
+      <div class="media">
+        <img src="URL_min.webp" alt="DESCRIZIONE DELLA SCENA" width="1080" height="1350" loading="lazy">
+        <div class="note-grafiche">
+          <!-- esempio: un cerchio rosso disegnato a mano e una nota -->
+          <svg viewBox="0 0 100 125" preserveAspectRatio="none" aria-hidden="true"><ellipse cx="50" cy="60" rx="14" ry="11" fill="none" stroke="#d6202a" stroke-width="1.2" transform="rotate(-8 50 60)"/></svg>
+          <span class="nota-mano" style="left:58%;top:40%">NOTA</span>
+        </div>
+      </div>
+      <div class="barra-link"><div class="dati"><div class="dominio">SITO.IT</div><div class="titolo">TITOLO (SECONDO HOOK)</div><div class="descrizione">DESCRIZIONE BREVE</div></div><button class="cta" type="button">Scopri di più</button></div>
+      <div class="perche">Perché funziona: UNA FRASE PER IL CLIENTE.</div>
+    </article>
+  </div>
+
+  <h2 class="sezione">Per chi vi conosce già</h2>
+  <p class="sotto">Annunci diretti: il prodotto, il vantaggio e un invito chiaro, per chi ha già visto i vostri contenuti o il vostro sito.</p>
+  <div class="griglia">
+    <article class="ad">
+      <div class="etichette"><span class="diretto">Diretto</span><span>Offerta o vantaggio</span><span>Test D1</span></div>
+      <div class="testa"><div class="avatar">NA</div><div><div class="nome">NOME PAGINA</div><div class="sponsor">Sponsorizzato · 🌐</div></div></div>
+      <div class="testo">TESTO BREVE, 2-4 RIGHE.</div>
+      <div class="media quadrato"><img src="URL_min.webp" alt="PRODOTTO O SERVIZIO" width="1080" height="1080" loading="lazy"><div class="note-grafiche"></div></div>
+      <div class="barra-link"><div class="dati"><div class="dominio">SITO.IT</div><div class="titolo">TITOLO</div><div class="descrizione">DESCRIZIONE BREVE</div></div><button class="cta" type="button">Prenota ora</button></div>
+      <div class="perche">Perché funziona: UNA FRASE.</div>
+    </article>
+  </div>
+
+  <h2 class="sezione">La strategia</h2>
+  <section class="strategia">
+    <h3>Il percorso</h3>
+    <div class="funnel">
+      <div><b>1 · Farsi scoprire</b>ANNUNCI INDIRETTI → ARTICOLO (ADVERTORIAL). PUBBLICO FREDDO: CHI.</div>
+      <div><b>2 · Farsi ricordare</b>CHI HA LETTO L'ARTICOLO O GUARDATO I CONTENUTI: COSA VEDE.</div>
+      <div><b>3 · Farsi scegliere</b>ANNUNCI DIRETTI → LANDING DELL'OFFERTA. CHI.</div>
+    </div>
+    <h3>I test, uno alla volta</h3>
+    <div class="tabella"><table>
+      <thead><tr><th>Test</th><th>Cosa cambia</th><th>Cosa resta uguale</th><th>Cosa ci dice</th><th>Quando si decide</th></tr></thead>
+      <tbody><tr><td>A</td><td>IMMAGINE (2-3 TIPI)</td><td>STESSO TESTO</td><td>QUALE SCENA FERMA IL PUBBLICO</td><td>REGOLA</td></tr></tbody>
+    </table></div>
+    <h3>Budget</h3>
+    <ul><li>RIPARTIZIONE IN PERCENTUALE TRA LE FASI (cifre solo se sono nel brief)</li></ul>
+    <h3>Cosa guardiamo e quando decidiamo</h3>
+    <ul><li>METRICA · SOGLIA O REGOLA</li></ul>
+    <h3>Le prime 4 settimane</h3>
+    <ul><li>SETTIMANA 1: …</li></ul>
+  </section>
+
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+<script>
+document.querySelectorAll('.ad .testo').forEach(t => {
+  const b = t.querySelector('button');
+  if (!t.querySelector('.resto')) { if (b) b.remove(); return; }
+  b.addEventListener('click', () => { t.classList.add('aperto'); b.remove(); });
+});
+</script>
+</body>
+</html>
