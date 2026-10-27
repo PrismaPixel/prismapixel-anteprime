@@ -129,7 +129,7 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
 | `piano_seo` | `seo/ISTRUZIONI.md` | da costruire |
 | `annunci_ads` | `ads/ISTRUZIONI.md` | da costruire |
 | `roadmap` | `roadmap/ISTRUZIONI.md` | da costruire |
-| `sequenza_email` | `email/ISTRUZIONI.md` | da costruire |
+| `sequenza_email` | `email/ISTRUZIONI.md` | attivo (in prova) |
 | `brand_concept` | `brand/ISTRUZIONI.md` | da costruire |
 | `flusso_automazione` | `automazioni/ISTRUZIONI.md` | da costruire |
 | `programma_formazione` | `formazione/ISTRUZIONI.md` | da costruire |

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Email per NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="La sequenza di email preparata per NOME ATTIVITÀ, in anteprima.">
+<meta property="og:title" content="Le email di NOME ATTIVITÀ, pronte da inviare">
+<meta property="og:description" content="Oggetti, testi e impaginazione in anteprima.">
+<!--
+  MODELLO DELL'AGENTE EMAIL · PrismaPixel
+  - Pagina = visore neutro: casella di posta a sinistra (o sopra, su telefono), email aperta a destra.
+  - Ogni email è un <article class="email"> con i campi qui sotto e, dentro <template class="html">, l'HTML COMPLETO
+    dell'email (tabelle, larghezza 600, stili in linea). Lo script lo mostra in un iframe.
+  - Le articoli NON si vedono: il visore costruisce la casella di posta leggendo i loro campi.
+  - La sezione "Il piano" serve solo al livello completa: cancellala nella prima bozza.
+  - Sostituisci i segnaposto MAIUSCOLI e cancella questi commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --p-bg: #f4f5f3; --p-card: #ffffff; --p-ink: #141616; --p-muted: #5d6463; --p-line: #e2e5e3; --p-accent: #00777b; --p-sel: #e8f2f1; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--p-bg); color: var(--p-ink); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 680px; margin: 0 auto 28px; text-align: center; }
+header.intro .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--p-accent); font-weight: 600; }
+header.intro h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+header.intro p { color: var(--p-muted); margin: 0; }
+.email { display: none; }
+.visore { display: grid; gap: 16px; }
+@media (min-width: 900px) { .visore { grid-template-columns: 340px 1fr; align-items: start; } }
+.casella { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; overflow: hidden; }
+.casella h2 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-muted); margin: 0; padding: 12px 14px; border-bottom: 1px solid var(--p-line); }
+.casella button { display: block; width: 100%; text-align: left; font: inherit; background: none; border: 0; border-bottom: 1px solid var(--p-line); padding: 12px 14px; cursor: pointer; }
+.casella button[aria-selected="true"] { background: var(--p-sel); }
+.casella .mitt { font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+.casella .mitt span { color: var(--p-muted); font-weight: 500; white-space: nowrap; }
+.casella .ogg { font-size: 15px; font-weight: 600; margin-top: 2px; }
+.casella .ant { font-size: 13px; color: var(--p-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.aperta { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; padding: 16px; min-width: 0; }
+.aperta .ogg { font-size: 20px; font-weight: 700; line-height: 1.25; margin: 0 0 4px; }
+.aperta .meta { font-size: 13px; color: var(--p-muted); }
+.schermi { display: flex; gap: 6px; margin: 12px 0; }
+.schermi button { font: inherit; font-size: 13px; border: 1px solid var(--p-line); background: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.schermi button[aria-pressed="true"] { border-color: var(--p-accent); color: var(--p-accent); }
+.cornice-mail { margin: 0 auto; max-width: 100%; border: 1px solid var(--p-line); border-radius: 12px; overflow: hidden; background: #fff; transition: width .2s; }
+.cornice-mail iframe { display: block; width: 100%; height: 640px; border: 0; }
+.dettagli { display: grid; gap: 10px; margin-top: 16px; font-size: 15px; }
+.dettagli h3 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--p-accent); margin: 8px 0 2px; }
+.dettagli ul { margin: 0; padding-left: 20px; }
+.piano { background: var(--p-card); border: 1px solid var(--p-line); border-radius: 14px; padding: 16px; margin-top: 28px; }
+.piano h2 { font-size: 20px; margin: 0 0 8px; }
+.piano table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.piano th, .piano td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--p-line); }
+footer.fine { margin-top: 48px; text-align: center; font-size: 12px; color: var(--p-muted); }
+footer.fine a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Anteprima PrismaPixel</div>
+    <h1>Le email di NOME ATTIVITÀ, pronte da inviare</h1>
+    <p>FRASE: QUANTE EMAIL, A CHI ARRIVANO E COSA OTTENGONO. Tocca un'email per aprirla, e guardala come la vedranno al telefono o al computer.</p>
+  </header>
+
+  <!-- UN'EMAIL (ripeti per ognuna) -->
+  <article class="email" data-mittente="NOME MITTENTE" data-quando="Subito dopo l'iscrizione">
+    <div class="oggetto">OGGETTO PRINCIPALE</div>
+    <div class="anteprima">TESTO DI ANTEPRIMA (preheader)</div>
+    <div class="obiettivo">A COSA SERVE QUESTA EMAIL, IN UNA FRASE</div>
+    <ul class="oggetti-alt"><li>OGGETTO ALTERNATIVO 1</li><li>OGGETTO ALTERNATIVO 2</li></ul>
+    <template class="html">
+      <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OGGETTO</title></head>
+      <body style="margin:0;padding:0;background:#f2f2f2;">
+        <div style="display:none;max-height:0;overflow:hidden;">TESTO DI ANTEPRIMA</div>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f2f2f2;"><tr><td align="center" style="padding:24px 12px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;">
+            <tr><td style="padding:32px 28px;font:16px/1.6 Arial,Helvetica,sans-serif;color:#222222;">
+              <p style="margin:0 0 16px;">CORPO DELL'EMAIL</p>
+              <p style="margin:24px 0;"><a href="#" style="display:inline-block;background:#222222;color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:6px;font-weight:bold;">CTA</a></p>
+              <p style="margin:24px 0 0;font-size:14px;color:#555555;">P.S. FACOLTATIVO</p>
+            </td></tr>
+            <tr><td style="padding:16px 28px;font:12px/1.5 Arial,Helvetica,sans-serif;color:#888888;border-top:1px solid #eeeeee;">
+              NOME ATTIVITÀ · INDIRIZZO (da inserire) · Ricevi questa email perché ti sei iscritto. <a href="#" style="color:#888888;">Annulla l'iscrizione</a>
+            </td></tr>
+          </table>
+        </td></tr></table>
+      </body></html>
+    </template>
+  </article>
+
+  <div class="visore">
+    <nav class="casella" aria-label="La sequenza"><h2>La sequenza</h2></nav>
+    <section class="aperta" aria-live="polite">
+      <p class="ogg"></p>
+      <div class="meta"></div>
+      <div class="schermi"><button type="button" data-w="375" aria-pressed="true">Telefono</button><button type="button" data-w="600" aria-pressed="false">Computer</button></div>
+      <div class="cornice-mail"><iframe title="Anteprima dell'email"></iframe></div>
+      <div class="dettagli"></div>
+    </section>
+  </div>
+
+  <!-- SOLO LIVELLO COMPLETA -->
+  <section class="piano">
+    <h2>Il piano</h2>
+    <table>
+      <thead><tr><th>Automazione o invio</th><th>A chi</th><th>Quando</th><th>Email</th></tr></thead>
+      <tbody><tr><td>NOME</td><td>SEGMENTO</td><td>REGOLA</td><td>N</td></tr></tbody>
+    </table>
+  </section>
+
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+<script>
+const emails = [...document.querySelectorAll('.email')];
+const casella = document.querySelector('.casella');
+const aperta = document.querySelector('.aperta');
+const iframe = aperta.querySelector('iframe');
+const cornice = aperta.querySelector('.cornice-mail');
+const testo = (el, sel) => (el.querySelector(sel) || {}).textContent?.trim() || '';
+function apri(i) {
+  const e = emails[i];
+  [...casella.querySelectorAll('button')].forEach((b, k) => b.setAttribute('aria-selected', String(k === i)));
+  aperta.querySelector('.ogg').textContent = testo(e, '.oggetto');
+  aperta.querySelector('.meta').textContent = `Da: ${e.dataset.mittente || ''} · ${e.dataset.quando || ''}`;
+  iframe.srcdoc = e.querySelector('template.html').innerHTML;
+  iframe.onload = () => { try { iframe.style.height = Math.max(480, iframe.contentDocument.documentElement.scrollHeight) + 'px'; } catch (_) {} };
+  const alt = [...e.querySelectorAll('.oggetti-alt li')].map(li => `<li>${li.innerHTML}</li>`).join('');
+  aperta.querySelector('.dettagli').innerHTML =
+    `<div><h3>A cosa serve</h3>${e.querySelector('.obiettivo')?.innerHTML || ''}</div>` +
+    `<div><h3>Anteprima nella casella</h3>${e.querySelector('.anteprima')?.innerHTML || ''}</div>` +
+    (alt ? `<div><h3>Oggetti da provare</h3><ul>${alt}</ul></div>` : '');
+}
+emails.forEach((e, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.innerHTML = `<div class="mitt">${e.dataset.mittente || ''}<span>${e.dataset.quando || ''}</span></div><div class="ogg"></div><div class="ant"></div>`;
+  b.querySelector('.ogg').textContent = testo(e, '.oggetto');
+  b.querySelector('.ant').textContent = testo(e, '.anteprima');
+  b.addEventListener('click', () => { apri(i); if (window.innerWidth < 900) aperta.scrollIntoView({ behavior: 'smooth' }); });
+  casella.appendChild(b);
+});
+aperta.querySelectorAll('.schermi button').forEach(b => b.addEventListener('click', () => {
+  aperta.querySelectorAll('.schermi button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  cornice.style.width = b.dataset.w === '600' ? '600px' : '375px';
+  iframe.onload && setTimeout(iframe.onload, 50);
+}));
+cornice.style.width = '375px';
+if (emails.length) apri(0);
+</script>
+</body>
+</html>
