@@ -19,7 +19,7 @@ Nessuno è presente mentre lavori: non fare domande, prendi la lettura più ragi
 
 Regole di spesa, sempre:
 - Passa `max_credits` su **ogni** chiamata a pagamento (valori sotto). Se torna `BudgetExceeded`, salta quel controllo e scrivi "da verificare".
-- **Budget totale 60 crediti.** Tieni un conto progressivo con `meta.credits_charged` di ogni risposta. Se arrivi a 50, fermati con la raccolta e scrivi.
+- **Budget totale 70 crediti.** Tieni un conto progressivo con `meta.credits_charged` di ogni risposta. Se arrivi a 60, fermati con la raccolta e scrivi. Se il budget stringe, la voce della nicchia (controlli 9-11) viene prima delle risposte delle AI (controllo 5): riduci i motori del controllo 5.
 - `InsufficientCredits` o `SpendCapReached`: fermati, scrivi l'audit con quello che hai, e mettilo in `note`.
 - `NoData`: non riprovare. `ProviderUnavailable`/`ConcurrencyLimit`: riprova una volta dopo `retry_after_s`.
 - Non chiamare mai: strumenti `leads_*`, `console_*`, `analytics_*`, `submit_feedback` con dati del cliente.
@@ -36,7 +36,10 @@ Ordine dei controlli (max_credits indicativo):
 | 5 | Risposta delle AI a 1 sola domanda tipica del cliente | `aeo_run_ai_answers` + `get_task` | 30 |
 | 6 | Instagram (solo se il profilo è noto) | `instagram_get_profile`, poi `instagram_get_posts` | 3 ciascuno |
 | 7 | Facebook (solo se la pagina è nota) | `facebook_get_profile` | 3 |
-| 8 | 2-3 concorrenti presi da Maps e SERP: la loro home | `seo_get_page` | gratis |
+| 8 | 2-3 concorrenti presi da Maps e SERP: la loro home (titolo, frase principale, cosa promettono) | `seo_get_page` | gratis |
+| 9 | **Voce della nicchia: di cosa parlano le recensioni** del cliente e di 2 concorrenti (argomenti e menzioni, distribuzione delle stelle) | `maps_get_place` (con `place_id` da Maps, `language: "it"`) | 2 ciascuno |
+| 10 | **Voce della nicchia: le parole dei clienti**: commenti al post più commentato del cliente e di 1 concorrente (Instagram o Facebook) | `instagram_get_posts` già fatto → `instagram_get_comments` / `facebook_get_comments` | 1 ciascuno |
+| 11 | **Voce della nicchia: le domande prima di comprare**: 1 ricerca nei commenti di Reddit (in inglese se il pubblico è straniero, es. "masseria Puglia worth it") | `reddit_search_comments` | 1 |
 
 Prima di una chiamata nuova o di cui non conosci il costo, usa `dry_run: true` per leggere `est_credits`.
 Per `aeo_run_ai_answers` scegli 1 sola domanda e i motori più rilevanti in Italia (chatgpt, gemini, ai_overview); se la stima supera 30, riduci i motori. Poi chiama `get_task` finché non è pronto (al massimo 10 tentativi, con pause).
@@ -54,11 +57,30 @@ Struttura (sezioni del modello `audit/_modello/index.html`):
 3. **Cosa non funziona**: 3-6 problemi, ognuno con il dato trovato (es. "Cercando «pizzeria Monopoli» su Google non compari nei primi 10 risultati").
 4. **Confronto con i concorrenti**: 2-3 concorrenti per nome, cosa fanno meglio o peggio. Tabella semplice.
 5. **Cosa dicono le AI**: cosa risponde l'AI alla domanda scelta e se l'attività compare.
-6. **Strategia**:
-   - **3 priorità** ordinate per impatto, ognuna legata a un problema della sezione 3, con il servizio PrismaPixel che la risolve.
+6. **La voce dei tuoi clienti** (controlli 9-11): cosa cercano davvero le persone di questo settore e di questa zona.
+   - 3-5 **desideri** e 2-4 **paure o obiezioni**, ognuno con la fonte: "nelle recensioni del concorrente X si parla
+     di «colazione» 48 volte", oppure "su Reddit chi sceglie una masseria chiede soprattutto…";
+   - **le loro parole**: 3-6 espressioni brevi, prese dai commenti, che il cliente può usare nei suoi testi. Massimo 10 parole
+     ciascuna e mai il nome di chi le ha scritte;
+   - cosa **lodano** dei concorrenti e cosa **rimproverano** (dalla distribuzione delle stelle e dagli argomenti).
+   Se una fonte non dà dati, dillo. Non riempire con supposizioni.
+7. **Il tuo posizionamento**: in cosa è unica l'attività per chi sceglie.
+   - **Oggi**: cosa promette il cliente (sito, bio, scheda Google) in una frase, citando le sue parole.
+   - **I concorrenti**: cosa promettono, una riga ciascuno. Poi **cosa promettono tutti uguale**, cioè il "rumore" del settore.
+   - **Lo spazio libero**: un desiderio forte della nicchia (sezione 6) che nessun concorrente presidia e che il
+     cliente può mantenere con ciò che ha davvero (offerta del brief, punti forti della sezione 2).
+   - **Valutazione** da 1 a 5, con una riga di motivazione ciascuna:
+     - chiarezza: si capisce in 5 secondi cosa fa e per chi;
+     - differenza: si distingue dal rumore;
+     - credibilità: ha prove reali.
+   - **Proposta di posizionamento** in una frase: "Per [chi] che [desiderio], [attività] è [categoria] che [differenza],
+     perché [prova reale]". Poi una versione breve, da bio o sottotitolo. Se la prova manca, scrivi "prova da
+     costruire" invece di inventarla.
+8. **Strategia**:
+   - **3 priorità** ordinate per impatto, ognuna legata a un problema della sezione 3 **e al posizionamento** della sezione 7, con il servizio PrismaPixel che la risolve.
    - **2-3 cose da fare subito da solo, gratis** (es. completare la scheda Google, aggiungere orari, chiedere recensioni ai clienti abituali).
    - **Piano a 90 giorni**: mese 1, mese 2, mese 3.
-7. **Prossimo passo**: una frase che invita a parlarne in chat. Ricorda che i 5 € pagati vengono scalati dal primo lavoro.
+9. **Prossimo passo**: una frase che invita a parlarne in chat. Ricorda che i 5 € pagati vengono scalati dal primo lavoro.
 
 Servizi PrismaPixel (usa solo questi nomi): Siti Web & E-commerce · SEO, AEO & GEO · Gestione ADS · Social & AI Content · Copywriting · Branding & Identity · Automazioni AI · Email Marketing · Consulenza Strategica · Formazione.
 
@@ -117,3 +139,6 @@ Come da **contratto, sezione 4**, con `fonte = agente_audit_strategia`:
 - `descrizione`: 2 righe con le 3 priorità (solo se pronta).
 - `note`: `durata: <N> min · crediti: manifold <N> · token: <token>` + direzione grafica e link dei riferimenti Pinterest + controlli saltati, dati "da verificare" o motivo dell'errore.
 - In più, per il passaggio di testimone: aggiungi in fondo alle note una riga `PASSA_A: <deliverable>` con il servizio della priorità n°1 (es. `PASSA_A: sito_web`).
+- In `officina_fine` (contratto, sezione 4b):
+  - `risultato` contiene anche `"posizionamento": {"frase": "...", "breve": "...", "spazio_libero": "...", "voti": {"chiarezza": 0, "differenza": 0, "credibilita": 0}}` e `"voce_clienti": {"desideri": [...], "paure": [...], "parole": [...]}`;
+  - `fatti` comprende la frase di posizionamento e i 2 desideri principali della nicchia, così li ritrovano tutti gli agenti successivi.

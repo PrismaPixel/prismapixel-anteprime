@@ -42,6 +42,8 @@ Il messaggio di avvio contiene un JSON:
 5. **Registra il lavoro nell'Agent OS** (sezione 4b, inizio) e leggi il contesto che ti restituisce: memoria del
    cliente, note di Vincenzo, lavori già fatti e il risultato del lavoro precedente se è un passaggio di testimone.
    Usalo: non contraddire ciò che è già stato scoperto o deciso.
+   Se il contesto contiene un **posizionamento** e una **voce dei clienti** (dall'audit), i contenuti partono da lì:
+   la stessa promessa di fondo e le parole dei clienti. Non inventarne un'altra.
 
 ## 3. Pubblicare l'anteprima (servizio Anteprime su n8n)
 
