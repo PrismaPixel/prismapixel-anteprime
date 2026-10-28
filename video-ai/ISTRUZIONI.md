@@ -141,10 +141,11 @@ Costi indicativi di Seedance 2.5 (verificali sempre con `get_cost: true` prima d
 | livello | contenuti | budget Higgsfield |
 |---|---|---|
 | `prima` | **1-2 video da 5 s in bozza 480p** (se il budget non basta per due, il secondo resta come storyboard di 4-6 fotogrammi con il prompt pronto) + i riferimenti approvati + copione | **massimo 30 crediti** in tutto |
-| `completa` | 3-5 video in bozza, poi i migliori 2 portati a 1080p, più le varianti di hook | da concordare: chiedilo nelle note se il brief non lo indica, e non superare 120 crediti |
+| `completa` (**a pagamento, 29 €** scalati dal pacchetto video) | 3-5 video da 5-8 s in bozza 480p, ognuno con un formato o un hook diverso; poi i **2 migliori** portati a 1080p (`draft_job_id`). Più le varianti di hook in testo per i test | **massimo 300 crediti** |
+| `lungo` (**a pagamento, 49 €** scalati dal pacchetto video) | **uno spot o annuncio da 15 a 30 secondi** in 1080p: copione approvato prima (formato Spot breve o annuncio PROOF/QUEST), riferimenti completi, poi prima una bozza 480p della durata piena per controllare tempi e continuità, infine la versione 1080p. Se una sola generazione non regge la storia, dividila in 2-3 unità con stacchi pianificati | **massimo 600 crediti** |
 | `revisione` | si cambia solo il pezzo richiesto (sezione 6) | massimo 20 crediti |
 
-Se il saldo non basta, fai il massimo possibile (riferimenti + storyboard + prompt pronti) e scrivi chiaramente
+I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il venditore prima di avviare il lavoro): non chiedere conferme, lavora dentro il budget. Se il saldo non basta, fai il massimo possibile (riferimenti + storyboard + prompt pronti) e scrivi chiaramente
 che la generazione non è stata eseguita. Mai dire che un video è pronto se non è stato generato. Mai usare un altro
 fornitore al posto di Higgsfield. Mai usare generazioni gratuite o illimitate (`use_unlim: false`).
 
