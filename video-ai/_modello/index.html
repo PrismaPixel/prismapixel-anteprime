@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Video AI per NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="I video generati con l'AI per NOME ATTIVITÀ, in anteprima.">
+<meta property="og:title" content="I video di NOME ATTIVITÀ, pronti da pubblicare">
+<meta property="og:image" content="URL_POSTER_min.webp">
+<!--
+  MODELLO DELL'AGENTE VIDEO AI · PrismaPixel
+  - Un video = un <article class="video">. Il lettore è .schermo (9:16) con <video> dal link Higgsfield e, sopra,
+    il livello .testo-schermo (testo e invito montati in HTML, mai generati nel video). Margini sicuri 250,90,450,90
+    su 1080x1920: in percentuale 13% alto, 8.3% lati, 23.4% basso.
+  - Video non generato per budget: togli <video>, lascia .storyboard con i fotogrammi e il prompt pronto.
+  - Lo stile (colori, font del livello di testo) è quello del cliente. Cancella i commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #f4f4f2; --card: #fff; --ink: #151515; --muted: #5f6261; --line: #e1e2df; --accent: #1f1f1f; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 680px; margin: 0 auto 28px; text-align: center; }
+.kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+.video { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-top: 24px; display: grid; gap: 20px; }
+@media (min-width: 860px) { .video { grid-template-columns: 340px 1fr; } }
+.etichette { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.etichette span { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+.schermo { position: relative; aspect-ratio: 9 / 16; background: #111; border-radius: 14px; overflow: hidden; max-width: 340px; margin: 0 auto; width: 100%; }
+.schermo video, .schermo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.testo-schermo { position: absolute; inset: 13% 8.3% 23.4% 8.3%; pointer-events: none; display: flex; flex-direction: column; justify-content: flex-start; }
+.testo-schermo .riga { font-weight: 800; color: #fff; font-size: clamp(18px, 6cqw, 26px); line-height: 1.15; text-shadow: 0 2px 8px rgba(0,0,0,.45); }
+.schermo { container-type: inline-size; }
+.audio { display: block; margin: 8px auto 0; font: inherit; font-size: 13px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+h2 { font-size: 22px; margin: 0 0 6px; }
+h3 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
+.copione { width: 100%; border-collapse: collapse; font-size: 14px; }
+.copione th, .copione td { text-align: left; vertical-align: top; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+.copione .trad { color: var(--muted); font-size: 13px; }
+@media (max-width: 600px) { .copione thead { display: none; } .copione tr { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); } .copione td { display: block; border: 0; padding: 2px 0; } .copione td::before { content: attr(data-l) " · "; color: var(--muted); font-size: 12px; } }
+.rif { display: flex; gap: 8px; flex-wrap: wrap; }
+.rif figure { margin: 0; width: 96px; font-size: 12px; color: var(--muted); }
+.rif img { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; display: block; }
+.didascalia { white-space: pre-line; background: var(--bg); border-radius: 10px; padding: 12px; font-size: 14px; }
+.copia { font: inherit; font-size: 13px; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; cursor: pointer; margin-top: 8px; }
+.storyboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+.storyboard img { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 8px; }
+.avviso { margin-top: 28px; padding: 14px 16px; border: 1px solid var(--line); border-left: 4px solid #c47f00; background: #fff; border-radius: 10px; font-size: 14px; }
+footer.fine { margin-top: 40px; text-align: center; font-size: 12px; color: var(--muted); }
+footer.fine a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Anteprima PrismaPixel</div>
+    <h1>I video di NOME ATTIVITÀ, pronti da pubblicare</h1>
+    <p>FRASE: QUANTI VIDEO, CHE FORMATO, PER CHI. Tocca un video per sentirlo con l'audio.</p>
+  </header>
+
+  <!-- UN VIDEO (ripeti per ognuno) -->
+  <article class="video">
+    <div>
+      <div class="schermo">
+        <video src="URL_VIDEO.mp4" poster="URL_POSTER_min.webp" playsinline muted loop autoplay preload="metadata"></video>
+        <div class="testo-schermo"><div class="riga">TESTO A SCHERMO DELL'HOOK</div></div>
+      </div>
+      <button class="audio" type="button">Attiva l'audio</button>
+    </div>
+    <div>
+      <div class="etichette"><span>FORMATO</span><span>5 s · 9:16</span><span>Bozza 480p</span></div>
+      <h2>TITOLO DEL VIDEO</h2>
+      <p>A COSA SERVE, IN UNA FRASE.</p>
+      <h3>Copione</h3>
+      <table class="copione">
+        <thead><tr><th>Tempo</th><th>Cosa si vede</th><th>Testo a schermo</th><th>Voce</th></tr></thead>
+        <tbody><tr><td data-l="Tempo">0-2 s</td><td data-l="Cosa si vede">AZIONE</td><td data-l="Testo a schermo">TESTO</td><td data-l="Voce">BATTUTA<div class="trad">TRADUZIONE SE IN ALTRA LINGUA</div></td></tr></tbody>
+      </table>
+      <h3>Riferimenti usati</h3>
+      <div class="rif"><figure><img src="URL_min.webp" alt="Riferimento del luogo" loading="lazy">Luogo</figure></div>
+      <h3>Didascalia</h3>
+      <div class="didascalia">DIDASCALIA</div>
+      <button class="copia" type="button">Copia la didascalia</button>
+    </div>
+  </article>
+
+  <div class="avviso">Video generati con l'AI: la persona che compare è un attore AI, non un cliente. Quando li pubblichi, attiva l'etichetta per i contenuti AI di Instagram, Facebook e TikTok.</div>
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+<script>
+document.querySelectorAll('.video').forEach(v => {
+  const vid = v.querySelector('video'), b = v.querySelector('.audio');
+  if (!vid) { if (b) b.remove(); return; }
+  b.addEventListener('click', () => { vid.muted = !vid.muted; if (!vid.muted) vid.play(); b.textContent = vid.muted ? "Attiva l'audio" : "Togli l'audio"; });
+});
+document.querySelectorAll('.copia').forEach(b => b.addEventListener('click', () => {
+  const t = b.previousElementSibling.textContent; navigator.clipboard && navigator.clipboard.writeText(t).then(() => { b.textContent = 'Copiata'; setTimeout(() => b.textContent = 'Copia la didascalia', 1500); });
+}));
+</script>
+</body>
+</html>
