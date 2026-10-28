@@ -75,12 +75,51 @@ Adattamenti fissi:
 4. **I dubbi dei tuoi clienti** (completa; nel `prima` le 2 principali): obiezione → cosa pensano davvero → la nuova
    convinzione → la prova vera o "prova da costruire" → la risposta breve, pronta da usare in chat.
 5. **Livelli e prezzi** (completa): 2-3 livelli, cosa cambia tra l'uno e l'altro, logica del prezzo.
+5b. **I numeri dell'acquisizione** (nel `prima` in breve: LTV, CAC sostenibile e canale da cui partire; completa per
+   intero, sezione 3b).
 6. **Come raccontarla** (completa): presentazione in 1 frase, in 3 righe e in un paragrafo, e gli angoli (ognuno con
    un titolo d'esempio e il canale dove usarlo: annunci, sito, email, social).
 7. **Le priorità**: 3 priorità ordinate per impatto, ognuna con il primo passo, la leva che sposta e il servizio
-   PrismaPixel che la porta avanti.
+   PrismaPixel che la porta avanti. Devono essere coerenti con i numeri della sezione 5b (canale da cui partire,
+   rientro dalla spesa).
 8. **La roadmap 30-60-90** (completa): per ogni mese 3-5 attività, chi le fa, come si capisce che ha funzionato.
 9. **Il prossimo passo**: un invito a parlarne in chat.
+
+## 3b. I numeri dell'acquisizione (metodo, con parole nostre)
+
+Un'offerta forte non basta se acquisire un cliente costa più di quanto quel cliente rende. Questa sezione mette in
+fila i numeri, in linguaggio semplice, con i dati del brief. **Nessun numero inventato**: ciò che il cliente non ha
+detto è un'ipotesi dichiarata ("ipotesi: 2 soggiorni in 3 anni") con l'invito a confermarla; senza dati sufficienti
+mostra la formula con i campi vuoti e cosa serve per riempirli.
+
+1. **Valore di un cliente nel tempo (LTV)** = valore medio di un acquisto × margine lordo (%) × quante volte compra
+   nel tempo (riacquisti, rinnovi, passaparola solo se misurato). Per un B&B: prezzo medio del soggiorno × margine ×
+   ritorni; per un servizio ricorrente: canone × margine × mesi medi di permanenza.
+2. **Costo per acquisire un cliente (CAC)** = tutto ciò che si spende per avere clienti nuovi (annunci, strumenti,
+   provvigioni dei portali come Booking, tempo pagato) ÷ clienti nuovi nello stesso periodo. Se non c'è storico, parti
+   da ciò che si sa (es. la commissione del portale è già un CAC: il 15-18% del soggiorno, se il cliente lo conferma).
+3. **CAC sostenibile**: quanto può spendere al massimo per un cliente nuovo. Regola di prudenza: **LTV almeno 3 volte
+   il CAC**; sotto 1:1 si perde a ogni cliente; tra 1 e 3 si lavora, ma è fragile.
+4. **Rientro dalla spesa**: il primo acquisto (o i primi 30 giorni) copre il costo per acquisire quel cliente? Se sì,
+   si può investire di più sugli annunci senza aspettare; se no, cosa aggiungere subito per farlo succedere: un'offerta
+   aggiuntiva al momento dell'acquisto, un pacchetto, un acconto, un abbonamento. Collegalo all'offerta proposta
+   (sezione 3, punto 3) e ai livelli (punto 5).
+5. **Da quale canale partire** (i quattro modi di farsi conoscere):
+   - **contatti caldi**: chi già ti conosce (clienti passati, rubrica, liste, passaparola). Il più economico, da fare per primo;
+   - **contenuti gratuiti**: social, video, articoli, SEO. Costano tempo, crescono nel tempo;
+   - **contatti a freddo**: scrivere a chi non ti conosce (per i clienti italiani attenzione alle regole sulle email,
+     art. 130 Codice Privacy: meglio telefono, visite, eventi, collaborazioni locali);
+   - **annunci a pagamento**: veloci e misurabili, ma solo se il CAC sostenibile lo permette e il tracciamento c'è.
+   Scegli 1 canale principale da cui partire (in base a budget, tempo del titolare, notorietà) e 1 da preparare; le
+   priorità (punto 7) seguono questa scelta.
+6. **Regole per gli annunci** (se gli annunci sono tra i canali): prima volume e costanza, poi ottimizzazione; il
+   **tetto di costo per contatto e per cliente** si ricava dal CAC sostenibile (es. se un cliente su 5 contatti compra e
+   il CAC sostenibile è 60 €, il costo per contatto deve restare sotto 12 €); si guarda il costo per cliente, non solo
+   il costo del clic; l'offerta viene prima della grafica: se l'offerta è debole, nessuna creatività la salva.
+   Questi tetti passano all'agente `annunci_ads` (risultato `numeri`).
+
+Mostra i numeri in una piccola tabella (voce · valore · da dove viene: brief, audit, ipotesi) e due frasi di lettura
+("Oggi ogni ospite da Booking vi costa circa X; un ospite diretto può costare fino a Y prima di non convenire più").
 
 Servizi PrismaPixel (usa solo questi nomi): Siti Web & E-commerce · SEO, AEO & GEO · Gestione ADS · Social & AI
 Content · Copywriting · Branding & Identity · Automazioni AI · Email Marketing · Consulenza Strategica · Formazione.
@@ -118,7 +157,8 @@ AA, a 375 px niente scorrimento orizzontale e tabelle con al massimo 3 colonne.
    gli screenshot con Read.
 2. Per ogni proposta dell'offerta: dice quale leva sposta? Il cliente la può mantenere con ciò che ha?
 3. Rileggi la sezione 4 voce per voce: garanzie, scarsità, bonus, prove, prezzi.
-4. Le 3 priorità sono coerenti con l'audit (se c'è) e con il posizionamento? Non contraddirli: se proponi qualcosa di
+4. Numeri: ogni valore ha la sua fonte (brief, audit, ipotesi dichiarata); i calcoli tornano (rifalli in Python).
+5. Le 3 priorità sono coerenti con l'audit (se c'è) e con il posizionamento? Non contraddirli: se proponi qualcosa di
    diverso, spiega perché.
 
 ## 7. Pubblicazione, esito e Agent OS
@@ -137,7 +177,7 @@ AA, a 375 px niente scorrimento orizzontale e tabelle con al massimo 3 colonne.
     6. controlli non eseguiti o problemi;
     7. in fondo `PASSA_A: <deliverable>` con il servizio della priorità n°1.
   - `officina_fine.risultato`:
-    `{"offerta_oggi": "...", "leve": {"risultato": 0, "probabilita": 0, "tempo": 0, "fatica": 0}, "offerta_proposta": {"nome": "...", "promessa": "...", "contenuto": ["..."], "prima_vittoria": "...", "garanzia": "...", "prezzo": "..."}, "obiezioni": [{"obiezione": "...", "convinzione": "...", "risposta": "..."}], "angoli": [{"angolo": "...", "titolo": "..."}], "priorita": [{"titolo": "...", "servizio": "...", "primo_passo": "..."}], "token": "..."}`.
+    `{"offerta_oggi": "...", "leve": {"risultato": 0, "probabilita": 0, "tempo": 0, "fatica": 0}, "offerta_proposta": {"nome": "...", "promessa": "...", "contenuto": ["..."], "prima_vittoria": "...", "garanzia": "...", "prezzo": "..."}, "obiezioni": [{"obiezione": "...", "convinzione": "...", "risposta": "..."}], "angoli": [{"angolo": "...", "titolo": "..."}], "priorita": [{"titolo": "...", "servizio": "...", "primo_passo": "..."}], "numeri": {"ltv": "... o null", "cac_attuale": "... o null", "cac_sostenibile": "... o null", "rapporto": "... o null", "rientro_primo_acquisto": true|false|null, "canale_principale": "caldi|contenuti|freddo|annunci", "tetto_costo_contatto": "... o null", "ipotesi": ["..."]}, "token": "..."}`.
     Gli agenti Ads, Landing ed Email leggono da qui offerta, obiezioni e angoli.
   - `fatti`: l'offerta proposta in una frase e la priorità n°1.
   - `passa_a`: il servizio della priorità n°1, con un brief che contiene l'offerta proposta e gli angoli migliori.

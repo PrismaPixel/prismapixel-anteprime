@@ -257,15 +257,16 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
    clic verso l'offerta, richieste o vendite), non solo sui clic. Un indiretto può avere meno clic di un diretto e
    vincere lo stesso. Va lasciato correre qualche giorno: il pubblico freddo decide più lentamente del remarketing.
    Mai spegnere un indiretto al secondo giorno perché non converte come il remarketing.
-4. **Budget**: ripartizione in **percentuale** tra scoperta, remarketing e test. Cifre in euro solo se il brief indica
+4. **Tetti di costo**: se nel contesto c'è una consulenza (`roadmap`) con `risultato.numeri`, usa `tetto_costo_contatto` e `cac_sostenibile` come soglie per decidere cosa spegnere e cosa scalare (punto 6), citandone la fonte.
+5. **Budget**: ripartizione in **percentuale** tra scoperta, remarketing e test. Cifre in euro solo se il brief indica
    un budget.
-5. **Metriche e regole di decisione**: cosa guardare (CTR del link, costo per clic, tempo sull'articolo, clic verso
+6. **Metriche e regole di decisione**: cosa guardare (CTR del link, costo per clic, tempo sull'articolo, clic verso
    l'offerta, richieste o acquisti, costo per risultato) e quando si spegne, si tiene o si scala. Mai promettere
    numeri di risultato.
-6. **Le prime 4 settimane**: cosa si lancia, cosa si guarda e cosa si decide, settimana per settimana.
-7. **Prerequisiti**: Pixel ed eventi (dalla scansione), advertorial pronto (mai mandare un indiretto alla pagina
+7. **Le prime 4 settimane**: cosa si lancia, cosa si guarda e cosa si decide, settimana per settimana.
+8. **Prerequisiti**: Pixel ed eventi (dalla scansione), advertorial pronto (mai mandare un indiretto alla pagina
    prodotto o alla home) e landing dell'offerta. Se mancano, sono il primo passo.
-8. Livello `completa`: **convenzione dei nomi** (es. `IND_MomentoRubato_Storia_A1`) e **brief dell'advertorial**.
+9. Livello `completa`: **convenzione dei nomi** (es. `IND_MomentoRubato_Storia_A1`) e **brief dell'advertorial**.
 
 ## 8. Pagina, controlli, pubblicazione
 
