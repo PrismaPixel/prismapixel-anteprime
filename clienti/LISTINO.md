@@ -3,7 +3,7 @@
 Da compilare da Vincenzo. Finché una voce è "da inserire", l'agente non cita prezzi nei messaggi.
 
 ## Regole
-- Prezzi citabili nei messaggi: **no** (cambia in "sì" quando il listino è completo)
+- Prezzi citabili nei messaggi: **sì**, ma solo la modalità d'ingresso del servizio proposto ("a partire da")
 - Nei messaggi si cita al massimo **un** prezzo: quello del servizio proposto, con la formula "a partire da".
 
 ## Firma
@@ -12,17 +12,28 @@ Da compilare da Vincenzo. Finché una voce è "da inserire", l'agente non cita p
 - Sito: prismapixel.it
 - Indirizzo postale: da inserire
 
-## Servizi
+## Servizi (IVA esclusa)
 
-| servizio | pacchetto | prezzo | cosa include | note |
+Una tantum in quattro modalità: fai da te guidato / fatto insieme / fatto per te / premium (2 al mese).
+
+| servizio | fai da te guidato | fatto insieme | fatto per te | premium |
 |---|---|---|---|---|
-| Siti Web & E-commerce | da inserire | da inserire | da inserire | |
-| Video AI | prima bozza | gratuita | 1-2 video da 5 s | |
-| Video AI | bozza completa | 29 € (scalati) | 3-5 video, i 2 migliori in 1080p | |
-| Video AI | video lungo | 49 € (scalati) | spot o annuncio fino a 30 s | |
-| Audit digitale e strategia | completo | 5 € (scalati) | audit e strategia | |
-| Social & AI Content | da inserire | da inserire | da inserire | |
-| Gestione ADS | da inserire | da inserire | da inserire | |
-| SEO, AEO & GEO | da inserire | da inserire | da inserire | |
-| Email Marketing | da inserire | da inserire | da inserire | |
-| Consulenza Strategica | da inserire | da inserire | da inserire | |
+| Sito vetrina o prenotazioni | 1.900 € | 3.900 € | 6.900 € | 9.900 € |
+| E-commerce | 3.900 € | 7.900 € | 12.900 € | 18.900 € |
+| Branding & Identity | 1.200 € | 2.900 € | 5.900 € | 8.900 € |
+| Automazioni AI | 1.500 € | 3.900 € | 7.900 € | 12.900 € |
+| Avvio SEO, AEO & GEO | 690 € | 1.490 € | 2.900 € | 4.900 € |
+| Avvio Gestione ADS | 490 € | 990 € | 1.900 € | 2.900 € |
+| Avvio Email Marketing | 690 € | 1.490 € | 2.900 € | 4.900 € |
+| Copywriting | 590 € | 1.490 € | 2.900 € | 4.500 € |
+| Pacchetto video AI | 490 € | 990 € | 1.900 € | 3.500 € |
+| Consulenza strategica | 990 € | 1.900 € | 3.900 € | 6.900 € |
+| Formazione del team | 1.490 € | 2.900 € | 5.900 € | 9.900 € |
+| Ecosistema (12 mesi, + 990 €/mese) | — | 7.900 € | 14.900 € | 24.900 € |
+
+Canoni mensili: sito 39/79/149 €; SEO 390/690/1.190 €; ADS 390 € (fino a 1.500 € di spesa), 690 € (fino a 5.000 €),
+oltre 12% (min. 690 €); Social 490/890/1.490 €; video AI 490 €; automazioni 49/149/249 €; email 290/490 €;
+affiancamento consulenza 390 €.
+
+Bozze gratuite e a pagamento: audit completo 5 €, sito completo 20 €, video AI completi 29 €, video lungo 49 €
+(scalati dal servizio).
