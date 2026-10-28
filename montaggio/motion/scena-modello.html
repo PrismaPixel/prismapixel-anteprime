@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Scena · NOME VIDEO</title>
+<!--
+  SCENA DI UN VIDEO (copiala in DIR/scena/scena.html). Palco 1080 × 1920 TRASPARENTE: va sopra il video montato.
+  - Tempi in secondi sul video MONTATO (parole_montate.json), mai sul girato originale.
+  - Ogni grafica: un blocco preso da componenti.html, con data-in / data-out e data-box da zone.json.
+  - Colori e font del cliente: solo nel blocco <style> qui sotto (variabili del tema).
+  - I sottotitoli li scrive sottotitoli.py tra i due commenti SOTTOTITOLI: non scriverli a mano.
+-->
+<link rel="stylesheet" href="tema.css">
+<link rel="stylesheet" href="fonts.css" onerror="this.remove()">
+<style>
+  :root {
+    /* --accento: #COLORE_DEL_CLIENTE; --font-titolo: 'FONT', sans-serif; --font-testo: 'FONT', sans-serif; */
+  }
+</style>
+</head>
+<body>
+<div id="palco">
+
+<!-- GRAFICHE: un blocco .grafica per ogni voce di piano.json, con lo stesso id -->
+
+<!-- SOTTOTITOLI -->
+<!-- /SOTTOTITOLI -->
+</div><!-- /palco -->
+<script src="motore.js"></script>
+<script>if (/anteprima/.test(location.search)) window.palcoPronto.then(() => { document.body.classList.add('guida-zone'); window.anteprima(); });</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Componenti verticali · PrismaPixel</title>
+<!--
+  CATALOGO VIVO dei 15 componenti verticali (1080 × 1920). Ogni componente è un blocco .grafica da copiare nella
+  scena del video (scena.html): cambi testi, tempi (data-in / data-out, in secondi sul video montato) e riquadro
+  (data-box = x,y,larghezza,altezza, dato da zone.py). Testi e numeri di esempio: nel video vanno quelli detti davvero.
+  Aprila con ?anteprima per vederla girare; rendi_grafiche.py la usa anche come prova del motore.
+-->
+<link rel="stylesheet" href="tema.css">
+<link rel="stylesheet" href="fonts.css" onerror="this.remove()">
+</head>
+<body>
+<div id="palco" class="prova">
+
+  <!-- 1 · numero grande: "X percento", un numero che conta -->
+  <div class="grafica c-numero scheda" id="g1" data-tipo="numero" data-in="0.2" data-out="3.4" data-box="90,300,850,700">
+    <div class="etichetta-alto">Prenotazioni dirette</div>
+    <div class="valore" data-anim="conta" data-in="0.4" data-da="0" data-a="38" data-dopo="%">38%</div>
+    <div class="cosa" data-in="1.0">senza commissioni ai portali</div>
+  </div>
+
+  <!-- 2 · passi numerati: "primo… poi… infine" -->
+  <div class="grafica c-passi scheda" id="g2" data-tipo="passi" data-in="3.6" data-out="7.2" data-box="90,280,850,900">
+    <div class="passo" data-in="3.8"><div class="n">1</div><div class="t">Scegli la data</div></div>
+    <div class="passo" data-in="4.6"><div class="n">2</div><div class="t">Prenoti dal sito</div></div>
+    <div class="passo" data-in="5.4"><div class="n">3</div><div class="t">Ricevi la conferma</div></div>
+  </div>
+
+  <!-- 3 · prima / dopo -->
+  <div class="grafica c-due" id="g3" data-tipo="prima-dopo" data-in="7.4" data-out="10.8" data-box="90,320,850,560">
+    <div class="lato" data-anim="pop" data-in="7.6"><div class="cap">Prima</div><div class="val">3 ore</div><div class="nota">a rispondere ai messaggi</div></div>
+    <div class="lato vince" data-anim="pop" data-in="8.4"><div class="cap">Adesso</div><div class="val">20 min</div><div class="nota">il resto lo fa il sito</div></div>
+  </div>
+
+  <!-- 4 · confronto con vincitore: "X contro Y" -->
+  <div class="grafica c-due" id="g4" data-tipo="confronto" data-in="11.0" data-out="14.4" data-box="90,320,850,600">
+    <div class="lato" data-anim="scorri" data-in="11.2"><div class="cap">Portale</div><div class="val">-18%</div><div class="nota">su ogni prenotazione</div></div>
+    <div class="lato vince" data-anim="scorri" data-in="11.7"><div class="cap">Sito tuo</div><div class="val">0%</div><div class="nota">resta tutto a te</div><div class="bollo" data-anim="pop" data-in="12.6">Vince</div></div>
+  </div>
+
+  <!-- 5 · prezzo -->
+  <div class="grafica c-prezzo scheda" id="g5" data-tipo="prezzo" data-in="14.6" data-out="18.0" data-box="90,300,850,900">
+    <div class="etichetta-alto">Tour al tramonto</div>
+    <div class="cifra" data-anim="conta" data-in="14.8" data-a="45" data-prima="€ ">€ 45<small>a persona</small></div>
+    <ul><li data-in="15.6">2 ore in barca</li><li data-in="16.0">aperitivo incluso</li><li data-in="16.4">max 12 persone</li></ul>
+  </div>
+
+  <!-- 6 · imbuto: "di tutti questi, solo…" -->
+  <div class="grafica c-imbuto" id="g6" data-tipo="imbuto" data-in="18.2" data-out="21.6" data-box="90,300,850,700">
+    <div class="liv" style="width:100%" data-anim="cresce" data-asse="x" data-in="18.4">1.000 visite</div>
+    <div class="liv" style="width:72%" data-anim="cresce" data-asse="x" data-in="18.9">120 richieste</div>
+    <div class="liv" style="width:44%" data-anim="cresce" data-asse="x" data-in="19.4">40 clienti</div>
+  </div>
+
+  <!-- 7 · linea del tempo: "nel 2019… poi… oggi" -->
+  <div class="grafica c-tempo scheda" id="g7" data-tipo="linea-tempo" data-in="21.8" data-out="25.4" data-box="90,280,850,900">
+    <div class="asse" data-anim="cresce" data-asse="giu" data-in="22.0" data-dur="1.6"></div>
+    <div class="tappa" data-in="22.1"><div class="quando">2019</div><div class="cosa">La prima barca</div></div>
+    <div class="tappa" data-in="22.8"><div class="quando">2023</div><div class="cosa">Il secondo tour</div></div>
+    <div class="tappa" data-in="23.5"><div class="quando">Oggi</div><div class="cosa">Prenoti in 2 minuti</div></div>
+  </div>
+
+  <!-- 8 · barre: confronto di quantità -->
+  <div class="grafica c-barre scheda" id="g8" data-tipo="barre" data-in="25.6" data-out="29.0" data-box="90,300,850,700">
+    <div class="etichetta-alto">Da dove arrivano</div>
+    <div class="riga"><div class="nome">Instagram</div><div class="barra"><div class="pieno top" style="width:78%" data-anim="cresce" data-asse="x" data-in="25.9">78</div></div></div>
+    <div class="riga"><div class="nome">Google</div><div class="barra"><div class="pieno" style="width:46%" data-anim="cresce" data-asse="x" data-in="26.3">46</div></div></div>
+    <div class="riga"><div class="nome">Passaparola</div><div class="barra"><div class="pieno" style="width:30%" data-anim="cresce" data-asse="x" data-in="26.7">30</div></div></div>
+  </div>
+
+  <!-- 9 · frase da ricordare, con evidenziatore -->
+  <div class="grafica c-frase scheda" id="g9" data-tipo="frase" data-in="29.2" data-out="32.6" data-box="90,320,850,800">
+    <p class="titolo">Il mare non si <span class="evid" data-anim="evidenzia" data-in="30.2">racconta</span>. Si vive.</p>
+  </div>
+
+  <!-- 10 · titolo che si svela, direttamente sul girato -->
+  <div class="grafica c-svela" id="g10" data-tipo="svela" data-in="32.8" data-out="36.2" data-box="90,300,850,600">
+    <p class="titolo" data-anim="maschera" data-in="33.0">Grotte <em>segrete</em></p>
+    <div class="sotto" data-in="33.8">a 10 minuti da Polignano</div>
+  </div>
+
+  <!-- 11 · telefono con notifica: "ti arriva un messaggio" -->
+  <div class="grafica c-telefono" id="g11" data-tipo="telefono" data-larghezza="600" data-in="36.4" data-out="39.8" data-box="190,260,650,1150">
+    <div class="tel" data-anim="pop" data-in="36.5"><div class="schermo">
+      <div class="notifica" data-anim="sale" data-in="37.2"><div class="ico"></div><div><div class="app">Prenotazioni</div><div class="msg">Nuova prenotazione: 4 persone, sabato</div></div></div>
+      <div class="notifica" data-anim="sale" data-in="38.0"><div class="ico"></div><div><div class="app">Pagamenti</div><div class="msg">Acconto ricevuto</div></div></div>
+    </div></div>
+  </div>
+
+  <!-- 12 · elenco con spunte -->
+  <div class="grafica c-elenco scheda" id="g12" data-tipo="elenco" data-in="40.0" data-out="43.4" data-box="90,300,850,800">
+    <div class="voce" data-in="40.2"><div class="spunta">✓</div>Giubbotti per tutti</div>
+    <div class="voce" data-in="40.8"><div class="spunta">✓</div>Snorkeling incluso</div>
+    <div class="voce no" data-in="41.4"><div class="spunta">✕</div>Barche affollate</div>
+  </div>
+
+  <!-- 13 · capitolo / sottopancia: "parte due", nome di chi parla -->
+  <div class="grafica" id="g13" data-tipo="capitolo" data-in="43.6" data-out="47.0" data-box="90,1180,850,240">
+    <div class="c-capitolo" data-anim="scorri" data-in="43.7"><div class="num">02</div><div class="nome">Vincenzo<small>skipper e fondatore</small></div></div>
+  </div>
+
+  <!-- 14 · luogo: "siamo a…", distanza -->
+  <div class="grafica c-luogo scheda" id="g14" data-tipo="luogo" data-in="47.2" data-out="50.6" data-box="90,300,850,800">
+    <svg width="796" height="360" viewBox="0 0 796 360" data-anim="disegna" data-in="47.4" data-dur="1.4"><path d="M20 300 C 160 260, 220 120, 380 150 S 600 60, 776 40" fill="none" stroke="var(--accento)" stroke-width="10" stroke-linecap="round" stroke-dasharray="1"/></svg>
+    <div class="pin" style="left:740px;top:0" data-anim="pop" data-in="48.6"></div>
+    <div class="nomeluogo" data-in="48.4">Polignano a Mare</div>
+    <div class="dist" data-in="48.8">partenza dal porto, 10 minuti dal centro</div>
+  </div>
+
+  <!-- 15 · finale con invito -->
+  <div class="grafica c-finale scheda" id="g15" data-tipo="finale" data-in="50.8" data-out="54.6" data-box="90,320,850,800">
+    <p class="titolo" data-anim="lettere" data-in="51.0" data-dur="0.9">Ci vediamo in mare</p>
+    <div class="bottone" data-anim="pop" data-in="52.0">Prenota dal link</div>
+    <div class="dove" data-in="52.4">nella bio · posti limitati ogni sera</div>
+  </div>
+
+</div>
+<script src="motore.js"></script>
+<script>if (/anteprima/.test(location.search)) window.palcoPronto.then(() => { document.body.classList.add('guida-zone'); window.anteprima(); });</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>I tuoi video montati · NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="Il montaggio dei video di NOME ATTIVITÀ, in anteprima.">
+<meta property="og:title" content="I video di NOME ATTIVITÀ, montati e pronti">
+<meta property="og:image" content="URL_COPERTINA_1">
+<!--
+  MODELLO DELL'AGENTE MONTAGGIO · PrismaPixel
+  - Un video = un <article class="video">. Il lettore usa SEMPRE il link n8n video/<token>/<nome> (il file resta
+    privato su Supabase): https://integrazioni.app.n8n.cloud/webhook/944d5887-9f47-481f-a13f-e4ab9ab6e9f0/video/TOKEN/bozza-1.mp4
+  - "Scarica" solo se il finale esiste (livelli completa e lungo, o dopo l'ok).
+  - Tagli in dubbio e fatti da confermare: sono le scelte del cliente, scritte semplici.
+  - Per il 16:9 (livello lungo) aggiungi la classe "orizzontale" al lettore.
+  - Cancella i commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #f4f4f2; --card: #fff; --ink: #151515; --muted: #5f6261; --line: #e1e2df; --accent: #1f1f1f; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 32px 16px 64px; }
+header.intro { max-width: 680px; margin: 0 auto 28px; text-align: center; }
+.kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin: 8px 0 12px; }
+.video { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-top: 24px; display: grid; gap: 20px; }
+@media (min-width: 860px) { .video { grid-template-columns: 340px 1fr; } .video.largo { grid-template-columns: 1fr; } }
+.lettore { position: relative; aspect-ratio: 9 / 16; background: #111; border-radius: 14px; overflow: hidden; max-width: 340px; margin: 0 auto; width: 100%; }
+.lettore.orizzontale { aspect-ratio: 16 / 9; max-width: 100%; }
+.lettore video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.etichette { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.etichette span { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+h2 { font-size: 22px; margin: 0 0 6px; }
+h3 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 18px 0 6px; }
+ul.lista { margin: 0; padding-left: 18px; font-size: 15px; }
+ul.lista li { margin: 4px 0; }
+.tempo { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; margin-right: 6px; }
+.scarica { display: inline-block; margin-top: 10px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 999px; font-size: 14px; }
+.box { margin-top: 28px; padding: 16px 18px; border: 1px solid var(--line); background: #fff; border-radius: 12px; font-size: 15px; }
+.avviso { border-left: 4px solid #c47f00; }
+footer.fine { margin-top: 40px; text-align: center; font-size: 12px; color: var(--muted); }
+footer.fine a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <div class="kicker">Montaggio · anteprima</div>
+    <h1>I video di NOME ATTIVITÀ, montati dal tuo girato</h1>
+    <p>Abbiamo tolto le ripetizioni e le pause, aggiunto i sottotitoli sulle parole che contano e qualche grafica nei tuoi colori. Guardali dal telefono: è lì che li vedranno i tuoi clienti.</p>
+  </header>
+
+  <article class="video">
+    <div>
+      <div class="lettore"><video src="https://integrazioni.app.n8n.cloud/webhook/944d5887-9f47-481f-a13f-e4ab9ab6e9f0/video/TOKEN/bozza-1.mp4" poster="https://integrazioni.app.n8n.cloud/webhook/944d5887-9f47-481f-a13f-e4ab9ab6e9f0/video/TOKEN/copertina-1.jpg" controls playsinline preload="metadata"></video></div>
+    </div>
+    <div>
+      <div class="etichette"><span>38 secondi</span><span>Reels e TikTok</span><span>bozza a metà risoluzione</span></div>
+      <h2>TITOLO DEL VIDEO</h2>
+      <p>Una frase su cosa racconta e perché il primo secondo funziona.</p>
+
+      <h3>Cosa abbiamo tolto</h3>
+      <ul class="lista">
+        <li><span class="tempo">0:04</span>la prima versione di «…»: abbiamo tenuto quella dopo, più sciolta</li>
+        <li>9 secondi di pause</li>
+      </ul>
+
+      <h3>Da decidere insieme</h3>
+      <ul class="lista">
+        <li><span class="tempo">0:21</span>«…» sembra detta due volte: per ora le abbiamo lasciate entrambe</li>
+      </ul>
+
+      <h3>Grafiche</h3>
+      <ul class="lista">
+        <li><span class="tempo">0:06</span>il numero «38%» quando lo dici</li>
+        <li><span class="tempo">0:33</span>l'invito finale: «Prenota dal link in bio»</li>
+      </ul>
+
+      <h3>Da confermare</h3>
+      <ul class="lista">
+        <li>Il prezzo detto a 0:18 («45 € a persona») è ancora valido?</li>
+      </ul>
+      <!-- solo se il finale esiste -->
+      <a class="scarica" href="https://integrazioni.app.n8n.cloud/webhook/944d5887-9f47-481f-a13f-e4ab9ab6e9f0/video/TOKEN/finale-1.mp4" download>Scarica il video in alta qualità</a>
+    </div>
+  </article>
+
+  <div class="box">
+    <strong>Vuoi cambiare qualcosa?</strong> Scrivicelo in chat con parole semplici, per esempio «la grafica copre la scritta», «tieni la prima versione della frase», «più veloce all'inizio». Lo sistemiamo noi.
+  </div>
+  <div class="box avviso">
+    <strong>Prima di pubblicare:</strong> la musica la scegli tu dalla libreria di Instagram o TikTok (così i diritti sono a posto). Le persone che si vedono devono essere d'accordo a comparire.
+  </div>
+
+  <footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+</div>
+</body>
+</html>
