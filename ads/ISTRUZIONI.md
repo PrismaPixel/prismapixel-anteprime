@@ -221,6 +221,18 @@ Il **titolo sotto l'immagine** è un secondo hook, mai il nome del prodotto. For
 riga e il titolo usa le regole dell'hook di Kallaway (`social/skills/kallaway-copywriting.md`, sezione 3): soggetto
 chiaro, motivo per fermarsi, contrasto, poche parole.
 
+**Metodo `100m-leads` per gli annunci** (`strategia/skills/100m/100m-leads/references/paid-ads.md`, leggilo):
+- **Chiamare il pubblico** nei primi secondi e nella prima riga: per nome e luogo ("Coppie che vengono in Puglia a
+  settembre"), con una domanda a cui si risponde sì, con un "se… allora", oppure mostrando la scena. Più è locale e
+  preciso, meglio è.
+- **Il valore con cosa, chi, quando**: le quattro leve (risultato, credibilità, tempo, fatica) e i loro opposti (il
+  risultato temuto, il rischio di restare fermi, la lentezza della strada attuale, la fatica senza aiuto); il "chi"
+  (come lo vedranno partner, famiglia, amici); il "quando" (passato, presente, futuro). Ogni annuncio sceglie **un**
+  angolo; più annunci coprono più angoli.
+- **Invito** chiaro e facile; scarsità e urgenza **solo se vere**.
+- Il materiale migliore per gli annunci sono spesso **i contenuti gratuiti che hanno già funzionato** e i **video dei
+  clienti veri** (con permesso): chiedili sempre nel brief.
+
 **Descrizione**: una riga di rinforzo (dove, quando, cosa si ottiene). Su molti posizionamenti non si vede: non
 metterci niente di indispensabile.
 
@@ -257,16 +269,22 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
    clic verso l'offerta, richieste o vendite), non solo sui clic. Un indiretto può avere meno clic di un diretto e
    vincere lo stesso. Va lasciato correre qualche giorno: il pubblico freddo decide più lentamente del remarketing.
    Mai spegnere un indiretto al secondo giorno perché non converte come il remarketing.
-4. **Tetti di costo**: se nel contesto c'è una consulenza (`roadmap`) con `risultato.numeri`, usa `tetto_costo_contatto` e `cac_sostenibile` come soglie per decidere cosa spegnere e cosa scalare (punto 6), citandone la fonte.
+4. **Tetti di costo**: se nel contesto c'è una consulenza (`roadmap`) con `risultato.numeri`, usa `tetto_costo_contatto` e `cac_sostenibile` come soglie per decidere cosa spegnere e cosa scalare (punti 6 e 7), citandone la fonte.
 5. **Budget**: ripartizione in **percentuale** tra scoperta, remarketing e test. Cifre in euro solo se il brief indica
    un budget.
-6. **Metriche e regole di decisione**: cosa guardare (CTR del link, costo per clic, tempo sull'articolo, clic verso
+6. **Le tre fasi della spesa** (da `100m-leads`): **tracciare** prima di spendere (Pixel, eventi, UTM); **pagare per
+   imparare** (regola di prova: un annuncio può spendere fino a 2 volte quanto paga un cliente nei primi 30 giorni se
+   porta contatti, e si spegne prima di 1 volta se non ne porta; usa `tetto_test_annuncio` della consulenza se c'è, o
+   la formula con i numeri del brief); **spingere** solo ciò che ha dimostrato di rendere, partendo dal numero di
+   clienti voluti × costo per cliente, con un margine del 20% perché crescendo si perde un po' di efficienza.
+   Ricorda nella pagina: se arrivano contatti qualificati che non comprano, il problema è la vendita, non l'annuncio.
+7. **Metriche e regole di decisione**: cosa guardare (CTR del link, costo per clic, tempo sull'articolo, clic verso
    l'offerta, richieste o acquisti, costo per risultato) e quando si spegne, si tiene o si scala. Mai promettere
    numeri di risultato.
-7. **Le prime 4 settimane**: cosa si lancia, cosa si guarda e cosa si decide, settimana per settimana.
-8. **Prerequisiti**: Pixel ed eventi (dalla scansione), advertorial pronto (mai mandare un indiretto alla pagina
+8. **Le prime 4 settimane**: cosa si lancia, cosa si guarda e cosa si decide, settimana per settimana.
+9. **Prerequisiti**: Pixel ed eventi (dalla scansione), advertorial pronto (mai mandare un indiretto alla pagina
    prodotto o alla home) e landing dell'offerta. Se mancano, sono il primo passo.
-9. Livello `completa`: **convenzione dei nomi** (es. `IND_MomentoRubato_Storia_A1`) e **brief dell'advertorial**.
+10. Livello `completa`: **convenzione dei nomi** (es. `IND_MomentoRubato_Storia_A1`) e **brief dell'advertorial**.
 
 ## 8. Pagina, controlli, pubblicazione
 

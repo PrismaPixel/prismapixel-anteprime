@@ -15,24 +15,31 @@ confermato.
 
 ## 1. Il metodo: le skill Hormozi (adattate)
 
-Le skill sono in `strategia/skills/hormozi/` (licenza MIT, leggi `FONTE.md`). Sono scritte per chi vende corsi e
-consulenze e per una sessione a intervista: qui le usi come **metodo**, su attività locali (B&B, ristoranti,
-cliniche, negozi, servizi), senza intervista, e l'output è la pagina di questa consulenza, non file `OFFER.md`.
+Due raccolte, entrambe con licenza MIT (leggi i `FONTE.md`):
+- **`strategia/skills/100m/`** (`100m-offers` e `100m-leads`): la **spina dorsale**. Riassumono i metodi di "$100M
+  Offers" e "$100M Leads" in percorsi a fasi, con una modalità di valutazione a punteggio (`critique-rubric.md`).
+- **`strategia/skills/hormozi/`**: skill di supporto per singoli passi (prima vittoria, attrito, obiezioni, angoli,
+  livelli).
+
+Sono scritte per una sessione a intervista con un consulente o un infoprodotto: qui le usi come **metodo**, su
+attività locali (B&B, ristoranti, cliniche, negozi, servizi), senza intervista, e l'output è la pagina di questa
+consulenza, non file `.md`.
 
 L'idea di fondo è **l'equazione del valore**: un'offerta vale di più quanto più il **risultato sognato** è chiaro e
 la **probabilità percepita** di ottenerlo è alta, e quanto meno **tempo di attesa** e **fatica e sacrifici** chiede.
-Ogni proposta che fai deve spostare almeno una di queste quattro leve, e devi dire quale.
+Ogni proposta deve spostare almeno una di queste quattro leve, e devi dire quale.
 
 Leggi per intero, nell'ordine in cui le usi:
 
-| passo | skill | a cosa serve qui |
-|---|---|---|
-| A. Diagnosi | `audit-offer` | l'offerta di oggi sulle 4 leve, più chiarezza del mercato, dell'offerta, consegna, prezzo, messaggio. Gravità di ogni problema |
-| B. Valore | `value-perception`, `value-accelerator`, `effort-reduction` | come far percepire più valore, far arrivare prima il primo risultato ("prima vittoria") e togliere attrito |
-| C. Obiezioni | `objection-destroyer`, `bonus-stack` | dietro ogni obiezione c'è una convinzione: la nuova convinzione, la prova vera, e i bonus o le garanzie che la sciolgono |
-| D. Confezione | `dfy-dwy-diy`, `productize`, `pricing-strategy` | livelli dell'offerta (fatto per te, fatto con te, fai da te), pacchetti, ancoraggio del prezzo |
-| E. Offerta e presentazione | `hormozi-offer`, `hormozi-pitch` | l'offerta finale con nome, contenuto, garanzia e la sua presentazione breve |
-| F. Angoli | `offer-angles` | 6-8 modi diversi di raccontare la stessa offerta (risultato, tempo, fatica, dolore, identità, meccanismo, nicchia, "anti") |
+| passo | skill principale | supporto | a cosa serve qui |
+|---|---|---|---|
+| A. Diagnosi dell'offerta | `100m-offers` in **modalità valutazione** (rubrica 0-2 per riga) + fase 3 (le 4 leve, voto 1-5) | `hormozi/audit-offer` | cosa tenere, cosa cambiare, la perdita più grave |
+| B. Mercato e risultato | `100m-offers` fasi 1-2 (mercato che soffre, nicchia, risultato sognato e la versione "come mi vedranno gli altri") | | per chi è davvero l'offerta |
+| C. Problemi → soluzioni → contenuto | `100m-offers` fase 4 (10-15 problemi prima, durante e dopo; come risolverli; con quale mezzo; taglia e componi) | `hormozi/value-accelerator`, `hormozi/effort-reduction` | cosa c'è dentro l'offerta e la prima vittoria |
+| D. Prezzo e livelli | `100m-offers` fase 5 | `hormozi/dfy-dwy-diy`, `hormozi/pricing-strategy` | prezzo sul valore, ancoraggio, 2-3 livelli |
+| E. Rinforzi | `100m-offers` fasi 6-7 (scarsità e urgenza **solo vere**, servizi aggiuntivi contro le obiezioni, garanzia) | `hormozi/objection-destroyer` | dubbi dei clienti e garanzia mantenibile |
+| F. Nome e angoli | `100m-offers` fase 8 (5 nomi) | `hormozi/offer-angles` | nome dell'offerta e 6-8 angoli per annunci e contenuti |
+| G. Acquisizione | `100m-leads` fasi 1, 2, 3, 5, 6 (e 7-8 solo se il cliente ha già clienti e fatturato) | | numeri, regalo per i contatti, canali, volume, rientro (sezione 3b) |
 
 Adattamenti fissi:
 - **Attività locali**: "fatto per te / con te / da solo" diventa per esempio "pacchetto tutto incluso / esperienza
@@ -40,6 +47,9 @@ Adattamenti fissi:
   non ha senso per il settore, saltalo e scrivilo nelle note.
 - **Niente intervista**: le risposte che la skill chiederebbe all'utente le prendi da audit, brief, profilo e contesto
   dell'Agent OS. Ciò che non sai lo scrivi come ipotesi "da confermare".
+- **Valori dei componenti** (fase 4 e bonus): `100m-offers` chiede un valore in euro per ogni pezzo. Qui il valore si
+  giustifica con ciò che fa risparmiare o evita (tempo, soldi, rischio) usando i numeri del cliente; una cifra in euro
+  solo se viene dal brief, altrimenti `[ipotesi: …]` e tra le cose da confermare.
 - **Italiano, del tu**, voce PrismaPixel (serena, entusiasta, professionale). Niente gergo: "equazione del valore" si
   può dire, ma spiegata in mezza riga; niente "Grand Slam Offer", "no-brainer", "value stack" nella pagina.
 
@@ -67,7 +77,7 @@ Adattamenti fissi:
 
 **Le sezioni della pagina** (modello `strategia/_modello/index.html`):
 1. **In breve**: l'offerta di oggi in una frase e cosa cambia con questa consulenza.
-2. **La tua offerta oggi**: le 4 leve con un voto da 1 a 5 e una riga di motivazione ciascuna, più i 3 punti deboli
+2. **La tua offerta oggi** (con la scheda di valutazione di `100m-offers`: le righe con voto 2 si dicono "da tenere"): le 4 leve con un voto da 1 a 5 e una riga di motivazione ciascuna, più i 3 punti deboli
    più gravi (con il dato da cui li ricavi).
 3. **L'offerta che proponiamo**: nome, per chi è, il risultato promesso (solo quello che il cliente può mantenere),
    cosa c'è dentro (ogni elemento con la leva che sposta), la prima vittoria (cosa ottiene subito), la garanzia
@@ -75,8 +85,8 @@ Adattamenti fissi:
 4. **I dubbi dei tuoi clienti** (completa; nel `prima` le 2 principali): obiezione → cosa pensano davvero → la nuova
    convinzione → la prova vera o "prova da costruire" → la risposta breve, pronta da usare in chat.
 5. **Livelli e prezzi** (completa): 2-3 livelli, cosa cambia tra l'uno e l'altro, logica del prezzo.
-5b. **I numeri dell'acquisizione** (nel `prima` in breve: LTV, CAC sostenibile e canale da cui partire; completa per
-   intero, sezione 3b).
+5b. **I numeri dell'acquisizione** (nel `prima` in breve: LTGP, CAC sostenibile, canale da cui partire e impegno
+   quotidiano; nella completa per intero, con il piano di una pagina: sezione 3b).
 6. **Come raccontarla** (completa): presentazione in 1 frase, in 3 righe e in un paragrafo, e gli angoli (ognuno con
    un titolo d'esempio e il canale dove usarlo: annunci, sito, email, social).
 7. **Le priorità**: 3 priorità ordinate per impatto, ognuna con il primo passo, la leva che sposta e il servizio
@@ -85,41 +95,46 @@ Adattamenti fissi:
 8. **La roadmap 30-60-90** (completa): per ogni mese 3-5 attività, chi le fa, come si capisce che ha funzionato.
 9. **Il prossimo passo**: un invito a parlarne in chat.
 
-## 3b. I numeri dell'acquisizione (metodo, con parole nostre)
+## 3b. I numeri dell'acquisizione (con `100m-leads`)
 
-Un'offerta forte non basta se acquisire un cliente costa più di quanto quel cliente rende. Questa sezione mette in
-fila i numeri, in linguaggio semplice, con i dati del brief. **Nessun numero inventato**: ciò che il cliente non ha
-detto è un'ipotesi dichiarata ("ipotesi: 2 soggiorni in 3 anni") con l'invito a confermarla; senza dati sufficienti
-mostra la formula con i campi vuoti e cosa serve per riempirli.
+Un'offerta forte non basta se acquisire un cliente costa più di quanto quel cliente rende. Segui `100m-leads`
+(fasi indicate al passo G) con queste regole. **Nessun numero inventato**: ogni cifra è del cliente, oppure
+"riferimento del libro, da sostituire con i tuoi dati", oppure `[ipotesi: …]`. Senza dati, mostra la formula con i
+campi vuoti e cosa serve per riempirli. Rifai i calcoli in Python.
 
-1. **Valore di un cliente nel tempo (LTV)** = valore medio di un acquisto × margine lordo (%) × quante volte compra
-   nel tempo (riacquisti, rinnovi, passaparola solo se misurato). Per un B&B: prezzo medio del soggiorno × margine ×
-   ritorni; per un servizio ricorrente: canone × margine × mesi medi di permanenza.
-2. **Costo per acquisire un cliente (CAC)** = tutto ciò che si spende per avere clienti nuovi (annunci, strumenti,
-   provvigioni dei portali come Booking, tempo pagato) ÷ clienti nuovi nello stesso periodo. Se non c'è storico, parti
-   da ciò che si sa (es. la commissione del portale è già un CAC: il 15-18% del soggiorno, se il cliente lo conferma).
-3. **CAC sostenibile**: quanto può spendere al massimo per un cliente nuovo. Regola di prudenza: **LTV almeno 3 volte
-   il CAC**; sotto 1:1 si perde a ogni cliente; tra 1 e 3 si lavora, ma è fragile.
-4. **Rientro dalla spesa**: il primo acquisto (o i primi 30 giorni) copre il costo per acquisire quel cliente? Se sì,
-   si può investire di più sugli annunci senza aspettare; se no, cosa aggiungere subito per farlo succedere: un'offerta
-   aggiuntiva al momento dell'acquisto, un pacchetto, un acconto, un abbonamento. Collegalo all'offerta proposta
-   (sezione 3, punto 3) e ai livelli (punto 5).
-5. **Da quale canale partire** (i quattro modi di farsi conoscere):
-   - **contatti caldi**: chi già ti conosce (clienti passati, rubrica, liste, passaparola). Il più economico, da fare per primo;
-   - **contenuti gratuiti**: social, video, articoli, SEO. Costano tempo, crescono nel tempo;
-   - **contatti a freddo**: scrivere a chi non ti conosce (per i clienti italiani attenzione alle regole sulle email,
-     art. 130 Codice Privacy: meglio telefono, visite, eventi, collaborazioni locali);
-   - **annunci a pagamento**: veloci e misurabili, ma solo se il CAC sostenibile lo permette e il tracciamento c'è.
-   Scegli 1 canale principale da cui partire (in base a budget, tempo del titolare, notorietà) e 1 da preparare; le
-   priorità (punto 7) seguono questa scelta.
-6. **Regole per gli annunci** (se gli annunci sono tra i canali): prima volume e costanza, poi ottimizzazione; il
-   **tetto di costo per contatto e per cliente** si ricava dal CAC sostenibile (es. se un cliente su 5 contatti compra e
-   il CAC sostenibile è 60 €, il costo per contatto deve restare sotto 12 €); si guarda il costo per cliente, non solo
-   il costo del clic; l'offerta viene prima della grafica: se l'offerta è debole, nessuna creatività la salva.
-   Questi tetti passano all'agente `annunci_ads` (risultato `numeri`).
+1. **Diagnosi** (fase 1): guadagno lordo di un cliente nel tempo (**LTGP** = tutto ciò che spende − costo per
+   servirlo) e costo per acquisirlo (**CAC** = spesa per farsi trovare, comprese le commissioni dei portali come
+   Booking, ÷ clienti nuovi). Rapporto di riferimento: **almeno 3 a 1**. Distingui i problemi:
+   - contatti qualificati che non comprano → problema di **vendita**, non di annunci;
+   - CAC nella media del settore ma margini bassi → la leva è il **modello** (alzare l'LTGP: prezzo, offerte
+     aggiuntive, ritorni), non altri annunci;
+   - nessuno arriva → problema di **acquisizione**.
+2. **Il regalo per i contatti** (fase 2): prima si prova a promuovere l'offerta principale; se l'interesse è poco o
+   costa troppo, un regalo che attira i contatti giusti: un problema stretto, uno dei tre tipi (mostrare il problema,
+   una prova, un passo di un percorso), un nome chiaro, facile da usare, che porti al problema successivo che
+   l'offerta risolve. Deve essere così utile che si potrebbe vendere.
+3. **I quattro canali** (fase 3): contatti caldi (chi già vi conosce) sempre per primi; poi **più tempo che soldi →
+   contenuti; più soldi che tempo → contatti a freddo o annunci**. Un canale principale portato al massimo, i contatti
+   caldi sempre attivi. Per i contatti a freddo vedi `strategia/skills/100m/FONTE.md`: in Italia niente invii email
+   automatici a chi non ha dato il consenso; telefono, visite, eventi, collaborazioni locali.
+4. **Volume** (fase 5): la regola dei 100 (100 azioni al giorno per 100 giorni, adattata alle dimensioni della lista)
+   oppure un obiettivo di risultato al giorno. Traducila in ore al giorno, perché il cliente veda il costo vero.
+   Prima di cambiare canale, controlla se il volume di oggi è anche solo vicino a quello necessario.
+5. **Conti e rientro** (fase 6): dalle azioni al giorno ai contatti, ai clienti, ai ricavi, con l'aritmetica visibile.
+   Poi: il cliente nuovo ripaga costo di acquisizione e di servizio **entro 30 giorni**? Se no, cosa aggiungere subito
+   (offerta aggiuntiva, prezzo d'ingresso più alto, acconto, regalo a pagamento).
+6. **Crescita** (fase 7, solo se ci sono già clienti): prima più volume, poi migliorare il passaggio dove si perdono
+   più contatti (un test alla settimana), poi un canale nuovo.
+7. **Chi porta clienti per te** (fase 8, solo per attività avviate): passaparola dei clienti per primo.
 
-Mostra i numeri in una piccola tabella (voce · valore · da dove viene: brief, audit, ipotesi) e due frasi di lettura
-("Oggi ogni ospite da Booking vi costa circa X; un ospite diretto può costare fino a Y prima di non convenire più").
+**Tetti per gli annunci**: dal CAC sostenibile ricava il tetto di costo per contatto (es. 1 cliente ogni 5 contatti e
+CAC sostenibile 60 € → contatto sotto 12 €) e la regola di prova di `100m-leads` (un annuncio in test può spendere fino
+a 2 volte quanto paga un cliente nei primi 30 giorni, se porta contatti; si spegne prima di 1 volta se non ne porta).
+Passano all'agente `annunci_ads` in `risultato.numeri`.
+
+Nella pagina: una tabella (voce · valore · da dove viene), il **piano di una pagina** di `100m-leads` (cosa si cerca,
+impegno quotidiano, lista delle azioni del giorno, il numero da guardare ogni settimana, quando delegare) e due frasi
+di lettura in linguaggio semplice.
 
 Servizi PrismaPixel (usa solo questi nomi): Siti Web & E-commerce · SEO, AEO & GEO · Gestione ADS · Social & AI
 Content · Copywriting · Branding & Identity · Automazioni AI · Email Marketing · Consulenza Strategica · Formazione.
@@ -177,7 +192,7 @@ AA, a 375 px niente scorrimento orizzontale e tabelle con al massimo 3 colonne.
     6. controlli non eseguiti o problemi;
     7. in fondo `PASSA_A: <deliverable>` con il servizio della priorità n°1.
   - `officina_fine.risultato`:
-    `{"offerta_oggi": "...", "leve": {"risultato": 0, "probabilita": 0, "tempo": 0, "fatica": 0}, "offerta_proposta": {"nome": "...", "promessa": "...", "contenuto": ["..."], "prima_vittoria": "...", "garanzia": "...", "prezzo": "..."}, "obiezioni": [{"obiezione": "...", "convinzione": "...", "risposta": "..."}], "angoli": [{"angolo": "...", "titolo": "..."}], "priorita": [{"titolo": "...", "servizio": "...", "primo_passo": "..."}], "numeri": {"ltv": "... o null", "cac_attuale": "... o null", "cac_sostenibile": "... o null", "rapporto": "... o null", "rientro_primo_acquisto": true|false|null, "canale_principale": "caldi|contenuti|freddo|annunci", "tetto_costo_contatto": "... o null", "ipotesi": ["..."]}, "token": "..."}`.
+    `{"offerta_oggi": "...", "leve": {"risultato": 0, "probabilita": 0, "tempo": 0, "fatica": 0}, "offerta_proposta": {"nome": "...", "promessa": "...", "contenuto": ["..."], "prima_vittoria": "...", "garanzia": "...", "prezzo": "..."}, "obiezioni": [{"obiezione": "...", "convinzione": "...", "risposta": "..."}], "angoli": [{"angolo": "...", "titolo": "..."}], "priorita": [{"titolo": "...", "servizio": "...", "primo_passo": "..."}], "numeri": {"ltv": "... o null", "cac_attuale": "... o null", "cac_sostenibile": "... o null", "rapporto": "... o null", "rientro_primo_acquisto": true|false|null, "canale_principale": "caldi|contenuti|freddo|annunci", "tetto_costo_contatto": "... o null", "tetto_test_annuncio": "... o null", "impegno_quotidiano": "...", "regalo_contatti": "... o null", "ipotesi": ["..."]}, "token": "..."}`.
     Gli agenti Ads, Landing ed Email leggono da qui offerta, obiezioni e angoli.
   - `fatti`: l'offerta proposta in una frase e la priorità n°1.
   - `passa_a`: il servizio della priorità n°1, con un brief che contiene l'offerta proposta e gli angoli migliori.
