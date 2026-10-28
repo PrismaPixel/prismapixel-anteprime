@@ -6,8 +6,8 @@ Istruzioni per l'agente che produce il deliverable `video_montaggio`. Vivono in 
 specifiche.
 
 Monti il **girato vero del cliente** (o le sue riprese senza volto, o clip dell'agente Video AI) in video verticali
-pronti per Reels, TikTok e Shorts: tagli puliti, sottotitoli parola per parola sulle parole chiave, 2-4 grafiche
-animate nello stile del cliente, controllo fotogramma per fotogramma. Per YouTube (16:9) c'è il livello `lungo`.
+pronti per Reels, TikTok e Shorts: tagli puliti, **sottotitoli completi** (tutto il parlato) nello stile del video, grafiche solo quando servono
+(di base nessuna), controllo fotogramma per fotogramma. Per YouTube (16:9) c'è il livello `lungo`.
 Il metodo nasce da due fonti (vedi `montaggio/FONTE.md`): il kit di montaggio di Vincenzo (solo il metodo, riscritto)
 e il repository YouTube AI Motion Graphics di TEIN AI (MIT).
 
@@ -76,15 +76,16 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
 5. **Monta**: `applica.py` → `montato.mp4` e `parole_montate.json` (i tempi da usare da qui in poi).
    Poi `persona.py` sul montato → `persona.json`.
 6. **Quanta grafica** (sezione 4: `naturale`, `leggero` o `grafico`), poi, solo se servono grafiche, **stile**
-   (sezione 5); scrivi `piano.json` con lo stile, le grafiche e le righe dei sottotitoli. Con `naturale` salta Pinterest,
-   zone delle grafiche e componenti: restano tagli, sottotitoli semplici e controlli.
+   (sezione 5); scrivi `piano.json` con lo stile, le grafiche e il preset dei sottotitoli. Con `naturale` salta Pinterest,
+   zone delle grafiche e componenti: restano tagli, sottotitoli completi `pulito` e controlli.
 7. **Zone**: `zone.py` → `zone.json`: per ogni grafica il riquadro libero accanto alla persona (normale, compatta o
    sopra il corpo, mai sul volto). Il video resta **sempre a tutto schermo**: niente riquadri divisi o rimpiccioliti,
    salvo intervista, concetto complesso o format del cliente, dichiarati nel piano (`"diviso": true`,
    `"motivo_diviso"`). Una grafica `da_rivedere` si sposta in un momento con più spazio, diventa sottotitolo o si toglie.
 8. **Scena**: copia `motion/scena-modello.html` in `DIR/scena/scena.html`; per ogni grafica incolla il blocco del
    componente da `componenti.html`, cambia testi, tempi e `data-box` (da `zone.json`); colori e font nel blocco
-   `<style>`. Poi `sottotitoli.py`.
+   `<style>`. Poi `sottotitoli.py`: scrive **tutto il parlato** a blocchi brevi nel preset del piano e li sposta da
+   soli se coprono un volto o una grafica. Prima rileggi `testo.txt` e metti in `correzioni` i nomi trascritti male.
 9. **Bozza**: `rendi_grafiche.py --bozza` → `componi.py --bozza` (540 × 960).
 10. **Controllo**: `controlla.py`. Guarda **tutti** i fogli in `controllo/` con Read, in ordine, e cerca: animazioni
     che ripartono, lampi, testo in ritardo, testo sul volto, parole doppie, labiale fuori sincrono (5 momenti),
@@ -102,9 +103,9 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 
 | stile | quando | grafiche | sottotitoli |
 |---|---|---|---|
-| **`naturale`** (il default) | persona che parla in modo spontaneo, dietro le quinte, racconto di scoperta, testimonianza vera, vlog, luogo o lavoro che parlano da soli, contenuti emotivi | **nessuna** (niente Pinterest, niente scena tranne i sottotitoli) | semplici: bianchi, nessuna parola colorata, solo dove servono per capire senza audio |
-| `leggero` | video con un dato o un'offerta da far ricordare, ma girato in modo naturale | **al massimo 2**: di solito il dato e l'invito finale, piccoli e brevi | come sopra, una parola d'accento al massimo per riga |
-| `grafico` | spiegazioni, tutorial, passi, confronti, numeri, prezzi, format educativi | 2-4 in un video da 30-45 s | parole chiave con accento |
+| **`naturale`** (il default) | persona che parla in modo spontaneo, dietro le quinte, racconto di scoperta, testimonianza vera, vlog, luogo o lavoro che parlano da soli, contenuti emotivi | **nessuna** (niente Pinterest, niente scena tranne i sottotitoli) | completi, preset `pulito`: frase come detta, piccola, bianca, nessun colore |
+| `leggero` | video con un dato o un'offerta da far ricordare, ma girato in modo naturale | **al massimo 2**: di solito il dato e l'invito finale, piccoli e brevi | completi, `pulito` (o `evidenziato` se il creator parla in camera con energia) |
+| `grafico` | spiegazioni, tutorial, passi, confronti, numeri, prezzi, format educativi | 2-4 in un video da 30-45 s | completi, `evidenziato` (karaoke) o `parola` per i video a ritmo alto |
 
 - Nel dubbio, `naturale`. Si sale di stile solo se il contenuto lo chiede (c'è davvero un numero, dei passi, un
   confronto) o se il brief lo dice. Se il cliente ha scritto di volere video "veri", "spontanei", "senza effetti",
@@ -114,12 +115,12 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 - Nella pagina scrivi quale stile hai scelto e perché, e proponi l'alternativa ("se vuoi, una versione con 2 grafiche
   sul prezzo e sull'invito").
 
-## 4b. Il piano: poche grafiche, sottotitoli solo sulle parole chiave
+## 4b. Il piano: poche grafiche, sottotitoli completi
 
 `piano.json`:
 ```json
 {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "testo": "38% · prenotazioni dirette"}],
- "righe": [{"testo": "zero commissioni", "accento": "zero", "in": 4.1, "out": 5.6}]}
+ "sottotitoli": {"preset": "pulito", "accenti": [], "correzioni": [{"da": "polignano", "a": "Polignano"}]}}
 ```
 - **Grafiche (solo negli stili `leggero` e `grafico`): al massimo 2 o 2-4 in un video da 30-45 s**, scelte con `motion/CATALOGO.md` sulle frasi che le chiamano: un numero,
   un confronto, dei passi, la frase da ricordare, l'invito finale. Nessuna grafica che ripete solo ciò che si sente.
@@ -129,10 +130,19 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
   esce una volta, mai due insieme, mai su un volto.
 - **Il titolo all'inizio** (`svela` o `frase`) solo se il primo secondo non ha già un gancio forte: i primi 2 secondi
   decidono se si guarda.
-- **Sottotitoli**: solo le frasi chiave (un'affermazione, un numero, un nome, la svolta), 1-6 parole, minuscolo, una
-  parola d'accento nel colore del cliente. Il testo è **esattamente** ciò che viene detto (puoi tenere solo le parole
-  chiave, mai cambiarle). I numeri restano interi. Se il cliente chiede sottotitoli completi (accessibilità), si fanno
-  per tutto il parlato con le stesse regole.
+- **Sottotitoli: sempre completi**, ogni parola detta (molti guardano senza audio). Li scrive `sottotitoli.py` da
+  `parole_montate.json`; tu scegli il **preset** (vedi `SOTTOTITOLI.md`, ricavato dai video più visti della nicchia):
+  | preset | come appare | quando |
+  |---|---|---|
+  | `pulito` (di base con `naturale` e `leggero`) | frase come detta, 48 px, bianca con ombra, fino a 5 parole su una riga, ferma; y ≈ 1400 | racconti, tour in barca, luoghi, testimonianze, video calmi |
+  | `evidenziato` (di base con `grafico`) | MAIUSCOLO 58 px con bordo scuro, 1-3 parole, la parola detta in giallo (karaoke); y ≈ 1270 | creator che parla in camera, consigli, liste di posti |
+  | `parola` | MAIUSCOLO 76 px, 1-2 parole con un pop, colore solo su `accenti` e numeri | ritmo alto: cibo, "3 cose da fare", montaggi veloci |
+  | `nessuno` | niente sottotitoli | solo se il video non ha parlato (solo musica) o il cliente li mette da sé |
+  Il testo è **esattamente** ciò che viene detto: le `correzioni` servono solo per errori di trascrizione (nomi di
+  luoghi, maiuscole), mai per cambiare parole. `accenti`: al massimo 1 ogni 3-4 blocchi (il numero, il nome del
+  posto). Il giallo dei sottotitoli è `--sott-accento`; si usa l'accento del cliente solo se è chiaro e leggibile sul
+  mare. Il titolo-gancio dei primi 2 s (molto usato nella nicchia) è una grafica a parte (`svela` o `frase`), solo
+  negli stili che le ammettono.
 - Invito finale: l'azione vera del brief (`cta`), con le parole di chi guarda (contratto, sezione 6).
 
 ## 5. Lo stile: riferimenti Pinterest di motion design
@@ -155,7 +165,7 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 
 | livello | contenuti | uscita |
 |---|---|---|
-| `prima` | **1 video fino a 45 s**: tagli, sottotitoli sulle parole chiave, 2-3 grafiche | bozza 540 × 960 nella pagina; il finale 1080 × 1920 si fa dopo l'ok |
+| `prima` | **1 video fino a 45 s**: tagli, sottotitoli completi, grafiche secondo lo stile (di base nessuna) | bozza 540 × 960 nella pagina; il finale 1080 × 1920 si fa dopo l'ok |
 | `completa` (**a pagamento, 29 €** scalati) | **3 video fino a 60 s** dal girato caricato (anche 3 tagli diversi dello stesso girato: gancio diverso, durata diversa), stile da Pinterest | bozze nella pagina + **finali 1080 × 1920** da scaricare |
 | `lungo` (**a pagamento, 49 €** scalati) | **1 video YouTube 16:9 fino a 8 minuti**: stesso metodo per tagli e sottotitoli; grafiche dalle skill e dalle board di `tein/` (catalogo e controlli loro), esportazione con `tein/tools/export.py`; capitoli e schermata finale | finale 1920 × 1080 |
 | `revisione` | applica `modifiche_richieste` partendo dal lavoro precedente (`token_precedente`: `DIR` e scena si rifanno dai file salvati nelle note dell'esito precedente) | come il livello d'origine |

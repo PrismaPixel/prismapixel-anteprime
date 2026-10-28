@@ -111,7 +111,20 @@ html, body { margin: 0; background: transparent; }
 .c-finale .bottone { display: inline-block; margin-top: 34px; background: var(--accento); color: var(--accento-testo); font: 800 46px/1 var(--font-testo); padding: 30px 48px; border-radius: 999px; }
 .c-finale .dove { font: 600 34px/1.2 var(--font-testo); color: var(--tenue); margin-top: 22px; }
 
-/* sottotitoli parola per parola (li scrive sottotitoli.py): solo le parole chiave, 1-6 parole, minuscolo */
-.sott { position: absolute; left: 90px; width: 850px; text-align: center; font: 800 68px/1.12 var(--font-testo); color: #fff; text-transform: lowercase; text-shadow: 0 3px 14px rgba(0, 0, 0, .55), 0 1px 2px rgba(0, 0, 0, .6); letter-spacing: -.01em; }
-.sott .acc { color: var(--accento); }
-.sott span { display: inline-block; margin: 0 .12em; }
+/* sottotitoli completi (li scrive sottotitoli.py), tre preset presi dai video più visti della nicchia (SOTTOTITOLI.md).
+   Il colore della parola evidenziata è --sott-accento: di base il giallo dei creator, leggibile su mare e cielo;
+   si può mettere l'accento del cliente se è chiaro abbastanza. */
+:root { --sott-accento: #ffd400; --font-sott: var(--font-testo); }
+.sott { position: absolute; left: 90px; width: 850px; text-align: center; color: #fff; white-space: nowrap; }
+.sott span { display: inline-block; }
+.sott.evidenziato span, .sott.parola span { margin: 0 .06em; }
+/* pulito: frase come detta, piccola, ombra morbida, niente colori (video naturali, tour, racconti) */
+.sott.pulito { font: 600 48px/1.2 var(--font-sott); letter-spacing: 0; text-shadow: 0 2px 6px rgba(0, 0, 0, .75), 0 0 2px rgba(0, 0, 0, .9); }
+/* evidenziato: maiuscolo con bordo scuro, la parola detta in colore (creator che parlano in camera) */
+.sott.evidenziato { font: 800 58px/1.1 var(--font-sott); text-transform: uppercase; letter-spacing: .01em;
+  -webkit-text-stroke: 7px #111; paint-order: stroke fill; text-shadow: 0 4px 10px rgba(0, 0, 0, .45); }
+.sott.evidenziato .ora, .sott.evidenziato .acc { color: var(--sott-accento); }
+/* parola: 1-2 parole grandi che entrano con un pop (ritmo alto, cibo, liste) */
+.sott.parola { font: 900 76px/1.05 var(--font-sott); text-transform: uppercase; letter-spacing: .005em;
+  -webkit-text-stroke: 9px #111; paint-order: stroke fill; text-shadow: 0 5px 12px rgba(0, 0, 0, .45); }
+.sott.parola .acc { color: var(--sott-accento); }

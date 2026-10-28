@@ -10,6 +10,7 @@
    - grafica troppo breve: meno di 2 s + 0,35 s per parola (è un lampo);
    - due grafiche nello stesso momento (sottotitoli esclusi);
    - due cambi di grafica a meno di 1,5 s (scatto);
+   - sottotitoli incompleti (una parola detta che non compare: errore), blocchi troppo lunghi o troppo brevi;
    - durata del video diversa da quella del montato.
 --fotogramma S salva un fotogramma a piena grandezza (DIR/controllo/f_S.png) per guardare da vicino un dubbio
 prima di chiamarlo errore: i riquadri piccoli del foglio possono ingannare.
@@ -90,6 +91,19 @@ def main():
         err.append(f"stile {stile}: {n_graf} grafiche, ne sono ammesse al massimo {limite}")
     elif stile == "grafico" and n_graf > max(4, round(durata(os.path.join(d, "montato.mp4")) / 11)):
         avv.append(f"stile grafico: {n_graf} grafiche sono tante per questa durata (circa una ogni 10-15 secondi)")
+    # sottotitoli completi: ogni parola detta deve comparire, nessun blocco troppo lungo o troppo breve
+    S = leggi(os.path.join(d, "sottotitoli.json"), None)
+    if S and S.get("preset") != "nessuno":
+        if S["parole_mostrate"] < S["parole_dette"]:
+            err.append(f"sottotitoli incompleti: {S['parole_mostrate']} parole su {S['parole_dette']} dette")
+        lim = {"pulito": 32, "evidenziato": 22, "parola": 16}.get(S["preset"], 32)
+        for b in S["blocchi"]:
+            if len(b["testo"]) > lim:
+                avv.append(f"{b['in']:.2f}s sottotitolo: «{b['testo']}» è lungo ({len(b['testo'])} caratteri): rischia di uscire dalla riga")
+            if b["out"] - b["in"] < (0.25 if S["preset"] == "parola" else 0.45):
+                avv.append(f"{b['in']:.2f}s sottotitolo: «{b['testo']}» resta {b['out'] - b['in']:.2f} s (lampo)")
+    elif S is None and not any(x["tipo"] == "sottotitolo" for x in R["tempi"]):
+        err.append("mancano i sottotitoli (lancia sottotitoli.py; per toglierli: \"preset\": \"nessuno\" nel piano)")
     dm, dv = durata(os.path.join(d, "montato.mp4")), durata(video)
     if abs(dm - dv) > 0.2:
         err.append(f"durata {dv:.2f} s diversa dal montato {dm:.2f} s")

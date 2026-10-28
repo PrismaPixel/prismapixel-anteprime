@@ -1,12 +1,11 @@
-"""Sceglie DOVE mettere ogni grafica e i sottotitoli, lontano dal corpo e dal volto.
+"""Sceglie DOVE mettere ogni grafica, lontano dal corpo e dal volto (i sottotitoli li sistema sottotitoli.py).
 
   python3 zone.py --lavoro DIR
 
 Legge DIR/piano.json (le grafiche approvate) e DIR/persona.json (se manca: video senza persone, si usa tutta l'area).
 piano.json:
   {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "altezza_min": 420}, ...,
-                 {"id": "g4", "tipo": "barre", "in": 20, "out": 26, "diviso": true, "motivo_diviso": "concetto_complesso"}],
-   "sottotitoli": true}
+                 {"id": "g4", "tipo": "barre", "in": 20, "out": 26, "diviso": true, "motivo_diviso": "concetto_complesso"}]}
 Il video resta SEMPRE a tutto schermo: niente riquadri divisi o rimpiccioliti. Per ogni grafica unisce i riquadri
 delle persone nell'intervallo (con 40 px d'aria) e cerca, dentro l'area utile (x 90-940, y 250-1470: fuori ci sono
 nome profilo, didascalia e pulsanti dell'app), lo spazio libero più grande tra sopra, sotto, a sinistra, a destra:
@@ -14,8 +13,8 @@ nome profilo, didascalia e pulsanti dell'app), lo spazio libero più grande tra 
 Se non c'è spazio nemmeno così, la grafica va rivista ("da_rivedere": spostarla, farne un sottotitolo o toglierla).
 Unica eccezione, il layout "diviso" (il video scende di 700 px e la grafica usa la parte alta, lo fa componi.py): solo
 se in piano.json la grafica ha "diviso": true e "motivo_diviso": "intervista" | "concetto_complesso" | "format".
-Scrive DIR/zone.json: {"g1": {"box": [x, y, w, h], "posto": "sopra", "diviso": false, "avviso": ""}, ...,
-"sottotitoli": [{"in": .., "out": .., "y": 1300}, ...]} — box è il valore di data-box nella scena.
+Scrive DIR/zone.json: {"g1": {"box": [x, y, w, h], "posto": "sopra", "diviso": false, "avviso": ""}, ...} — box è il
+valore di data-box nella scena. Con lo stile naturale (nessuna grafica) zone.py si può saltare.
 """
 import argparse, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -97,20 +96,9 @@ def main():
             out[g["id"]] = {"box": [], "posto": "nessuno", "diviso": False, "da_rivedere": True,
                             "avviso": "nessuno spazio senza coprire il volto: sposta la grafica in un momento con più spazio, "
                                       "trasformala in sottotitolo o toglila (il video non si divide, salvo i casi ammessi)"}
-    # sottotitoli: banda bassa (y 1300); se lì c'è un volto o una grafica, più in alto (1100, poi 420)
-    sott = []
-    graf = [(g, out[g["id"]]) for g in piano.get("grafiche", []) if out.get(g["id"], {}).get("box")]
-    for r in piano.get("righe", []):
-        f = unione(camp, r["in"], r["out"], "volti")
-        ostacoli = [(f[1], f[3])] if f else []
-        ostacoli += [(z["box"][1], z["box"][1] + z["box"][3]) for g, z in graf if g["in"] < r["out"] and r["in"] < g["out"]]
-        y = next((c for c in (1300, 1100, 420, 1400) if all(c + 70 <= a or c - 50 >= b for a, b in ostacoli)), 1300)
-        sott.append({"in": r["in"], "out": r["out"], "y": y})
-    out["sottotitoli"] = sott
     scrivi(os.path.join(d, "zone.json"), out)
     for k, v in out.items():
-        if k != "sottotitoli":
-            print(f"• {k}: {v['posto']} {v['box']} {v['avviso']}")
+        print(f"• {k}: {v['posto']} {v['box']} {v['avviso']}")
 
 
 if __name__ == "__main__":
