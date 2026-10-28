@@ -4,12 +4,16 @@
 
 Legge DIR/piano.json (le grafiche approvate) e DIR/persona.json (se manca: video senza persone, si usa tutta l'area).
 piano.json:
-  {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "altezza_min": 420}, ...],
+  {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "altezza_min": 420}, ...,
+                 {"id": "g4", "tipo": "barre", "in": 20, "out": 26, "diviso": true, "motivo_diviso": "concetto_complesso"}],
    "sottotitoli": true}
-Per ogni grafica unisce i riquadri delle persone nell'intervallo (con 40 px d'aria) e cerca, dentro l'area utile
-(x 90-940, y 250-1470: fuori ci sono nome profilo, didascalia e pulsanti dell'app), lo spazio libero più grande tra:
-sopra la persona, sotto, a sinistra, a destra. Se nessuno spazio è abbastanza grande (primo piano stretto), propone il
-layout "diviso": il video scende di 700 px e la grafica usa la parte alta (lo fa componi.py).
+Il video resta SEMPRE a tutto schermo: niente riquadri divisi o rimpiccioliti. Per ogni grafica unisce i riquadri
+delle persone nell'intervallo (con 40 px d'aria) e cerca, dentro l'area utile (x 90-940, y 250-1470: fuori ci sono
+nome profilo, didascalia e pulsanti dell'app), lo spazio libero più grande tra sopra, sotto, a sinistra, a destra:
+  1. con la grafica a grandezza normale; 2. con la grafica compatta; 3. sopra il corpo ma mai sul volto.
+Se non c'è spazio nemmeno così, la grafica va rivista ("da_rivedere": spostarla, farne un sottotitolo o toglierla).
+Unica eccezione, il layout "diviso" (il video scende di 700 px e la grafica usa la parte alta, lo fa componi.py): solo
+se in piano.json la grafica ha "diviso": true e "motivo_diviso": "intervista" | "concetto_complesso" | "format".
 Scrive DIR/zone.json: {"g1": {"box": [x, y, w, h], "posto": "sopra", "diviso": false, "avviso": ""}, ...,
 "sottotitoli": [{"in": .., "out": .., "y": 1300}, ...]} — box è il valore di data-box nella scena.
 """
@@ -17,6 +21,7 @@ import argparse, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from comune import UTILE, MARGINE_PERSONA, lavoro, leggi, scrivi
 
+DIVISO_AMMESSO = {"intervista", "concetto_complesso", "format"}
 X0, Y0, X1, Y1 = UTILE["x"], UTILE["y"], UTILE["x"] + UTILE["w"], UTILE["y"] + UTILE["h"]
 
 
@@ -65,23 +70,41 @@ def main():
     for g in piano.get("grafiche", []):
         u = unione(camp, g["in"], g["out"])
         hmin, wmin = g.get("altezza_min", 380), g.get("larghezza_min", 560)
-        buoni = [(n, b) for n, b in spazi(u) if b[3] >= hmin and b[2] >= wmin]
-        if buoni:
-            n, b = max(buoni, key=lambda x: x[1][2] * x[1][3])
-            # non serve tutta l'altezza: la scheda si appoggia vicino al bordo libero più lontano dalla persona
-            h = min(b[3], g.get("altezza_max", 900))
-            y = b[1] if n != "sotto" else b[1] + b[3] - h
-            out[g["id"]] = {"box": [int(b[0]), int(y), int(b[2]), int(h)], "posto": n, "diviso": False, "avviso": ""}
-        else:
+        motivo = str(g.get("motivo_diviso", "")).strip()
+        if g.get("diviso") and motivo in DIVISO_AMMESSO:
+            # eccezione dichiarata nel piano: intervista, concetto complesso, format
             out[g["id"]] = {"box": [X0, Y0, X1 - X0, 640], "posto": "diviso", "diviso": True,
-                            "avviso": "nessuno spazio libero accanto alla persona: layout diviso (video spostato in basso di 700 px)"}
-    # sottotitoli: banda bassa (y 1300), salvo che lì ci sia un volto; poi in alto
+                            "avviso": f"layout diviso per scelta ({motivo})"}
+            continue
+        scelta = None
+        # 1. spazio libero accanto al corpo, grandezza normale; 2. stesso spazio con la grafica compatta;
+        # 3. sopra il corpo ma lontano dal volto (il volto non si copre mai)
+        for nome, unione_, (hm, wm) in (("normale", u, (hmin, wmin)), ("compatta", u, (240, 420)),
+                                        ("sul corpo", unione(camp, g["in"], g["out"], "volti"), (240, 420))):
+            buoni = [(n, b) for n, b in spazi(unione_) if b[3] >= hm and b[2] >= wm]
+            if buoni:
+                n, b = max(buoni, key=lambda x: x[1][2] * x[1][3])
+                scelta = (nome, n, b)
+                break
+        if scelta:
+            nome, n, b = scelta
+            h = min(b[3], g.get("altezza_max", 900 if nome == "normale" else 520))
+            y = b[1] if n != "sotto" else b[1] + b[3] - h
+            avviso = "" if nome == "normale" else ("grafica compatta: poco spazio accanto alla persona" if nome == "compatta"
+                                                     else "la grafica passa sopra il corpo (non sul volto): guarda il foglio")
+            out[g["id"]] = {"box": [int(b[0]), int(y), int(b[2]), int(h)], "posto": n, "diviso": False, "avviso": avviso}
+        else:
+            out[g["id"]] = {"box": [], "posto": "nessuno", "diviso": False, "da_rivedere": True,
+                            "avviso": "nessuno spazio senza coprire il volto: sposta la grafica in un momento con più spazio, "
+                                      "trasformala in sottotitolo o toglila (il video non si divide, salvo i casi ammessi)"}
+    # sottotitoli: banda bassa (y 1300); se lì c'è un volto o una grafica, più in alto (1100, poi 420)
     sott = []
+    graf = [(g, out[g["id"]]) for g in piano.get("grafiche", []) if out.get(g["id"], {}).get("box")]
     for r in piano.get("righe", []):
         f = unione(camp, r["in"], r["out"], "volti")
-        y = 1300
-        if f and f[1] < 1380 and f[3] > 1180:
-            y = 1100 if f[1] > 1200 else 420
+        ostacoli = [(f[1], f[3])] if f else []
+        ostacoli += [(z["box"][1], z["box"][1] + z["box"][3]) for g, z in graf if g["in"] < r["out"] and r["in"] < g["out"]]
+        y = next((c for c in (1300, 1100, 420, 1400) if all(c + 70 <= a or c - 50 >= b for a, b in ostacoli)), 1300)
         sott.append({"in": r["in"], "out": r["out"], "y": y})
     out["sottotitoli"] = sott
     scrivi(os.path.join(d, "zone.json"), out)

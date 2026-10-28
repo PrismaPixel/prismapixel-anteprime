@@ -30,13 +30,17 @@ confronto, dei passi, la frase da ricordare). Un video da 30-45 s ne ha **2-4**,
 `data-dopo`, `data-decimali`) · `disegna` (SVG) · `cresce` (`data-asse` x | y | giu) · `evidenzia` · `scorri` ·
 `appare`. Tempi sempre in secondi sul video montato: `data-in`, `data-out`, `data-dur`.
 
-## Tre impaginazioni
+## Impaginazione: il video resta sempre a tutto schermo
 - **Volto pieno** (la normale): il girato a tutto schermo, la grafica nello spazio libero accanto alla persona
-  (`zone.py` sceglie sopra, sotto, a sinistra o a destra).
+  (`zone.py` sceglie sopra, sotto, a sinistra o a destra). Se lo spazio è poco, la grafica diventa **compatta**; se
+  serve, passa sopra il corpo ma **mai sul volto**. Se non c'è posto nemmeno così, la grafica si sposta in un momento
+  con più spazio, diventa un sottotitolo o si toglie.
 - **Senza volto**: riprese di luogo, prodotto o lavoro, o clip del video AI, con voce fuori campo o solo testo:
   la grafica può usare tutta l'area utile.
-- **Diviso**: quando la persona occupa tutto (primo piano stretto) e la grafica deve essere grande: il video scende di
-  700 px e la grafica usa la parte alta (`componi.py`, colore `--fondo`).
+- **Mai riquadri divisi o rimpiccioliti**, salvo tre eccezioni dichiarate nel piano (`"diviso": true`,
+  `"motivo_diviso"`): **intervista** (due persone o domanda e risposta), **concetto complesso** (un grafico o uno
+  schema che a tutto schermo non si legge), **format** ricorrente del cliente che lo prevede. Solo allora il video
+  scende di 700 px e la grafica usa la parte alta (`componi.py`, colore `--fondo`).
 
 ## Misure fisse
 - Area utile **x 90-940, y 250-1470** (fuori: nome profilo in alto, didascalia e audio in basso, pulsanti a destra).

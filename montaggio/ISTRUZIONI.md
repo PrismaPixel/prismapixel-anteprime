@@ -76,7 +76,10 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
 5. **Monta**: `applica.py` → `montato.mp4` e `parole_montate.json` (i tempi da usare da qui in poi).
    Poi `persona.py` sul montato → `persona.json`.
 6. **Stile** (sezione 5) e **piano** (sezione 4): scrivi `piano.json` con le grafiche e le righe dei sottotitoli.
-7. **Zone**: `zone.py` → `zone.json`: per ogni grafica il riquadro libero accanto alla persona, o il layout diviso.
+7. **Zone**: `zone.py` → `zone.json`: per ogni grafica il riquadro libero accanto alla persona (normale, compatta o
+   sopra il corpo, mai sul volto). Il video resta **sempre a tutto schermo**: niente riquadri divisi o rimpiccioliti,
+   salvo intervista, concetto complesso o format del cliente, dichiarati nel piano (`"diviso": true`,
+   `"motivo_diviso"`). Una grafica `da_rivedere` si sposta in un momento con più spazio, diventa sottotitolo o si toglie.
 8. **Scena**: copia `motion/scena-modello.html` in `DIR/scena/scena.html`; per ogni grafica incolla il blocco del
    componente da `componenti.html`, cambia testi, tempi e `data-box` (da `zone.json`); colori e font nel blocco
    `<style>`. Poi `sottotitoli.py`.
@@ -97,6 +100,8 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
 ```
 - **Grafiche: 2-4 in un video da 30-45 s**, scelte con `motion/CATALOGO.md` sulle frasi che le chiamano: un numero,
   un confronto, dei passi, la frase da ricordare, l'invito finale. Nessuna grafica che ripete solo ciò che si sente.
+- Le grafiche stanno **sopra** il video a tutto schermo, mai al posto di un pezzo di video: se una grafica avrebbe
+  bisogno di mezzo schermo per leggersi, è troppo piena (togli testo) oppure è il caso eccezionale del layout diviso.
 - Una grafica entra **sulla parola che la nomina o un attimo prima**, resta almeno 2 s + 0,35 s per parola, entra ed
   esce una volta, mai due insieme, mai su un volto.
 - **Il titolo all'inizio** (`svela` o `frase`) solo se il primo secondo non ha già un gancio forte: i primi 2 secondi
@@ -173,5 +178,5 @@ I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il ve
        alle vecchie: si riscrive quella che avrebbe evitato l'errore. Il repository è in sola lettura: la riscrive
        Vincenzo.
   - `officina_fine.risultato`:
-    `{"video": [{"titolo": "...", "durata_s": 38.2, "file_bozza": "bozza-1.mp4", "file_finale": "", "grafiche": ["numero", "frase"], "impaginazione": "volto|senza_volto|misto|diviso"}], "stile": {"accento": "#...", "font": ["..."], "look": "carta|scuro"}, "girato": "<codice>", "token": "..."}`
+    `{"video": [{"titolo": "...", "durata_s": 38.2, "file_bozza": "bozza-1.mp4", "file_finale": "", "grafiche": ["numero", "frase"], "impaginazione": "volto|senza_volto|misto", "divisi": ["g4: concetto_complesso"]}], "stile": {"accento": "#...", "font": ["..."], "look": "carta|scuro"}, "girato": "<codice>", "token": "..."}`
   - `passa_a`: se i video servono come annunci, `annunci_ads` con i video e i loro ganci.
