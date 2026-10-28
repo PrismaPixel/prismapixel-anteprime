@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ricerca clienti · LOTTO · PrismaPixel</title>
+<!-- MODELLO DELL'AGENTE RICERCA CLIENTI · pagina interna per Vincenzo. Una scheda <article class="lead"> per attività. Cancella i commenti prima di pubblicare. -->
+<style>
+:root { --bg: #f5f5f3; --card: #fff; --ink: #161616; --muted: #5d5f5e; --line: #e0e1de; --ok: #2e7d4f; --warn: #a35a00; --ko: #b3261e; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+main { max-width: 900px; margin: 0 auto; padding: 28px 16px 64px; }
+h1 { font-size: clamp(24px, 5vw, 34px); margin: 0 0 8px; }
+.riepilogo { color: var(--muted); }
+.avviso { border-left: 4px solid var(--warn); background: #fff; padding: 12px 14px; border-radius: 8px; margin: 16px 0; font-size: 15px; }
+.lead { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-top: 16px; }
+.lead h2 { font-size: 20px; margin: 0 0 4px; }
+.meta { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.stato { font-size: 12px; border-radius: 999px; padding: 2px 10px; border: 1px solid var(--line); }
+.stato.da_approvare { color: var(--warn); border-color: var(--warn); }
+.stato.vietato, .stato.senza_email { color: var(--ko); border-color: var(--ko); }
+h3 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 14px 0 4px; }
+.messaggio { white-space: pre-line; background: var(--bg); border-radius: 10px; padding: 12px; font-size: 15px; }
+.campione img { max-width: 100%; width: 260px; border-radius: 10px; display: block; }
+ol { padding-left: 20px; }
+footer { margin-top: 40px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <p class="meta">Ricerca clienti · uso interno</p>
+  <h1>LOTTO: SERVIZIO per NICCHIA a ZONA</h1>
+  <p class="riepilogo">N attività trovate · N con email pubblica · N in Italia · N saltate</p>
+  <div class="avviso">REGOLA DEL PAESE: in Italia le email commerciali richiedono di regola il consenso (art. 130 Codice Privacy), anche verso aziende. Approvare un invio è una tua scelta, contatto per contatto.</div>
+
+  <!-- UNA SCHEDA PER ATTIVITÀ -->
+  <article class="lead">
+    <h2>NOME ATTIVITÀ</h2>
+    <div class="meta"><span class="stato da_approvare">da approvare</span><span>SETTORE · ZONA</span><a href="#">SITO</a></div>
+    <h3>Cosa abbiamo notato</h3>
+    <p>NOTA SUL PROBLEMA</p>
+    <h3>Il regalo</h3>
+    <div class="campione"><img src="URL_min.webp" alt="DESCRIZIONE DEL CAMPIONE" loading="lazy"></div>
+    <h3>Contatto</h3>
+    <p>EMAIL · trovata su FONTE il DATA</p>
+    <h3>Oggetto</h3>
+    <p>OGGETTO</p>
+    <h3>Messaggio</h3>
+    <div class="messaggio">TESTO</div>
+    <h3>Follow-up (dopo 5 giorni senza risposta)</h3>
+    <div class="messaggio">TESTO FOLLOW-UP</div>
+  </article>
+
+  <h2 style="margin-top:32px">Come approvare</h2>
+  <ol>
+    <li>Apri in n8n la tabella "PrismaPixel · Contatti in uscita" e filtra per lotto LOTTO.</li>
+    <li>Correggi oggetto e testo se vuoi.</li>
+    <li>Metti stato "approvato" a chi vuoi contattare: il workflow di invio parte ogni ora (9-17, giorni feriali), massimo 10 per giro e 50 al giorno, e manda un solo follow-up dopo 5 giorni.</li>
+  </ol>
+  <footer>PrismaPixel · uso interno</footer>
+</main>
+</body>
+</html>

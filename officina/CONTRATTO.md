@@ -130,6 +130,7 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
 | `carosello_social` | `social/ISTRUZIONI.md` | attivo (in prova) |
 | `script_video` | `video/ISTRUZIONI.md` | attivo (in prova) |
 | `video_ai` | `video-ai/ISTRUZIONI.md` | attivo (in prova) |
+| `ricerca_clienti` (interno) | `clienti/ISTRUZIONI.md` | attivo (in prova) |
 | `piano_seo` | `seo/ISTRUZIONI.md` | da costruire |
 | `annunci_ads` | `ads/ISTRUZIONI.md` | attivo (in prova) |
 | `roadmap` | `strategia/ISTRUZIONI.md` | attivo (in prova) |
