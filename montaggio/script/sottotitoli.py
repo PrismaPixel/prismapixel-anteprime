@@ -65,7 +65,7 @@ def main():
         for k, pz in enumerate(pezzi):
             t_in = pz[0][1] - 0.02 if k else r["in"]
             t_out = pezzi[k + 1][0][1] - 0.02 if k + 1 < len(pezzi) else r["out"]
-            acc = norm(r.get("accento", ""))
+            acc = "" if piano.get("stile", "naturale") == "naturale" else norm(r.get("accento", ""))
             spans = ""
             for w, t in pz:
                 cls = ' class="acc"' if acc and norm(w) == acc else ""

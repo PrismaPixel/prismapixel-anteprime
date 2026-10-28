@@ -5,7 +5,8 @@ Il codice di ogni componente è in `componenti.html`: aprila con `?anteprima` pe
 YouTube AI Motion Graphics di TEIN AI, licenza MIT, vedi `../tein/`).
 
 Regola d'oro: **una grafica solo quando aggiunge qualcosa che la voce da sola non fa vedere** (un numero, un
-confronto, dei passi, la frase da ricordare). Un video da 30-45 s ne ha **2-4**, mai una per frase.
+confronto, dei passi, la frase da ricordare). Di default i video sono **naturali, senza grafiche**: si usano solo con
+lo stile `leggero` (al massimo 2) o `grafico` (2-4 in 30-45 s), scelto nel piano secondo `ISTRUZIONI.md`, sezione 4.
 
 | # | tipo (`data-tipo`) | quando si dice… | cosa mostra | nota |
 |---|---|---|---|---|

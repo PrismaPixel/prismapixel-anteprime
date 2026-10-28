@@ -75,7 +75,9 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
    cammina). Stringi solo se il file è 4K (avviso di `applica.py` se la qualità cala).
 5. **Monta**: `applica.py` → `montato.mp4` e `parole_montate.json` (i tempi da usare da qui in poi).
    Poi `persona.py` sul montato → `persona.json`.
-6. **Stile** (sezione 5) e **piano** (sezione 4): scrivi `piano.json` con le grafiche e le righe dei sottotitoli.
+6. **Quanta grafica** (sezione 4: `naturale`, `leggero` o `grafico`), poi, solo se servono grafiche, **stile**
+   (sezione 5); scrivi `piano.json` con lo stile, le grafiche e le righe dei sottotitoli. Con `naturale` salta Pinterest,
+   zone delle grafiche e componenti: restano tagli, sottotitoli semplici e controlli.
 7. **Zone**: `zone.py` → `zone.json`: per ogni grafica il riquadro libero accanto alla persona (normale, compatta o
    sopra il corpo, mai sul volto). Il video resta **sempre a tutto schermo**: niente riquadri divisi o rimpiccioliti,
    salvo intervista, concetto complesso o format del cliente, dichiarati nel piano (`"diviso": true`,
@@ -91,14 +93,35 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
 11. **Finale**: solo per i livelli che lo prevedono (sezione 6): `rendi_grafiche.py` e `componi.py` senza `--bozza`.
 12. **Pagina, consegna, esito** (sezione 8).
 
-## 4. Il piano: poche grafiche, sottotitoli solo sulle parole chiave
+## 4. Prima di tutto: quanta grafica (di default, il meno possibile)
+
+Il motion design è un attrezzo, non una firma. Un video autentico (la persona che parla, il dietro le quinte, il
+racconto di scoperta, la testimonianza vera, il luogo che si mostra da solo) perde fiducia se si riempie di schede
+animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli UNO stile per video e scrivilo in
+`piano.json` (`"stile": "naturale" | "leggero" | "grafico"`):
+
+| stile | quando | grafiche | sottotitoli |
+|---|---|---|---|
+| **`naturale`** (il default) | persona che parla in modo spontaneo, dietro le quinte, racconto di scoperta, testimonianza vera, vlog, luogo o lavoro che parlano da soli, contenuti emotivi | **nessuna** (niente Pinterest, niente scena tranne i sottotitoli) | semplici: bianchi, nessuna parola colorata, solo dove servono per capire senza audio |
+| `leggero` | video con un dato o un'offerta da far ricordare, ma girato in modo naturale | **al massimo 2**: di solito il dato e l'invito finale, piccoli e brevi | come sopra, una parola d'accento al massimo per riga |
+| `grafico` | spiegazioni, tutorial, passi, confronti, numeri, prezzi, format educativi | 2-4 in un video da 30-45 s | parole chiave con accento |
+
+- Nel dubbio, `naturale`. Si sale di stile solo se il contenuto lo chiede (c'è davvero un numero, dei passi, un
+  confronto) o se il brief lo dice. Se il cliente ha scritto di volere video "veri", "spontanei", "senza effetti",
+  resta `naturale` anche se c'è un numero: lo dice la voce.
+- Ogni grafica deve superare questa domanda: "senza, chi guarda capirebbe o ricorderebbe meno?". Se la risposta è no,
+  non si mette.
+- Nella pagina scrivi quale stile hai scelto e perché, e proponi l'alternativa ("se vuoi, una versione con 2 grafiche
+  sul prezzo e sull'invito").
+
+## 4b. Il piano: poche grafiche, sottotitoli solo sulle parole chiave
 
 `piano.json`:
 ```json
 {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "testo": "38% · prenotazioni dirette"}],
  "righe": [{"testo": "zero commissioni", "accento": "zero", "in": 4.1, "out": 5.6}]}
 ```
-- **Grafiche: 2-4 in un video da 30-45 s**, scelte con `motion/CATALOGO.md` sulle frasi che le chiamano: un numero,
+- **Grafiche (solo negli stili `leggero` e `grafico`): al massimo 2 o 2-4 in un video da 30-45 s**, scelte con `motion/CATALOGO.md` sulle frasi che le chiamano: un numero,
   un confronto, dei passi, la frase da ricordare, l'invito finale. Nessuna grafica che ripete solo ciò che si sente.
 - Le grafiche stanno **sopra** il video a tutto schermo, mai al posto di un pezzo di video: se una grafica avrebbe
   bisogno di mezzo schermo per leggersi, è troppo piena (togli testo) oppure è il caso eccezionale del layout diviso.
@@ -178,5 +201,5 @@ I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il ve
        alle vecchie: si riscrive quella che avrebbe evitato l'errore. Il repository è in sola lettura: la riscrive
        Vincenzo.
   - `officina_fine.risultato`:
-    `{"video": [{"titolo": "...", "durata_s": 38.2, "file_bozza": "bozza-1.mp4", "file_finale": "", "grafiche": ["numero", "frase"], "impaginazione": "volto|senza_volto|misto", "divisi": ["g4: concetto_complesso"]}], "stile": {"accento": "#...", "font": ["..."], "look": "carta|scuro"}, "girato": "<codice>", "token": "..."}`
+    `{"video": [{"titolo": "...", "durata_s": 38.2, "file_bozza": "bozza-1.mp4", "file_finale": "", "stile_montaggio": "naturale|leggero|grafico", "grafiche": ["numero", "frase"], "impaginazione": "volto|senza_volto|misto", "divisi": ["g4: concetto_complesso"]}], "stile": {"accento": "#...", "font": ["..."], "look": "carta|scuro"}, "girato": "<codice>", "token": "..."}`
   - `passa_a`: se i video servono come annunci, `annunci_ads` con i video e i loro ganci.

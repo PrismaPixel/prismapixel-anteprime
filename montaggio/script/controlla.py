@@ -81,6 +81,15 @@ def main():
             err.append(f"{y['in']:.2f}s: {x['id']} e {y['id']} sono sullo schermo insieme")
         elif 0.3 < y["in"] - x["out"] < 1.5:
             avv.append(f"{y['in']:.2f}s: {y['id']} entra {y['in'] - x['out']:.1f} s dopo l'uscita di {x['id']} (scatto: unisci o distanzia)")
+    # quanta grafica: lo stile scelto nel piano
+    piano = leggi(os.path.join(d, "piano.json"), {})
+    stile = piano.get("stile", "naturale")
+    n_graf = len([x for x in R["tempi"] if x["tipo"] != "sottotitolo"])
+    limite = {"naturale": 0, "leggero": 2}.get(stile)
+    if limite is not None and n_graf > limite:
+        err.append(f"stile {stile}: {n_graf} grafiche, ne sono ammesse al massimo {limite}")
+    elif stile == "grafico" and n_graf > max(4, round(durata(os.path.join(d, "montato.mp4")) / 11)):
+        avv.append(f"stile grafico: {n_graf} grafiche sono tante per questa durata (circa una ogni 10-15 secondi)")
     dm, dv = durata(os.path.join(d, "montato.mp4")), durata(video)
     if abs(dm - dv) > 0.2:
         err.append(f"durata {dv:.2f} s diversa dal montato {dm:.2f} s")
