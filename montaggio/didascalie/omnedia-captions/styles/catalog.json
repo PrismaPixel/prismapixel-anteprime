@@ -1,0 +1,59 @@
+[
+  {
+    "id": "yellow-authority",
+    "name": "Yellow Authority",
+    "instructions": "styles/yellow-authority/STYLE.md",
+    "preview": "styles/yellow-authority/preview.gif",
+    "colors": {
+      "base": "#FFFFFF",
+      "accent": "#FFE600"
+    },
+    "font": "styles/yellow-authority/fonts/Poppins-SemiBold.ttf",
+    "fontManifest": "styles/yellow-authority/fonts/source.json"
+  },
+  {
+    "id": "active-word-highlight",
+    "name": "Active Word Highlight",
+    "instructions": "styles/active-word-highlight/STYLE.md",
+    "preview": "styles/active-word-highlight/preview.gif",
+    "colors": {
+      "base": "#FFFFFF",
+      "active": "#FFD54A",
+      "shadow": "#000000"
+    },
+    "font": "styles/active-word-highlight/fonts/Inter-Bold.woff2"
+  },
+  {
+    "id": "editorial-kinetic",
+    "name": "Editorial Kinetic",
+    "instructions": "styles/editorial-kinetic/STYLE.md",
+    "preview": "styles/editorial-kinetic/preview.gif",
+    "colors": {
+      "base": "#F7F4ED",
+      "creamTop": "#E1F8F2",
+      "creamBottom": "#77D8C8",
+      "pinkTop": "#FFF0CD",
+      "pinkBottom": "#E6BB70",
+      "accent": "#F2C879",
+      "stroke": "#F7F4ED",
+      "shadow": "#111B22"
+    },
+    "font": "styles/editorial-kinetic/fonts/Poppins-Bold.ttf",
+    "fontManifest": "styles/editorial-kinetic/fonts/source.json"
+  },
+  {
+    "id": "montserrat-difference",
+    "name": "Montserrat Difference",
+    "instructions": "styles/montserrat-difference/STYLE.md",
+    "preview": "styles/montserrat-difference/preview.gif",
+    "colors": {
+      "base": "#F7F5EF",
+      "accent": "#FF3030",
+      "blue": "#208CFF",
+      "turquoise": "#20D6BE",
+      "gold": "#D8B86C"
+    },
+    "font": "styles/montserrat-difference/fonts/Montserrat.ttf",
+    "fontManifest": "styles/montserrat-difference/fonts/source.json"
+  }
+]

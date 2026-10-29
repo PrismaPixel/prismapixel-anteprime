@@ -1,0 +1,76 @@
+# Configuration and resumable runs
+
+Personal settings live at `~/.config/codex-captions/config.json` on every OS (on Windows, under the user's home directory). No personal path or palette belongs in committed defaults. Read shipped `config/defaults.json` and then saved user settings. Explicit run settings win over both. Style-owned font/placement come from the style and per-project overrides only.
+
+On first run, save a supplied or newly collected project folder. Named brand colors are optional. Example changes file:
+
+```json
+{"projectFolder":"/absolute/path/to/caption-projects","brandColors":{"Gold":"#DDBB44"}}
+```
+
+Run `node <skill>/scripts/captions.mjs configure <changes.json>`. This allowlists shared fields: projectFolder, brandColors, width, height, fps, export. It excludes font/position. One-off choices go in `run.json`; only save them as defaults when requested.
+
+## Export defaults
+
+`export.scale` defaults to `2`: the 1080×1920 composition renders at **2160×3840**, or **3840×2160** for a 1920×1080 landscape composition. Remotion renders at the higher resolution; this does not enlarge an already encoded video. Layout, timing and frame rate stay the same. Both preview and final exports use the saved scale. Studio keeps the composition dimensions.
+
+`export.imageFormat` is `"png"` for alpha. `export.jpegQuality` defaults to `90` (0–100), but is dormant for PNG and is never passed to Remotion's PNG renderer. JPEG quality concerns intermediate JPEG frames, not ProRes compression. The transparent overlay helper rejects JPEG because it cannot retain alpha; use that quality only if explicitly implementing an opaque JPEG workflow.
+
+Export fields merge individually across shipped defaults, personal defaults and run overrides. For a one-off native-resolution export, add `"export": {"scale": 1}` to the run. Saving that same partial object with `configure` changes the shared default without losing codec/profile settings. Values are frozen into each new project; existing projects are unchanged. A legacy project with no saved scale continues rendering at 1×.
+
+See [Remotion render options](https://www.remotion.dev/docs/renderer/render-media) for `scale` and `jpegQuality` semantics.
+
+## Run record
+
+This is agent-owned workflow state, **not a transcript input schema**. Use absolute paths. Write current plugin evidence only after verifying the plugin is exposed in this task and reading its instructions; a helper cannot independently inspect the app's installed-plugin UI. The helper checks the assertion, readable instructions, and freshness (24 hours), not standalone package installation. Reverify on every resumed task regardless of the freshness window.
+
+```json
+{
+  "plugin": {
+    "availableInApp": true,
+    "instructionPath": "/actual/available/remotion/skills/remotion-best-practices/SKILL.md",
+    "checkedAt": "<current ISO timestamp>"
+  },
+  "projectName": "launch-captions",
+  "style": "active-word-highlight",
+  "colors": {"base":"#FFFFFF","active":"#FFD54A","shadow":"#000000"},
+  "colorsAccepted": true,
+  "normalizedPath": "/task/normalized.json",
+  "timing": {
+    "status": "word-timing-reviewed",
+    "provenance": "User-supplied word timestamps in seconds, source file transcript.txt"
+  },
+  "sourceOffsetMs": 0,
+  "timelinePlacementMs": 0
+}
+```
+
+Before timing is resolved, retain `timing.status` such as `untimed`, `cue-only` or `ambiguous`, and `audio` when supplied. Record unresolved questions in the run. The helper stops until semantic review produces `word-timing-reviewed`; never set this just to bypass a blocker.
+
+`sourceOffsetMs` adds to every source timestamp inside the output. `timelinePlacementMs` is where MOV frame zero is placed in the editor. They are distinct. Example: words start at source 1500 ms, offset 500 ms, and MOV placed at 10000 ms: speech appears 2000 ms into the MOV / 12000 ms on the editor timeline. Preserve leading silence; do not subtract the first word time automatically. A negative offset that would truncate speech is rejected.
+
+Saved `project.json` contains resolved shared settings, style, explicit colors, font asset/checksum, style options, timing provenance, both offsets and duration. Editing personal defaults does not alter it. `prepare` saves `projectPath` and a `prepared` snapshot of settings/captions in the run. The Remotion plugin scaffolds that path, then `attach` adds captions. Resume failed setup in the same folder; after attachment, use the `dependencies` helper to retry caption dependency installation. Keep node_modules and the project lockfile in that generated folder.
+
+For `editorial-kinetic`, settings also contain a `fonts` map for primary, serif and
+handwritten faces, including hashes and supported characters. The serif is Libre
+Baskerville Italic, the approved freely redistributable Marion alternative. Its
+`styleOptions.phrases` stores line roles, focal word indices, entrance groups,
+directions and optional decoration; see [the style contract](../styles/editorial-kinetic/STYLE.md).
+
+## Montserrat Difference
+
+The installed `montserrat-difference` style adds reviewed Montserrat compositions with per-group source colors and genuine Difference blending. Save explicit phrase groups, positions and reveal/persistence choices. Delivery defaults to `alpha`: one transparent MOV using normal source-color text. Only explicitly requested `footage` or `layers` delivery preserves the backdrop-dependent Difference effect. See [style configuration and delivery](../styles/montserrat-difference/STYLE.md).
+
+## Brunson Red Script
+
+Select `brunson-red-script`; colors are `headline`, `script`, and `default`. Save reviewed `styleOptions.phrases` with mode, stable word-index ranges, roles, independent region anchors/lines, explicit default units, size/shadow overrides, script overlap and layer order, entrance parameters and end times. Shared defaults do not select hero moments. See [style contract](../styles/brunson-red-script/STYLE.md) and [representative configuration](../tests/fixtures/brunson-example.mjs). Original transcript text and word timing remain independent of display casing.
+
+## Vermilion Brush Editorial
+
+Select `vermilion-brush-editorial`; its color roles are `block`, `script`, and `ordinary`. See [the style guide](../styles/vermilion-brush-editorial/STYLE.md) for transcript planning, templates, roles and global-index group overrides. `prepare` saves `settings.layoutPlan` and separate `settings.styleOverrides`. Rendering uses the saved plan. To change editorial options or transcript timing, run `planVermilion(sentences, settings.styleOverrides)` again and update the saved plan; no external model or audio is required.
+
+## Yellow Authority
+
+Select `yellow-authority`; palette roles are `base` (white) and `accent` (yellow). Project-only `styleOptions` accepts `anchor: {x:360,y:688}` in the 720×1280 design canvas, uniform `scale` (0–1.5, exclusive of zero), nonstructural emphasis `density` (0–1), and an AI-authored `editorialPlan` with source text and complete group/span ranges. Unknown keys are rejected; final ink must fit the safe envelope. Defaults and original overrides remain separate. The AI reads the full transcript and saves the editorial plan before `prepare`; user-authored emphasis markup is not required. Density is an editorial planning input: regenerate choices when it changes. See [the style guide](../styles/yellow-authority/STYLE.md).
+
+`prepare` validates and compiles the AI’s saved choices into `settings.yellowPlan`; the attached `captions:plan` script validates fonts and persists shaped layout before Studio/export. Run it again after editing source text, timing, palette or options. `captions:render` and `captions:studio` invoke it automatically. Rendering consumes the saved plan without semantic selection or measurement. Exports use the existing silent ProRes 4444 alpha pipeline.

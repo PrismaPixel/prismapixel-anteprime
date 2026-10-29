@@ -13,7 +13,8 @@ e il repository YouTube AI Motion Graphics di TEIN AI (MIT).
 
 Strumenti, tutti in `montaggio/`:
 - `script/` (Python): `prepara.py` → `trascrivi.py` → `tagli.py` → `persona.py --girato` → `applica.py` →
-  `persona.py` → `zone.py` → `sottotitoli.py` → `rendi_grafiche.py` → `componi.py` → `controlla.py`.
+  `persona.py` → `zone.py` → `rendi_grafiche.py` → `didascalie.py` (skill Omnedia Captions, in
+  `didascalie/`) → `componi.py` → `controlla.py`.
   Ogni script ha l'aiuto in cima (`python3 script/X.py -h`); tutti usano `--lavoro /tmp/lavoro/<slug>/montaggio`.
 - `motion/`: `tema.css` (variabili di colori e font), `motore.js` (tempo fermato fotogramma per fotogramma),
   `componenti.html` (i 15 componenti verticali, da copiare), `CATALOGO.md` (quando usarli), `scena-modello.html`.
@@ -76,17 +77,23 @@ nelle note** (tagli in dubbio, fatti da confermare, grafiche). Le correzioni arr
 5. **Monta**: `applica.py` → `montato.mp4` e `parole_montate.json` (i tempi da usare da qui in poi).
    Poi `persona.py` sul montato → `persona.json`.
 6. **Quanta grafica** (sezione 4: `naturale`, `leggero` o `grafico`), poi, solo se servono grafiche, **stile**
-   (sezione 5); scrivi `piano.json` con lo stile, le grafiche e il preset dei sottotitoli. Con `naturale` salta Pinterest,
-   zone delle grafiche e componenti: restano tagli, sottotitoli completi `pulito` e controlli.
+   (sezione 5); scrivi `piano.json` con lo stile, le grafiche e le didascalie. Con `naturale` salta Pinterest, zone,
+   scena e `rendi_grafiche.py`: restano tagli, didascalie complete tutte bianche e controlli.
 7. **Zone**: `zone.py` → `zone.json`: per ogni grafica il riquadro libero accanto alla persona (normale, compatta o
    sopra il corpo, mai sul volto). Il video resta **sempre a tutto schermo**: niente riquadri divisi o rimpiccioliti,
    salvo intervista, concetto complesso o format del cliente, dichiarati nel piano (`"diviso": true`,
    `"motivo_diviso"`). Una grafica `da_rivedere` si sposta in un momento con più spazio, diventa sottotitolo o si toglie.
 8. **Scena**: copia `motion/scena-modello.html` in `DIR/scena/scena.html`; per ogni grafica incolla il blocco del
    componente da `componenti.html`, cambia testi, tempi e `data-box` (da `zone.json`); colori e font nel blocco
-   `<style>`. Poi `sottotitoli.py`: scrive **tutto il parlato** a blocchi brevi nel preset del piano e li sposta da
-   soli se coprono un volto o una grafica. Prima rileggi `testo.txt` e metti in `correzioni` i nomi trascritti male.
-9. **Bozza**: `rendi_grafiche.py --bozza` → `componi.py --bozza` (540 × 960).
+   `<style>`.
+9. **Didascalie** con la skill **Omnedia Captions** (`didascalie/omnedia-captions/SKILL.md`, MIT; cosa abbiamo
+   cambiato in `didascalie/MODIFICHE.md`): rileggi `testo.txt` e metti in `correzioni` i nomi trascritti male; scegli
+   lo stile (sezione 4b) e leggi **solo** il suo `styles/<stile>/STYLE.md`. Per `yellow-authority` e
+   `montserrat-difference` lancia `didascalie.py --bozza-piano`, poi scrivi tu il piano editoriale come chiede lo
+   STYLE.md (dove il giallo, le liste, i titoli, le righe) e mettilo in `piano.json` → `didascalie.opzioni`. Poi
+   `didascalie.py`: crea il progetto Remotion, rende `didascalie.mov` (trasparente, 1080 × 1920) e i riquadri del
+   testo. Ci vuole circa un minuto e mezzo.
+   **Bozza**: `rendi_grafiche.py --bozza` (se ci sono grafiche) → `componi.py --bozza` (540 × 960).
 10. **Controllo**: `controlla.py`. Guarda **tutti** i fogli in `controllo/` con Read, in ordine, e cerca: animazioni
     che ripartono, lampi, testo in ritardo, testo sul volto, parole doppie, labiale fuori sincrono (5 momenti),
     ultima parola tagliata. Prima di chiamare qualcosa errore guardalo grande (`controlla.py --fotogramma S`).
@@ -101,11 +108,11 @@ racconto di scoperta, la testimonianza vera, il luogo che si mostra da solo) per
 animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli UNO stile per video e scrivilo in
 `piano.json` (`"stile": "naturale" | "leggero" | "grafico"`):
 
-| stile | quando | grafiche | sottotitoli |
+| stile | quando | grafiche | didascalie |
 |---|---|---|---|
-| **`naturale`** (il default) | persona che parla in modo spontaneo, dietro le quinte, racconto di scoperta, testimonianza vera, vlog, luogo o lavoro che parlano da soli, contenuti emotivi | **nessuna** (niente Pinterest, niente scena tranne i sottotitoli) | completi, preset `pulito`: frase come detta, piccola, bianca, nessun colore |
-| `leggero` | video con un dato o un'offerta da far ricordare, ma girato in modo naturale | **al massimo 2**: di solito il dato e l'invito finale, piccoli e brevi | completi, `pulito` (o `evidenziato` se il creator parla in camera con energia) |
-| `grafico` | spiegazioni, tutorial, passi, confronti, numeri, prezzi, format educativi | 2-4 in un video da 30-45 s | completi, `evidenziato` (karaoke) o `parola` per i video a ritmo alto |
+| **`naturale`** (il default) | persona che parla in modo spontaneo, dietro le quinte, racconto di scoperta, testimonianza vera, vlog, luogo o lavoro che parlano da soli, contenuti emotivi | **nessuna** (niente Pinterest, niente scena tranne i sottotitoli) | complete, `active-word-highlight` **tutto bianco**: frase come detta, nessun colore |
+| `leggero` | video con un dato o un'offerta da far ricordare, ma girato in modo naturale | **al massimo 2**: di solito il dato e l'invito finale, piccoli e brevi | complete, `active-word-highlight` con la parola detta in giallo |
+| `grafico` | spiegazioni, tutorial, passi, confronti, numeri, prezzi, format educativi | 2-4 in un video da 30-45 s | complete, `yellow-authority`: bianco calmo, giallo solo dove conta, titoli e liste quando si elenca |
 
 - Nel dubbio, `naturale`. Si sale di stile solo se il contenuto lo chiede (c'è davvero un numero, dei passi, un
   confronto) o se il brief lo dice. Se il cliente ha scritto di volere video "veri", "spontanei", "senza effetti",
@@ -115,12 +122,13 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 - Nella pagina scrivi quale stile hai scelto e perché, e proponi l'alternativa ("se vuoi, una versione con 2 grafiche
   sul prezzo e sull'invito").
 
-## 4b. Il piano: poche grafiche, sottotitoli completi
+## 4b. Il piano: poche grafiche, didascalie complete
 
 `piano.json`:
 ```json
 {"grafiche": [{"id": "g1", "tipo": "numero", "in": 3.2, "out": 6.4, "testo": "38% · prenotazioni dirette"}],
- "sottotitoli": {"preset": "pulito", "accenti": [], "correzioni": [{"da": "polignano", "a": "Polignano"}]}}
+ "didascalie": {"stile": "active-word-highlight", "colori": {}, "opzioni": {},
+                 "correzioni": [{"da": "polignano", "a": "Polignano"}]}}
 ```
 - **Grafiche (solo negli stili `leggero` e `grafico`): al massimo 2 o 2-4 in un video da 30-45 s**, scelte con `motion/CATALOGO.md` sulle frasi che le chiamano: un numero,
   un confronto, dei passi, la frase da ricordare, l'invito finale. Nessuna grafica che ripete solo ciò che si sente.
@@ -130,19 +138,25 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
   esce una volta, mai due insieme, mai su un volto.
 - **Il titolo all'inizio** (`svela` o `frase`) solo se il primo secondo non ha già un gancio forte: i primi 2 secondi
   decidono se si guarda.
-- **Sottotitoli: sempre completi**, ogni parola detta (molti guardano senza audio). Li scrive `sottotitoli.py` da
-  `parole_montate.json`; tu scegli il **preset** (vedi `SOTTOTITOLI.md`, ricavato dai video più visti della nicchia):
-  | preset | come appare | quando |
+- **Didascalie: sempre complete**, ogni parola detta (molti guardano senza audio): lo fanno tutti i video con voce più
+  visti della nicchia (`SOTTOTITOLI.md`). Le fa la skill **Omnedia Captions** con `didascalie.py`. Stili disponibili
+  (gli altri due della skill sono tolti: font senza licenza commerciale):
+  | stile | come appare | quando |
   |---|---|---|
-  | `pulito` (di base con `naturale` e `leggero`) | frase come detta, 48 px, bianca con ombra, fino a 5 parole su una riga, ferma; y ≈ 1400 | racconti, tour in barca, luoghi, testimonianze, video calmi |
-  | `evidenziato` (di base con `grafico`) | MAIUSCOLO 58 px con bordo scuro, 1-3 parole, la parola detta in giallo (karaoke); y ≈ 1270 | creator che parla in camera, consigli, liste di posti |
-  | `parola` | MAIUSCOLO 76 px, 1-2 parole con un pop, colore solo su `accenti` e numeri | ritmo alto: cibo, "3 cose da fare", montaggi veloci |
-  | `nessuno` | niente sottotitoli | solo se il video non ha parlato (solo musica) o il cliente li mette da sé |
-  Il testo è **esattamente** ciò che viene detto: le `correzioni` servono solo per errori di trascrizione (nomi di
-  luoghi, maiuscole), mai per cambiare parole. `accenti`: al massimo 1 ogni 3-4 blocchi (il numero, il nome del
-  posto). Il giallo dei sottotitoli è `--sott-accento`; si usa l'accento del cliente solo se è chiaro e leggibile sul
-  mare. Il titolo-gancio dei primi 2 s (molto usato nella nicchia) è una grafica a parte (`svela` o `frase`), solo
-  negli stili che le ammettono.
+  | `active-word-highlight` (di base con `naturale` e `leggero`) | Inter 64 px, fino a 2 righe, frase come detta; con `leggero` la parola detta diventa gialla; con `naturale` tutto bianco | racconti, tour in barca, luoghi, testimonianze, creator in camera |
+  | `yellow-authority` (di base con `grafico`) | Poppins, gruppi di 2-3 parole bianchi e fermi; giallo, numeri, titoli in corsivo e liste **scelti da te** leggendo tutto il testo | consigli, liste di posti, spiegazioni, prezzi |
+  | `editorial-kinetic` | composizioni eleganti: parola chiave grande con sfumatura, serif corsivo, a volte scritta a mano | format di brand, lusso, tramonti, racconti emozionali |
+  | `montserrat-difference` | Montserrat sottile e maiuscolo, composizioni a righe | solo format del cliente con sfondi scuri o uniformi: sul mare chiaro si legge poco |
+  | `nessuno` | niente didascalie | solo se nel video nessuno parla (solo musica) o il cliente le mette da sé |
+  Regole: il testo è **esattamente** ciò che viene detto (le `correzioni` solo per errori di trascrizione, mai per
+  cambiare parole); nessuna parola omessa (con `yellow-authority` i gruppi coprono tutto il testo). Posizione, margini
+  e lato li sceglie `didascalie.py`, dentro l'area utile e lontano dai volti; li cambi in `opzioni` solo se il foglio
+  di controllo mostra un problema. Colori: quelli dello stile, salvo un colore del cliente chiaro e leggibile sul mare
+  (`colori`, ruoli nello STYLE.md). Con `yellow-authority` metti **un solo ruolo per riga** (`line` diverse per parole
+  di colore diverso, come in `support-emphasis`): due ruoli sulla stessa riga si sovrappongono. Le animazioni a
+  salire solo dove il gruppo resta a schermo almeno 450 ms (STYLE.md). Il titolo-gancio dei primi 2 s è una grafica a
+  parte (`svela` o `frase`), solo negli stili che le ammettono. `script/sottotitoli.py` (HTML, tre preset) resta solo
+  di riserva, se Remotion non si può usare: scrivilo nelle note.
 - Invito finale: l'azione vera del brief (`cta`), con le parole di chi guarda (contratto, sezione 6).
 
 ## 5. Lo stile: riferimenti Pinterest di motion design
@@ -165,7 +179,7 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 
 | livello | contenuti | uscita |
 |---|---|---|
-| `prima` | **1 video fino a 45 s**: tagli, sottotitoli completi, grafiche secondo lo stile (di base nessuna) | bozza 540 × 960 nella pagina; il finale 1080 × 1920 si fa dopo l'ok |
+| `prima` | **1 video fino a 45 s**: tagli, didascalie complete, grafiche secondo lo stile (di base nessuna) | bozza 540 × 960 nella pagina; il finale 1080 × 1920 si fa dopo l'ok |
 | `completa` (**a pagamento, 29 €** scalati) | **3 video fino a 60 s** dal girato caricato (anche 3 tagli diversi dello stesso girato: gancio diverso, durata diversa), stile da Pinterest | bozze nella pagina + **finali 1080 × 1920** da scaricare |
 | `lungo` (**a pagamento, 49 €** scalati) | **1 video YouTube 16:9 fino a 8 minuti**: stesso metodo per tagli e sottotitoli; grafiche dalle skill e dalle board di `tein/` (catalogo e controlli loro), esportazione con `tein/tools/export.py`; capitoli e schermata finale | finale 1920 × 1080 |
 | `revisione` | applica `modifiche_richieste` partendo dal lavoro precedente (`token_precedente`: `DIR` e scena si rifanno dai file salvati nelle note dell'esito precedente) | come il livello d'origine |

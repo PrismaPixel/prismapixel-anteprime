@@ -6,7 +6,8 @@
 2. Scarica i modelli UNA volta in $MODELLI_MONTAGGIO (default /tmp/modelli-montaggio), solo da fonti ufficiali su GitHub:
    - trascrizione: NVIDIA Parakeet TDT 0.6B v3 (25 lingue europee, italiano compreso, con i tempi di ogni parola),
      versione int8 di sherpa-onnx (k2-fsa), circa 490 MB; più Silero VAD per dividere l'audio in frasi;
-   - persone: YOLOX-S (corpo intero, anche lontano) e YuNet (volto) dall'OpenCV Model Zoo.
+   - persone: YOLOX-S (corpo intero, anche lontano) e YuNet (volto) dall'OpenCV Model Zoo;
+   - didascalie: le istruzioni ufficiali di Remotion (github.com/remotion-dev/skills), lette dalla skill captions.
 3. Copia tema.css e motore.js in DIR/scena e installa i font da npm (@fontsource/<nome>) scrivendo fonts.css.
 4. Normalizza il girato in DIR/girato/NN.mp4: rotazione applicata, 30 fotogrammi al secondo costanti, H.264, audio
    48 kHz; più DIR/girato/NN.wav (16 kHz mono) per la trascrizione. Scrive DIR/girato/elenco.json.
@@ -104,6 +105,15 @@ def normalizza(files, d):
     scrivi(os.path.join(out, "elenco.json"), elenco)
 
 
+def remotion_skills():
+    dest = os.path.join(MODELLI, "remotion-skills")
+    if os.path.exists(os.path.join(dest, "skills", "remotion-best-practices", "SKILL.md")):
+        return
+    os.makedirs(MODELLI, exist_ok=True)
+    subprocess.run(["git", "clone", "-q", "--depth", "1", "https://github.com/remotion-dev/skills.git", dest], check=True)
+    print("  ✓ istruzioni Remotion")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--lavoro")
@@ -111,7 +121,7 @@ def main():
     ap.add_argument("--font", nargs="*", default=[], help="nomi Google Fonts, es. Inter Fraunces")
     ap.add_argument("--senza-modelli", action="store_true", help="salta i modelli (solo grafiche)")
     a = ap.parse_args()
-    for p in ("ffmpeg", "ffprobe", "node", "npm"):
+    for p in ("ffmpeg", "ffprobe", "node", "npm", "git"):
         if not shutil.which(p):
             raise SystemExit(f"✗ manca {p} nell'ambiente")
     d = lavoro(a.lavoro)
@@ -119,6 +129,7 @@ def main():
     if not a.senza_modelli:
         for k in MODELLI_URL:
             scarica(k)
+        remotion_skills()
     scena = os.path.join(d, "scena")
     os.makedirs(scena, exist_ok=True)
     for f in ("tema.css", "motore.js"):

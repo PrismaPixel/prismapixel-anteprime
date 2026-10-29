@@ -10,7 +10,8 @@
    - grafica troppo breve: meno di 2 s + 0,35 s per parola (è un lampo);
    - due grafiche nello stesso momento (sottotitoli esclusi);
    - due cambi di grafica a meno di 1,5 s (scatto);
-   - sottotitoli incompleti (una parola detta che non compare: errore), blocchi troppo lunghi o troppo brevi;
+   - didascalie incomplete (una parola detta che non compare), fuori dall'area utile o sopra un volto (errori,
+     dai riquadri del canale alfa di didascalie.mov);
    - durata del video diversa da quella del montato.
 --fotogramma S salva un fotogramma a piena grandezza (DIR/controllo/f_S.png) per guardare da vicino un dubbio
 prima di chiamarlo errore: i riquadri piccoli del foglio possono ingannare.
@@ -91,9 +92,23 @@ def main():
         err.append(f"stile {stile}: {n_graf} grafiche, ne sono ammesse al massimo {limite}")
     elif stile == "grafico" and n_graf > max(4, round(durata(os.path.join(d, "montato.mp4")) / 11)):
         avv.append(f"stile grafico: {n_graf} grafiche sono tante per questa durata (circa una ogni 10-15 secondi)")
-    # sottotitoli completi: ogni parola detta deve comparire, nessun blocco troppo lungo o troppo breve
-    S = leggi(os.path.join(d, "sottotitoli.json"), None)
-    if S and S.get("preset") != "nessuno":
+    # didascalie (skill Omnedia Captions, didascalie.py): complete, dentro l'area utile, mai sul volto
+    D = leggi(os.path.join(d, "didascalie.json"), None)
+    S = leggi(os.path.join(d, "sottotitoli.json"), None)          # riserva: sottotitoli.py (HTML)
+    if D and D.get("stile") != "nessuno":
+        if D["parole_mostrate"] < D["parole_dette"]:
+            err.append(f"didascalie incomplete: {D['parole_mostrate']} parole su {D['parole_dette']} dette")
+        for r in leggi(os.path.join(d, "didascalie_riquadri.json"), []):
+            dove = f"{r['t']:.2f}s didascalia"
+            if r["x"] < X0 - 4 or r["y"] < Y0 - 4 or r["x"] + r["w"] > X1 + 4 or r["y"] + r["h"] > Y1 + 4:
+                err.append(f"{dove}: esce dall'area utile ({r['x']},{r['y']} {r['w']}×{r['h']})")
+            pc = P.get(round(r["t"], 2))
+            if pc and any(tocca(r, v, 10) for v in pc["volti"]):
+                err.append(f"{dove}: copre un volto")
+            gc = next((c for c in R["campioni"] if abs(c["t"] - r["t"]) < 0.13), None)
+            if gc and any(g["tipo"] != "sottotitolo" and tocca(r, g) for g in gc["testi"]):
+                err.append(f"{dove}: si sovrappone a una grafica")
+    elif S and S.get("preset") != "nessuno":
         if S["parole_mostrate"] < S["parole_dette"]:
             err.append(f"sottotitoli incompleti: {S['parole_mostrate']} parole su {S['parole_dette']} dette")
         lim = {"pulito": 32, "evidenziato": 22, "parola": 16}.get(S["preset"], 32)
@@ -102,8 +117,8 @@ def main():
                 avv.append(f"{b['in']:.2f}s sottotitolo: «{b['testo']}» è lungo ({len(b['testo'])} caratteri): rischia di uscire dalla riga")
             if b["out"] - b["in"] < (0.25 if S["preset"] == "parola" else 0.45):
                 avv.append(f"{b['in']:.2f}s sottotitolo: «{b['testo']}» resta {b['out'] - b['in']:.2f} s (lampo)")
-    elif S is None and not any(x["tipo"] == "sottotitolo" for x in R["tempi"]):
-        err.append("mancano i sottotitoli (lancia sottotitoli.py; per toglierli: \"preset\": \"nessuno\" nel piano)")
+    elif not D and not S and not any(x["tipo"] == "sottotitolo" for x in R["tempi"]):
+        err.append("mancano le didascalie (lancia didascalie.py; per toglierle: \"stile\": \"nessuno\" nel piano)")
     dm, dv = durata(os.path.join(d, "montato.mp4")), durata(video)
     if abs(dm - dv) > 0.2:
         err.append(f"durata {dv:.2f} s diversa dal montato {dm:.2f} s")

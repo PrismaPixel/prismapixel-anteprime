@@ -14,7 +14,8 @@ Se non c'è spazio nemmeno così, la grafica va rivista ("da_rivedere": spostarl
 Unica eccezione, il layout "diviso" (il video scende di 700 px e la grafica usa la parte alta, lo fa componi.py): solo
 se in piano.json la grafica ha "diviso": true e "motivo_diviso": "intervista" | "concetto_complesso" | "format".
 Scrive DIR/zone.json: {"g1": {"box": [x, y, w, h], "posto": "sopra", "diviso": false, "avviso": ""}, ...} — box è il
-valore di data-box nella scena. Con lo stile naturale (nessuna grafica) zone.py si può saltare.
+valore di data-box nella scena. Le grafiche stanno sopra y 1270: sotto ci sono le didascalie (didascalie.py), salvo
+"didascalie": {"stile": "nessuno"}. Con lo stile naturale (nessuna grafica) zone.py si può saltare.
 """
 import argparse, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -22,6 +23,7 @@ from comune import UTILE, MARGINE_PERSONA, lavoro, leggi, scrivi
 
 DIVISO_AMMESSO = {"intervista", "concetto_complesso", "format"}
 X0, Y0, X1, Y1 = UTILE["x"], UTILE["y"], UTILE["x"] + UTILE["w"], UTILE["y"] + UTILE["h"]
+BANDA_DIDASCALIE = 1270   # sotto questa altezza ci sono le didascalie (didascalie.py): le grafiche restano sopra
 
 
 def principali(lst):
@@ -65,6 +67,9 @@ def main():
     if not piano:
         raise SystemExit("✗ manca piano.json (le grafiche approvate)")
     camp = leggi(os.path.join(d, "persona.json"), [])
+    global Y1
+    if (piano.get("didascalie") or {}).get("stile") != "nessuno":
+        Y1 = BANDA_DIDASCALIE      # la banda bassa è delle didascalie
     out = {}
     for g in piano.get("grafiche", []):
         u = unione(camp, g["in"], g["out"])

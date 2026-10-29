@@ -1,0 +1,4 @@
+interface:
+  display_name: "Omnedia Captions"
+  short_description: "Create timed, animated caption overlays in Remotion"
+  default_prompt: "Use $omnedia-captions to create a transparent Active Word Highlight overlay from my transcript."

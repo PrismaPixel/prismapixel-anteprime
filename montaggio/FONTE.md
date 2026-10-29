@@ -18,3 +18,11 @@
    - YOLOX-S (Apache-2.0) e YuNet (MIT) dall'OpenCV Model Zoo: corpo e volto delle persone.
 4. **Formato verticale**: misure e zone sicure nostre, le stesse dell'agente Video AI (margini 250 in alto, 450 in
    basso, 90 a sinistra, 140 a destra su 1080 × 1920).
+
+## Didascalie: skill Omnedia Captions (MIT)
+`didascalie/omnedia-captions/` è la skill https://github.com/omnedia/skills/tree/master/video/captions (commit
+`29bf674`, © 2026 Omnedia, licenza MIT), usata su richiesta di Vincenzo per le didascalie dei verticali. Tolti i due
+stili con font senza licenza commerciale (Brunson, Brush Script MT); tre piccole modifiche segnate "PrismaPixel" nel
+codice: elenco e motivi in `didascalie/MODIFICHE.md`. I font rimasti sono OFL o di pubblico dominio (licenze nelle
+cartelle `styles/*/fonts/`). Remotion (il motore) è gratuito fino a 3 persone in azienda: oltre serve la licenza.
+

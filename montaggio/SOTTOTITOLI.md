@@ -1,4 +1,4 @@
-# Da dove vengono i sottotitoli
+# Da dove vengono le didascalie (sottotitoli)
 
 Ricerca del 29 ottobre 2026 sui video verticali più visti della nicchia (turismo in Puglia e Salento, giri in barca,
 creator di viaggio e cibo). Le classifiche vengono da TikTok (ricerca per popolarità, ultimo anno); i fotogrammi
@@ -29,7 +29,14 @@ Cosa se ne ricava:
 5. Il giallo è l'unico colore usato per la parola evidenziata: si legge su mare, cielo e sabbia.
 6. Quasi tutti hanno un **titolo-gancio** nei primi 2-3 secondi, separato dai sottotitoli.
 
-Da qui i preset di `script/sottotitoli.py` (`pulito`, `evidenziato`, `parola`) e le misure in `motion/tema.css`
-(classi `.sott.pulito`, `.sott.evidenziato`, `.sott.parola`, colore `--sott-accento`). Le misure sono scalate dai
-fotogrammi (1080 px di larghezza) e tenute dentro l'area utile x 90-940, y 250-1470.
+Come si traduce negli stili della skill **Omnedia Captions** (`didascalie/`, usata da `script/didascalie.py`):
+| famiglia vista nella nicchia | stile della skill | quando |
+|---|---|---|
+| frase piccola e pulita, nessun colore | `active-word-highlight` tutto bianco | stile video `naturale` |
+| parola detta in giallo (karaoke) | `active-word-highlight` con il giallo | stile video `leggero` |
+| maiuscolo, giallo sui punti chiave, titoli dei posti | `yellow-authority` con il piano dell'agente | stile video `grafico` |
+| titolo elegante (video di cibo e lusso) | `editorial-kinetic` | format di brand |
+Posizione: tra ⅔ e ¾ dello schermo come nella nicchia, ma con il fondo del blocco a y 1459 (sopra la didascalia
+dell'app) e dentro x 110-910; sale da solo se lì c'è un volto. `script/sottotitoli.py` con i suoi tre preset HTML
+(`pulito`, `evidenziato`, `parola`) resta come riserva se Remotion non si può usare.
 Da rifare ogni tanto: gli stili cambiano. Bastano 6-8 video con voce, guardati in 8 fotogrammi ciascuno.

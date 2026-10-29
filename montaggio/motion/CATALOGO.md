@@ -46,7 +46,8 @@ lo stile `leggero` (al massimo 2) o `grafico` (2-4 in 30-45 s), scelto nel piano
 ## Misure fisse
 - Area utile **x 90-940, y 250-1470** (fuori: nome profilo in alto, didascalia e audio in basso, pulsanti a destra).
 - Testo mai sotto **40 px** dopo la scala; titoli da 72 px in su; massimo 6 parole per riga.
-- Sottotitoli: **completi**, li scrive `sottotitoli.py` nel preset del piano (`pulito` y ≈ 1400, `evidenziato` y ≈ 1270,
-  `parola` y ≈ 1250; vedi `../SOTTOTITOLI.md`); si spostano da soli se lì c'è un volto o una grafica.
+- Didascalie: **complete**, le fa `didascalie.py` con la skill Omnedia Captions (`../didascalie/`): stanno sopra a
+  tutto, dentro l'area utile e lontano dai volti. Una grafica non va mai nella banda delle didascalie (di solito
+  y 1290-1460): se serve lì, sposta le didascalie con le `opzioni` dello stile.
 - Una grafica resta almeno **2 s + 0,35 s per parola**; entra sulla parola che la nomina o un attimo prima; entra ed
   esce una volta sola; mai due grafiche insieme (i sottotitoli non contano).
