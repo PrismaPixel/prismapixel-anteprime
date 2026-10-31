@@ -100,21 +100,28 @@ const pagina = join(dir, 'index.html');
 if (!existsSync(pagina)) errori.push('manca index.html');
 else {
   const url = pathToFileURL(resolve(pagina)).href;
+  // densità 2: come un telefono o un portatile moderni, così si vede se foto e mockup sono nitidi
+  const ctx = await browser.newContext({ deviceScaleFactor: 2 });
+  const q = await ctx.newPage();
   for (const w of [390, 1280]) {
-    await p.setViewportSize({ width: w, height: 900 });
-    await p.goto(url, { waitUntil: 'networkidle' });
-    await p.evaluate(() => document.fonts.ready);
+    await q.setViewportSize({ width: w, height: 900 });
+    await q.goto(url, { waitUntil: 'networkidle' });
+    await q.evaluate(() => document.fonts.ready);
     // tutte le direzioni una sotto l'altra, così lo screenshot le mostra tutte
-    await p.addStyleTag({ content: '.dir{display:block!important}.scelta{position:static!important}' });
-    await p.waitForTimeout(300);
-    const st = await p.evaluate(() => ({
+    await q.addStyleTag({ content: '.dir{display:block!important}.scelta{position:static!important}' });
+    await q.waitForTimeout(300);
+    const st = await q.evaluate(() => ({
       orizz: document.documentElement.scrollWidth > window.innerWidth + 1,
+      sgranate: [...document.images].filter(i => i.complete && i.naturalWidth && !/\.svg|^data:image\/svg/.test(i.src) && i.naturalWidth < i.getBoundingClientRect().width * 1.5).map(i => `${i.src.slice(-40)} (${i.naturalWidth} px per ${Math.round(i.getBoundingClientRect().width)} px mostrati)`),
       rotte: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src.slice(0, 90)),
       font: [...document.fonts].filter(f => f.status === 'error').map(f => f.family),
       dati: (() => { try { return JSON.parse(document.getElementById('brand-dati').textContent); } catch (_) { return null; } })(),
     }));
     if (st.orizz) errori.push(`pagina a ${w} px: scorre di lato`);
     st.rotte.forEach(u => errori.push(`immagine rotta: ${u}`));
+    if (w === 1280) {
+      st.sgranate.forEach(u => avvisi.push(`foto poco definita: ${u}: rigenerala a 2k, qualità media`));
+    }
     st.font.forEach(f => errori.push(`font non caricato: ${f}`));
     if (w === 390) {
       if (!st.dati) avvisi.push('manca <script id="brand-dati"> con palette e coppie: contrasti non controllati');
@@ -128,7 +135,7 @@ else {
         }));
       }
     }
-    await p.screenshot({ path: join(out, `pagina-${w}.png`), fullPage: true });
+    await q.screenshot({ path: join(out, `pagina-${w}.png`), fullPage: true });
   }
 }
 await browser.close();

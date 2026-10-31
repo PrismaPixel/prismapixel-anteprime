@@ -139,8 +139,12 @@ Le applicazioni mostrano il marchio dove vivrà. Due modi, da scegliere per cias
    superficie vuota con `transform` (prospettiva leggera se serve) e `mix-blend-mode: multiply` (su carta, pietra,
    tessuto) o `screen` per l'oro e le incisioni chiare. Il logo resta sempre il file vero, non un'immagine
    generata: così è esatto e nitido.
-   - Prima `models_explore` (`action: "recommend"`), poi `generate_image` sempre con `max_credits`; usa i link
-     `_min.webp` (contratto, sezione 3).
+   - Prima `models_explore` (`action: "recommend"`), poi `generate_image` sempre con `max_credits`, **a 2k e
+     qualità media** (per `gpt_image_2_5`: `resolution: "2k"`, `quality: "medium"`, circa 1 credito): a 1k e
+     qualità bassa i mockup si vedono sgranati sui telefoni.
+   - Nella pagina usa il link `_min.webp` (contratto, sezione 3): a 2k pesa circa 200 KB ed è nitido come
+     l'originale, mentre l'originale `.png` pesa 5-8 MB. Il controllo (sezione 8) segnala le foto con troppi pochi
+     pixel per la grandezza a cui sono mostrate.
    - Budget: **4 crediti** per `prima`, **10 crediti** per `completa`.
    - Niente persone riconoscibili, niente marchi altrui, niente testo nelle immagini.
    - Scrivi nelle note che le foto sono scene d'esempio.
