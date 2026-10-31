@@ -26,7 +26,7 @@ const out = resolve(outArg || join(dir, 'controlli'));
 mkdirSync(out, { recursive: true });
 const errori = [], avvisi = [];
 const svgFiles = readdirSync(dir).filter(f => f.endsWith('.svg')).sort();
-const pezzi = svgFiles.filter(f => /^(etichetta|menu|scatola|pezzo)/.test(f)); // applicazioni progettate: niente prova a 16 px
+const pezzi = svgFiles.filter(f => /^(etichetta|lattina|menu|scatola|shopper|pezzo)/.test(f)); // applicazioni progettate: niente prova a 16 px
 const loghi = svgFiles.filter(f => !/^pattern/.test(f) && !pezzi.includes(f));
 const pattern = svgFiles.filter(f => /^pattern/.test(f));
 
@@ -64,16 +64,18 @@ for (const f of loghi) {
   const ok = await p.evaluate(() => [...document.images].every(i => i.complete && i.naturalWidth > 0));
   if (!ok) { errori.push(`${f}: il browser non riesce ad aprirlo`); continue; }
   // inchiostro: il logo grande deve occupare spazio vero; a 16 px deve restare qualcosa di leggibile
-  const ink = await p.evaluate(async () => {
+  // il negativo (chiaro, per i fondi scuri) si misura su scuro
+  const neg = /negativo/.test(f);
+  const ink = await p.evaluate(async (neg) => {
     const misura = (img, w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
-      g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); const r = Math.min(w / img.naturalWidth, h / img.naturalHeight);
+      g.fillStyle = neg ? '#1d1d1b' : '#fff'; g.fillRect(0, 0, w, h); const r = Math.min(w / img.naturalWidth, h / img.naturalHeight);
       g.drawImage(img, 0, 0, img.naturalWidth * r, img.naturalHeight * r); const d = g.getImageData(0, 0, w, h).data; let n = 0;
-      for (let k = 0; k < d.length; k += 4) if (d[k] + d[k + 1] + d[k + 2] < 600) n++; return n / (w * h); };
+      for (let k = 0; k < d.length; k += 4) { const t = d[k] + d[k + 1] + d[k + 2]; if (neg ? t > 180 : t < 600) n++; } return n / (w * h); };
     const img = document.images[0];
     return { grande: misura(img, 460, 260), piccolo: misura(img, 48, 16) };
-  });
-  if (ink.grande < 0.01) errori.push(`${f}: sembra vuoto o troppo chiaro su bianco`);
-  if (ink.piccolo < 0.04) avvisi.push(`${f}: a 16 px resta poco: prepara una versione semplificata (marchio) per le misure piccole`);
+  }, neg);
+  if (ink.grande < 0.01) errori.push(`${f}: sembra vuoto o senza contrasto sul fondo ${neg ? 'scuro' : 'bianco'}`);
+  if (ink.piccolo < 0.04 && !neg) avvisi.push(`${f}: a 16 px resta poco: prepara una versione semplificata (marchio) per le misure piccole`);
   await p.setViewportSize({ width: 1400, height: 900 });
   await p.screenshot({ path: join(out, basename(f, '.svg') + '-prova.png'), fullPage: true });
 }
