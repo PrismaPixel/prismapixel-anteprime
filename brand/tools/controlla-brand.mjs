@@ -2,7 +2,7 @@
 // Uso: node controlla-brand.mjs /tmp/lavoro/<slug> [/tmp/lavoro/<slug>/controlli]
 //
 // Nella cartella: index.html (la pagina del brand board) e i file SVG pubblicati (logo-*.svg, marchio-*.svg,
-// pattern-*.svg). Salva da guardare con Read:
+// pattern-*.svg, etichetta-*.svg / menu-*.svg per le applicazioni progettate). Salva da guardare con Read:
 //   - <file>-prova.png per ogni logo: grande, a 64/32/16 px, su chiaro e su scuro, e a un colore (nero e bianco);
 //   - <pattern>-prova.png: la tessera ripetuta 3×3, per vedere le giunture;
 //   - pagina-390.png e pagina-1280.png.
@@ -26,7 +26,8 @@ const out = resolve(outArg || join(dir, 'controlli'));
 mkdirSync(out, { recursive: true });
 const errori = [], avvisi = [];
 const svgFiles = readdirSync(dir).filter(f => f.endsWith('.svg')).sort();
-const loghi = svgFiles.filter(f => !/^pattern/.test(f));
+const pezzi = svgFiles.filter(f => /^(etichetta|menu|scatola|pezzo)/.test(f)); // applicazioni progettate: niente prova a 16 px
+const loghi = svgFiles.filter(f => !/^pattern/.test(f) && !pezzi.includes(f));
 const pattern = svgFiles.filter(f => /^pattern/.test(f));
 
 // 1. Controlli sul testo degli SVG
@@ -77,6 +78,14 @@ for (const f of loghi) {
   await p.screenshot({ path: join(out, basename(f, '.svg') + '-prova.png'), fullPage: true });
 }
 
+// 2b. Applicazioni progettate (etichette, menu…): a misura di lettura
+for (const f of pezzi) {
+  const s = readFileSync(join(dir, f), 'utf8');
+  const uri = 'data:image/svg+xml;base64,' + Buffer.from(s).toString('base64');
+  await p.setContent(`<!doctype html><body style="margin:0;background:#bbb;padding:20px"><img src="${uri}" style="width:700px;display:block"></body>`, { waitUntil: 'load' });
+  await p.screenshot({ path: join(out, basename(f, '.svg') + '-prova.png'), fullPage: true });
+}
+
 // 3. Pattern: tessera ripetuta 3×3
 for (const f of pattern) {
   const s = readFileSync(join(dir, f), 'utf8');
@@ -123,8 +132,9 @@ else {
   }
 }
 await browser.close();
+const tuttiPng = [...loghi, ...pezzi];
 const rapporto = [`ERRORI: ${errori.length ? '' : 'nessuno'}`, ...errori.map(e => '  ✗ ' + e), `AVVISI: ${avvisi.length ? '' : 'nessuno'}`, ...avvisi.map(a => '  ! ' + a),
-  `Guarda con Read: ${loghi.map(f => basename(f, '.svg') + '-prova.png').concat(pattern.map(f => basename(f, '.svg') + '-prova.png'), ['pagina-390.png', 'pagina-1280.png']).join(', ')}`];
+  `Guarda con Read: ${tuttiPng.map(f => basename(f, '.svg') + '-prova.png').concat(pattern.map(f => basename(f, '.svg') + '-prova.png'), ['pagina-390.png', 'pagina-1280.png']).join(', ')}`];
 writeFileSync(join(out, 'rapporto.txt'), rapporto.join('\n') + '\n');
 console.log(rapporto.join('\n'));
 console.log(errori.length ? 'ESITO: DA CORREGGERE' : 'ESITO: OK');

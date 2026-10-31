@@ -148,6 +148,22 @@ Le applicazioni mostrano il marchio dove vivrà. Due modi, da scegliere per cias
 Un'applicazione è riuscita se il marchio sembra **stampato o inciso lì**, alla grandezza giusta: un logo enorme al
 centro di una tazza non è un'applicazione credibile.
 
+**Applicazioni di prodotto e packaging** (etichetta, scatola, menu, shopper, sacchetto, cartellino): non basta
+appoggiare il logo su una superficie vuota, si **progetta il pezzo intero**.
+1. **Ricerca Pinterest dedicata**, una per pezzo, sempre con `formato: "branding"` e `n: 6-8`: 3-4 ricerche in
+   inglese sul pezzo e sul prodotto (es. `olive oil label design`, `extra virgin olive oil packaging design`,
+   `olive oil bottle label typography`, `premium olive oil label minimal`; per un menu `restaurant menu design
+   seafood`, `trattoria menu typography`). Leggi gerarchia, campi presenti, margini, carta e finiture, rapporto con
+   la forma dell'oggetto. Si prende il metodo, mai l'etichetta.
+2. **Disegna il pezzo a misura reale** in SVG o HTML (es. etichetta d'olio 70 × 100 mm, menu A4), con la gerarchia
+   dei riferimenti e i campi veri del prodotto: nome del marchio, nome del prodotto, categoria ("Olio extravergine
+   di oliva"), provenienza solo se è nel brief, formato (es. 500 ml). **Mai** certificazioni (DOP, IGP, bio),
+   annate, cultivar, premi o diciture di legge inventate: se servono, segnaposto chiaro e nota "da confermare".
+3. **Mettilo nella scena**: l'etichetta intera, non il solo logo, sulla superficie vuota della foto (stesse
+   proporzioni, `mix-blend-mode: multiply` su carta, una leggera curvatura con `border-radius`/ombra se l'oggetto è
+   cilindrico). Mostra anche l'etichetta **in piano**, accanto alla foto, così si legge.
+4. Nelle note per Vincenzo: i 2-3 riferimenti usati per il pezzo.
+
 ## 8. La pagina e i controlli
 
 **Il modello** `brand/_modello/index.html` è la pagina-brand board: copertina, scelta tra le direzioni (schede in
