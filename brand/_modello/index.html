@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Identità di marca · NOME ATTIVITÀ · anteprima PrismaPixel</title>
+<meta name="description" content="Due direzioni di identità per NOME ATTIVITÀ: logo, colori, caratteri, pattern e applicazioni.">
+<meta property="og:title" content="L'identità di NOME ATTIVITÀ">
+<meta property="og:image" content="URL_IMMAGINE_APPLICAZIONE_min.webp">
+<!--
+  MODELLO DELL'AGENTE BRANDING · PrismaPixel (brand/ISTRUZIONI.md, sezione 8)
+  - Una direzione = una <section class="dir" id="d-<nome>"> + un pulsante nella barra .scelta.
+  - I colori di ogni direzione stanno nelle variabili --b-* scritte sulla sua <section> (style="...").
+  - I loghi sono SVG inline (copia il contenuto dei file .svg) e anche file scaricabili (link relativi).
+  - Il pattern si usa come sfondo: url('pattern-<nome>.svg') (file pubblicato) o SVG inline in data URI.
+  - Le sezioni marcate SOLO COMPLETA si tolgono nella prima bozza.
+  - Riempi <script id="brand-dati"> per il controllo dei contrasti. Cancella i commenti prima di pubblicare.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- font della pagina (neutri) + i font delle direzioni -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --carta: #f6f5f2; --inchiostro: #161616; --tenue: #6b6b68; --riga: #e3e2de; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--carta); color: var(--inchiostro); font: 16px/1.55 'Inter', system-ui, sans-serif; }
+img, svg { display: block; max-width: 100%; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+header.intro { padding: 40px 0 18px; }
+.kicker { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+h1 { font-size: clamp(28px, 5.4vw, 46px); line-height: 1.08; margin: 10px 0 12px; letter-spacing: -.02em; font-weight: 600; }
+.lead { max-width: 640px; color: #333; margin: 0; }
+/* scelta della direzione */
+.scelta { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--carta) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--riga); }
+.scelta .wrap { display: flex; gap: 8px; padding-top: 10px; padding-bottom: 10px; overflow-x: auto; }
+.scelta button { flex: 0 0 auto; font: 600 14px 'Inter', sans-serif; border: 1px solid var(--riga); background: #fff; color: var(--inchiostro); padding: 9px 14px; border-radius: 999px; cursor: pointer; }
+.scelta button[aria-pressed="true"] { background: var(--inchiostro); color: #fff; border-color: var(--inchiostro); }
+/* una direzione */
+.dir { display: none; padding: 26px 0 56px; }
+.dir.attiva { display: block; }
+.dir h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 6px; letter-spacing: -.01em; font-weight: 600; }
+.idea { font-size: 18px; color: #333; max-width: 720px; margin: 0 0 22px; }
+.blocco { margin-top: 34px; }
+.blocco > h3 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); margin: 0 0 12px; font-weight: 600; }
+.hero-logo { background: var(--b-fondo); border-radius: 18px; min-height: 340px; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
+.hero-logo svg { width: min(560px, 82%); height: auto; color: var(--b-logo); }
+.griglia { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.tile { border-radius: 14px; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; padding: 26px; position: relative; overflow: hidden; }
+.tile svg { max-height: 62%; max-width: 78%; width: auto; height: auto; }
+.tile .et { position: absolute; left: 12px; bottom: 10px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+/* palette */
+.palette { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.col { border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--riga); }
+.col .sw { height: 96px; }
+.col .tx { padding: 10px 12px 12px; font-size: 13px; }
+.col b { display: block; font-size: 14px; }
+.col code { font: 12px ui-monospace, monospace; color: var(--tenue); }
+.barra { display: flex; height: 18px; border-radius: 9px; overflow: hidden; margin-top: 12px; }
+/* tipografia */
+.tipo { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.tipo > div { background: #fff; border: 1px solid var(--riga); border-radius: 14px; padding: 20px; }
+.tipo .campione { font-size: 44px; line-height: 1.05; margin: 6px 0 10px; }
+.tipo .testo { font-size: 16px; color: #333; }
+.tipo .nome { font-size: 12px; color: var(--tenue); letter-spacing: .06em; text-transform: uppercase; }
+/* pattern */
+.pattern { height: 260px; border-radius: 14px; background-size: 180px auto; }
+/* applicazioni */
+.app { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.app figure { margin: 0; background: #fff; border: 1px solid var(--riga); border-radius: 14px; overflow: hidden; }
+.app .scena { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #e9e6df; }
+.app .scena > img { width: 100%; height: 100%; object-fit: cover; }
+.app .sopra { position: absolute; }                   /* il logo appoggiato sulla superficie vuota della foto */
+.app figcaption { padding: 10px 14px 12px; font-size: 14px; color: #333; }
+/* regole (SOLO COMPLETA) */
+.regole { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.regole > div { background: #fff; border: 1px solid var(--riga); border-radius: 14px; padding: 16px; font-size: 14px; }
+/* file */
+.file { display: flex; flex-wrap: wrap; gap: 8px; }
+.file a { font: 600 14px 'Inter', sans-serif; color: var(--inchiostro); text-decoration: none; border: 1px solid var(--inchiostro); border-radius: 999px; padding: 8px 14px; }
+.box { margin: 28px 0 0; padding: 16px 18px; border: 1px solid var(--riga); background: #fff; border-radius: 12px; font-size: 15px; }
+footer.fine { padding: 30px 0 48px; text-align: center; font-size: 12px; color: var(--tenue); }
+footer.fine a { color: inherit; }
+@media (max-width: 520px) { .hero-logo { min-height: 240px; padding: 36px 18px; } .tipo .campione { font-size: 36px; } }
+</style>
+</head>
+<body>
+<header class="intro wrap">
+  <div class="kicker">Identità di marca · anteprima</div>
+  <h1>NOME ATTIVITÀ, due modi di presentarsi</h1>
+  <p class="lead">Due direzioni pensate per [chi è e per chi]. Guardale con calma e dimmi quale ti somiglia di più: la sviluppiamo nella versione completa, con tutte le varianti e le regole d'uso.</p>
+</header>
+
+<nav class="scelta" aria-label="Direzioni">
+  <div class="wrap">
+    <button aria-pressed="true" data-dir="d-uno">1 · NOME DIREZIONE</button>
+    <button aria-pressed="false" data-dir="d-due">2 · NOME DIREZIONE</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <!-- DIREZIONE 1 · copia questa section per ogni direzione e cambia id, variabili e contenuti -->
+  <section class="dir attiva" id="d-uno"
+    style="--b-fondo:#F3EEE4; --b-logo:#2A2722; --b1:#F3EEE4; --b2:#A4532F; --b3:#7E8C6A; --b4:#CDBFA5; --b5:#2A2722;">
+    <h2>NOME DIREZIONE</h2>
+    <p class="idea">L'idea in una frase: da dove nasce il segno e cosa racconta.</p>
+
+    <div class="hero-logo"><!-- SVG del logo principale, inline, fill="currentColor" o colori della palette --></div>
+
+    <div class="blocco"><h3>Le versioni</h3>
+      <div class="griglia">
+        <div class="tile" style="background:var(--b1);color:var(--b5)"><!-- marchio --><span class="et">Marchio</span></div>
+        <div class="tile" style="background:var(--b5);color:var(--b1)"><!-- negativo --><span class="et">Su scuro</span></div>
+        <div class="tile" style="background:#fff;color:#111"><!-- un colore --><span class="et">Un colore</span></div>
+      </div>
+    </div>
+
+    <div class="blocco"><h3>I colori</h3>
+      <div class="palette">
+        <div class="col"><div class="sw" style="background:var(--b1)"></div><div class="tx"><b>Nome</b>ruolo (fondo, 60%)<br><code>#F3EEE4</code></div></div>
+        <!-- … 4-5 colori … -->
+      </div>
+      <div class="barra"><span style="flex:60;background:var(--b1)"></span><span style="flex:25;background:var(--b2)"></span><span style="flex:10;background:var(--b3)"></span><span style="flex:5;background:var(--b5)"></span></div>
+    </div>
+
+    <div class="blocco"><h3>I caratteri</h3>
+      <div class="tipo">
+        <div><div class="nome">Titoli · FONT 600</div><div class="campione" style="font-family:'FONT'">Campione con il nome</div><div class="testo">a che serve</div></div>
+        <div><div class="nome">Testi · FONT 400</div><div class="campione" style="font-family:'FONT';font-size:22px;line-height:1.4">Una frase vera dell'attività, come comparirebbe sul sito o su un menu.</div></div>
+      </div>
+    </div>
+
+    <div class="blocco"><h3>Il pattern</h3>
+      <div class="pattern" style="background-color:var(--b1);background-image:url('pattern-uno.svg')"></div>
+      <p class="testo" style="color:#555;font-size:14px;margin:8px 0 0">Da dove nasce e dove si usa (carta da pacchi, fodera, sfondo social).</p>
+    </div>
+
+    <div class="blocco"><h3>Dove vive</h3>
+      <div class="app">
+        <figure>
+          <div class="scena"><img src="URL_SCENA_min.webp" alt="Scena d'esempio">
+            <!-- logo appoggiato sulla superficie vuota: posizione, rotazione e fusione da regolare guardando lo screenshot -->
+            <div class="sopra" style="left:38%;top:40%;width:24%;transform:rotate(-1deg);mix-blend-mode:multiply;color:#3a2a1e"><!-- SVG --></div>
+          </div>
+          <figcaption>Insegna all'ingresso</figcaption>
+        </figure>
+        <figure>
+          <div class="scena" style="background:#d9d3c7;display:flex;align-items:center;justify-content:center">
+            <!-- mockup costruito in HTML/CSS: biglietto, cartolina, etichetta… -->
+          </div>
+          <figcaption>Biglietto di benvenuto</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- SOLO COMPLETA: costruzione e regole
+    <div class="blocco"><h3>Come è costruito</h3> … griglia sopra il segno … </div>
+    <div class="blocco"><h3>Le regole</h3>
+      <div class="regole">
+        <div><b>Area di rispetto</b><br>…</div><div><b>Misura minima</b><br>…</div>
+        <div><b>Da non fare</b><br>…</div><div><b>Colori di stampa</b><br>indicativi, da verificare con il tipografo</div>
+      </div>
+    </div> -->
+
+    <div class="blocco"><h3>I file</h3>
+      <div class="file">
+        <a href="logo-uno.svg" download>Logo (SVG)</a>
+        <a href="marchio-uno.svg" download>Marchio (SVG)</a>
+        <a href="logo-uno-nero.svg" download>Un colore (SVG)</a>
+        <a href="pattern-uno.svg" download>Pattern (SVG)</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="box"><strong>Come si va avanti.</strong> Dimmi in chat quale direzione preferisci e cosa cambieresti (un colore, una lettera, l'atmosfera). Nella versione completa la sviluppiamo con tutte le varianti, le regole d'uso e le applicazioni che ti servono davvero.</div>
+  <div class="box" style="font-size:13px;color:#555">Le foto delle applicazioni sono scene d'esempio. Prima di registrare il marchio va fatta una ricerca di anteriorità.</div>
+</main>
+
+<footer class="fine">Anteprima realizzata da PrismaPixel · <a href="https://prismapixel.it">prismapixel.it</a></footer>
+
+<script type="application/json" id="brand-dati">
+{"direzioni":[{"nome":"NOME DIREZIONE","palette":[{"nome":"Calce","hex":"#F3EEE4"}],"coppie":[["#2A2722","#F3EEE4","testo"],["#A4532F","#F3EEE4","logo"]]}]}
+</script>
+<script>
+document.querySelectorAll('.scelta button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.scelta button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  document.querySelectorAll('.dir').forEach(d => d.classList.toggle('attiva', d.id === b.dataset.dir));
+  window.scrollTo({ top: document.querySelector('.scelta').offsetTop, behavior: 'smooth' });
+}));
+</script>
+</body>
+</html>

@@ -136,7 +136,7 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
 | `annunci_ads` | `ads/ISTRUZIONI.md` | attivo (in prova) |
 | `roadmap` | `strategia/ISTRUZIONI.md` | attivo (in prova) |
 | `sequenza_email` | `email/ISTRUZIONI.md` | attivo (in prova) |
-| `brand_concept` | `brand/ISTRUZIONI.md` | da costruire |
+| `brand_concept` | `brand/ISTRUZIONI.md` | attivo (in prova) |
 | `flusso_automazione` | `automazioni/ISTRUZIONI.md` | da costruire |
 | `programma_formazione` | `formazione/ISTRUZIONI.md` | da costruire |
 
