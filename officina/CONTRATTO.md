@@ -155,6 +155,7 @@ aggiornano. La ricerca di viralità fa parte del piano e si fa solo nei casi scr
 | `sequenza_email` | `email/ISTRUZIONI.md` | attivo (in prova) |
 | `brand_concept` | `brand/ISTRUZIONI.md` | attivo (in prova) |
 | `report_mensile` | `report/ISTRUZIONI.md` | pronto, spento finché Vincenzo non lo attiva |
+| `pubblicazione_sito` | `pubblicazione/ISTRUZIONI.md` | pronto, spento finché Vincenzo non lo attiva |
 | `flusso_automazione` | `automazioni/ISTRUZIONI.md` | da costruire |
 | `programma_formazione` | `formazione/ISTRUZIONI.md` | da costruire |
 
