@@ -26,7 +26,7 @@ const out = resolve(outArg || join(dir, 'controlli'));
 mkdirSync(out, { recursive: true });
 const errori = [], avvisi = [];
 const svgFiles = readdirSync(dir).filter(f => f.endsWith('.svg')).sort();
-const pezzi = svgFiles.filter(f => /^(etichetta|lattina|menu|scatola|shopper|pezzo)/.test(f)); // applicazioni progettate: niente prova a 16 px
+const pezzi = svgFiles.filter(f => /^(etichetta|lattina|cartellino|menu|scatola|shopper|biglietto|pezzo)/.test(f)); // applicazioni progettate: niente prova a 16 px
 const loghi = svgFiles.filter(f => !/^pattern/.test(f) && !pezzi.includes(f));
 const pattern = svgFiles.filter(f => /^pattern/.test(f));
 
@@ -114,6 +114,8 @@ else {
     await q.waitForTimeout(300);
     const st = await q.evaluate(() => ({
       orizz: document.documentElement.scrollWidth > window.innerWidth + 1,
+      // pezzi appoggiati sulle foto: sotto un quarto della scena diventano illeggibili sul telefono
+      piccoli: [...document.querySelectorAll('.scena .sopra')].filter(s => { const sc = s.closest('.scena').getBoundingClientRect(); const r = s.getBoundingClientRect(); return r.width && r.width < sc.width * 0.25 && r.height < sc.height * 0.5; }).map(s => (s.getAttribute('src') || s.className).slice(-50)),
       sgranate: [...document.images].filter(i => i.complete && i.naturalWidth && !/\.svg|^data:image\/svg/.test(i.src) && i.naturalWidth < i.getBoundingClientRect().width * 1.5).map(i => `${i.src.slice(-40)} (${i.naturalWidth} px per ${Math.round(i.getBoundingClientRect().width)} px mostrati)`),
       rotte: [...document.images].filter(i => !i.complete || !i.naturalWidth).map(i => i.src.slice(0, 90)),
       font: [...document.fonts].filter(f => f.status === 'error').map(f => f.family),
@@ -123,6 +125,7 @@ else {
     st.rotte.forEach(u => errori.push(`immagine rotta: ${u}`));
     if (w === 1280) {
       st.sgranate.forEach(u => avvisi.push(`foto poco definita: ${u}: rigenerala a 2k, qualità media`));
+      [...new Set(st.piccoli)].forEach(u => avvisi.push(`pezzo troppo piccolo sulla foto: ${u}: inquadra più stretto o mostralo in piano, grande`));
     }
     st.font.forEach(f => errori.push(`font non caricato: ${f}`));
     if (w === 390) {

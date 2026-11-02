@@ -152,6 +152,19 @@ Le applicazioni mostrano il marchio dove vivrà. Due modi, da scegliere per cias
 Un'applicazione è riuscita se il marchio sembra **stampato o inciso lì**, alla grandezza giusta: un logo enorme al
 centro di una tazza non è un'applicazione credibile.
 
+**Niente immagini sgranate** (il cliente guarda dal telefono, e lo zoom non deve scoprire pixel):
+- Preferisci il **mockup vettoriale** (HTML/CSS + SVG) per tutto ciò che è piatto o quasi: biglietti, cartellini,
+  etichette in piano, scatole, insegne su muro, avatar. È nitido a qualsiasi zoom e non costa crediti. Se Higgsfield
+  non è disponibile, tutte le applicazioni si fanno così.
+- La foto serve solo dove la materia conta (vetro, metallo, pietra) e va **inquadrata stretta**: l'oggetto riempie
+  almeno metà dell'immagine e la superficie dove va il marchio almeno un terzo della larghezza. Mai una bottiglia
+  piccola in un paesaggio: il pezzo appoggiato sopra diventa di 60 pixel e illeggibile.
+- Ogni pezzo con testo (etichetta, cartellino, scatola) si mostra anche **in piano**, grande, accanto alla foto.
+- Il logo e i pezzi appoggiati sulle foto sono sempre i file SVG, mai immagini.
+- Il controllo (sezione 8) segnala le foto con pochi pixel e i pezzi appoggiati troppo piccoli rispetto alla scena.
+- Le anteprime per Vincenzo (catture delle applicazioni, fogli dei loghi) si fanno **a densità 2**; la pagina intera,
+  che è molto alta, si manda in .zip o a sezioni, mai come un'unica immagine (la chat la rimpicciolisce).
+
 **Applicazioni di prodotto e packaging** (etichetta, scatola, menu, shopper, sacchetto, cartellino): non basta
 appoggiare il logo su una superficie vuota, si **progetta il pezzo intero**.
 1. **Ricerca Pinterest dedicata**, una per pezzo, sempre con `formato: "branding"` e `n: 6-8`: 3-4 ricerche in
