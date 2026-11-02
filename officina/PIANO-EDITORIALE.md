@@ -20,12 +20,26 @@ ha un calendario o delle rubriche, il piano parte da lì.
 | situazione | cosa fai |
 |---|---|
 | il cliente non ha un piano | **lo crei** (sezione 3) prima di qualsiasi contenuto, e lo mostri nella pagina |
-| il piano ha più di 90 giorni, oppure obiettivo, offerta o pubblico sono cambiati, oppure `modifiche_richieste` lo tocca | **lo aggiorni**: tieni ciò che funziona, cambi rubriche o calendario |
+| il piano ha più di 90 giorni, oppure si entra in una nuova fase di `stagioni`, oppure obiettivo, offerta, pubblico o maturità dell'account sono cambiati, oppure `modifiche_richieste` lo tocca | **lo aggiorni**: tieni ciò che funziona, cambi rubriche o calendario |
 | c'è un piano valido | **lo segui**: prendi i primi spazi `da_fare` del tuo formato e non lo rifai |
 | `revisione` | non tocchi il piano: correggi solo i contenuti |
 
 Il piano lo crea **il primo agente social** che lavora per il cliente, qualunque sia. Per la prima bozza basta il
 **piano base**: rubriche, mix e le prime 2 settimane di calendario. La versione completa ha 4 settimane.
+
+## 2b. Da cosa nasce (è su misura, non un modello)
+
+Prima di scrivere il piano raccogli in `brief.md`, dal contesto dell'Agent OS e dal JSON del lavoro:
+- **obiettivo** e **pubblico** (brief, `profilo_cliente`, audit);
+- **esigenze social** in `profilo_cliente.social`, raccolte dal venditore: `lingue` del pubblico, `stagione_forte` e
+  `stagione_bassa`, `da_mostrare` e `da_non_mostrare`, `volto` (chi può comparire), `momenti` (eventi, aperture,
+  novità), `contenuti_al_mese`;
+- **maturità dell'account** (sezione 3, mix): dai `contatti` del cliente e, se serve, con `instagram_get_profile` o
+  `tiktok_get_profile` (1 credito, rientra nel budget della ricerca);
+- **settore** e **offerta**: cosa vende, cosa si sceglie in anticipo e cosa d'impulso, quanto costa decidere.
+
+Quello che manca non si inventa: nel piano va tra i campi `"da_confermare"`, e nella pagina diventa una domanda
+semplice per il cliente ("In bassa stagione lavorate su prenotazione?").
 
 ## 3. Cosa contiene
 
@@ -35,34 +49,68 @@ Il piano lo crea **il primo agente social** che lavora per il cliente, qualunque
   "obiettivo": "prenotazioni | contatti | vendite online | notorietà",
   "pubblico": "chi è, cosa desidera, cosa teme (una riga ciascuno)",
   "promessa": "la frase di posizionamento (dall'audit se c'è, altrimenti 'da confermare')",
+  "maturita": "nuovo | in crescita | affermato",
+  "lingue": [{"lingua": "it", "quota": 60}, {"lingua": "fr", "quota": 40}],
+  "stagioni": [{"periodo": "nov-mar", "fase": "bassa", "pubblico": "chi sogna e prenota da casa", "focus": "..."}],
   "canali": [{"canale": "instagram", "frequenza": "3 a settimana", "formati": ["carosello", "reel"]}],
   "rubriche": [
     {"nome": "Da salvare", "scopo": "scoperta", "quota": 40, "formati": ["carosello", "reel"], "temi": ["..."]}
   ],
   "calendario": [
     {"settimana": 1, "giorno": "mar", "canale": "instagram", "formato": "carosello", "rubrica": "Da salvare",
-     "tema": "...", "obiettivo": "scoperta", "cta": "salva e manda a chi viene con te", "stato": "da_fare", "fatto_da": ""}
+     "tema": "...", "obiettivo": "scoperta", "lingua": "it", "cta": "salva e manda a chi viene con te", "stato": "da_fare", "fatto_da": ""}
   ],
-  "regole": {"tono": "...", "cta_ammesse": ["..."], "da_non_dire": ["..."]},
+  "regole": {"tono": "...", "cta_ammesse": ["..."], "da_non_dire": ["..."], "da_non_mostrare": ["..."], "volto": "..."},
+  "da_confermare": ["..."],
   "hook": ["schemi di hook che valgono per questo cliente"],
   "ricerca": null,
   "misure": {"scoperta": "salvataggi e condivisioni", "fiducia": "commenti e visite al profilo", "contatto": "DM e clic sul link"}
 }
 ```
 
-**Rubriche** (3-4, con nomi adatti al cliente). Il punto di partenza è questo, da adattare:
-1. **Da salvare** (scoperta): guide, liste, itinerari, errori da evitare. Contenuti utili anche a chi non compra.
-2. **Dietro le quinte e persone** (fiducia): chi lavora, come si fa, il luogo. Con la faccia se il cliente ci sta.
-3. **Prova** (fiducia): cosa succede davvero, recensioni e numeri **solo se sono nel brief**.
-4. **Offerta e dubbi** (contatto): come funziona, cosa include, le obiezioni vere del pubblico (dall'audit, dalla chat,
-   dai commenti), con una CTA chiara.
+**Rubriche** (3-4): si costruiscono dal **settore**, dall'**offerta** e dall'**obiettivo** del cliente, non da un elenco
+fisso. Chiediti: cosa cerca questo pubblico prima di comprare? cosa lo fa fidare? cosa lo blocca? Esempi di come cambiano:
+- tour ed esperienze: "La rotta" (luoghi e itinerari da salvare), "A bordo" (persone e momenti), "Prima di partire"
+  (meteo, mal di mare, cosa portare);
+- studio dentistico: "Domande che ti fai" (dubbi veri, linguaggio sobrio), "Lo studio" (persone, strumenti, come si
+  lavora), "Il percorso" (cosa succede alla prima visita);
+- ristorante: "Il piatto" (cosa e perché), "La cucina" (chi lo fa), "Stasera da noi" (serate, novità, prenotazione);
+- e-commerce: "Come si usa", "Scelto per te" (guide alla scelta), "Chi lo compra" (recensioni vere, solo dal brief).
 
-**Mix degli obiettivi**: di base 40% scoperta, 35% fiducia, 25% contatto. Se l'obiettivo del cliente è il contatto o la
-vendita, 30 / 30 / 40.
+**Controllo** (non è un modello, è una verifica): insieme le rubriche devono coprire **scoperta** (contenuti utili anche
+a chi non compra), **fiducia** (persone, lavoro, prove vere) e **contatto** (offerta, dubbi, CTA chiara). Se una delle
+tre manca, aggiungi o cambia una rubrica. Ogni rubrica rispetta `da_non_mostrare` e `volto`: se il cliente non vuole
+comparire, niente rubriche con la faccia.
+
+**Mix degli obiettivi**, in base a obiettivo del cliente e **maturità dell'account**:
+
+| maturità | come la riconosci | scoperta | fiducia | contatto |
+|---|---|---|---|---|
+| nuovo | account assente o sotto 1.000 follower, pubblica poco | 55% | 30% | 15% |
+| in crescita | 1.000-10.000 follower, pubblica ma con poche richieste | 40% | 35% | 25% |
+| affermato | oltre 10.000 follower o molte interazioni, ma le richieste non seguono | 25% | 35% | 40% |
+
+Se l'obiettivo è **contatti o vendite**, sposta 10 punti dalla scoperta al contatto (mai sotto il 20% di scoperta). Se
+l'obiettivo è **notorietà**, fai il contrario. Scrivi nel piano il mix scelto e perché.
 
 **Frequenza**: realistica rispetto al tempo del cliente (`ecosistema.aree.team_tempo`): meglio 3 contenuti a settimana
 tenuti che 7 promessi. Un video da girare vale come un contenuto e richiede tempo al cliente: non più di 2 a settimana se
 li gira lui.
+
+**Lingue**: se il pubblico parla più lingue (`profilo_cliente.social.lingue`, oppure la clientela del brief), il piano
+decide la lingua di ogni spazio con le quote del pubblico: un contenuto si fa in una lingua sola, oppure con la
+didascalia nella seconda lingua. Mai le lingue mescolate dentro la stessa slide. Se il pubblico straniero è il più
+importante, i contenuti di scoperta e di contatto vanno soprattutto nella sua lingua.
+
+**Stagioni** (per le attività che hanno una stagione: turismo, ristorazione, eventi, scuole, regali, sport):
+- dividi l'anno in fasi dalle informazioni del cliente (`stagione_forte`, `stagione_bassa`) e scrivile in `stagioni`;
+- **in bassa stagione** si parla a chi sogna e prepara: più scoperta e contenuti da salvare, la CTA porta a
+  prenotare in anticipo o a seguire l'account; si preparano i contenuti per l'alta;
+- **a ridosso dell'alta** (4-6 settimane prima) cresce la fiducia: persone, cosa aspettarsi, dubbi;
+- **in alta stagione** si parla a chi è già lì o sta per decidere: più contatto, CTA immediate (scrivici, prenota),
+  contenuti veloci da girare sul posto;
+- il calendario usa la fase in cui cade e la scrive nello spazio; i `momenti` del cliente (eventi, aperture,
+  novità) entrano nel calendario nella settimana giusta, e solo quelli veri.
 
 **Calendario**: ogni spazio ha settimana, giorno, canale, formato, rubrica, tema, obiettivo e CTA. Alterna le rubriche e
 non mettere due contenuti di contatto di fila. Mai date di eventi, offerte o prezzi che non sono nel brief.
