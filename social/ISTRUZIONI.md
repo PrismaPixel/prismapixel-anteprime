@@ -249,6 +249,11 @@ classi `.s-` e i font della scheda di stile.
   contenuto e obiettivo;
 - niente nomi di Pinterest, riferimenti o note interne: quelli vanno solo nell'esito per Vincenzo.
 
+**Font**: incorpora i font come file, non da Google Fonts (dall'Officina può non essere raggiungibile e le slide
+uscirebbero con caratteri di ripiego): `npm i @fontsource/<font>` in `/tmp/officina-font`, copia i `.woff2` latin dei pesi
+che usi in `font/` accanto alla pagina e dichiarali con `@font-face` e `font-display: block`; pubblica anche i file
+`font/*.woff2`. Il controllo segnala "nessun font web caricato".
+
 Un solo file `index.html`, con CSS e JS dentro. Se diventa più grande di 350 KB, sposta lo stile delle slide in `stile.css`.
 
 ## 7. Controlli (prima di pubblicare)

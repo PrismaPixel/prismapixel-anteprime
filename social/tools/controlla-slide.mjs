@@ -28,6 +28,9 @@ const info = await p.evaluate(() => {
   const ris = [];
   // le slide fuori dal binario scorrevole verrebbero tagliate: le mettiamo una sotto l'altra, a misura reale
   document.querySelectorAll('.binario').forEach(b => { b.style.cssText = 'display:block;overflow:visible;scroll-snap-type:none'; });
+  // la card del post e la griglia non devono tagliare le tele a misura reale
+  document.querySelectorAll('.post, .video, .ad').forEach(c => { c.style.overflow = 'visible'; c.style.width = 'max-content'; c.style.maxWidth = 'none'; });
+  document.querySelectorAll('.griglia').forEach(g => { g.style.display = 'block'; });
   document.querySelectorAll('.media.grafica').forEach(m => { m.style.cssText = 'overflow:visible;aspect-ratio:auto;background:none'; }); // grafiche degli annunci
   document.querySelectorAll('.tela').forEach((t, i) => {
     t.style.transform = 'none';
@@ -53,6 +56,8 @@ const info = await p.evaluate(() => {
   });
   const immaginiRotte = [...document.images].filter(im => !im.complete || !im.naturalWidth).map(im => im.src.slice(0, 80));
   const fontMancanti = [...document.fonts].filter(f => f.status === 'error').map(f => f.family);
+  // se nessun font web si è caricato (es. Google Fonts irraggiungibile) le slide escono con i caratteri di ripiego
+  if (![...document.fonts].some(f => f.status === 'loaded')) fontMancanti.push('nessun font web caricato: incorpora i file .woff2 (ISTRUZIONI, sezione 6)');
   return { ris, immaginiRotte, fontMancanti };
 });
 const tele = await p.$$('.tela');
