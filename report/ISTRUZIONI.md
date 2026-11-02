@@ -75,7 +75,19 @@ quelle**, e solo per questo cliente:
 |---|---|---|
 | `search_console` | clic, impressioni e posizione media delle ricerche, confronto col mese prima | `console_get_search_analytics` sulla proprietà in `riferimento` |
 | `ga4` | visite, da dove arrivano, contatti o acquisti (conversioni) | `analytics_get_report` sulla proprietà in `riferimento` |
-| `meta`, `google_ads`, `email`, `ecommerce`, `altro` | — | non c'è ancora un lettore automatico: scrivi "dati di <fonte> da collegare" nelle note |
+| `meta` | spesa, persone raggiunte, clic e risultati (conversazioni, contatti, acquisti, prenotazioni) del mese, totali e per campagna | workflow n8n **"PrismaPixel · Dati Meta Ads"** (sotto) |
+| `google_ads`, `email`, `ecommerce`, `altro` | — | non c'è ancora un lettore automatico: scrivi "dati di <fonte> da collegare" nelle note |
+
+**Dati Meta Ads.** Avvia con `execute_workflow`: `workflowId: "SNyf2JhKdBX3H1Cl"`, `executionMode: "production"`,
+`triggerNodeName: "Richiesta dati Meta"`, `inputs: { "webhookData": { "method": "POST", "body": { "job_id": "<job_id del report>" } } }`.
+Leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames: ["Riepilogo", "Non disponibile"]`).
+- Passi solo il `job_id`: l'account pubblicitario lo prende il workflow dagli accessi del cliente, e risponde solo per
+  un report mensile aperto.
+- `ok: false` o `errore` su un conto: scrivi nelle note il motivo ("accesso Meta non ancora dato", "permessi
+  insufficienti") e fai il blocco ADS con lavoro fatto e dati pubblici.
+- La spesa è nella valuta dell'account. Nel report mostra spesa, risultati e costo per risultato (spesa ÷ risultati,
+  calcolato da te); clic e CTR solo se aiutano a spiegare. Per il pubblico dei social organici restano i dati pubblici
+  di 2b.
 
 Se la proprietà indicata non compare tra quelle collegate (`console_list_properties`, `analytics_list_properties`),
 non cercarne altre: scrivi nelle note "accesso <fonte> non raggiungibile". Se non ci sono accessi, il report si fa lo
