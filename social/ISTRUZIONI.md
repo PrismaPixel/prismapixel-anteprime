@@ -13,7 +13,9 @@ Instagram 4:5, con didascalie. Il venditore li manda al cliente per chiudere la 
 I contenuti parlano **al pubblico del cliente**, non al cliente. Un carosello di una clinica parla ai pazienti,
 quello di un tour in barca ai turisti.
 
-Due cose decidono la qualità:
+Tre cose decidono la qualità:
+- **Temi e hook partono da ciò che funziona davvero nel settore** (sezione 3b): i post che oggi vengono salvati e
+  condivisi più del solito.
 - **Il copy segue il metodo Kallaway** (`social/skills/kallaway-copywriting.md`, da leggere tutto prima di scrivere).
 - **Il design nasce solo dai migliori caroselli del settore su Pinterest** (sezione 3), riletti e adattati al brand
   del cliente. Non esiste uno stile di casa: niente modelli grafici predefiniti, niente skill di caroselli
@@ -83,6 +85,58 @@ Scegli **una direzione**: una delle tre proposte, oppure una tua sintesi. Deve p
 `qualita` 4 o 5 ed essere coerente con brand, settore e tono. Se nessun riferimento ha qualità 4 o più, rifai la
 ricerca (punto 5). Scrivila in `brief.md` con i numeri dei riferimenti che la ispirano. Nel livello `completa`
 tutti i contenuti seguono la stessa direzione: la serie deve sembrare un feed coerente.
+
+## 3b. Cosa funziona davvero nel settore (ricerca di viralità)
+
+Pinterest dice **come** sono fatti i caroselli belli; questa ricerca dice **di cosa** parlano e **come si aprono** i
+post che oggi spingono nel settore del cliente. Si fa sempre, prima della strategia (sezione 4).
+
+**Prima guarda l'Agent OS**: se nel contesto c'è un audit o un lavoro video con una ricerca recente (meno di 30
+giorni) sugli stessi temi, riusala e salta le chiamate.
+
+Strumenti Manifold, **budget massimo 6 crediti** per `prima`, **10** per `completa`, sempre con `max_credits`
+(mai `leads_*`, `console_*`, `analytics_*`, `submit_feedback` con dati del cliente):
+1. `tiktok_search_videos`, **2 ricerche** in italiano, `sort: "popular"`, `since: "year"` (30 risultati per pagina,
+   con follower dell'autore, salvataggi e condivisioni): una sul servizio e il luogo (es. "gita in barca
+   polignano", "dentista bari"), una sul dolore o la domanda del pubblico (es. "come scegliere un dentista",
+   "cosa fare a polignano"). È la fonte principale: su TikTok i caroselli sono i post a foto, e i temi e gli hook
+   che funzionano lì valgono anche su Instagram.
+2. `instagram_search_posts` su **1 hashtag** del settore in italiano (es. `#gitainbarca`, `#dentistabari`),
+   `since: "year"`: è una ricerca per hashtag e spesso restituisce pochi post, senza follower né salvataggi. Serve
+   per temi, formato e commenti, non per la classifica.
+3. Solo per `completa`, se ne resta il budget: la seconda pagina della ricerca TikTok che ha dato i post migliori
+   (`cursor`).
+
+**Come si sceglie cosa conta** (non i post più grandi, ma quelli che hanno fatto più del solito):
+- per ogni post calcola la **spinta** = (salvataggi + condivisioni) ÷ max(follower dell'autore, 1.000) × 100: un
+  account piccolo che fa molti salvataggi ha toccato un tema forte (es. una barca di Polignano con 251 follower e
+  353.000 visualizzazioni). Dove salvataggi e condivisioni mancano (Instagram), ordina per visualizzazioni o like
+  solo dentro quel gruppo;
+- scarta i post con like = 3 (like nascosti), gli annunci a pagamento (`is_ad: true`), quelli fuori tema e le pagine
+  con più di 500.000 follower (giocano un altro campionato);
+- tieni i **5 post con la spinta più alta**, solo se almeno il doppio della mediana del campione; se nessuno la
+  supera, scrivi "nessun post fuori dalla media: il settore premia la costanza più dei singoli temi".
+
+**Cosa leggi nei 5 post** (testo, trascrizione, primi commenti):
+- il **tema** in una riga e l'**hook** della prima riga o della copertina, ridotto a schema (es. "N errori che
+  [pubblico] fa prima di [azione]", "Quello che nessuno ti dice su [X]"), mai copiato;
+- il **formato**: carosello (quante foto), reel, foto singola; e se il valore è salvabile (liste, guide, prezzi tipo);
+- cosa **chiedono o citano i commenti**: domande, dubbi, tag agli amici. Sono i temi del prossimo carosello;
+- l'**angolo** che tutti usano e quello che nessuno usa: lo **spazio libero** per il cliente.
+
+Scrivi in `brief.md`, sezione "Cosa funziona": 3-5 temi che spingono, 3 schemi di hook, formato e lunghezza che
+funzionano, le domande dei commenti, lo spazio libero, e i link dei 2-4 post usati con la spinta di ciascuno.
+
+**Come la usi**:
+- la strategia (sezione 4) sceglie temi e angoli **tra quelli che spingono**, adattati all'offerta del cliente, e
+  preferisce lo spazio libero quando c'è;
+- l'hook di copertina segue uno schema che ha funzionato, scritto con le parole e i fatti del cliente;
+- il numero di slide segue ciò che funziona nel settore (sempre tra 7 e 9);
+- i 3 hook alternativi includono almeno uno schema preso dalla ricerca.
+
+Se Manifold non risponde, i crediti mancano o non ci sono dati: vai avanti con il metodo Kallaway e scrivilo nelle
+note ("ricerca di viralità non disponibile"). I numeri della ricerca non finiscono mai nei contenuti del cliente e non
+sono una promessa: sono indizi su cosa interessa al pubblico.
 
 ## 4. Strategia dei contenuti
 
@@ -228,13 +282,14 @@ Segui il contratto:
 - `descrizione` (per il venditore, 2-3 frasi): cosa c'è (es. "un carosello di 7 slide sui 5 errori…" + "un post…")
   e i 2 punti più forti per questo cliente, con parole da cliente.
 - `note` (per Vincenzo), in quest'ordine:
-  1. `durata: <N> min · crediti: higgsfield <N> · token: <token>`;
+  1. `durata: <N> min · crediti: higgsfield <N>, manifold <N> · token: <token>`;
   2. direzione scelta, scheda di stile in breve e i link delle immagini Pinterest che l'hanno ispirata (2-4);
+  2b. cosa funziona nel settore (sezione 3b): i 2-4 post usati con link e spinta, e cosa ne hai preso per tema e hook;
   3. per ogni carosello, i 3 hook alternativi;
   4. cosa confermare con il cliente: palette, handle, foto vere, offerte o CTA;
   5. controlli non eseguiti o problemi.
 - `officina_fine.risultato`:
-  `{"direzione": "...", "palette": ["#..."], "font": ["..."], "contenuti": [{"tipo": "carosello|singolo", "titolo": "...", "angolo": "...", "hook": "...", "slide": 7}], "riferimenti": ["url", ...], "token": "..."}`
+  `{"direzione": "...", "palette": ["#..."], "font": ["..."], "contenuti": [{"tipo": "carosello|singolo", "titolo": "...", "angolo": "...", "hook": "...", "slide": 7}], "riferimenti": ["url", ...], "virali": {"temi": ["..."], "schemi_hook": ["..."], "spazio_libero": "...", "post": ["url", ...]}, "token": "..."}`
 - `fatti`: 2-4 fatti verificati e utili ai prossimi agenti (es. tono scelto, pubblico, temi che funzionano per il settore).
 - `passa_a`: di solito nulla. Se dal brief emerge un problema evidente che i social non risolvono (es. niente sito
   dove mandare le persone), indica il servizio giusto.
