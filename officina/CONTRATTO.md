@@ -118,6 +118,17 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
   - `risultato`: oggetto con ciò che serve ai prossimi agenti (es. audit: `{"priorita": [...], "piano_90_giorni": {...}}`; sito: `{"pagine": [...], "palette": [...], "token": "..."}`);
   - `fatti`: 2-5 fatti utili sul cliente, `[{"tipo": "problema|fatto|obiettivo|preferenza|risultato", "testo": "..."}]`, solo cose verificate;
   - `passa_a`: il lavoro successivo consigliato, `[{"deliverable": "sito_web", "brief": {...}}]` (l'audit indica sempre il servizio della priorità n°1; gli altri solo se ha senso). Il lavoro non parte da solo: aspetta l'approvazione di Vincenzo.
+  - `ecosistema` (facoltativo, ma da mandare ogni volta che hai verificato qualcosa): lo stato del digitale del
+    cliente nelle aree che hai toccato, `{"aree": {"sito": {"stato": "assente|base|da_migliorare|buono|da_scoprire", "nota": "una riga"}}, "prossimi_passi": [{"deliverable": "piano_seo", "perche": "una riga"}]}`.
+    Aree: `sito`, `social`, `ads`, `seo_google`, `email`, `gestione_contatti`, `branding`, `strategia_budget`,
+    `team_tempo`. Scrivi solo ciò che hai visto o fatto tu (es. il branding: "identità in due direzioni, in attesa
+    della scelta"; l'audit: lo stato di tutte le aree). Quello che verifichi vale più di ciò che il cliente ha detto al
+    venditore.
+- **Ecosistema**: all'inizio `contesto.cliente.ecosistema` dice, area per area, cosa ha il cliente, chi l'ha
+  verificato, i lavori già fatti da PrismaPixel e i prossimi passi. Il tuo lavoro deve stare dentro quel quadro: usa
+  logo, palette e font del branding scelto, il posizionamento dell'audit, i testi e le pagine del sito già fatti.
+- **Una scheda per persona**: se il cliente scrive da più canali, l'Agent OS riconosce sito, email, telefono e profili
+  social uguali e unisce le schede da solo. Nel contesto trovi già tutto, da tutti i canali.
 - Nell'SQL scrivi il JSON come stringa tra apici singoli, raddoppiando ogni apice interno (`l'orto` → `l''orto`).
 
 ## 5. Servizi e istruzioni
