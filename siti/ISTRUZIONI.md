@@ -84,6 +84,62 @@ Ogni pagina ha un compito (far scegliere, convincere, far prenotare) e un'azione
    la versione del repository. Nei comandi delle skill `<skill>` è quella cartella; dove una skill parla di
    `siti/<slug>/`, intendi `/tmp/lavoro/<slug>/`.
 
+## 2b. Riferimenti: Land-book per la struttura, Baymard per vendere
+
+Prima del design guardi come sono fatti i siti migliori del settore. **Non usare Pinterest** per i siti: i riferimenti
+vengono da **Land-book** (struttura delle pagine) e, per gli e-commerce, dalle **ricerche di Baymard Institute** (come
+si compra online). Si fa per `livello: completa`; in `revisione` riusi i riferimenti del lavoro precedente.
+
+**1. Land-book.** Avvia con `execute_workflow` il workflow **"PrismaPixel · Riferimenti siti (Land-book)"**:
+`workflowId: "0Dk7DeCLOm18PR6U"`, `executionMode: "production"`, `triggerNodeName: "Richiesta riferimenti siti"`,
+`inputs: { "webhookData": { "method": "POST", "body": { "job_id": "<job_id>", "ricerche": [...], "settori": [...], "n": 5 } } }`.
+- `ricerche`: 2-3 ricerche **in inglese**, dal settore preciso al più largo (es. masseria → `"boutique hotel"`,
+  `"countryside hotel"`, `"hotel"`; trattoria → `"restaurant"`, `"italian restaurant"`; studio dentistico →
+  `"dental clinic"`, `"clinic"`; e-commerce di olio → `"food ecommerce"`, `"olive oil"`).
+- `settori` (facoltativo): le categorie di Land-book da preferire, scritte come le usa Land-book, es. `"Travel"`,
+  `"Food & Drinks"`, `"Local Business"`, `"Real Estate"`, `"Furniture & Interiors"` (le altre come compaiono nel campo
+  `settore` dei risultati; il confronto non bada a maiuscole). Se ne
+  escono meno di 3 del settore, il workflow completa con gli altri risultati e lo dice (`solo_settore: false`).
+- Ci vogliono 10-30 secondi. Il risultato **non leggerlo dall'esecuzione** (è enorme): leggilo dal database con
+  `execute_sql`: `select dati from riferimenti_siti where job_id = '<job_id>' order by id desc limit 1;`
+- Per ogni sito hai: `nome`, `sito` (l'indirizzo vero), `settore` e `stile` secondo Land-book, `sezioni_home` (le
+  sezioni della home **in ordine**: apertura, promessa, caratteristiche, recensioni, invito all'azione, piede…) e
+  `screenshot`. Se puoi aprire lo screenshot, guardalo; per i titoli e i pulsanti veri leggi la home del sito con
+  `seo_get_page` (gratis) su 2-3 dei riferimenti.
+- Se il workflow non risponde o `ok` è `false`: vai avanti con la tabella delle pagine della sezione 1 e scrivilo
+  nelle note.
+
+**2. Scheda dei riferimenti.** In `/tmp/lavoro/<slug>/riferimenti.md` scrivi, per i 3-5 siti scelti:
+- l'**ordine delle sezioni** della home e cosa c'è nel primo schermo (frase, immagine, pulsante, ricerca date…);
+- le soluzioni che si ripetono nel settore (es. "la verifica date è sempre nel primo schermo", "il menu è diviso per
+  portate con i prezzi in vista");
+- cosa prendi per questo cliente e cosa no, con il perché.
+Poi la struttura delle pagine (sezione 1) e la composizione della home (fase A) partono da qui. **Lo stile resta
+quello dell'inventario del cliente**: dai riferimenti prendi ordine, gerarchia e soluzioni, mai testi, foto, loghi,
+colori precisi o composizioni copiate.
+
+**3. Baymard (solo e-commerce o siti con prenotazione/acquisto).** Prima della fase B controlla il sito con questa
+lista, ricavata dalle ricerche pubbliche di Baymard Institute (puoi approfondire un punto leggendo i loro articoli
+gratuiti su baymard.com con `seo_get_page`). Ogni punto che non rispetti va corretto o scritto nelle note.
+- **Navigazione e catalogo**: categorie con i nomi che usa chi compra (non quelli interni); ricerca visibile; filtri
+  utili per quel prodotto (es. taglia, colore, prezzo, formato), filtri attivi visibili e rimovibili uno per uno;
+  numero di risultati e ordinamento; su telefono i filtri si aprono in un pannello.
+- **Scheda prodotto**: più foto, almeno una che mostri misura o uso; varianti (taglia, colore, formato) chiare, con
+  disponibilità; prezzo, **costi e tempi di spedizione** e reso vicino al pulsante; pulsante "Aggiungi al carrello"
+  sempre raggiungibile su telefono; descrizione breve a punti più specifiche complete; spazio per le recensioni vere
+  del cliente (in bozza un segnaposto "recensioni da collegare", mai recensioni inventate).
+- **Carrello**: foto, variante e quantità modificabili; totale con spedizione stimata già nel carrello; il campo del
+  codice sconto non in evidenza; "continua gli acquisti" visibile.
+- **Checkout** (anche se in bozza non è collegato): acquisto come ospite senza registrazione obbligatoria; pochi
+  campi, ognuno necessario; etichette sempre visibili, errori spiegati accanto al campo; tastiera giusta su telefono
+  (numeri per telefono e CAP); **costo totale chiaro prima del pagamento, nessuna sorpresa**; metodi di pagamento
+  visibili fin dal carrello.
+- **Prenotazioni** (hotel, tour, ristoranti): date e persone nel primo schermo o a un tocco; prezzo totale e
+  condizioni di cancellazione prima di confermare.
+
+Nelle note dell'esito: i siti usati come riferimento (nome e indirizzo), cosa hai preso da ciascuno e, per
+gli e-commerce, i punti di Baymard non ancora coperti (es. "spedizioni da confermare con il cliente").
+
 ## 3. Come lavori: taste guida, impeccable rifinisce
 
 **Fase A · Direzione e costruzione con `design-taste-frontend`.** Segui il suo SKILL.md passo per passo
@@ -92,6 +148,8 @@ Ogni pagina ha un compito (far scegliere, convincere, far prenotare) e un'azione
   appartengono solo a questo cliente è obbligatorio: nome e cosa significa, città e quartiere, numeri,
   vincoli, materiali, rituali, oggetti stampati del suo mondo. Se il brief è scarno, ricava dalla città e
   dal settore ciò che è vero ovunque (il mare per chi lavora sul mare) e non inventare fatti specifici.
+- Passo 2-3: la composizione della home e l'ordine delle sezioni partono dalla scheda dei riferimenti
+  (sezione 2b); la direzione visiva resta tua e nasce dall'inventario.
 - Passo 3: `--have photography,product-photo` perché le immagini le generi tu con Higgsfield.
   Se il cliente ha colori o logo (`materiali_cliente`), usa `--keep palette,type` dove serve.
 - Passo 6, immagini: la fonte principale è **Higgsfield** (sezione 4). Le foto d'archivio
