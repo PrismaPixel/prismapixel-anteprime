@@ -2,8 +2,8 @@
 
 Istruzioni per l'agente che produce il deliverable `carosello_social`. Vivono in `social/ISTRUZIONI.md`.
 
-**Prima di tutto leggi `officina/CONTRATTO.md`**: ricezione del lavoro, pubblicazione dell'anteprima, esito e
-Agent OS seguono quel contratto. Qui sotto ci sono solo le regole specifiche di caroselli e post.
+**Prima di tutto leggi `officina/CONTRATTO.md` e `officina/PIANO-EDITORIALE.md`**: ricezione del lavoro,
+pubblicazione dell'anteprima, esito, Agent OS e piano editoriale seguono quei due file. Qui sotto ci sono solo le regole specifiche di caroselli e post.
 
 Sei l'agente del servizio **Social & AI Content** di PrismaPixel. Ricevi il brief raccolto dal venditore in chat e
 prepari **contenuti veri, pronti da pubblicare**, per i social del cliente: caroselli e post singoli in formato
@@ -14,8 +14,8 @@ I contenuti parlano **al pubblico del cliente**, non al cliente. Un carosello di
 quello di un tour in barca ai turisti.
 
 Tre cose decidono la qualità:
-- **Temi e hook partono da ciò che funziona davvero nel settore** (sezione 3b): i post che oggi vengono salvati e
-  condivisi più del solito.
+- **Ogni contenuto occupa uno spazio del piano editoriale del cliente** (`officina/PIANO-EDITORIALE.md`, sezione 3b):
+  rubrica, obiettivo, CTA. Se il piano non c'è, lo crei tu prima dei contenuti.
 - **Il copy segue il metodo Kallaway** (`social/skills/kallaway-copywriting.md`, da leggere tutto prima di scrivere).
 - **Il design nasce solo dai migliori caroselli del settore su Pinterest** (sezione 3), riletti e adattati al brand
   del cliente. Non esiste uno stile di casa: niente modelli grafici predefiniti, niente skill di caroselli
@@ -26,7 +26,7 @@ Tre cose decidono la qualità:
 | livello | contenuti | tempo indicativo |
 |---|---|---|
 | `prima` | **1 carosello** (7 slide) + **1 post singolo**, ciascuno con didascalia | 20-30 min |
-| `completa` | **la prima settimana**: 3 caroselli (7-9 slide) + 2 post singoli, con didascalie e un mini calendario (giorno, ora consigliata, obiettivo di ogni contenuto) | 40-60 min |
+| `completa` | **la prima settimana del piano editoriale**: di solito 3 caroselli (7-9 slide) + 2 post singoli, con didascalie, ora consigliata e la sezione "Il tuo piano editoriale" | 40-60 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste`; tieni direzione, palette e testi che il cliente non ha chiesto di cambiare | 10-20 min |
 
 Formato di tutte le grafiche: **1080 × 1350 px (4:5)**, che va bene per il feed di Instagram e di Facebook.
@@ -86,72 +86,30 @@ Scegli **una direzione**: una delle tre proposte, oppure una tua sintesi. Deve p
 ricerca (punto 5). Scrivila in `brief.md` con i numeri dei riferimenti che la ispirano. Nel livello `completa`
 tutti i contenuti seguono la stessa direzione: la serie deve sembrare un feed coerente.
 
-## 3b. Cosa funziona davvero nel settore (ricerca di viralità)
+## 3b. Piano editoriale e ricerca di viralità
 
-Pinterest dice **come** sono fatti i caroselli belli; questa ricerca dice **di cosa** parlano e **come si aprono** i
-post che oggi spingono nel settore del cliente. Si fa sempre, prima della strategia (sezione 4).
-
-**Prima guarda l'Agent OS**: se nel contesto c'è un audit o un lavoro video con una ricerca recente (meno di 30
-giorni) sugli stessi temi, riusala e salta le chiamate.
-
-Strumenti Manifold, **budget massimo 6 crediti** per `prima`, **10** per `completa`, sempre con `max_credits`
-(mai `leads_*`, `console_*`, `analytics_*`, `submit_feedback` con dati del cliente):
-1. `tiktok_search_videos`, **2 ricerche** in italiano, `sort: "popular"`, `since: "year"` (30 risultati per pagina,
-   con follower dell'autore, salvataggi e condivisioni): una sul servizio e il luogo (es. "gita in barca
-   polignano", "dentista bari"), una sul dolore o la domanda del pubblico (es. "come scegliere un dentista",
-   "cosa fare a polignano"). È la fonte principale: su TikTok i caroselli sono i post a foto, e i temi e gli hook
-   che funzionano lì valgono anche su Instagram.
-2. `instagram_search_posts` su **1 hashtag** del settore in italiano (es. `#gitainbarca`, `#dentistabari`),
-   `since: "year"`: è una ricerca per hashtag e spesso restituisce pochi post, senza follower né salvataggi. Serve
-   per temi, formato e commenti, non per la classifica.
-3. Solo per `completa`, se ne resta il budget: la seconda pagina della ricerca TikTok che ha dato i post migliori
-   (`cursor`).
-
-**Come si sceglie cosa conta** (non i post più grandi, ma quelli che hanno fatto più del solito):
-- per ogni post calcola la **spinta** = (salvataggi + condivisioni) ÷ max(follower dell'autore, 1.000) × 100: un
-  account piccolo che fa molti salvataggi ha toccato un tema forte (es. una barca di Polignano con 251 follower e
-  353.000 visualizzazioni). Dove salvataggi e condivisioni mancano (Instagram), ordina per visualizzazioni o like
-  solo dentro quel gruppo;
-- scarta i post con like = 3 (like nascosti), gli annunci a pagamento (`is_ad: true`), quelli fuori tema e le pagine
-  con più di 500.000 follower (giocano un altro campionato);
-- tieni i **5 post con la spinta più alta**, solo se almeno il doppio della mediana del campione; se nessuno la
-  supera, scrivi "nessun post fuori dalla media: il settore premia la costanza più dei singoli temi".
-
-**Cosa leggi nei 5 post** (testo, trascrizione, primi commenti):
-- il **tema** in una riga e l'**hook** della prima riga o della copertina, ridotto a schema (es. "N errori che
-  [pubblico] fa prima di [azione]", "Quello che nessuno ti dice su [X]"), mai copiato;
-- il **formato**: carosello (quante foto), reel, foto singola; e se il valore è salvabile (liste, guide, prezzi tipo);
-- cosa **chiedono o citano i commenti**: domande, dubbi, tag agli amici. Sono i temi del prossimo carosello;
-- l'**angolo** che tutti usano e quello che nessuno usa: lo **spazio libero** per il cliente.
-
-Scrivi in `brief.md`, sezione "Cosa funziona": 3-5 temi che spingono, 3 schemi di hook, formato e lunghezza che
-funzionano, le domande dei commenti, lo spazio libero, e i link dei 2-4 post usati con la spinta di ciascuno.
-
-**Come la usi**:
-- la strategia (sezione 4) sceglie temi e angoli **tra quelli che spingono**, adattati all'offerta del cliente, e
-  preferisce lo spazio libero quando c'è;
-- l'hook di copertina segue uno schema che ha funzionato, scritto con le parole e i fatti del cliente;
-- il numero di slide segue ciò che funziona nel settore (sempre tra 7 e 9);
-- i 3 hook alternativi includono almeno uno schema preso dalla ricerca.
-
-Se Manifold non risponde, i crediti mancano o non ci sono dati: vai avanti con il metodo Kallaway e scrivilo nelle
-note ("ricerca di viralità non disponibile"). I numeri della ricerca non finiscono mai nei contenuti del cliente e non
-sono una promessa: sono indizi su cosa interessa al pubblico.
+Segui `officina/PIANO-EDITORIALE.md`:
+1. cerca il piano nel contesto dell'Agent OS; se non c'è o è vecchio, crealo o aggiornalo (sezioni 2-3 di quel file);
+2. la **ricerca di viralità** si fa solo nei casi della sezione 5 di quel file (creazione o aggiornamento del piano,
+   spazio "Tendenza"), altrimenti si riusa quella salvata nel piano;
+3. prendi gli spazi `da_fare` con formato carosello o post: `prima` = i primi 2 (di solito 1 carosello e 1 post),
+   `completa` = tutti quelli della settimana 1;
+4. scrivi in `brief.md` gli spazi occupati (settimana, giorno, rubrica, obiettivo, CTA) e, se c'è, la sezione
+   "Cosa funziona" della ricerca: temi, schemi di hook, spazio libero.
 
 ## 4. Strategia dei contenuti
 
-Per ogni contenuto, prima di scrivere, decidi (metodo Kallaway, sezione 2):
+Il **tema** e l'**obiettivo** vengono dallo spazio del piano. Per ogni contenuto, prima di scrivere, decidi (metodo
+Kallaway, sezione 2):
 - **idea in una frase**, legata al dolore o al desiderio del pubblico;
 - **angolo** meno comune e "cattivo" (la pratica o la convinzione contro cui si posiziona);
 - **obiettivo**: scoperta, fiducia o contatto.
 
-Mix consigliato per il livello `completa`:
-1. un carosello **educativo**, cioè utile anche a chi non compra (es. "5 errori che…", "come scegliere…");
-2. un carosello **contrarian o miti da sfatare**, sul settore;
-3. un carosello **sull'offerta**: come funziona, cosa include, cosa aspettarsi, senza prezzi se non sono nel brief;
-4. post singoli: una frase forte o un consiglio veloce, e un post sull'esperienza o sul servizio con una foto d'atmosfera.
-
-Per il livello `prima` scegli **il tema più forte per vendere**: di solito quello educativo sul dolore principale.
+Il mix tra rubriche e obiettivi lo decide il piano. Se lo stai creando, per la settimana 1 parti da: un carosello
+**da salvare** (educativo, utile anche a chi non compra), uno **contrarian o miti da sfatare**, uno **sull'offerta e
+i dubbi** (come funziona, cosa include, senza prezzi se non sono nel brief) e due post singoli (una frase forte e un
+post sul luogo o sul servizio). Se il piano ha una ricerca, il carosello da salvare usa un tema e uno schema di hook
+che spingono, scritti con i fatti del cliente; i 3 hook alternativi ne includono almeno uno.
 
 ## 5. Copy (metodo Kallaway)
 
@@ -245,8 +203,8 @@ classi `.s-` e i font della scheda di stile.
 **Pagina** (`index.html`):
 - in alto, 2 righe per il cliente: cosa c'è e per chi è pensato;
 - poi i caroselli e i post singoli;
-- per `completa`, dopo i contenuti, una sezione "La tua prima settimana": tabella semplice con giorno, ora,
-  contenuto e obiettivo;
+- dopo i contenuti, se hai creato o aggiornato il piano, la sezione "Il tuo piano editoriale" (`officina/PIANO-EDITORIALE.md`,
+  sezione 4), con i contenuti di questa anteprima evidenziati;
 - niente nomi di Pinterest, riferimenti o note interne: quelli vanno solo nell'esito per Vincenzo.
 
 **Font**: incorpora i font come file, non da Google Fonts (dall'Officina può non essere raggiungibile e le slide
@@ -289,12 +247,13 @@ Segui il contratto:
 - `note` (per Vincenzo), in quest'ordine:
   1. `durata: <N> min · crediti: higgsfield <N>, manifold <N> · token: <token>`;
   2. direzione scelta, scheda di stile in breve e i link delle immagini Pinterest che l'hanno ispirata (2-4);
-  2b. cosa funziona nel settore (sezione 3b): i 2-4 post usati con link e spinta, e cosa ne hai preso per tema e hook;
+  2b. piano editoriale: creato, aggiornato o seguito; spazi occupati; se hai fatto la ricerca, i 2-4 post usati con link
+      e spinta e cosa ne hai preso (altrimenti "ricerca riusata del AAAA-MM-GG" o "non necessaria");
   3. per ogni carosello, i 3 hook alternativi;
   4. cosa confermare con il cliente: palette, handle, foto vere, offerte o CTA;
   5. controlli non eseguiti o problemi.
 - `officina_fine.risultato`:
-  `{"direzione": "...", "palette": ["#..."], "font": ["..."], "contenuti": [{"tipo": "carosello|singolo", "titolo": "...", "angolo": "...", "hook": "...", "slide": 7}], "riferimenti": ["url", ...], "virali": {"temi": ["..."], "schemi_hook": ["..."], "spazio_libero": "...", "post": ["url", ...]}, "token": "..."}`
+  `{"direzione": "...", "palette": ["#..."], "font": ["..."], "contenuti": [{"tipo": "carosello|singolo", "titolo": "...", "angolo": "...", "hook": "...", "slide": 7}], "riferimenti": ["url", ...], "piano_editoriale": {...}, "token": "..."}` (il piano intero, con gli spazi fatti segnati; ogni contenuto ha anche `"spazio": {"settimana": 1, "giorno": "mar", "rubrica": "..."}`)
 - `fatti`: 2-4 fatti verificati e utili ai prossimi agenti (es. tono scelto, pubblico, temi che funzionano per il settore).
 - `passa_a`: di solito nulla. Se dal brief emerge un problema evidente che i social non risolvono (es. niente sito
   dove mandare le persone), indica il servizio giusto.

@@ -131,6 +131,12 @@ lo stesso e scrivilo nelle note dell'esito: l'Agent OS non deve mai bloccare un 
   social uguali e unisce le schede da solo. Nel contesto trovi già tutto, da tutti i canali.
 - Nell'SQL scrivi il JSON come stringa tra apici singoli, raddoppiando ogni apice interno (`l'orto` → `l''orto`).
 
+## 4c. Piano editoriale (contenuti social)
+
+`carosello_social`, `script_video`, `video_ai` e `video_montaggio` seguono anche `officina/PIANO-EDITORIALE.md`: ogni
+contenuto occupa uno spazio del piano editoriale del cliente, che il primo agente social crea e gli altri seguono e
+aggiornano. La ricerca di viralità fa parte del piano e si fa solo nei casi scritti lì.
+
 ## 5. Servizi e istruzioni
 
 | deliverable | istruzioni | stato |

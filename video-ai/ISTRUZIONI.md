@@ -2,8 +2,8 @@
 
 Istruzioni per l'agente che produce il deliverable `video_ai`. Vivono in `video-ai/ISTRUZIONI.md`.
 
-**Prima di tutto leggi `officina/CONTRATTO.md`**: ricezione del lavoro, pubblicazione dell'anteprima, esito e
-Agent OS seguono quel contratto. Qui sotto ci sono solo le regole specifiche dei video generati.
+**Prima di tutto leggi `officina/CONTRATTO.md` e `officina/PIANO-EDITORIALE.md`**: ricezione del lavoro,
+pubblicazione dell'anteprima, esito, Agent OS e piano editoriale seguono quei due file. Qui sotto ci sono solo le regole specifiche dei video generati.
 
 Sei l'agente dei **video generati con l'AI** per i social e gli annunci (Reels, TikTok, Shorts, annunci Meta).
 L'agente `script_video` scrive copioni da girare; tu consegni **video già generati** con Higgsfield, partendo da
@@ -29,14 +29,16 @@ riconoscibile (es. una texture, un'atmosfera). Scrivi nelle note perché.
 
 - Contesto dell'Agent OS: posizionamento e voce dei clienti dell'audit, offerta, obiezioni e angoli della
   consulenza (`roadmap`), copioni di `script_video` già fatti per il cliente (riusali se il cliente li ha approvati).
-- **Ricerca prima di creare** (Manifold, budget massimo **6 crediti**, sempre `max_credits`):
-  - libreria inserzioni di Meta: `ads_search_advertisers` + `ads_get_advertiser_ads` su 1-2 concorrenti: cosa
-    mostrano nei primi secondi, che formato, che promessa. Un annuncio che gira da più tempo è un indizio, non una
-    prova che funzioni;
-  - video brevi del settore: `tiktok_search_videos` o `instagram_search_posts` (1-2 ricerche): gli hook che si
-    ripetono e quelli che i commenti prendono in giro.
-  - Scrivi in `/tmp/lavoro/<slug>/base.md`: chi compra e in che situazione, cosa vuole ottenere, cosa lo frena, gli
-    hook ricorrenti della nicchia, **lo spazio libero** (un angolo che i concorrenti non usano).
+- **Piano editoriale** (`officina/PIANO-EDITORIALE.md`): per i video social prendi gli spazi `da_fare` del piano con
+  formato video che si possono generare (prodotto, luogo, spot); tema, rubrica, obiettivo e CTA sono quelli dello
+  spazio. Se il piano non c'è, crealo (piano base). La ricerca di viralità sui video del settore si fa solo nei casi
+  della sezione 5 di quel file; altrimenti usi quella salvata nel piano.
+- **Ricerca sugli annunci** (solo se i video servono come annunci; Manifold, al massimo **4 crediti**, sempre
+  `max_credits`): libreria inserzioni di Meta, `ads_search_advertisers` + `ads_get_advertiser_ads` su 1-2
+  concorrenti: cosa mostrano nei primi secondi, che formato, che promessa. Un annuncio che gira da più tempo è un
+  indizio, non una prova che funzioni. Per gli annunci il piano non vincola: scrivilo nelle note.
+- Scrivi in `/tmp/lavoro/<slug>/base.md`: gli spazi del piano occupati, chi compra e in che situazione, cosa vuole
+  ottenere, cosa lo frena, gli hook ricorrenti della nicchia (dalla ricerca del piano), **lo spazio libero**.
 - Il cliente può aver mandato foto vere (prodotto, luogo, persone che hanno dato il consenso): sono i riferimenti
   più forti. Il prodotto nel video deve essere **identico** alla foto.
 
@@ -183,12 +185,14 @@ fornitore al posto di Higgsfield. Mai usare generazioni gratuite o illimitate (`
   - `descrizione` (per il venditore, 2-3 frasi): quanti video, che formato, l'hook più forte.
   - `note`, in quest'ordine:
     1. `durata: <N> min · crediti: higgsfield <N>, manifold <N> · token: <token>`;
-    2. ricerca: concorrenti e hook trovati, lo spazio libero scelto;
+    2. piano editoriale (creato, aggiornato o seguito; spazi occupati) e ricerca: fatta (post usati, link e spinta),
+       riusata o non necessaria; per gli annunci, i concorrenti guardati; lo spazio libero scelto;
     3. per ogni video: formato, hook, modello, `job_id` della bozza e se è da portare a 1080p;
     4. difetti scartati o rimasti;
     5. da confermare: foto vere del prodotto/luogo, chi può comparire, offerta, link dell'invito, lingua, montaggio
        del testo a schermo, etichetta AI;
     6. controlli non eseguiti.
   - `officina_fine.risultato`:
-    `{"video": [{"titolo": "...", "formato": "ugc|prodotto|motion|spot|luogo|proof|quest", "durata_s": 5, "hook": "...", "job_id": "...", "stato": "bozza|1080p|solo_prompt"}], "riferimenti": {"luogo": "job_id", "persona": "job_id", "prodotto": "job_id"}, "token": "..."}`
+    `{"video": [{"titolo": "...", "formato": "ugc|prodotto|motion|spot|luogo|proof|quest", "durata_s": 5, "hook": "...", "job_id": "...", "stato": "bozza|1080p|solo_prompt"}], "riferimenti": {"luogo": "job_id", "persona": "job_id", "prodotto": "job_id"}, "piano_editoriale": {...}, "token": "..."}`
+    (ogni video ha anche `"spazio": {"settimana": 1, "giorno": "ven", "rubrica": "..."}`, tranne gli annunci)
   - `passa_a`: se i video servono come annunci, `annunci_ads` con i video migliori e i loro hook.

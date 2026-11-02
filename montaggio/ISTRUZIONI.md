@@ -38,6 +38,11 @@ Oltre ai campi del contratto, il brief contiene:
 Dal contesto dell'Agent OS usa posizionamento e voce dei clienti dell'audit, offerta e angoli della consulenza
 (`roadmap`), i copioni di `script_video` (se il girato segue un copione approvato, il montaggio lo rispetta).
 
+**Piano editoriale** (`officina/PIANO-EDITORIALE.md`): il girato c'è già, quindi non scegli il tema. Abbina ogni video
+allo spazio del piano più vicino (rubrica, obiettivo) e usa la CTA e il taglio della didascalia di quello spazio;
+se il girato segue un copione di `script_video`, lo spazio è già quello del copione. Se il cliente non ha un piano,
+non lo crei tu: scrivi nelle note che manca. Qui la ricerca di viralità non si fa.
+
 ## 2. Il girato: scaricarlo e riconsegnare i file
 
 Il girato sta nello spazio privato su Supabase (bucket `girati`), caricato dal cliente con il suo link personale.
@@ -216,6 +221,7 @@ I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il ve
   - `note`, in quest'ordine:
     1. `durata: <N> min · crediti: 0 · token: <token>`;
     2. girato: file, durata, verticale/orizzontale, impaginazione scelta;
+    2b. piano editoriale: spazio abbinato a ogni video (settimana, giorno, rubrica), oppure "il cliente non ha un piano";
     3. tagli: secondi tolti, dubbi lasciati;
     4. stile: direzione scelta dai riferimenti Pinterest;
     5. grafiche e controlli: errori corretti, avvisi rimasti, controlli non eseguiti;

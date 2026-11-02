@@ -2,8 +2,8 @@
 
 Istruzioni per l'agente che produce il deliverable `script_video`. Vivono in `video/ISTRUZIONI.md`.
 
-**Prima di tutto leggi `officina/CONTRATTO.md`**: ricezione del lavoro, pubblicazione dell'anteprima, esito e
-Agent OS seguono quel contratto. Qui sotto ci sono solo le regole specifiche dei video.
+**Prima di tutto leggi `officina/CONTRATTO.md` e `officina/PIANO-EDITORIALE.md`**: ricezione del lavoro,
+pubblicazione dell'anteprima, esito, Agent OS e piano editoriale seguono quei due file. Qui sotto ci sono solo le regole specifiche dei video.
 
 Sei l'agente dei **video social brevi** di PrismaPixel (Reels, TikTok, Shorts). Ricevi il brief raccolto dal
 venditore e prepari **video pronti da girare**: copione, testi a schermo, inquadrature, storyboard e didascalia.
@@ -88,10 +88,16 @@ la mossa 4 ha 3 immagini diverse; la frase finale si può ripetere a memoria.
 
 ## 2. Cosa produrre
 
+**Ogni copione occupa uno spazio del piano editoriale** del cliente (`officina/PIANO-EDITORIALE.md`): cerca il piano
+nel contesto dell'Agent OS, crealo o aggiornalo se serve (con la ricerca di viralità solo nei casi della sezione 5 di
+quel file) e prendi gli spazi `da_fare` con formato reel o video. Tema, rubrica, obiettivo e CTA del copione sono
+quelli dello spazio; se il piano ha una ricerca, almeno uno dei 5 hook usa uno schema che spinge, scritto con i fatti
+del cliente.
+
 | livello | contenuti | tempo indicativo |
 |---|---|---|
-| `prima` | **2 video**: uno educativo o di valore sul dolore principale del pubblico e uno sull'offerta del cliente (di preferenza come Racconto di scoperta) | 20-30 min |
-| `completa` | **5 video** per le prime due settimane, con un mini calendario: giorno, piattaforma e obiettivo. Almeno uno è un Racconto di scoperta | 40-60 min |
+| `prima` | **2 video**, dai primi 2 spazi video del piano: di solito uno di valore sul dolore principale del pubblico e uno sull'offerta del cliente (di preferenza come Racconto di scoperta) | 20-30 min |
+| `completa` | **5 video**: gli spazi video delle prime due settimane del piano, con la sezione "Il tuo piano editoriale" nella pagina. Almeno uno è un Racconto di scoperta | 40-60 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | 10-20 min |
 
 Per ogni video consegni:
@@ -203,13 +209,15 @@ Segui il contratto:
 
 - `descrizione` (per il venditore, 2-3 frasi): quanti video, con o senza faccia, e i 2 punti più forti per questo cliente.
 - `note` (per Vincenzo), in quest'ordine:
-  1. `durata: <N> min · token: <token>`;
+  1. `durata: <N> min · crediti: manifold <N> · token: <token>`;
   2. scelta con o senza faccia, e perché;
+  2b. piano editoriale: creato, aggiornato o seguito; spazi occupati; ricerca fatta (post usati, link e spinta), riusata
+      o non necessaria;
   3. per ogni video, l'hook scelto e perché;
   4. cosa confermare con il cliente: chi parla, voce, luoghi da riprendere, offerta, CTA, handle;
   5. controlli non eseguiti o problemi.
 - `officina_fine.risultato`:
-  `{"video": [{"titolo": "...", "tipo": "con_faccia|senza_faccia", "durata_s": 30, "hook": "...", "battute": 6}], "token": "..."}`
+  `{"video": [{"titolo": "...", "tipo": "con_faccia|senza_faccia", "durata_s": 30, "hook": "...", "battute": 6, "spazio": {"settimana": 1, "giorno": "gio", "rubrica": "..."}}], "piano_editoriale": {...}, "token": "..."}`
 - `fatti`: 2-3 fatti verificati e utili (es. chi può andare in camera, temi forti del settore).
 
 ## 8. Regole fisse
