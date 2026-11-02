@@ -85,6 +85,8 @@ Leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames
   un report mensile aperto.
 - `ok: false` o `errore` su un conto: scrivi nelle note il motivo ("accesso Meta non ancora dato", "permessi
   insufficienti") e fai il blocco ADS con lavoro fatto e dati pubblici.
+- `senza_inserzioni: true`: nel mese non è girata nessuna inserzione. Scrivilo così ("questo mese le campagne erano
+  ferme"), non come risultati a zero.
 - La spesa è nella valuta dell'account. Nel report mostra spesa, risultati e costo per risultato (spesa ÷ risultati,
   calcolato da te); clic e CTR solo se aiutano a spiegare. Per il pubblico dei social organici restano i dati pubblici
   di 2b.
