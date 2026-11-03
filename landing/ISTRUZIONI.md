@@ -60,7 +60,18 @@ In entrambi i modi:
 
 ## 3. Come lavori
 
-Uguale all'agente siti (sezioni 2, 3 e 4 di `siti/ISTRUZIONI.md`), con queste differenze:
+Uguale all'agente siti (sezioni 2, 2b, 3 e 4 di `siti/ISTRUZIONI.md`), con queste differenze:
+- **Riferimenti (sezione 2b dei siti)**: niente Pinterest. Usa il workflow Land-book con ricerche pensate per una
+  pagina sola:
+  - `offerta`: `"<settore> landing page"` più 1-2 ricerche del settore (es. `"dental clinic landing page"`, `"clinic"`);
+  - `advertorial`: `"editorial"`, `"magazine"` o `"blog"` più una ricerca del settore, perché la pagina deve
+    sembrare un articolo.
+  Nella scheda dei riferimenti conta soprattutto **cosa c'è nel primo schermo** e **l'ordine dalla promessa al
+  pulsante**. I riferimenti sono quasi sempre siti con menu: della loro struttura prendi la sequenza delle sezioni,
+  non la navigazione, che in una landing non c'è.
+- **Baymard**: se l'azione è un acquisto o una prenotazione, applica la parte della lista che riguarda la pagina
+  (prezzo totale e costi chiari prima del pulsante, condizioni di cancellazione, pochi campi, pulsante raggiungibile su
+  telefono, nessuna sorpresa dopo il clic).
 - **Fase A (`design-taste-frontend`)** sulla pagina principale. Per l'advertorial la direzione è **editoriale**
   (rivista o giornale locale, tipografia da lettura, foto come in un articolo), non da sito aziendale. Per l'offerta
   segui la direzione dell'attività; se esiste già un sito PrismaPixel del cliente o i colori del brand, riprendili.
