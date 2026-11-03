@@ -64,6 +64,9 @@ Per ogni email consegni:
 
 ## 4. Copy (metodo Kallaway applicato alle email)
 
+Vale anche **`officina/COPYWRITING.md`** (voce dei clienti, tre test, prove, controllo finale). Nella sequenza: il
+benvenuto e il valore parlano a chi conosce il problema, l'offerta a chi conosce il cliente e sta decidendo.
+
 Leggi `social/skills/kallaway-copywriting.md` (sezioni 2, 3, 4, 6, 7 e 8). Nelle email vale così:
 - **Oggetto = hook**: soggetto e motivo per aprire (4 S), contrasto quando c'è. Meglio sotto i 45 caratteri, massimo
   60, perché sul telefono si taglia dopo circa 40. Niente MAIUSCOLO, niente "!!!", niente clickbait che il testo

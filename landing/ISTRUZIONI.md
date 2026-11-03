@@ -88,6 +88,8 @@ Uguale all'agente siti (sezioni 2, 2b, 3 e 4 di `siti/ISTRUZIONI.md`), con quest
 
 ## 4. Testi
 
+- **Metodo: `officina/COPYWRITING.md`**. L'advertorial parla a chi non sa ancora di avere il problema o non conosce
+  soluzioni (si parte da una scena e dal problema); la pagina d'offerta a chi è pronto (si parte dall'offerta).
 - Valgono le regole dei testi di `siti/ISTRUZIONI.md` (sezione 5) e le **regole di onestà e di policy di
   `ads/ISTRUZIONI.md`** (sezione 6): la landing è la continuazione dell'annuncio e Meta controlla anche la pagina.
 - Advertorial: 800-1500 parole, frasi brevi, paragrafi di 2-4 righe, titoletti che si capiscono da soli (chi scorre

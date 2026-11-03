@@ -75,7 +75,7 @@ Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
 - Pagine di servizio e di zona dove c'è domanda vera (es. "pulizia dentale gioia del colle"), guide che rispondono
   alle domande prima dell'acquisto (es. "quando andare alla Grotta della Poesia"). Mai pagine fatte con lo stampino
   cambiando solo il nome della città: ogni pagina ha fatti suoi.
-- Testi con le regole dei siti (sezione 5) e la voce del cliente; prove solo vere.
+- Testi con le regole dei siti (sezione 5) e il metodo `officina/COPYWRITING.md`; prove solo vere.
 
 ## 3. Cosa fare per livello
 

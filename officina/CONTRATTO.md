@@ -159,6 +159,11 @@ aggiornano. La ricerca di viralità fa parte del piano e si fa solo nei casi scr
 | `flusso_automazione` | `automazioni/ISTRUZIONI.md` | da costruire |
 | `programma_formazione` | `formazione/ISTRUZIONI.md` | da costruire |
 
+## 5b. Copywriting
+
+Siti, landing, annunci, email e contenuti SEO seguono anche `officina/COPYWRITING.md`: posizionamento, livello di
+consapevolezza, voce dei clienti e del cliente, struttura, tre test dei titoli, prove e controllo finale.
+
 ## 6. Regole fisse per tutti
 
 - Italiano naturale, voce PrismaPixel: serena, entusiasta, professionale. Niente frasi da brochure, nessuna firma.

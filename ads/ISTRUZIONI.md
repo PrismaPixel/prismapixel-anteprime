@@ -194,6 +194,10 @@ identità). Scrivi nella strategia quale principio vince e cosa si prova dopo.
 
 ## 6. I testi
 
+**Metodo: `officina/COPYWRITING.md`** per voce dei clienti, tre test dei titoli, prove e controllo finale. Gli
+indiretti parlano a chi non sa ancora di avere il problema, i diretti e il remarketing a chi conosce l'attività o è
+pronto: lo schema qui sotto ne è l'applicazione.
+
 **Indiretti: il testo fa la vendita.** Da 150 a 400 parole. La prima riga riprende la domanda dell'immagine.
 
 Cinque modi di aprire:

@@ -247,6 +247,11 @@ Guarda gli screenshot a 1440, 768 e 390 px: se qualcosa si vede storto, è stort
 
 ## 5. Testi
 
+**Metodo: `officina/COPYWRITING.md`**, da leggere per intero prima di scrivere: posizionamento, livello di
+consapevolezza (la home di solito parla a chi conosce le soluzioni ma non il cliente; le pagine servizio, camera o
+prodotto a chi sta decidendo), voce dei clienti, struttura, tre test dei titoli e controllo finale. Sotto, le regole
+in più dei siti.
+
 - Italiano naturale, il tono è quello del brief; di default sereno e professionale. Niente frasi da
   brochure ("a 360 gradi", "fare la differenza", "esperienza unica", "valorizzare").
 - Il primo schermo dice cosa fa l'attività, dove, e porta all'azione del brief con un pulsante vero.
