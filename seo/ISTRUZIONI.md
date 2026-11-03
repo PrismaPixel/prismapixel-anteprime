@@ -20,8 +20,8 @@ sezione 2c di `siti/ISTRUZIONI.md` (regole SEO e GEO delle pagine): qui sotto ci
 | `mese` | ogni mese, per gli abbonamenti SEO attivi (lo crea il sistema il 1° del mese) | **il lavoro del mese**, secondo il livello del canone | livello 1: 300 · 2: 500 · 3: 900 |
 
 **Strumenti: OpenSEO prima di tutto** (`officina/OPENSEO.md`, da leggere per intero): progetto del cliente,
-parole chiave, posizioni, Maps, scheda, controllo tecnico, AI, Search Console e Analytics. 1.000 crediti OpenSEO =
-1 dollaro: i budget sopra sono qualche decina di centesimi. Le risposte si puliscono sempre con gli script di
+parole chiave, posizioni, Maps, scheda, controllo tecnico, AI, Search Console e Analytics. 1 credito OpenSEO =
+0,001 $ di DataForSEO (come si conta: `officina/OPENSEO.md`): i budget sopra sono qualche decina di centesimi. Le risposte si puliscono sempre con gli script di
 `seo/tools/`. Manifold solo se OpenSEO non è disponibile (budget Manifold: `prima` 20, `avvio` 40, `mese` 15/25/40
 crediti) o per i dati che OpenSEO non ha (Reddit, social).
 

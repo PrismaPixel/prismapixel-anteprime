@@ -1,12 +1,21 @@
 # OpenSEO · come lo usano gli agenti
 
-OpenSEO (strumenti `mcp__OpenSEO__*`) è lo strumento **principale per i dati SEO**: parole chiave, posizioni,
-concorrenti in Google, Maps e scheda dell'attività, controllo tecnico, visibilità nelle AI, Search Console e Google
-Analytics. Usa gli stessi dati di Manifold (DataForSEO) a una frazione del costo: 1.000 crediti OpenSEO = 1 dollaro.
-**Manifold resta** per social, librerie degli annunci, Reddit, recensioni via `maps_get_place` e tutto ciò che non è SEO.
+OpenSEO è lo strumento **principale per i dati SEO**: parole chiave, posizioni, concorrenti in Google, Maps e scheda
+dell'attività, controllo tecnico, visibilità nelle AI, Search Console e Google Analytics. PrismaPixel lo usa
+**installato sul proprio Cloudflare** (`https://open-seo-selfhost.prismapixell.workers.dev`): gli strumenti si chiamano
+`mcp__OpenSEO_PrismaPixel__*` (in alcune sessioni `mcp__OpenSEO__*`: sono gli stessi). Usa gli stessi dati di Manifold
+(DataForSEO), pagati direttamente a DataForSEO, senza ricarichi. **Manifold resta** per social, librerie degli annunci,
+Reddit, recensioni via `maps_get_place` e tutto ciò che non è SEO.
 
-Se gli strumenti `mcp__OpenSEO__*` non ci sono o rispondono con un errore di accesso, usa gli strumenti SEO di
-Manifold come prima e scrivilo nelle note.
+**Come si conta la spesa.** In questa installazione non ci sono crediti e **nessun limite automatico**: ogni chiamata
+a pagamento va dritta sul conto DataForSEO. I budget delle istruzioni sono scritti in "crediti OpenSEO" e valgono
+così: **1 credito = 0,001 $ di DataForSEO** (1.000 crediti = 1 $). `whoami` risponde `mode: "self-hosted"` e
+`creditsRemaining: null`: è normale. Prima di ogni chiamata nuova o ripetuta molte volte usa le stime
+(`estimate_rank_tracker_cost`, `estimate_ai_visibility_cost`) e chiedi poco e bene (sezione 2); nelle note scrivi
+la spesa stimata (`openseo ~<N> crediti`). I limiti di questa guida sono l'unico freno: rispettali alla lettera.
+
+Se gli strumenti OpenSEO non ci sono o rispondono con un errore di accesso, usa gli strumenti SEO di Manifold come
+prima e scrivilo nelle note.
 
 ## 1. Il progetto del cliente (uno per cliente)
 
@@ -39,7 +48,7 @@ Manifold come prima e scrivilo nelle note.
 | controllo tecnico | `run_site_audit`, poi `get_audit_status`, `get_audit_issues`, `get_audit_pages` | solo all'avvio, in pubblicazione e quando serve |
 | risposte delle AI | `explore_prompt` (una domanda), oppure `save_ai_visibility_tracker` + `set_ai_visibility_schedule` per il monitoraggio | stima sempre prima con `estimate_ai_visibility_cost` |
 | posizioni nel tempo | `create_rank_tracker` / `add_rank_tracking_keywords`, poi `get_rank_history` | stima prima con `estimate_rank_tracker_cost` |
-| Search Console e Analytics | `list_search_console_sites` / `set_search_console_site`, `list_google_analytics_properties` / `set_google_analytics_property`, poi `get_search_console_performance`, `get_search_opportunities`, `get_google_analytics_*` | solo per le proprietà dichiarate negli accessi del cliente |
+| Search Console e Analytics (solo quando è configurato il collegamento Google dell'installazione; se gli strumenti rispondono che non è configurato, usa Manifold `console_*`/`analytics_*` sulle proprietà dichiarate) | `list_search_console_sites` / `set_search_console_site`, `list_google_analytics_properties` / `set_google_analytics_property`, poi `get_search_console_performance`, `get_search_opportunities`, `get_google_analytics_*` | solo per le proprietà dichiarate negli accessi del cliente |
 | pagine nuove o modificate | `submit_indexnow_urls`, `inspect_urls` | dopo una pubblicazione |
 
 ## 3. Pulire le risposte (sempre)
@@ -75,7 +84,7 @@ Se la risposta arriva già salvata in un file dallo strumento, passa quel file. 
 
 Il monitoraggio delle posizioni e delle AI spende crediti a ogni controllo, anche quando nessun agente lavora.
 - Stima sempre il costo (`estimate_rank_tracker_cost`, `estimate_ai_visibility_cost`).
-- Puoi crearlo solo se la stima è entro **300 crediti al mese per cliente** (0,30 $) e con frequenza **mensile** o
+- Puoi crearlo solo se la stima è entro **300 crediti al mese per cliente** (0,30 $ di DataForSEO) e con frequenza **mensile** o
   settimanale; oltre, non crearlo e scrivi nelle note la stima e la proposta: lo decide Vincenzo.
 - Scrivi sempre in `risultato` cosa hai creato (tracker, frequenza, ricerche, costo stimato al mese).
 - Mai più di 2.000 crediti in un solo lavoro senza che sia scritto nel brief.
