@@ -152,7 +152,8 @@ servizio DNS-over-HTTPS come `https://dns.google/resolve?name=<dominio>&type=MX`
 
 ## 7. Livello `verifica` (dopo il lancio)
 
-Controlli sul sito vero, gratis o quasi (budget **8 crediti**):
+Controlli sul sito vero, gratis o quasi (budget **8 crediti** Manifold; con OpenSEO anche `run_site_audit` sul
+dominio, `submit_indexnow_urls` con le pagine nuove e `inspect_urls` su 2-3 pagine, `officina/OPENSEO.md`):
 - home e 3 pagine chiave rispondono, in HTTPS, senza `noindex` (`seo_get_page`);
 - 10 reindirizzamenti della tabella portano alla pagina giusta;
 - `sitemap.xml` e `robots.txt` raggiungibili;

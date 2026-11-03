@@ -61,6 +61,13 @@ Se una delle due condizioni manca, o se la scansione non risponde, scrivi **"da 
 Se la scansione trova una "prenotazione o pagamento integrati nel sito", il cliente **ha** un sistema di
 prenotazione: valuta quanto è facile da usare, non dire che manca.
 
+**Con OpenSEO** (`officina/OPENSEO.md`) i controlli 3 e 4 si fanno lì, a costo quasi nullo: crea il progetto del
+cliente, poi `get_local_rank_grid` 3×3 sulla ricerca principale con la città (la prova più chiara per un'attività
+locale: dove compare intorno alla sede e chi vince al suo posto), `get_serp_results` sulle 2-3 ricerche e
+`get_ranked_keywords` sul suo dominio (con `posizioni.py`). Nella sezione "Cosa non funziona" la griglia si
+racconta così: "Cercando «giro in barca monopoli» su Maps, in 8 punti su 9 intorno al porto compari all'8° posto;
+primo è sempre X". Budget OpenSEO 400 crediti. Manifold resta per Maps (recensioni), social, Reddit e AI (controllo 5).
+
 Prima di una chiamata nuova o di cui non conosci il costo, usa `dry_run: true` per leggere `est_credits`.
 Per `aeo_run_ai_answers` scegli 1 sola domanda e i motori più rilevanti in Italia (chatgpt, gemini, ai_overview); se la stima supera 30, riduci i motori. Poi chiama `get_task` finché non è pronto (al massimo 10 tentativi, con pause).
 

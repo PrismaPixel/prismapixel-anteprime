@@ -13,13 +13,19 @@ sezione 2c di `siti/ISTRUZIONI.md` (regole SEO e GEO delle pagine): qui sotto ci
   profilo_cliente, n8n: { ... } }
 ```
 
-| livello | quando | cosa consegna | budget Manifold |
+| livello | quando | cosa consegna | budget OpenSEO |
 |---|---|---|---|
-| `prima` | bozza di vendita (di solito da `passa_a` dell'audit) | **anteprima del piano**: dove sei, 5 cose da fare subito, piano a 90 giorni | 20 crediti |
-| `avvio` | il cliente ha pagato, primo mese | **piano completo** + le prime correzioni pronte | 40 crediti |
-| `mese` | ogni mese, per gli abbonamenti SEO attivi (lo crea il sistema il 1° del mese) | **il lavoro del mese**, secondo il livello del canone | livello 1: 15 · 2: 25 · 3: 40 |
+| `prima` | bozza di vendita (di solito da `passa_a` dell'audit) | **anteprima del piano**: dove sei, 5 cose da fare subito, piano a 90 giorni | 400 crediti |
+| `avvio` | il cliente ha pagato, primo mese | **piano completo** + le prime correzioni pronte + monitoraggi | 1.500 crediti |
+| `mese` | ogni mese, per gli abbonamenti SEO attivi (lo crea il sistema il 1° del mese) | **il lavoro del mese**, secondo il livello del canone | livello 1: 300 · 2: 500 · 3: 900 |
 
-Regole di spesa come nell'audit: `max_credits` su **ogni** chiamata, `dry_run` se non conosci il costo, conto
+**Strumenti: OpenSEO prima di tutto** (`officina/OPENSEO.md`, da leggere per intero): progetto del cliente,
+parole chiave, posizioni, Maps, scheda, controllo tecnico, AI, Search Console e Analytics. 1.000 crediti OpenSEO =
+1 dollaro: i budget sopra sono qualche decina di centesimi. Le risposte si puliscono sempre con gli script di
+`seo/tools/`. Manifold solo se OpenSEO non è disponibile (budget Manifold: `prima` 20, `avvio` 40, `mese` 15/25/40
+crediti) o per i dati che OpenSEO non ha (Reddit, social).
+
+Regole di spesa di Manifold, quando lo usi, come nell'audit: `max_credits` su **ogni** chiamata, `dry_run` se non conosci il costo, conto
 progressivo con `meta.credits_charged`, stop a 5 crediti dal budget. `NoData` non si riprova. Costi da ricordare:
 `seo_search_keywords` 5 + 5 ogni 100 righe · `seo_get_position` 6 a ricerca · `seo_get_serp` circa 5 ·
 `seo_get_ranked_keywords` 5 + 5 ogni 100 righe · `aeo_run_ai_answers` fino a 30 · `maps_search_places` 5 ·
@@ -37,6 +43,9 @@ Dal contesto dell'Agent OS:
 - **piano SEO precedente** (`piano_seo`): `risultato.mappa`, `ricerche_monitorate`, `azioni_fatte`, `da_fare`;
 - **report mensili** (`report_mensile`): `risultato.misure.seo`, per sapere cosa è salito e cosa no;
 - **accessi**: Search Console, Google Analytics, dominio.
+
+Dal **progetto OpenSEO** del cliente (`get_project_context`): contesto, concorrenti, pagine chiave, registro delle
+ricerche già fatte; e dai suoi monitoraggi (`get_rank_tracker`, `get_rank_history`, `get_ai_visibility_trend`).
 
 Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
 
@@ -90,12 +99,19 @@ Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
 5. chiusura: una frase che invita a parlarne in chat. Niente prezzi, niente garanzie.
 
 **`avvio` (primo mese del cliente)**:
-1. tutto il punto `prima`, più la salute tecnica del sito e la mappa ricerca → pagina completa;
-2. le **ricerche monitorate** (5-10 a seconda del livello, sotto) e le domande fisse per le AI: da qui si misura tutto
-   ogni mese;
-3. le correzioni pronte (A), i testi della scheda (B), l'elenco delle fonti delle AI (C), il calendario dei contenuti
+1. tutto il punto `prima`, più la salute tecnica del sito (`run_site_audit`) e la mappa ricerca → pagina completa;
+   le ricerche scelte si salvano nel progetto con un'etichetta per pagina (`save_keywords` con `tags`, es.
+   `"pagina: tour grotte"`);
+2. le **ricerche monitorate** (5-12 a seconda del livello, sotto) in un **monitoraggio mensile delle posizioni**
+   (`create_rank_tracker`, dispositivo mobile, località della sede) e le domande fisse per le AI in un **monitoraggio
+   delle AI** mensile o trimestrale (`save_ai_visibility_tracker`, `set_ai_visibility_schedule`), entro i limiti di
+   spesa di `officina/OPENSEO.md` sezione 5: da qui si misura tutto ogni mese;
+3. se il cliente ha dato gli accessi: Search Console e Analytics collegati al progetto
+   (`set_search_console_site`, `set_google_analytics_property`);
+4. la **griglia su Maps** (`get_local_rank_grid`) per la ricerca principale, come punto di partenza;
+5. le correzioni pronte (A), i testi della scheda (B), l'elenco delle fonti delle AI (C), il calendario dei contenuti
    dei primi 3 mesi (D);
-4. se il sito è nostro: le pagine corrette o nuove come file pronti (sezione 4); se non è nostro: i testi da
+6. se il sito è nostro: le pagine corrette o nuove come file pronti (sezione 4); se non è nostro: i testi da
    incollare, pagina per pagina.
 
 **`mese`** — prima leggi cosa è stato fatto e cosa è rimasto da fare. Il lavoro del mese, secondo il livello:
@@ -109,8 +125,11 @@ Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
 | misura delle AI | ogni 3 mesi | ogni 3 mesi | ogni mese |
 | correzioni tecniche | le urgenti | tutte quelle trovate | tutte, più controllo dei concorrenti |
 
-Le **ricerche monitorate** si misurano con Search Console (se collegata) e con una sola `seo_get_ranked_keywords` sul
-dominio, non con una `seo_get_position` per ricerca: con 8-12 ricerche costerebbe troppo.
+Nel lavoro del mese **prima leggi, poi compri**: storico dei monitoraggi (`get_rank_history`,
+`get_ai_visibility_trend`, `get_ai_visibility_sources`), Search Console (`get_search_console_performance`) e le
+**opportunità quasi in prima pagina** (`get_search_opportunities`: ricerche in posizione 8-20, dove con poco si sale).
+Il lavoro del mese parte da quelle. Dopo ogni pagina pubblicata: `submit_indexnow_urls` e `inspect_urls`. Senza
+OpenSEO, le posizioni si misurano con Search Console e una sola `seo_get_ranked_keywords` di Manifold.
 
 Il contenuto preciso di ogni livello è **da confermare con Vincenzo**: se il brief o le note del cliente dicono
 altro, vale quello. Le posizioni del mese le misura il report mensile: tu non le ricomprare, leggile da

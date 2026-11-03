@@ -147,12 +147,16 @@ Il sito deve farsi trovare su Google e nelle risposte delle AI (ChatGPT, Gemini,
 testi**, perché cambia titoli, pagine e domande frequenti. Vale per `completa`; in `revisione` tieni la mappa del
 lavoro precedente.
 
-**1. Parole chiave (Manifold, `location: "Italy"`, `language: "it"`; per un pubblico straniero anche la lingua e il
-paese di chi compra).** Budget **15 crediti**, `max_credits` su ogni chiamata, `dry_run` se non conosci il costo.
+**1. Parole chiave con OpenSEO** (`officina/OPENSEO.md`: progetto del cliente, mercato Italia/italiano o quello di
+chi compra, script di pulizia). Budget **400 crediti OpenSEO** (circa 0,40 $). Il modo più pulito: scrivi tu 15-30
+ricerche candidate (servizi × luoghi, dal brief e dall'audit) e misurale con `get_keyword_metrics`; usa
+`research_keywords` con 2-3 semi precisi solo per trovarne di nuove, e puliscile con `pulisci_keyword.py`.
+Senza OpenSEO: Manifold (`location: "Italy"`, `language: "it"`), budget **15 crediti**, `max_credits` su ogni
+chiamata.
 - Riusa prima quello che c'è: se l'audit o un piano SEO del cliente hanno già le parole chiave (contesto dell'Agent
   OS), parti da lì e non ricomprarle.
-- `seo_search_keywords` (`limit: 50`) su 1-2 semi: il servizio principale con la città (es. "dentista gioia del colle",
-  "masseria ostuni") e, se serve, il servizio senza città.
+- I semi: il servizio principale con la città (es. "dentista gioia del colle", "masseria ostuni") e, se serve, il
+  servizio senza città. La priorità è quella di `officina/OPENSEO.md` sezione 4: KD basso, intento di acquisto, CPC alto.
 - Per le attività locali conta l'**intento**, non solo il volume: "dentista urgenze bari" con 30 ricerche al mese vale
   più di "denti bianchi" con 5.000. Con volumi bassi o `null` usa le ricerche che farebbe un cliente e scrivile come
   "volume non misurato".
@@ -188,7 +192,7 @@ non ha una pagina (es. un servizio o una zona), aggiungi la pagina se ha contenu
 Nelle note: la mappa pagina → ricerca, i volumi (o "non misurato"), i crediti usati e i "prossimi passi SEO" (ricerche
 senza pagina, scheda Google, recensioni). In `officina_fine.risultato` aggiungi
 `"seo": {"mappa": [{"pagina": "index.html", "ricerca": "...", "volume": 0}], "prossimi_passi": [...]}`: la riprende
-l'agente `piano_seo`.
+l'agente `piano_seo`. Salva le stesse ricerche nel progetto OpenSEO con un'etichetta per pagina (`save_keywords`).
 
 ## 3. Come lavori: taste guida, impeccable rifinisce
 

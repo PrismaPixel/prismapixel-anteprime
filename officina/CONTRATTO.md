@@ -159,6 +159,12 @@ aggiornano. La ricerca di viralità fa parte del piano e si fa solo nei casi scr
 | `flusso_automazione` | `automazioni/ISTRUZIONI.md` | da costruire |
 | `programma_formazione` | `formazione/ISTRUZIONI.md` | da costruire |
 
+## 5a. Dati SEO
+
+Parole chiave, posizioni, Maps, scheda dell'attività, controllo tecnico, visibilità nelle AI, Search Console e
+Analytics si prendono da **OpenSEO** (`officina/OPENSEO.md`), con un progetto per cliente. Manifold resta per social,
+annunci, Reddit e il resto, e per la SEO solo se OpenSEO non è disponibile.
+
 ## 5b. Copywriting
 
 Siti, landing, annunci, email e contenuti SEO seguono anche `officina/COPYWRITING.md`: posizionamento, livello di
