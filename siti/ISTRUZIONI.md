@@ -97,7 +97,8 @@ si compra online). Si fa per `livello: completa`; in `revisione` riusi i riferim
   `"countryside hotel"`, `"hotel"`; trattoria → `"restaurant"`, `"italian restaurant"`; studio dentistico →
   `"dental clinic"`, `"clinic"`; e-commerce di olio → `"food ecommerce"`, `"olive oil"`).
 - `settori` (facoltativo): le categorie di Land-book da preferire, scritte come le usa Land-book, es. `"Travel"`,
-  `"Food & Drinks"`, `"Local Business"`, `"Real Estate"`, `"Furniture & Interiors"` (le altre come compaiono nel campo
+  `"Food & Drinks"`, `"Local Business"`, `"Real Estate"`, `"Furniture & Interiors"`, `"Medical"`,
+  `"Health & Fitness"` (le altre come compaiono nel campo
   `settore` dei risultati; il confronto non bada a maiuscole). Se ne
   escono meno di 3 del settore, il workflow completa con gli altri risultati e lo dice (`solo_settore: false`).
 - Ci vogliono 10-30 secondi. Il risultato **non leggerlo dall'esecuzione** (è enorme): leggilo dal database con
