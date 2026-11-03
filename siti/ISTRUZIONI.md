@@ -141,6 +141,55 @@ gratuiti su baymard.com con `seo_get_page`). Ogni punto che non rispetti va corr
 Nelle note dell'esito: i siti usati come riferimento (nome e indirizzo), cosa hai preso da ciascuno e, per
 gli e-commerce, i punti di Baymard non ancora coperti (es. "spedizioni da confermare con il cliente").
 
+## 2c. SEO e GEO: le ricerche vere, prima di scrivere
+
+Il sito deve farsi trovare su Google e nelle risposte delle AI (ChatGPT, Gemini, AI Overviews). Si decide **prima dei
+testi**, perché cambia titoli, pagine e domande frequenti. Vale per `completa`; in `revisione` tieni la mappa del
+lavoro precedente.
+
+**1. Parole chiave (Manifold, `location: "Italy"`, `language: "it"`; per un pubblico straniero anche la lingua e il
+paese di chi compra).** Budget **15 crediti**, `max_credits` su ogni chiamata, `dry_run` se non conosci il costo.
+- Riusa prima quello che c'è: se l'audit o un piano SEO del cliente hanno già le parole chiave (contesto dell'Agent
+  OS), parti da lì e non ricomprarle.
+- `seo_search_keywords` (`limit: 50`) su 1-2 semi: il servizio principale con la città (es. "dentista gioia del colle",
+  "masseria ostuni") e, se serve, il servizio senza città.
+- Per le attività locali conta l'**intento**, non solo il volume: "dentista urgenze bari" con 30 ricerche al mese vale
+  più di "denti bianchi" con 5.000. Con volumi bassi o `null` usa le ricerche che farebbe un cliente e scrivile come
+  "volume non misurato".
+
+**2. Mappa: una ricerca principale per pagina.** In `/tmp/lavoro/<slug>/seo.md`: pagina → ricerca principale →
+2-4 ricerche vicine → domanda a cui risponde. Due pagine non puntano alla stessa ricerca. Se una ricerca importante
+non ha una pagina (es. un servizio o una zona), aggiungi la pagina se ha contenuto vero, altrimenti scrivila tra i
+"prossimi passi SEO" nelle note.
+
+**3. Nella pagina.**
+- `<title>` (max ~60 caratteri) e `<h1>` con la ricerca principale scritta in modo naturale, città compresa per le
+  attività locali; `meta description` (max ~155) che dice cosa trova chi clicca;
+- `h2` che seguono le domande e le ricerche vicine, un solo `h1` per pagina;
+- link tra le pagine con testo descrittivo ("le camere con vista mare", non "clicca qui");
+- `alt` delle immagini che descrivono la scena, senza riempirli di parole chiave;
+- dati strutturati JSON-LD solo con dati veri del brief: `LocalBusiness` o il tipo preciso (`Restaurant`, `Dentist`,
+  `LodgingBusiness`, `Store`…) nella home, `FAQPage` dove ci sono le FAQ, `Product` sulle schede prodotto
+  (nome, immagine, prezzo d'esempio solo se il cliente lo ha dato), `BreadcrumbList` se ci sono sottopagine.
+  Niente voti né recensioni nei dati strutturati.
+
+**4. GEO: farsi citare dalle AI.** Le AI riportano quello che leggono chiaramente e che trovano uguale in più posti.
+- **I fatti in chiaro, nel testo**: chi è, cosa fa, dove (città e quartiere), per chi, cosa è incluso, orari, come si
+  prenota, fasce di prezzo se il brief le dà. Mai solo dentro un'immagine o un'animazione.
+- **Una frase per pagina che risponde da sola** alla domanda principale (es. "La Masseria X è un agriturismo con 8
+  camere a 5 km da Ostuni, aperto da aprile a ottobre"): è quella che le AI riprendono.
+- **Domande frequenti vere**: dalle paure della voce dei clienti (audit), dalle domande "Le persone chiedono anche"
+  di `seo_get_serp` se l'audit le ha già, da Reddit se c'è. Risposta in 1-3 frasi, poi i dettagli.
+- **Nome, indirizzo e telefono identici** a quelli della scheda Google (se nel brief): stessa grafia ovunque nel sito.
+- Pagina "chi siamo" con fatti verificabili, senza superlativi.
+- Nella pubblicazione `robots.txt` non blocca i crawler delle AI (GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot,
+  Google-Extended): lo controlla l'agente di pubblicazione.
+
+Nelle note: la mappa pagina → ricerca, i volumi (o "non misurato"), i crediti usati e i "prossimi passi SEO" (ricerche
+senza pagina, scheda Google, recensioni). In `officina_fine.risultato` aggiungi
+`"seo": {"mappa": [{"pagina": "index.html", "ricerca": "...", "volume": 0}], "prossimi_passi": [...]}`: la riprende
+l'agente `piano_seo`.
+
 ## 3. Come lavori: taste guida, impeccable rifinisce
 
 **Fase A · Direzione e costruzione con `design-taste-frontend`.** Segui il suo SKILL.md passo per passo

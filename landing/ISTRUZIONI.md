@@ -69,6 +69,9 @@ Uguale all'agente siti (sezioni 2, 2b, 3 e 4 di `siti/ISTRUZIONI.md`), con quest
   Nella scheda dei riferimenti conta soprattutto **cosa c'è nel primo schermo** e **l'ordine dalla promessa al
   pulsante**. I riferimenti sono quasi sempre siti con menu: della loro struttura prendi la sequenza delle sezioni,
   non la navigazione, che in una landing non c'è.
+- **SEO e GEO (sezione 2c dei siti)**: una landing per gli annunci non insegue Google, quindi **niente ricerca di
+  parole chiave**. Valgono invece le regole GEO dei fatti in chiaro (chi, cosa, dove, cosa è incluso, come si
+  prenota), le FAQ vere e i dati strutturati `LocalBusiness` e `FAQPage` con dati veri.
 - **Baymard**: se l'azione è un acquisto o una prenotazione, applica la parte della lista che riguarda la pagina
   (prezzo totale e costi chiari prima del pulsante, condizioni di cancellazione, pochi campi, pulsante raggiungibile su
   telefono, nessuna sorpresa dopo il clic).

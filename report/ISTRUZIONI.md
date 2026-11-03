@@ -56,7 +56,7 @@ riprova. **Budget 25 crediti per report.** Vietati: `leads_*`, `submit_feedback`
 
 | servizio pagato | cosa misuri | strumento | crediti |
 |---|---|---|---|
-| SEO, AEO & GEO | posizione su 3-5 ricerche fisse (le stesse ogni mese: quelle del piano SEO o del primo report) | `seo_get_position` | 1-2 ciascuna |
+| SEO, AEO & GEO | posizione delle **ricerche monitorate** del piano SEO (`piano_seo.risultato.ricerche_monitorate`; se non c'è, 3-5 ricerche fisse scelte al primo report): prima Search Console se collegata (gratis), poi **una sola** chiamata `seo_get_ranked_keywords` sul dominio (`location: "Italy"`, `language: "it"`, `limit: 100`) da cui leggi le posizioni di tutte; `seo_get_position` solo per 1-2 ricerche importanti che non compaiono | 10 + 6 ciascuna |
 | SEO, AEO & GEO | scheda Google: voto e numero di recensioni | `maps_get_place` | 2 |
 | SEO, AEO & GEO | risposte delle AI a 1 domanda fissa, **solo a marzo, giugno, settembre e dicembre** (o ogni mese al livello 3) | `aeo_run_ai_answers` + `get_task` | ≤ 15 |
 | Social & AI Content, Video AI, Montaggio | follower, contenuti pubblicati nel mese, i 3 contenuti migliori del mese per interazioni | `instagram_get_profile`, `instagram_get_posts` (e TikTok o Facebook se sono nel piano) | 1-3 ciascuno |

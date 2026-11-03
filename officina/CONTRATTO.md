@@ -149,7 +149,7 @@ aggiornano. La ricerca di viralità fa parte del piano e si fa solo nei casi scr
 | `video_ai` | `video-ai/ISTRUZIONI.md` | attivo (in prova) |
 | `video_montaggio` | `montaggio/ISTRUZIONI.md` | attivo (in prova) |
 | `ricerca_clienti` (interno) | `clienti/ISTRUZIONI.md` | attivo (in prova) |
-| `piano_seo` | `seo/ISTRUZIONI.md` | da costruire |
+| `piano_seo` | `seo/ISTRUZIONI.md` | pronto, spento finché Vincenzo non lo attiva |
 | `annunci_ads` | `ads/ISTRUZIONI.md` | attivo (in prova) |
 | `roadmap` | `strategia/ISTRUZIONI.md` | attivo (in prova) |
 | `sequenza_email` | `email/ISTRUZIONI.md` | attivo (in prova) |
