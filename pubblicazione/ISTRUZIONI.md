@@ -180,8 +180,9 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
    cliente; `misure.<dominio>` su Cloudflare senza proxy; la cookie policy aggiornata con gli strumenti usati.
    Il progetto Replit (sezione 4b) con il comando per ripubblicare.
 5. **Subito dopo** (entro 1 ora): sito raggiungibile in HTTPS, 10 reindirizzamenti più importanti provati a mano,
-   una mail di prova inviata e ricevuta dal cliente, Search Console verificata con record TXT e sitemap inviata,
-   Google Analytics collegato se previsto.
+   una mail di prova inviata e ricevuta dal cliente, **Search Console**: Vincenzo avvia il workflow
+   "PrismaPixel · Search Console" (`IMPOSTAZIONE.md`, sezione 4) appena la zona è attiva su Cloudflare, poi collega
+   Search Console a GA4 (in GA4 → Amministrazione → Collegamenti a Search Console).
 6. **Dopo** (in 2-7 giorni): link del sito aggiornato su scheda Google, Instagram, Facebook e portali; poi
    `pubblicazione_sito` con `livello: verifica`.
 7. **La tabella dei reindirizzamenti** completa (vecchio → nuovo), con le pagine "da decidere" segnate.

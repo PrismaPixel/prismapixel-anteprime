@@ -75,11 +75,17 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
 ## 4. Search Console e reindirizzamenti su Cloudflare
 
 - Proprietà **di dominio** (`<dominio>`, tutte le varianti) nell'**account Google di PrismaPixel** (proprietario
-  PrismaPixel). Si verifica con il record **TXT** sulla zona del dominio su Cloudflare, **dopo** il cambio dei
-  nameserver (prima Google non lo vede): in Search Console → Aggiungi proprietà → Dominio, Google propone di
-  aggiungere il record da solo tramite Cloudflare; se no, copia il TXT a mano in Cloudflare → DNS.
-  In accessi: fonte `search_console`, riferimento `sc-domain:<dominio>`. Il cliente, se lo chiede, come utente.
-- Subito dopo il lancio: invia `sitemap.xml`; collega GA4.
+  PrismaPixel), verificata con il record **TXT** sulla zona del dominio su Cloudflare, **dopo** il cambio dei
+  nameserver (prima Google non lo vede).
+- **Automatico**: workflow n8n **"PrismaPixel · Search Console"** (`workflowId: "fbRWN66nEj95RaJk"`,
+  `executionMode: "production"`, `triggerNodeName: "Richiesta Search Console"`, body `{"job_id": "<job della
+  pubblicazione>"}`). Controlla che la zona sia attiva su Cloudflare (se no risponde `ok: false` con il motivo:
+  riprova dopo il cambio dei nameserver), chiede a Google il TXT, lo scrive su Cloudflare, verifica il dominio,
+  aggiunge `sc-domain:<dominio>`, invia `https://<dominio>/sitemap.xml` e registra in accessi fonte
+  `search_console`. Risponde con `verificato`, `aggiunto`, `sitemap` ed `errori`. Se la verifica non passa subito
+  ("Google non vede ancora il TXT"), si rilancia dopo 10-15 minuti: il TXT già scritto non si duplica.
+- A mano, una volta per sito: in GA4 → Amministrazione → **Collegamenti a Search Console** → la proprietà
+  `sc-domain:`. Il cliente, se lo chiede, si aggiunge come utente in Search Console → Impostazioni → Utenti.
 - **Reindirizzamenti**:
   - stesso dominio (restyling): bastano le regole `_redirects` del sito su Cloudflare Pages;
   - **dominio che cambia** (vecchio → nuovo): sul dominio vecchio, in Cloudflare, una **Redirect Rule** (o Bulk
