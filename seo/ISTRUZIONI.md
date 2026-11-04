@@ -29,9 +29,9 @@ Regole di spesa di Manifold, quando lo usi, come nell'audit: `max_credits` su **
 progressivo con `meta.credits_charged`, stop a 5 crediti dal budget. `NoData` non si riprova. Costi da ricordare:
 `seo_search_keywords` 5 + 5 ogni 100 righe · `seo_get_position` 6 a ricerca · `seo_get_serp` circa 5 ·
 `seo_get_ranked_keywords` 5 + 5 ogni 100 righe · `aeo_run_ai_answers` fino a 30 · `maps_search_places` 5 ·
-`seo_get_page`, `aeo_get_site_readiness` e gli strumenti `console_*`/`analytics_*` gratis.
-Gli strumenti `console_*` e `analytics_*` solo sulle proprietà dichiarate in `accessi_cliente` per questo cliente
-(come nel report mensile). Mai `leads_*`.
+`seo_get_page` e `aeo_get_site_readiness` gratis.
+GA4 e Search Console del cliente **solo** con il workflow "PrismaPixel · Dati Google" (`officina/DATI-GOOGLE.md`),
+gratis: mai `console_*`/`analytics_*` di Manifold né gli strumenti Google di OpenSEO. Mai `leads_*`.
 
 Nessuno è presente mentre lavori: non fare domande, prendi la lettura più ragionevole e annotala in `note`.
 
@@ -106,8 +106,8 @@ Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
    (`create_rank_tracker`, dispositivo mobile, località della sede) e le domande fisse per le AI in un **monitoraggio
    delle AI** mensile o trimestrale (`save_ai_visibility_tracker`, `set_ai_visibility_schedule`), entro i limiti di
    spesa di `officina/OPENSEO.md` sezione 5: da qui si misura tutto ogni mese;
-3. se il cliente ha dato gli accessi: Search Console e Analytics collegati al progetto
-   (`set_search_console_site`, `set_google_analytics_property`);
+3. se il cliente ha GA4 e Search Console negli accessi: i numeri di partenza con il workflow "PrismaPixel · Dati
+   Google" (`officina/DATI-GOOGLE.md`); non collegarli in OpenSEO;
 4. la **griglia su Maps** (`get_local_rank_grid`) per la ricerca principale, come punto di partenza;
 5. le correzioni pronte (A), i testi della scheda (B), l'elenco delle fonti delle AI (C), il calendario dei contenuti
    dei primi 3 mesi (D);
@@ -126,8 +126,8 @@ Non ricomprare dati che il contesto ha già e che hanno meno di 30 giorni.
 | correzioni tecniche | le urgenti | tutte quelle trovate | tutte, più controllo dei concorrenti |
 
 Nel lavoro del mese **prima leggi, poi compri**: storico dei monitoraggi (`get_rank_history`,
-`get_ai_visibility_trend`, `get_ai_visibility_sources`), Search Console (`get_search_console_performance`) e le
-**opportunità quasi in prima pagina** (`get_search_opportunities`: ricerche in posizione 8-20, dove con poco si sale).
+`get_ai_visibility_trend`, `get_ai_visibility_sources`), Search Console (workflow "PrismaPixel · Dati Google") e le
+**opportunità quasi in prima pagina** (le `ricerche` di Search Console in posizione 8-20, dove con poco si sale).
 Il lavoro del mese parte da quelle. Dopo ogni pagina pubblicata: `submit_indexnow_urls` e `inspect_urls`. Senza
 OpenSEO, le posizioni si misurano con Search Console e una sola `seo_get_ranked_keywords` di Manifold.
 

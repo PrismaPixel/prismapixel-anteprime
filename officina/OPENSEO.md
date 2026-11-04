@@ -48,7 +48,7 @@ prima e scrivilo nelle note.
 | controllo tecnico | `run_site_audit`, poi `get_audit_status`, `get_audit_issues`, `get_audit_pages` | solo all'avvio, in pubblicazione e quando serve |
 | risposte delle AI | `explore_prompt` (una domanda), oppure `save_ai_visibility_tracker` + `set_ai_visibility_schedule` per il monitoraggio | stima sempre prima con `estimate_ai_visibility_cost` |
 | posizioni nel tempo | `create_rank_tracker` / `add_rank_tracking_keywords`, poi `get_rank_history` | stima prima con `estimate_rank_tracker_cost` |
-| Search Console e Analytics (solo quando è configurato il collegamento Google dell'installazione; se gli strumenti rispondono che non è configurato, usa Manifold `console_*`/`analytics_*` sulle proprietà dichiarate) | `list_search_console_sites` / `set_search_console_site`, `list_google_analytics_properties` / `set_google_analytics_property`, poi `get_search_console_performance`, `get_search_opportunities`, `get_google_analytics_*` | solo per le proprietà dichiarate negli accessi del cliente |
+| Search Console e Analytics | **non da OpenSEO**: si leggono solo con il workflow "PrismaPixel · Dati Google" (`officina/DATI-GOOGLE.md`) | — |
 | pagine nuove o modificate | `submit_indexnow_urls`, `inspect_urls` | dopo una pubblicazione |
 
 ## 3. Pulire le risposte (sempre)

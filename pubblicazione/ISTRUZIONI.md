@@ -38,8 +38,8 @@ Obiettivo: nessuna pagina vecchia che porta visite finisce in un errore.
    - la sua `sitemap.xml` e `robots.txt` (`seo_get_page`);
    - workflow **"PrismaPixel · Scansione sito"** (come nell'audit) sulla home e sulle pagine chiave;
    - i link interni delle pagine lette.
-   Se il cliente ha collegato Search Console (accesso `search_console`), le pagine con clic negli ultimi 3 mesi
-   (`console_get_search_analytics`) vengono prima di tutte, poi quelle che Search Console vede con link esterni.
+   Se il cliente ha Search Console negli accessi, le pagine con clic del mese scorso (`pagine` del workflow
+   "PrismaPixel · Dati Google", `officina/DATI-GOOGLE.md`) vengono prima di tutte, poi quelle che Search Console vede con link esterni.
    Con OpenSEO (`officina/OPENSEO.md`): le pagine vecchie che si posizionano (`get_ranked_keywords` sul dominio) e
    quelle con backlink (`get_backlinks_profile`) entrano tutte in tabella.
    Budget Manifold: **15 crediti**; `seo_run_technical_crawl` solo con `dry_run` prima e se la stima sta nel budget.
@@ -210,12 +210,13 @@ dominio, `submit_indexnow_urls` con le pagine nuove e `inspect_urls` su 2-3 pagi
 - home e 3 pagine chiave rispondono, in HTTPS, senza `noindex` (`seo_get_page`);
 - **tutti** i reindirizzamenti della tabella portano alla pagina giusta con un solo passaggio (controllo automatico con
   richieste HEAD dal tuo ambiente, oppure `seo_get_page` sui 10 più importanti se la rete non lo permette);
-- il banner compare, prima del consenso non ci sono cookie `_ga` né di pubblicità, gli eventi arrivano in GA4 (se
-  collegato, `analytics_get_report` sugli eventi degli ultimi giorni);
+- il banner compare, prima del consenso non ci sono cookie `_ga` né di pubblicità; nella scheda di Vincenzo: "in GA4
+  → Rapporti in tempo reale, dopo 'Accetta tutti', arrivano page_view e un clic su WhatsApp o telefono";
 - `sitemap.xml` e `robots.txt` raggiungibili;
 - record `MX`, SPF e `_dmarc` presenti come da scheda (DNS pubblici);
-- se c'è Search Console: pagine indicizzate e errori 404 delle ultime settimane (`console_get_search_analytics`,
-  `console_inspect_url` su 2-3 pagine). I 404 trovati diventano nuove righe di `_redirects` in una revisione del kit.
+- se c'è Search Console: le pagine con impressioni del mese (workflow "PrismaPixel · Dati Google") e, nella scheda di
+  Vincenzo, il rapporto Indicizzazione → "Non trovata (404)". I 404 trovati diventano nuove righe di `_redirects` in
+  una revisione del kit.
 
 Esito con una pagina breve: cosa funziona, cosa no, cosa fare.
 

@@ -74,8 +74,8 @@ quelle**, e solo per questo cliente:
 
 | fonte | cosa leggi | come |
 |---|---|---|
-| `search_console` | clic, impressioni e posizione media delle ricerche, confronto col mese prima | `console_get_search_analytics` sulla proprietà in `riferimento` |
-| `ga4` | visite, da dove arrivano, contatti o acquisti (conversioni) | `analytics_get_report` sulla proprietà in `riferimento` |
+| `search_console` | clic, impressioni, CTR e posizione media, ricerche e pagine principali, confronto col mese prima | workflow n8n **"PrismaPixel · Dati Google"** (`officina/DATI-GOOGLE.md`) |
+| `ga4` | visite, utenti, da dove arrivano (canali), conversioni ed eventi (contatti, WhatsApp, telefono, acquisti), pagine di arrivo, dispositivi | stesso workflow, una sola chiamata per tutte e due le fonti |
 | `meta` | spesa, persone raggiunte, clic e risultati (conversazioni, contatti, acquisti, prenotazioni) del mese, totali e per campagna | workflow n8n **"PrismaPixel · Dati Meta Ads"** (sotto) |
 | `instagram`, `facebook_pagina` | i contenuti del mese con **copertura, salvataggi e condivisioni veri** (Instagram) o reazioni, commenti e condivisioni (pagina), la mediana dei 12 mesi e i **migliori del mese** (almeno il doppio della mediana) | workflow n8n **"PrismaPixel · Insights social"** (sotto). Se c'è, **sostituisce** la riga social della fonte 2b per quel canale |
 | `google_ads`, `email`, `ecommerce`, `altro` | — | non c'è ancora un lettore automatico: scrivi "dati di <fonte> da collegare" nelle note |
@@ -104,8 +104,11 @@ Il risultato **non sta nell'esecuzione** (non viene salvata): attendi 10-60 seco
 - Copia `migliori` in `risultato.misure.<canale>.migliori` (sezione 5) con la stessa `resa`: li riprende il piano
   editoriale. Copertura e salvataggi sono dati privati: nel report sì, mai su GitHub.
 
-Se la proprietà indicata non compare tra quelle collegate (`console_list_properties`, `analytics_list_properties`),
-non cercarne altre: scrivi nelle note "accesso <fonte> non raggiungibile". Se non ci sono accessi, il report si fa lo
+**Dati Google.** GA4 e Search Console si leggono **solo** con il workflow "PrismaPixel · Dati Google" (mai Manifold
+`console_*`/`analytics_*`): chiamata, lettura da `misure_google` e significato dei campi in `officina/DATI-GOOGLE.md`.
+Nei **Numeri** del blocco SEO usa clic e impressioni di Search Console (più 1-2 ricerche dalla lista `ricerche`);
+nel blocco Siti/ADS visite e conversioni di GA4, con il canale che porta più contatti. Se il workflow risponde
+`errore` per una fonte, non cercare altre proprietà: scrivi nelle note "accesso <fonte> non raggiungibile". Se non ci sono accessi, il report si fa lo
 stesso con 2a e 2b, e chiude con una riga gentile: "Se ci colleghi Google Analytics e Search Console, dal prossimo mese
 vedi anche visite e contatti".
 
