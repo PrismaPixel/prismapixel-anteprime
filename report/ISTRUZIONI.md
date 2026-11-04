@@ -141,7 +141,10 @@ suo sito o del profilo social, sobri.
 - In `officina_fine`:
   - `risultato`: `{"mese": "2026-10", "misure": {...}, "fatto": {...}, "prossimo_mese": {...}}`. In `misure` salva
     **tutto quello che hai misurato con il metodo** (ricerche usate, zona, dispositivo, proprietà), così il mese dopo
-    si confronta allo stesso modo. Esempio: `{"seo": {"metodo": {"zona": "Bari", "dispositivo": "mobile"}, "posizioni": {"pizzeria bari centro": 7}}, "instagram": {"follower": 1840, "contenuti": 12}}`;
+    si confronta allo stesso modo. Esempio: `{"seo": {"metodo": {"zona": "Bari", "dispositivo": "mobile"}, "posizioni": {"pizzeria bari centro": 7}}, "instagram": {"follower": 1840, "contenuti": 12, "mediana": {"salvataggi_condivisioni": 9}, "migliori": [{"url": "...", "formato": "carosello", "tema": "...", "hook": "...", "resa": 2.6, "data": "AAAA-MM-GG"}]}}`.
+    In `migliori` vanno i contenuti del mese che hanno reso almeno il doppio della mediana del cliente: diventano i
+    vincitori del piano editoriale (`officina/PIANO-EDITORIALE.md`, sezione 4b). Se nel mese sono uscite delle
+    **riprese**, scrivi la loro resa in `"riprese": [{"url": "...", "vincitore": "<url originale>", "resa": 1.2}]`;
   - `fatti`: 1-3 risultati verificati del mese (`tipo: "risultato"`), ad esempio "In ottobre è passato dal 12° al 7°
     posto per «pizzeria bari centro»";
   - `ecosistema`: aggiorna le aree dei servizi seguiti, con quello che hai verificato;

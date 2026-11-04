@@ -69,6 +69,8 @@ semplice per il cliente ("In bassa stagione lavorate su prenotazione?").
   "regole": {"tono": "...", "cta_ammesse": ["..."], "da_non_dire": ["..."], "da_non_mostrare": ["..."], "volto": "..."},
   "da_confermare": ["..."],
   "hook": ["schemi di hook che valgono per questo cliente"],
+  "vincitori": [],
+  "riprese_quota": 0.25,
   "ricerca": null,
   "misure": {"scoperta": "salvataggi e condivisioni", "fiducia": "commenti e visite al profilo", "contatto": "DM e clic sul link"}
 }
@@ -157,6 +159,11 @@ non mettere due contenuti di contatto di fila. Mai date di eventi, offerte o pre
 - **`video_montaggio`**: il girato c'è già. Abbina ogni video allo spazio più vicino (rubrica, obiettivo) e scrivi
   didascalia e CTA di quello spazio; se nessuno spazio è vicino, scrivilo nelle note.
 
+**Spazi "Ripresa"** (sezione 4b): l'agente del formato dello spazio riceve il vincitore (link, hook, tema) e ne fa
+la versione indicata nello spazio. Guarda l'originale (link o copertina) per capire cosa ha funzionato e lo rifà con
+la direzione grafica attuale: mai lo stesso testo e la stessa grafica. Nella `ripresa` del vincitore scrive lo spazio
+e la versione fatta.
+
 Per ogni contenuto:
 - nel `brief.md` (o `base.md`) e nelle note scrivi **lo spazio occupato** (settimana, giorno, rubrica, obiettivo);
 - la CTA è quella dello spazio, scritta in modo naturale;
@@ -172,6 +179,48 @@ con i contenuti di questa anteprima evidenziati. Parole semplici, niente sigle.
 **Il tuo feed**: chi produce caroselli o post mostra anche come appare il profilo del canale principale con i
 contenuti del piano (`social/ISTRUZIONI.md`, sezione 6c): i contenuti di questa anteprima con le loro copertine
 vere, gli altri spazi della settimana come riquadri "in arrivo" con il tema, nell'ordine di pubblicazione.
+
+## 4b. I contenuti che funzionano tornano più volte (riprese)
+
+Un contenuto che ha funzionato per **questo** cliente vale più di qualunque tendenza: si ripropone più volte, ogni
+volta in una versione nuova, finché continua a funzionare.
+
+**Chi è un vincitore**: un contenuto del cliente (fatto da lui o da noi) che ha reso **almeno il doppio della sua
+mediana** in salvataggi + condivisioni (o, se non ci sono, interazioni o visualizzazioni), confrontato con i suoi
+contenuti degli ultimi 12 mesi, mai con il settore. Servono almeno 8 contenuti per avere una mediana; con meno, nessun
+vincitore. Deve parlare ancora di qualcosa che il cliente vende o fa: eventi passati e prodotti tolti non contano.
+
+**Da dove arrivano**, in quest'ordine (prima i gratuiti):
+1. `contesto.cliente.lavori`: `audit_strategia` → `risultato.social.migliori`; `report_mensile` → `risultato.misure.<canale>.migliori` (i migliori del mese, anche quelli fatti da noi);
+2. il piano stesso: `vincitori` (sotto);
+3. se mancano o hanno più di 60 giorni: **1 chiamata** `instagram_get_posts` o `tiktok_get_videos` sul canale principale (1-3 crediti, budget della ricerca), anche quando la ricerca di viralità non si fa.
+
+Nel piano:
+`"vincitori": [{"url": "...", "canale": "instagram", "formato": "carosello", "tema": "...", "hook": "...", "resa": 3.4, "data": "AAAA-MM-GG", "riprese": [{"spazio": "S3-gio", "versione": "reel con lo stesso hook", "resa": null}], "stato": "attivo|ritirato"}]`
+(`resa` = volte la mediana del cliente).
+
+**Il ciclo**:
+- prima ripresa **3-4 settimane** dopo l'originale (o dalla creazione del piano), poi **ogni 4-6 settimane**;
+- **ogni ripresa è una versione diversa**, mai lo stesso file: un altro formato (carosello → reel, reel → carosello,
+  post → storia), un altro hook tra quelli alternativi, un angolo nuovo sullo stesso tema, dati o stagione aggiornati.
+  L'idea che ha funzionato resta; cambia come si presenta;
+- un vincitore resta `attivo` finché le riprese rendono almeno quanto la mediana del cliente; dopo **2 riprese di fila
+  sotto la mediana** diventa `ritirato`. Il report mensile aggiorna la `resa` delle riprese;
+- il report o l'agente che trova un vincitore nuovo lo aggiunge a `vincitori`;
+- ogni volta che il calendario si allunga (settimane nuove) o il piano si aggiorna, gli spazi "Ripresa" si rimettono
+  in calendario dai vincitori `attivi` e dalle date delle loro ultime riprese.
+
+**Quanto spazio**: le riprese hanno la rubrica **"Ripresa"** nel calendario e occupano **fino a 1 contenuto su 4**
+del canale principale (25%); gli altri 3 su 4 restano contenuti nuovi. Se i vincitori attivi sono pochi, le riprese
+sono meno: mai inventare un vincitore per riempire la quota. In più ogni ripresa può avere i suoi `adattamenti`
+(storie, altri canali) senza togliere spazio al feed.
+- Vincenzo o il cliente possono cambiare la quota nel brief o con una revisione del piano (`"riprese_quota": 0.25`);
+  `0` le spegne.
+- **Mai nella bozza `prima`** (il cliente deve vedere contenuti nuovi): lì i vincitori guidano solo temi, formati e hook.
+- Nel mix (scoperta, fiducia, contatto) la ripresa conta con l'obiettivo dello spazio che occupa.
+
+**Anche quando non si ripropongono**, i vincitori guidano il piano: le rubriche e i formati che rendono di più per il
+cliente prendono più spazio, e i loro schemi di hook entrano in `hook`.
 
 ## 5. Ricerca di viralità: inclusa nel piano, ma non sempre
 
@@ -202,8 +251,8 @@ mai `leads_*`, `console_*`, `analytics_*`, `submit_feedback` con dati del client
    È la fonte principale.
 2. `instagram_search_posts` su **1 hashtag** del settore, `since: "year"`: spesso pochi post, senza follower né
    salvataggi. Serve per temi e commenti, non per la classifica.
-3. Se il cliente ha già un account con dei post, guarda anche i suoi migliori (`instagram_get_posts` o
-   `tiktok_get_videos`, 1 chiamata): quello che funziona per lui conta più degli altri.
+3. I post del cliente **non entrano in questa classifica**: si valutano contro la sua mediana e vanno in `vincitori`
+   (sezione 4b), che usa la stessa chiamata se serve.
 
 **Cosa conta**: per ogni post la **spinta** = (salvataggi + condivisioni) ÷ max(follower dell'autore, 1.000) × 100.
 Scarta i like nascosti (= 3), gli annunci (`is_ad`), i post fuori tema e le pagine con più di 500.000 follower. Tieni
