@@ -39,13 +39,23 @@ Obiettivo: nessuna pagina vecchia che porta visite finisce in un errore.
    - workflow **"PrismaPixel · Scansione sito"** (come nell'audit) sulla home e sulle pagine chiave;
    - i link interni delle pagine lette.
    Se il cliente ha collegato Search Console (accesso `search_console`), le pagine con clic negli ultimi 3 mesi
-   (`console_get_search_analytics`) vengono prima di tutte.
+   (`console_get_search_analytics`) vengono prima di tutte, poi quelle che Search Console vede con link esterni.
+   Con OpenSEO (`officina/OPENSEO.md`): le pagine vecchie che si posizionano (`get_ranked_keywords` sul dominio) e
+   quelle con backlink (`get_backlinks_profile`) entrano tutte in tabella.
    Budget Manifold: **15 crediti**; `seo_run_technical_crawl` solo con `dry_run` prima e se la stima sta nel budget.
 2. **Tabella dei reindirizzamenti 301**: ogni pagina vecchia va alla pagina nuova **più simile per contenuto**.
    - Mai tutte alla home: la home solo per la home vecchia o per pagine che non hanno nessun equivalente.
    - Le pagine vecchie che portano clic e non hanno equivalente vanno segnalate come **da decidere** (nuova pagina o
      sezione), non nascoste.
    - Varianti da coprire: con e senza `/` finale, `.html`/`.php`, `index.html`, maiuscole se il vecchio sito le usava.
+   - **Dominio che cambia** (es. da `vecchio.it` a `nuovo.it`): le regole sul dominio vecchio non stanno in
+     `_redirects` ma in una Redirect Rule di Cloudflare sul dominio vecchio (scheda, sezione "Il giorno del lancio"),
+     più il **Cambio di indirizzo** in Search Console (`pubblicazione/tracciamento/IMPOSTAZIONE.md`, sezione 4).
+   - **Niente catene né cicli**: ogni regola porta direttamente alla pagina finale, e la destinazione deve esistere
+     tra i file del sito.
+   - Le pagine tolte di proposito, senza equivalente e senza visite, non si reindirizzano: rispondono con la pagina
+     404 del sito (Cloudflare Pages non gestisce il codice 410 in `_redirects`). Nella tabella sono segnate "tolta".
+   - Controllo automatico prima di salvare: per ogni riga, la destinazione esiste e non è a sua volta un'origine.
 3. Scrivila nel file `_redirects` (formato di Cloudflare Pages), una regola per riga, al massimo 2.000:
    ```
    /chi-siamo.php        /chi-siamo.html   301
@@ -88,6 +98,27 @@ File da aggiungere:
     Cache-Control: public, max-age=31536000, immutable
   ```
 
+**Misure e consenso** (ogni sito, guida completa in `pubblicazione/tracciamento/IMPOSTAZIONE.md`):
+- in ogni pagina, prima cosa dentro `<head>`, il blocco di `pubblicazione/tracciamento/testa.html` (consenso negato
+  all'avvio, Consent Mode v2, GTM) con l'ID del contenitore del cliente (accessi, fonte `gtm`); subito dopo `<body>`
+  il `noscript` di GTM; prima di `</body>` i tre script. Se l'ID non c'è ancora: lascia `GTM-XXXXXXX` ed è un
+  **bloccante** della scheda ("contenitore GTM da creare");
+- copia nella cartella principale del sito `consenso.js` ed `eventi.js` (da `pubblicazione/tracciamento/`) e la
+  libreria del banner, versione fissa: `npm pack vanilla-cookieconsent@3.1.0` in una cartella tua, poi
+  `dist/cookieconsent.umd.js` e `dist/cookieconsent.css`. In `consenso.js` metti l'indirizzo vero della cookie
+  policy; i colori del banner prendono quelli del sito con poche variabili nello stile del sito
+  (`#cc-main { --cc-btn-primary-bg: …; --cc-btn-primary-color: …; --cc-font-family: … }`);
+- nel piè di pagina, accanto a Privacy e Cookie, il pulsante "Preferenze cookie" (`data-cc="show-preferencesModal"`);
+- eventi: i link `tel:`, WhatsApp e `mailto:` e i moduli sono già misurati da `eventi.js`; aggiungi
+  `data-posizione` (es. `testata`, `piede`) ai pulsanti principali e `data-evento="begin_checkout"` ai pulsanti che
+  aprono prenotazione o carrello. Nei moduli nessun dato personale va nel dataLayer;
+- **lato server** solo se il cliente ha **annunci attivi** (servizio Gestione ADS, accesso `meta` con inserzioni,
+  Google Ads) o vende online: nel sito non cambia niente, si imposta in GTM (scheda, sezione "Misure"). Negli altri
+  casi scrivi nella scheda "lato server: non necessario".
+- Controlla con il browser (Playwright) su una pagina servita in locale: il banner compare (in un browser automatico
+  la libreria si nasconde: per la prova aggiungi `hideFromBots: false` solo nella copia di test), "Rifiuta" e
+  "Accetta tutti" aggiornano il consenso nel dataLayer, un clic su `tel:` crea `click_telefono`.
+
 **Obblighi da controllare** (se manca qualcosa: bloccante, con segnaposto chiaro nel sito):
 - **P.IVA** e ragione sociale nel piè di pagina di tutte le pagine (obbligatorio per chi ha partita IVA);
 - pagina o link alla **privacy** del cliente; se il sito usa strumenti che tracciano (Analytics, pixel di Meta,
@@ -101,13 +132,28 @@ Controlla in locale prima di salvare: tutti i link interni portano a file che es
 
 - Token nuovo nel formato **`<slug>-online-<6 caratteri casuali>`**: solo questo formato si può scaricare come zip.
 - Una riga per file nella tabella Anteprime, come da contratto sezione 3. Per il kit online sono ammessi anche i nomi
-  `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `immagini.json`.
+  `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `immagini.json`, `consenso.js`, `eventi.js`,
+  `cookieconsent.umd.js`, `cookieconsent.css`.
 - Link dello zip da caricare su Cloudflare Pages (scarica anche le immagini di `immagini.json`):
   `https://integrazioni.app.n8n.cloud/webhook/689f7b2a-d224-412c-9500-db025a61d096/scarica-sito/<token>`
   Se puoi, provalo con `execute_workflow` sul workflow **"PrismaPixel · Scarica sito"**
   (`workflowId: "0xRQUDMFFsTnm80I"`, `executionMode: "production"`, `triggerNodeName: "Richiesta zip"`,
   `inputs: { "webhookData": { "method": "GET", "query": { "token": "<token>" } } }`) e controlla in
   `get_workflow_execution` che "Unisci file e immagini" non abbia `immagini_mancanti`.
+
+## 4b. Il progetto Replit (per le modifiche future)
+
+Ogni sito pubblicato ha un progetto Replit con gli stessi file: lì si fanno le modifiche, e da lì si pubblica su
+Cloudflare Pages (`pubblicazione/tracciamento/IMPOSTAZIONE.md`, sezione 5). Solo per `livello: completa`.
+- Con lo strumento Replit `create_app_from_prompt`, prompt (in inglese, preciso):
+  "Create a static website project named `<slug>`. Download the zip from `<link dello zip>` and extract it into
+  `site/` without changing any file. Serve `site/` as a static site for preview. Add `package.json` with `wrangler`
+  pinned to an exact version and the script `\"pubblica\": \"wrangler pages deploy site --project-name <slug> --branch main\"`,
+  which reads `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` from Replit Secrets. Add a short README in Italian:
+  edit files in `site/`, then run `npm run pubblica`. Do not add frameworks, build steps or analytics."
+- Controlla con `list_app_files` che in `site/` ci siano tutte le pagine e `_redirects`; con `read_app_file` che
+  `index.html` sia identico a quello del kit. Non pubblicare l'app su Replit.
+- Se lo strumento non c'è o non riesce: scrivi nella scheda "progetto Replit da creare" con il prompt qui sopra.
 
 ## 5. La scheda di pubblicazione per Vincenzo
 
@@ -127,6 +173,10 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
    - reindirizzamento `www` ↔ senza `www` come da brief (regola di reindirizzamento in Cloudflare);
    - solo dopo che i record sono verificati: il cliente cambia i **nameserver** (guida già mandata);
    - email: tabella dei record da avere (sezione 6).
+4b. **Misure** (`pubblicazione/tracciamento/IMPOSTAZIONE.md`): GA4 e contenitore GTM del cliente con i tag e gli eventi
+   elencati, prova con Anteprima di GTM; **lato server** su Cloud Run solo se indicato, con il costo da comunicare al
+   cliente; `misure.<dominio>` su Cloudflare senza proxy; la cookie policy aggiornata con gli strumenti usati.
+   Il progetto Replit (sezione 4b) con il comando per ripubblicare.
 5. **Subito dopo** (entro 1 ora): sito raggiungibile in HTTPS, 10 reindirizzamenti più importanti provati a mano,
    una mail di prova inviata e ricevuta dal cliente, Search Console verificata con record TXT e sitemap inviata,
    Google Analytics collegato se previsto.
@@ -155,7 +205,10 @@ servizio DNS-over-HTTPS come `https://dns.google/resolve?name=<dominio>&type=MX`
 Controlli sul sito vero, gratis o quasi (budget **8 crediti** Manifold; con OpenSEO anche `run_site_audit` sul
 dominio, `submit_indexnow_urls` con le pagine nuove e `inspect_urls` su 2-3 pagine, `officina/OPENSEO.md`):
 - home e 3 pagine chiave rispondono, in HTTPS, senza `noindex` (`seo_get_page`);
-- 10 reindirizzamenti della tabella portano alla pagina giusta;
+- **tutti** i reindirizzamenti della tabella portano alla pagina giusta con un solo passaggio (controllo automatico con
+  richieste HEAD dal tuo ambiente, oppure `seo_get_page` sui 10 più importanti se la rete non lo permette);
+- il banner compare, prima del consenso non ci sono cookie `_ga` né di pubblicità, gli eventi arrivano in GA4 (se
+  collegato, `analytics_get_report` sugli eventi degli ultimi giorni);
 - `sitemap.xml` e `robots.txt` raggiungibili;
 - record `MX`, SPF e `_dmarc` presenti come da scheda (DNS pubblici);
 - se c'è Search Console: pagine indicizzate e errori 404 delle ultime settimane (`console_get_search_analytics`,
@@ -172,7 +225,7 @@ Come da contratto, sezione 4, con `fonte = agente_pubblicazione_sito`:
   decidere", record DNS non letti, controlli non fatti.
 
 In `officina_fine`:
-- `risultato`: `{"dominio": "...", "token_online": "...", "zip": "...", "reindirizzamenti": N, "da_decidere": [...],
+- `risultato`: `{"dominio": "...", "token_online": "...", "zip": "...", "reindirizzamenti": N, "da_decidere": [...], "tracciamento": {"gtm": "GTM-…|da creare", "ga4": "…|da creare", "server": "sì|no", "banner": "vanilla-cookieconsent 3.1.0"}, "replit": "link del progetto|da creare",
   "bloccanti": [...], "email": {"fornitore": "...", "resta": true}}`;
 - `ecosistema`: area `sito` → `"pronto da pubblicare"` (o `"online"` dopo la verifica riuscita);
 - `fatti`: dove stanno dominio ed email, se verificato;
