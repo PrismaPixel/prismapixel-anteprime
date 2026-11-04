@@ -1,19 +1,31 @@
 # Tracciamento, banner e Search Console · cosa si imposta
 
 Serve all'agente di pubblicazione per scrivere la sezione "Misure" della scheda di Vincenzo, e a Vincenzo per farla.
-Tutti gli account (GA4, GTM, Google Cloud, Search Console) sono **del cliente**: PrismaPixel li gestisce come utente,
-il cliente resta proprietario. Mai password o token nei file o nella scheda.
+
+**Di chi sono gli account.** GA4, GTM e il server di misura stanno negli **account di PrismaPixel**: una proprietà GA4
+e un contenitore GTM per ogni sito, creati in automatico. Search Console resta del cliente (verifica sul suo dominio),
+con PrismaPixel come utente. Il cliente resta **titolare** dei dati; PrismaPixel è **responsabile del trattamento**
+(termini di servizio). Se il cliente se ne va: la proprietà GA4 si sposta nel suo account GA (Amministrazione →
+Proprietà → Sposta proprietà), il contenitore GTM si esporta e si importa nel suo account, e il server di misura si
+ricrea nel suo progetto Google Cloud. Mai password o token nei file o nella scheda.
 
 ## 1. Lato client (sempre, per ogni sito con tracciamento)
 
+**Creazione automatica.** Il workflow n8n **"PrismaPixel · Crea tracciamento"** (`workflowId: "le5mfdOrvT4weNLD"`,
+`executionMode: "production"`, `triggerNodeName: "Richiesta tracciamento"`, body `{"job_id": "<job della
+pubblicazione>"}`) crea in un colpo solo, negli account di PrismaPixel: proprietà GA4, flusso web, conservazione 14
+mesi ed eventi chiave; contenitore GTM con Tag Google, attivatori ed eventi GA4; lo pubblica e registra `gtm` e `ga4`
+negli accessi del cliente. Risponde con `gtm`, `ga4`, `misurazione`, `pubblicato` ed `errori`. Se GTM e GA4 ci sono
+già non crea niente. Dopo, nella scheda resta solo da collegare Search Console a GA4 e da provare con l'Anteprima.
+
 **GA4**
-- Proprietà del cliente (fuso Europe/Rome, valuta EUR), un flusso web per il dominio. Conservazione dei dati: 14 mesi.
+- Proprietà nell'account di PrismaPixel (fuso Europe/Rome, valuta EUR), un flusso web per il dominio. Conservazione: 14 mesi.
 - Eventi chiave: `generate_lead`; più `click_whatsapp` e `click_telefono` se il sito vende per contatto;
   `begin_checkout` e `purchase` per e-commerce e prenotazioni.
 - Collegamenti: Search Console; Google Ads se ci sono annunci.
 - In accessi: fonte `ga4`, riferimento = ID della proprietà (numeri).
 
-**GTM web** (un contenitore per sito, in accessi fonte `gtm`, riferimento `GTM-XXXXXXX`)
+**GTM web** (un contenitore per sito nell'account GTM di PrismaPixel, in accessi fonte `gtm`, riferimento `GTM-XXXXXXX`)
 - Il sito ha già: consenso negato all'avvio (Consent Mode v2), banner, eventi nel dataLayer (`pubblicazione/tracciamento/`).
 - Nel contenitore:
   1. **Tag Google** (Google tag) con l'ID di misurazione GA4 (`G-…`), attivazione "Initialization - All Pages".
@@ -30,10 +42,11 @@ il cliente resta proprietario. Mai password o token nei file o nella scheda.
 
 - **Perché**: le conversioni arrivano ad annunci e GA4 anche con blocchi del browser e cookie brevi di Safari; i dati
   passano da un dominio del cliente (`misure.<dominio>`).
-- **Costo per il cliente**: Google Cloud Run a consumo, da pochi euro a circa 100-120 €/mese con le istanze sempre
-  accese consigliate da Google per i siti con tanto traffico. Va detto al cliente prima, ed è a suo carico.
+- **Costo**: Google Cloud Run a consumo, da pochi euro a circa 100-120 €/mese con le istanze sempre accese consigliate
+  da Google per i siti con tanto traffico. Lo paga PrismaPixel e lo **riaddebita** al cliente nel canone (va detto
+  prima). Un servizio Cloud Run per cliente, con l'etichetta `cliente=<slug>`, così i costi si leggono per cliente.
 - **Passi**:
-  1. Progetto Google Cloud **del cliente**, con la sua fatturazione; PrismaPixel come utente con ruolo Editor.
+  1. Progetto Google Cloud **di PrismaPixel** (uno per tutti i server di misura), con la fatturazione di PrismaPixel.
   2. GTM → nuovo contenitore **Server** → "Effettua il provisioning automatico del server di tagging" (crea il servizio
      su Cloud Run nel progetto del cliente). Regione: `europe-west1` (o la più vicina in UE).
   3. Dominio: su Cloud Run → **Gestisci domini personalizzati** → `misure.<dominio>`; il record DNS che Google indica

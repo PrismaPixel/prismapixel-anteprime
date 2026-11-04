@@ -99,10 +99,12 @@ File da aggiungere:
   ```
 
 **Misure e consenso** (ogni sito, guida completa in `pubblicazione/tracciamento/IMPOSTAZIONE.md`):
+- **prima** avvia il workflow **"PrismaPixel · Crea tracciamento"** (`IMPOSTAZIONE.md`, sezione 1): crea GA4 e GTM
+  negli account di PrismaPixel e ti restituisce l'ID `GTM-…` (se ci sono già, li restituisce). Se risponde con
+  `errori` o senza `gtm`, scrivili nelle note e nella scheda come bloccante ("tracciamento da completare");
 - in ogni pagina, prima cosa dentro `<head>`, il blocco di `pubblicazione/tracciamento/testa.html` (consenso negato
-  all'avvio, Consent Mode v2, GTM) con l'ID del contenitore del cliente (accessi, fonte `gtm`); subito dopo `<body>`
-  il `noscript` di GTM; prima di `</body>` i tre script. Se l'ID non c'è ancora: lascia `GTM-XXXXXXX` ed è un
-  **bloccante** della scheda ("contenitore GTM da creare");
+  all'avvio, Consent Mode v2, GTM) con quell'ID; subito dopo `<body>` il `noscript` di GTM; prima di `</body>` i tre
+  script. Senza ID lascia `GTM-XXXXXXX`: è un **bloccante** della scheda;
 - copia nella cartella principale del sito `consenso.js` ed `eventi.js` (da `pubblicazione/tracciamento/`) e la
   libreria del banner, versione fissa: `npm pack vanilla-cookieconsent@3.1.0` in una cartella tua, poi
   `dist/cookieconsent.umd.js` e `dist/cookieconsent.css`. In `consenso.js` metti l'indirizzo vero della cookie
