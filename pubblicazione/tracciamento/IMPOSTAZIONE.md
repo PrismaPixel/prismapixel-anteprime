@@ -27,11 +27,16 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
 
 **GTM web** (un contenitore per sito nell'account GTM di PrismaPixel, in accessi fonte `gtm`, riferimento `GTM-XXXXXXX`)
 - Il sito ha già: consenso negato all'avvio (Consent Mode v2), banner, eventi nel dataLayer (`pubblicazione/tracciamento/`).
-- Nel contenitore:
-  1. **Tag Google** (Google tag) con l'ID di misurazione GA4 (`G-…`), attivazione "Initialization - All Pages".
-     Se c'è il lato server: parametro `server_container_url` = `https://misure.<dominio>`.
-  2. **Eventi GA4**, uno per evento del dataLayer: `generate_lead`, `click_whatsapp`, `click_telefono`,
-     `click_email`, `begin_checkout`, `purchase` (attivatore: evento personalizzato con lo stesso nome).
+- Nel contenitore (il workflow lo crea così):
+  1. **Eventi GA4**, uno per evento del dataLayer: `generate_lead`, `click_whatsapp`, `click_telefono`,
+     `click_email`, `begin_checkout`, `purchase` (attivatore: evento personalizzato con lo stesso nome), con l'ID di
+     misurazione `G-…`.
+  2. Il **tag di destinazione GA4** ("Google Analytics G-…", su tutte le pagine) lo crea GTM da solo insieme ai tag
+     evento: **non** aggiungere un Tag Google a mano con lo stesso `G-…`, va in conflitto e la versione non si crea
+     ("Tag Google in conflitto"). Se c'è il lato server: `server_container_url` = `https://misure.<dominio>` nelle
+     impostazioni di quel tag.
+  3. **Dati forniti dagli utenti** (raccolta automatica di email, telefono, indirizzo dai moduli): GTM la accende da
+     solo, il workflow la **spegne**. Non riaccenderla.
   3. Pixel di Meta e tag di Google Ads **solo se ci sono annunci**, con controllo del consenso `ad_storage`.
   4. Impostazioni del contenitore → **Panoramica del consenso** attiva; i tag Google usano il consenso integrato,
      gli altri richiedono `ad_storage` o `analytics_storage`.
