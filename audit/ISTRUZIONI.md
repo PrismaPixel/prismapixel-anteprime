@@ -19,7 +19,8 @@ Nessuno è presente mentre lavori: non fare domande, prendi la lettura più ragi
 
 Regole di spesa, sempre:
 - Passa `max_credits` su **ogni** chiamata a pagamento (valori sotto). Se torna `BudgetExceeded`, salta quel controllo e scrivi "da verificare".
-- **Budget totale 70 crediti.** Tieni un conto progressivo con `meta.credits_charged` di ogni risposta. Se arrivi a 60, fermati con la raccolta e scrivi. Se il budget stringe, la voce della nicchia (controlli 9-11) viene prima delle risposte delle AI (controllo 5): riduci i motori del controllo 5.
+- **Budget totale 80 crediti** (i social ne prendono al massimo 20; se il cliente ha più di 3 canali, misura i 3 più attivi e degli altri scrivi solo che ci sono).
+- Tieni un conto progressivo con `meta.credits_charged` di ogni risposta. Se arrivi a 70, fermati con la raccolta e scrivi. Se il budget stringe, la voce della nicchia (controlli 9-11) viene prima delle risposte delle AI (controllo 5): riduci i motori del controllo 5.
 - `InsufficientCredits` o `SpendCapReached`: fermati, scrivi l'audit con quello che hai, e mettilo in `note`.
 - `NoData`: non riprovare. `ProviderUnavailable`/`ConcurrencyLimit`: riprova una volta dopo `retry_after_s`.
 - Non chiamare mai: strumenti `leads_*`, `console_*`, `analytics_*`, `submit_feedback` con dati del cliente.
@@ -35,8 +36,8 @@ Ordine dei controlli (max_credits indicativo):
 | 3 | Concorrenti e scheda su Google Maps nella zona (1 ricerca: "<attività> <zona>") | `maps_search_places` | 5 |
 | 4 | 2-3 ricerche che farebbe un cliente su Google | `seo_get_serp` | 5 ciascuna |
 | 5 | Risposta delle AI a 1 sola domanda tipica del cliente | `aeo_run_ai_answers` + `get_task` | 30 |
-| 6 | Instagram (solo se il profilo è noto) | `instagram_get_profile`, poi `instagram_get_posts` | 3 ciascuno |
-| 7 | Facebook (solo se la pagina è nota) | `facebook_get_profile` | 3 |
+| 6 | **Social: tutti i canali che il cliente usa** (Instagram, Facebook, TikTok, YouTube, LinkedIn), trovati dal sito, dai dati strutturati e dal brief. Per ognuno profilo, ultimi contenuti, mediana e migliori, con la misura della piattaforma | `officina/SOCIAL-MISURE.md` | 2-4 a canale (LinkedIn fino a 10) |
+| 7 | Canali che il cliente non usa ma dove sta il suo pubblico (es. TikTok per il turismo, LinkedIn per il B2B): 1 riga ciascuno nell'audit, senza misure | — | gratis |
 | 8 | 2-3 concorrenti presi da Maps e SERP: la loro home (titolo, frase principale, cosa promettono) | `seo_get_page` | gratis |
 | 9 | **Voce della nicchia: di cosa parlano le recensioni** del cliente e di 2 concorrenti (argomenti e menzioni, distribuzione delle stelle) | `maps_get_place` (con `place_id` da Maps, `language: "it"`) | 2 ciascuno |
 | 10 | **Voce della nicchia: le parole dei clienti**: commenti al post più commentato del cliente e di 1 concorrente (Instagram o Facebook) | `instagram_get_posts` già fatto → `instagram_get_comments` / `facebook_get_comments` | 1 ciascuno |
@@ -168,5 +169,5 @@ Come da **contratto, sezione 4**, con `fonte = agente_audit_strategia`:
 - In più, per il passaggio di testimone: aggiungi in fondo alle note una riga `PASSA_A: <deliverable>` con il servizio della priorità n°1 (es. `PASSA_A: sito_web`).
 - In `officina_fine` (contratto, sezione 4b):
   - `risultato` contiene anche `"posizionamento": {"frase": "...", "breve": "...", "spazio_libero": "...", "voti": {"chiarezza": 0, "differenza": 0, "credibilita": 0}}` e `"voce_clienti": {"desideri": [...], "paure": [...], "parole": [...]}`;
-  - se hai letto i post del cliente (controllo 6): `"social": {"canale": "instagram", "mediana": {"salvataggi_condivisioni": 0, "interazioni": 0}, "migliori": [{"url": "...", "formato": "carosello|reel|post", "tema": "...", "hook": "...", "resa": 3.4, "data": "AAAA-MM-GG"}]}` con i post che hanno reso almeno il doppio della sua mediana (massimo 5; `resa` = volte la mediana; nessuno se i post sono meno di 8). Li riprende il piano editoriale (`officina/PIANO-EDITORIALE.md`, sezione 4b). Se il cliente ha già un accesso `instagram` o `facebook_pagina` (raro all'audit), usa il workflow "PrismaPixel · Insights social" come nel report (sezione 2c) invece dei dati pubblici;
+  - `"social": {"canali": [...]}` con un oggetto per ogni canale misurato (controllo 6), nel formato di `officina/SOCIAL-MISURE.md` sezione 3: misura, mediana e `migliori` (resa ≥ 2, massimo 5 per canale). Li riprende il piano editoriale (`officina/PIANO-EDITORIALE.md`, sezione 4b). Se il cliente ha già un accesso `instagram` o `facebook_pagina` (raro all'audit), usa il workflow "PrismaPixel · Insights social" come nel report (sezione 2c) invece dei dati pubblici;
   - `fatti` comprende la frase di posizionamento e i 2 desideri principali della nicchia, così li ritrovano tutti gli agenti successivi.

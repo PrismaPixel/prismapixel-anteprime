@@ -186,8 +186,9 @@ Un contenuto che ha funzionato per **questo** cliente vale più di qualunque ten
 volta in una versione nuova, finché continua a funzionare.
 
 **Chi è un vincitore**: un contenuto del cliente (fatto da lui o da noi) che ha reso **almeno il doppio della sua
-mediana** in salvataggi + condivisioni (o, se non ci sono, interazioni o visualizzazioni), confrontato con i suoi
-contenuti degli ultimi 12 mesi, mai con il settore. Servono almeno 8 contenuti per avere una mediana; con meno, nessun
+mediana** sullo stesso canale, con la misura di quella piattaforma (`officina/SOCIAL-MISURE.md`: salvataggi +
+condivisioni su TikTok e su Instagram con gli insights, visualizzazioni su YouTube, interazioni su Facebook e LinkedIn),
+confrontato con i suoi contenuti degli ultimi 12 mesi, mai con il settore o con un altro canale. Servono almeno 8 contenuti per avere una mediana; con meno, nessun
 vincitore. Deve parlare ancora di qualcosa che il cliente vende o fa: eventi passati e prodotti tolti non contano.
 
 **Da dove arrivano**, in quest'ordine (prima i gratuiti):
@@ -197,7 +198,9 @@ vincitore. Deve parlare ancora di qualcosa che il cliente vende o fa: eventi pas
    dati pubblici. Fuori dal report il periodo sono gli ultimi 90 giorni, la mediana sempre 12 mesi;
 1. `contesto.cliente.lavori`: `audit_strategia` → `risultato.social.migliori`; `report_mensile` → `risultato.misure.<canale>.migliori` (i migliori del mese, anche quelli fatti da noi);
 2. il piano stesso: `vincitori` (sotto);
-3. se mancano o hanno più di 60 giorni: **1 chiamata** `instagram_get_posts` o `tiktok_get_videos` sul canale principale (1-3 crediti, budget della ricerca), anche quando la ricerca di viralità non si fa.
+3. se mancano o hanno più di 60 giorni: i dati pubblici del **canale principale e di ogni canale `dedicato`**, con strumenti e misura di `officina/SOCIAL-MISURE.md` (2-4 crediti a canale, budget della ricerca), anche quando la ricerca di viralità non si fa.
+
+Ogni canale ha i **suoi** vincitori, misurati contro la sua mediana; le riprese di un canale `dedicato` stanno nei suoi spazi e nella sua quota.
 
 Nel piano:
 `"vincitori": [{"url": "...", "canale": "instagram", "formato": "carosello", "tema": "...", "hook": "...", "resa": 3.4, "data": "AAAA-MM-GG", "riprese": [{"spazio": "S3-gio", "versione": "reel con lo stesso hook", "resa": null}], "stato": "attivo|ritirato"}]`

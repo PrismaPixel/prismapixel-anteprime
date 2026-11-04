@@ -52,7 +52,7 @@ Scrivi il lavoro come lo capisce il cliente: "12 contenuti pubblicati su 12 prev
 ### 2b. Dati pubblici (sempre, con Manifold)
 
 Regole di spesa come nell'audit: `max_credits` su ogni chiamata, `dry_run` per i costi nuovi, `NoData` non si
-riprova. **Budget 25 crediti per report.** Vietati: `leads_*`, `submit_feedback` con dati del cliente.
+riprova. **Budget 25 crediti per report**, più 3 per ogni canale social oltre il primo (massimo 40). Vietati: `leads_*`, `submit_feedback` con dati del cliente.
 
 | servizio pagato | cosa misuri | strumento | crediti |
 |---|---|---|---|
@@ -60,7 +60,7 @@ riprova. **Budget 25 crediti per report.** Vietati: `leads_*`, `submit_feedback`
 | SEO, AEO & GEO (senza OpenSEO) | posizione delle **ricerche monitorate** del piano SEO (`piano_seo.risultato.ricerche_monitorate`; se non c'è, 3-5 ricerche fisse scelte al primo report): prima Search Console se collegata (gratis), poi **una sola** chiamata `seo_get_ranked_keywords` sul dominio (`location: "Italy"`, `language: "it"`, `limit: 100`) da cui leggi le posizioni di tutte; `seo_get_position` solo per 1-2 ricerche importanti che non compaiono | 10 + 6 ciascuna |
 | SEO, AEO & GEO | scheda Google: voto e numero di recensioni | `maps_get_place` | 2 |
 | SEO, AEO & GEO | risposte delle AI a 1 domanda fissa, **solo a marzo, giugno, settembre e dicembre** (o ogni mese al livello 3) | `aeo_run_ai_answers` + `get_task` | ≤ 15 |
-| Social & AI Content, Video AI, Montaggio | follower, contenuti pubblicati nel mese, i 3 contenuti migliori del mese per interazioni | `instagram_get_profile`, `instagram_get_posts` (e TikTok o Facebook se sono nel piano) | 1-3 ciascuno |
+| Social & AI Content, Video AI, Montaggio | per **ogni canale `principale` o `dedicato` del piano** (Instagram, Facebook, TikTok, YouTube, LinkedIn): follower, contenuti del mese, mediana e migliori del mese con la misura della piattaforma; dei canali `stesso`/`adattato` solo quanti contenuti sono usciti | `officina/SOCIAL-MISURE.md` (insights privati prima, se collegati: 2c) | 2-4 a canale |
 | Gestione ADS | annunci attivi del cliente nella libreria pubblica | `ads_get_advertiser_ads` | 2 |
 | Siti Web & E-commerce | il sito risponde, titolo e descrizione delle pagine chiave, strumenti presenti | workflow **"PrismaPixel · Scansione sito"** (come nell'audit) + `seo_get_page` | gratis |
 | Email Marketing, Automazioni, Consulenza | niente dati pubblici: solo lavoro fatto e dati privati | — | — |

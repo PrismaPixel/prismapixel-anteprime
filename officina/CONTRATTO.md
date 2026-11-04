@@ -167,6 +167,8 @@ annunci, Reddit e il resto, e per la SEO solo se OpenSEO non è disponibile.
 
 ## 5b. Copywriting
 
+Chi misura i social del cliente (audit, report, piano editoriale) segue `officina/SOCIAL-MISURE.md`: tutti i canali, una misura per piattaforma, insights privati prima dei dati pubblici.
+
 Siti, landing, annunci, email e contenuti SEO seguono anche `officina/COPYWRITING.md`: posizionamento, livello di
 consapevolezza, voce dei clienti e del cliente, struttura, tre test dei titoli, prove e controllo finale.
 
