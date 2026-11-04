@@ -143,14 +143,35 @@ Controlla in locale prima di salvare: tutti i link interni portano a file che es
   `inputs: { "webhookData": { "method": "GET", "query": { "token": "<token>" } } }`) e controlla in
   `get_workflow_execution` che "Unisci file e immagini" non abbia `immagini_mancanti`.
 
+## 4a. Cloudflare: zona, progetto Pages e domini (automatico)
+
+Avvia con `execute_workflow`: `workflowId: "Awemky0BENlNokKa"`, `executionMode: "production"`,
+`triggerNodeName: "Richiesta Cloudflare"`, `inputs: { "webhookData": { "method": "POST", "body": { "job_id": "<job_id>" } } }`.
+Leggi l'esito con `get_workflow_execution` (`includeData: true`, `nodeNames: ["Esito", "Non valido"]`).
+- Crea (o ritrova) la **zona** del dominio nell'account Cloudflare di PrismaPixel: Cloudflare importa da solo i record
+  che trova. Confronta MX, TXT e `_dmarc` di oggi con quelli importati: `record_mancanti` va nella scheda come
+  **bloccante** ("da aggiungere su Cloudflare prima del cambio dei nameserver").
+- Crea il **progetto Pages** (`progetto`, di solito il dominio con i trattini: `esempio-it`; per un altro nome metti
+  `progetto_pages` nel brief) e collega dominio e `www`.
+- Zona nuova (non ancora attiva): punta subito dominio e `www` a `<progetto>.pages.dev` (toglie solo A, AAAA e CNAME
+  di dominio e `www`: email e verifiche restano). Non cambia niente online finché il cliente non cambia i nameserver.
+- Zona **già attiva** (il dominio è già su Cloudflare e il sito è online): i record del sito **non** si toccano
+  (`cambio_record: rimandato`). Nella scheda: "il giorno del lancio, dopo il primo caricamento, rilancia il workflow
+  con `lancio: true`".
+- `nameserver`: vanno nella scheda e nella guida per il cliente. Registra in accessi `dominio` (con i nameserver) e
+  `hosting` (`pages:<progetto>`).
+- `errori` non vuoto o nodo "Non valido": scrivilo nelle note e nella scheda come bloccante, con il testo.
+- Il **www ↔ senza www** non lo fa il workflow: nella scheda resta la regola di reindirizzamento da creare in
+  Cloudflare (Regole → Regole di reindirizzamento → "Reindirizza da WWW a radice" o il contrario).
+
 ## 4b. Il progetto Replit (per le modifiche future)
 
 Ogni sito pubblicato ha un progetto Replit con gli stessi file: lì si fanno le modifiche, e da lì si pubblica su
 Cloudflare Pages (`pubblicazione/tracciamento/IMPOSTAZIONE.md`, sezione 5). Solo per `livello: completa`.
 - Con lo strumento Replit `create_app_from_prompt`, prompt (in inglese, preciso):
-  "Create a static website project named `<slug>`. Download the zip from `<link dello zip>` and extract it into
+  "Create a static website project named `<progetto>`. Download the zip from `<link dello zip>` and extract it into
   `site/` without changing any file. Serve `site/` as a static site for preview. Add `package.json` with `wrangler`
-  pinned to an exact version and the script `\"pubblica\": \"wrangler pages deploy site --project-name <slug> --branch main\"`,
+  pinned to an exact version and the script `\"pubblica\": \"wrangler pages deploy site --project-name <progetto> --branch main\"`,
   which reads `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` from Replit Secrets. Add a short README in Italian:
   edit files in `site/`, then run `npm run pubblica`. Do not add frameworks, build steps or analytics."
 - Controlla con `list_app_files` che in `site/` ci siano tutte le pagine e `_redirects`; con `read_app_file` che
@@ -164,14 +185,14 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
 
 1. **In breve**: dominio, dove sta il dominio, dove sta l'email, numero di reindirizzamenti, punti bloccanti.
 2. **Bloccanti** (in cima, in evidenza): cosa va sistemato prima di andare online e chi deve farlo.
-3. **Una settimana prima**:
-   - accesso Cloudflare come membro arrivato e dominio aggiunto su Cloudflare;
-   - **controllare che Cloudflare abbia importato tutti i record attuali**, soprattutto `MX` e `TXT` delle email:
-     elencali come devono essere (letti dai DNS pubblici attuali, sezione 6), così Vincenzo li confronta;
-   - TTL a 5 minuti dove si può.
+3. **Una settimana prima** (zona, progetto Pages e domini li ha già fatti il workflow, sezione 4a):
+   - i **record mancanti** trovati dal workflow (se ci sono) aggiunti su Cloudflare → DNS;
+   - un'occhiata ai record importati, soprattutto `MX` e `TXT` delle email (sezione 6);
+   - TTL a 5 minuti dove si può, dal pannello del vecchio fornitore DNS.
 4. **Il giorno del lancio**:
-   - Cloudflare Pages: nuovo progetto `<slug>` → **Carica i file** → lo zip (link sopra) → collegare il dominio
-     (dominio senza e con `www`) dalla scheda "Domini personalizzati";
+   - **primo caricamento** dal progetto Replit: Shell → `npm run pubblica` (oppure, senza Replit, Cloudflare →
+     progetto `<progetto>` → Crea distribuzione → lo zip). Controlla che `<progetto>.pages.dev` mostri il sito;
+   - se la zona era già attiva: rilancia "PrismaPixel · Cloudflare sito" con `lancio: true`;
    - reindirizzamento `www` ↔ senza `www` come da brief (regola di reindirizzamento in Cloudflare);
    - solo dopo che i record sono verificati: il cliente cambia i **nameserver** (guida già mandata);
    - email: tabella dei record da avere (sezione 6).

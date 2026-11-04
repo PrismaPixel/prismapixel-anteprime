@@ -102,6 +102,8 @@ modifiche, e il progetto **pubblica su Cloudflare Pages** con un comando. Cloudf
 reindirizzamenti, HTTPS); Replit è l'officina.
 - Una volta sola su Replit: nei **Secrets dell'account** `CLOUDFLARE_API_TOKEN` (token Cloudflare con permesso
   "Cloudflare Pages: Edit" sull'account di PrismaPixel) e `CLOUDFLARE_ACCOUNT_ID`.
+- Zona, progetto Pages e domini li crea il workflow "PrismaPixel · Cloudflare sito" (`pubblicazione/ISTRUZIONI.md`,
+  sezione 4a); il progetto Replit pubblica su quel progetto Pages. Al token serve anche "Cloudflare Pages: Edit".
 - Nel progetto: cartella `site/` con il sito, `package.json` con `wrangler` a versione fissa e lo script
   `"pubblica": "wrangler pages deploy site --project-name <slug> --branch main"`, una pagina README breve.
 - Per pubblicare una modifica: nel progetto, Shell → `npm run pubblica`. La versione precedente resta su Cloudflare
