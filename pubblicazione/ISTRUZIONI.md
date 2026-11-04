@@ -218,7 +218,7 @@ servizio DNS-over-HTTPS come `https://dns.google/resolve?name=<dominio>&type=MX`
 
 | caso | cosa scrivi |
 |---|---|
-| sito | `CNAME` (o il record che Cloudflare Pages propone) per il dominio e per `www` verso `<progetto>.pages.dev`: lo crea Cloudflare quando colleghi il dominio a Pages |
+| sito | `CNAME` (o il record che Cloudflare Pages propone) per il dominio e per `www` verso `<progetto>.pages.dev`: lo crea il workflow "PrismaPixel · Cloudflare sito" (sezione 4a) |
 | email che **resta dov'è** | i record `MX` e `TXT` attuali **devono restare uguali**: elencali uno per uno |
 | email **nuova** o da spostare | `MX` del fornitore scelto; SPF (un solo record `v=spf1 ...` con il fornitore); **DKIM: da copiare dal pannello del fornitore** (non si inventa); DMARC di partenza `v=DMARC1; p=none; rua=mailto:<email del cliente>`, da alzare a `quarantine` dopo 4 settimane senza problemi |
 | SPF già presente | non aggiungerne un secondo: unisci i fornitori in un solo record |
