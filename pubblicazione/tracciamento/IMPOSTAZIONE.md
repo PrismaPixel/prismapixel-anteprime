@@ -2,9 +2,9 @@
 
 Serve all'agente di pubblicazione per scrivere la sezione "Misure" della scheda di Vincenzo, e a Vincenzo per farla.
 
-**Di chi sono gli account.** GA4, GTM e il server di misura stanno negli **account di PrismaPixel**: una proprietà GA4
-e un contenitore GTM per ogni sito, creati in automatico. Search Console resta del cliente (verifica sul suo dominio),
-con PrismaPixel come utente. Il cliente resta **titolare** dei dati; PrismaPixel è **responsabile del trattamento**
+**Di chi sono gli account.** GA4, GTM, il server di misura e **Search Console** stanno negli **account di
+PrismaPixel**: una proprietà GA4, un contenitore GTM e una proprietà Search Console di dominio per ogni sito. Il
+cliente, se vuole, viene aggiunto come utente con accesso in lettura. Il cliente resta **titolare** dei dati; PrismaPixel è **responsabile del trattamento**
 (termini di servizio). Se il cliente se ne va: la proprietà GA4 si sposta nel suo account GA (Amministrazione →
 Proprietà → Sposta proprietà), il contenitore GTM si esporta e si importa nel suo account, e il server di misura si
 ricrea nel suo progetto Google Cloud. Mai password o token nei file o nella scheda.
@@ -69,8 +69,11 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
 
 ## 4. Search Console e reindirizzamenti su Cloudflare
 
-- Proprietà **di dominio** (`<dominio>`, tutte le varianti), verificata con record **TXT** su Cloudflare.
-  Il cliente è proprietario; PrismaPixel utente con accesso completo. In accessi: fonte `search_console`.
+- Proprietà **di dominio** (`<dominio>`, tutte le varianti) nell'**account Google di PrismaPixel** (proprietario
+  PrismaPixel). Si verifica con il record **TXT** sulla zona del dominio su Cloudflare, **dopo** il cambio dei
+  nameserver (prima Google non lo vede): in Search Console → Aggiungi proprietà → Dominio, Google propone di
+  aggiungere il record da solo tramite Cloudflare; se no, copia il TXT a mano in Cloudflare → DNS.
+  In accessi: fonte `search_console`, riferimento `sc-domain:<dominio>`. Il cliente, se lo chiede, come utente.
 - Subito dopo il lancio: invia `sitemap.xml`; collega GA4.
 - **Reindirizzamenti**:
   - stesso dominio (restyling): bastano le regole `_redirects` del sito su Cloudflare Pages;
