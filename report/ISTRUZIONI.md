@@ -77,6 +77,7 @@ quelle**, e solo per questo cliente:
 | `search_console` | clic, impressioni e posizione media delle ricerche, confronto col mese prima | `console_get_search_analytics` sulla proprietà in `riferimento` |
 | `ga4` | visite, da dove arrivano, contatti o acquisti (conversioni) | `analytics_get_report` sulla proprietà in `riferimento` |
 | `meta` | spesa, persone raggiunte, clic e risultati (conversazioni, contatti, acquisti, prenotazioni) del mese, totali e per campagna | workflow n8n **"PrismaPixel · Dati Meta Ads"** (sotto) |
+| `instagram`, `facebook_pagina` | i contenuti del mese con **copertura, salvataggi e condivisioni veri** (Instagram) o reazioni, commenti e condivisioni (pagina), la mediana dei 12 mesi e i **migliori del mese** (almeno il doppio della mediana) | workflow n8n **"PrismaPixel · Insights social"** (sotto). Se c'è, **sostituisce** la riga social della fonte 2b per quel canale |
 | `google_ads`, `email`, `ecommerce`, `altro` | — | non c'è ancora un lettore automatico: scrivi "dati di <fonte> da collegare" nelle note |
 
 **Dati Meta Ads.** Avvia con `execute_workflow`: `workflowId: "SNyf2JhKdBX3H1Cl"`, `executionMode: "production"`,
@@ -91,6 +92,17 @@ Leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames
 - La spesa è nella valuta dell'account. Nel report mostra spesa, risultati e costo per risultato (spesa ÷ risultati,
   calcolato da te); clic e CTR solo se aiutano a spiegare. Per il pubblico dei social organici restano i dati pubblici
   di 2b.
+
+**Insights social.** Avvia con `execute_workflow`: `workflowId: "UAvE9NVsNXxnaW42"`, `executionMode: "production"`,
+`triggerNodeName: "Richiesta insights social"`, `inputs: { "webhookData": { "method": "POST", "body": { "job_id": "<job_id del report>" } } }`.
+Il risultato **non sta nell'esecuzione** (non viene salvata): attendi 10-60 secondi e leggilo con `execute_sql`:
+`select dati from insights_social where job_ref = '<job_id>' order by id desc limit 1;`
+- Per canale hai `metrica` (salvataggi + condivisioni se Meta dà gli insights, altrimenti like + commenti), `mediana`
+  dei 12 mesi, `migliori` del mese (con `resa` = volte la mediana), `contenuti` del mese ed eventuale `errore`.
+- `errore` con "permission" o "does not exist": nelle note "insights <canale> non raggiungibili: controllare
+  l'accesso partner e l'utente di sistema" e usa i dati pubblici di 2b per quel canale.
+- Copia `migliori` in `risultato.misure.<canale>.migliori` (sezione 5) con la stessa `resa`: li riprende il piano
+  editoriale. Copertura e salvataggi sono dati privati: nel report sì, mai su GitHub.
 
 Se la proprietà indicata non compare tra quelle collegate (`console_list_properties`, `analytics_list_properties`),
 non cercarne altre: scrivi nelle note "accesso <fonte> non raggiungibile". Se non ci sono accessi, il report si fa lo

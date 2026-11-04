@@ -191,6 +191,10 @@ contenuti degli ultimi 12 mesi, mai con il settore. Servono almeno 8 contenuti p
 vincitore. Deve parlare ancora di qualcosa che il cliente vende o fa: eventi passati e prodotti tolti non contano.
 
 **Da dove arrivano**, in quest'ordine (prima i gratuiti):
+0. se il cliente ci ha dato l'accesso (`accessi_cliente` con fonte `instagram` o `facebook_pagina`): il workflow
+   **"PrismaPixel · Insights social"** (`workflowId: "UAvE9NVsNXxnaW42"`, body `{"job_id": "<job_id>"}`, risultato in
+   `insights_social`, come in `report/ISTRUZIONI.md` sezione 2c). Dà salvataggi e condivisioni veri: vale più dei
+   dati pubblici. Fuori dal report il periodo sono gli ultimi 90 giorni, la mediana sempre 12 mesi;
 1. `contesto.cliente.lavori`: `audit_strategia` → `risultato.social.migliori`; `report_mensile` → `risultato.misure.<canale>.migliori` (i migliori del mese, anche quelli fatti da noi);
 2. il piano stesso: `vincitori` (sotto);
 3. se mancano o hanno più di 60 giorni: **1 chiamata** `instagram_get_posts` o `tiktok_get_videos` sul canale principale (1-3 crediti, budget della ricerca), anche quando la ricerca di viralità non si fa.
