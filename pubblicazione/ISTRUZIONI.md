@@ -158,7 +158,8 @@ Leggi l'esito con `get_workflow_execution` (`includeData: true`, `nodeNames: ["E
 - Zona **già attiva** (il dominio è già su Cloudflare e il sito è online): i record del sito **non** si toccano
   (`cambio_record: rimandato`). Nella scheda: "il giorno del lancio, dopo il primo caricamento, rilancia il workflow
   con `lancio: true`".
-- `nameserver`: vanno nella scheda e nella guida per il cliente. Registra in accessi `dominio` (con i nameserver) e
+- `nameserver`: vanno nella scheda. Il workflow manda anche a Vincenzo su Telegram il messaggio pronto da inoltrare al
+  cliente (guida per il cliente: `guida-dominio-email-j48awv`, il cliente non crea account Cloudflare). Registra in accessi `dominio` (con i nameserver) e
   `hosting` (`pages:<progetto>`).
 - `errori` non vuoto o nodo "Non valido": scrivilo nelle note e nella scheda come bloccante, con il testo.
 - Il **www ↔ senza www** non lo fa il workflow: nella scheda resta la regola di reindirizzamento da creare in
@@ -194,7 +195,8 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
      progetto `<progetto>` → Crea distribuzione → lo zip). Controlla che `<progetto>.pages.dev` mostri il sito;
    - se la zona era già attiva: rilancia "PrismaPixel · Cloudflare sito" con `lancio: true`;
    - reindirizzamento `www` ↔ senza `www` come da brief (regola di reindirizzamento in Cloudflare);
-   - solo dopo che i record sono verificati: il cliente cambia i **nameserver** (guida già mandata);
+   - solo dopo il primo caricamento e i record verificati: Vincenzo inoltra al cliente il messaggio con i
+     **nameserver** arrivato su Telegram, e il cliente li cambia;
    - email: tabella dei record da avere (sezione 6).
 4b. **Misure** (`pubblicazione/tracciamento/IMPOSTAZIONE.md`): GA4 e contenitore GTM del cliente con i tag e gli eventi
    elencati, prova con Anteprima di GTM; **lato server** su Cloud Run solo se indicato, con il costo da comunicare al
