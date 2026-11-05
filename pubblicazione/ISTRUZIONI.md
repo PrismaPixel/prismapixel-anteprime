@@ -174,9 +174,19 @@ Cloudflare Pages (`pubblicazione/tracciamento/IMPOSTAZIONE.md`, sezione 5). Solo
   `site/` without changing any file. Serve `site/` as a static site for preview. Add `package.json` with `wrangler`
   pinned to an exact version and the script `\"pubblica\": \"wrangler pages deploy site --project-name <progetto> --branch main\"`,
   which reads `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` from Replit Secrets. Add a short README in Italian:
-  edit files in `site/`, then run `npm run pubblica`. Do not add frameworks, build steps or analytics."
+  edit files in `site/`, then run `npm run pubblica`. Do not add frameworks, build steps or analytics.
+  When everything is in place, run `npm run pubblica` once and report the deployment URL it prints. If the secrets are
+  missing, say so and do not ask for them in chat."
 - Controlla con `list_app_files` che in `site/` ci siano tutte le pagine e `_redirects`; con `read_app_file` che
-  `index.html` sia identico a quello del kit. Non pubblicare l'app su Replit.
+  `index.html` sia identico a quello del kit. Non pubblicare l'app su Replit (il sito si pubblica solo su Cloudflare
+  Pages).
+- **Primo caricamento**: se Replit risponde con l'indirizzo `…pages.dev`, aprilo (`seo_get_page` o una richiesta
+  HTTP) e controlla che mostri la home del kit. Se mancano i Secrets o il caricamento non riesce: nella scheda,
+  bloccante "primo caricamento da fare: Replit → Shell → `npm run pubblica`".
+- Da qui in poi lavora il workflow **"PrismaPixel · Regista pubblicazione"** (ogni 2 ore, tabella `siti_lancio`):
+  appena su Pages c'è il primo caricamento manda a Vincenzo su Telegram il messaggio con i nameserver da inoltrare;
+  quando i nameserver passano avvia Search Console e avvisa che il sito è online; 3 giorni dopo crea il lavoro di
+  verifica. Nella scheda scrivilo così, senza chiedere a Vincenzo di avviare Search Console a mano.
 - Se lo strumento non c'è o non riesce: scrivi nella scheda "progetto Replit da creare" con il prompt qui sopra.
 
 ## 5. La scheda di pubblicazione per Vincenzo
@@ -203,8 +213,8 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
    cliente; `misure.<dominio>` su Cloudflare senza proxy; la cookie policy aggiornata con gli strumenti usati.
    Il progetto Replit (sezione 4b) con il comando per ripubblicare.
 5. **Subito dopo** (entro 1 ora): sito raggiungibile in HTTPS, 10 reindirizzamenti più importanti provati a mano,
-   una mail di prova inviata e ricevuta dal cliente, **Search Console**: Vincenzo avvia il workflow
-   "PrismaPixel · Search Console" (`IMPOSTAZIONE.md`, sezione 4) appena la zona è attiva su Cloudflare, poi collega
+   una mail di prova inviata e ricevuta dal cliente, **Search Console**: la avvia da solo il Regista quando i
+   nameserver passano (se fallisce, Vincenzo rilancia "PrismaPixel · Search Console"), poi Vincenzo collega
    Search Console a GA4 (in GA4 → Amministrazione → Collegamenti a Search Console).
 6. **Dopo** (in 2-7 giorni): link del sito aggiornato su scheda Google, Instagram, Facebook e portali; poi
    `pubblicazione_sito` con `livello: verifica`.
