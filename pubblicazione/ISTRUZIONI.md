@@ -234,6 +234,7 @@ servizio DNS-over-HTTPS come `https://dns.google/resolve?name=<dominio>&type=MX`
 | email che **resta dov'è** | i record `MX` e `TXT` attuali **devono restare uguali**: elencali uno per uno |
 | email **nuova** o da spostare | `MX` del fornitore scelto; SPF (un solo record `v=spf1 ...` con il fornitore); **DKIM: da copiare dal pannello del fornitore** (non si inventa); DMARC di partenza `v=DMARC1; p=none; rua=mailto:<email del cliente>`, da alzare a `quarantine` dopo 4 settimane senza problemi |
 | SPF già presente | non aggiungerne un secondo: unisci i fornitori in un solo record |
+| **controllo automatico** | il workflow "PrismaPixel · Cloudflare sito" (sezione 4a) riconosce il fornitore dagli `MX` (Google Workspace, Microsoft 365, Aruba), controlla SPF, DKIM e DMARC e lo dice in `email` (fornitore, `spf`, `dkim`, `dmarc`, `proposte`, `avvisi`, `scritti`). Su una zona nuova scrive da solo SPF (o lo corregge aggiungendo il fornitore) e un DMARC `p=none`; su una zona già attiva non scrive niente e mette le `proposte`. Nella scheda copia `email.scritti`, le `proposte` da applicare e ogni `avviso` (DKIM da attivare, SPF doppio, altri servizi che mandano email) come punti da spuntare; DKIM resta sempre un passo nel pannello del fornitore |
 | vecchio hosting con la posta dentro | bloccante finché le caselle non sono migrate: **non si disdice il vecchio hosting** |
 
 ## 7. Livello `verifica` (dopo il lancio)
