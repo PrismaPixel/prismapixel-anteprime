@@ -128,6 +128,9 @@ L'annuncio indiretto fallisce nel momento in cui sembra un annuncio o sembra fat
   testo dentro.
 - Modelli: `gpt_image_2_5` per le scene realistiche, `marketing_studio_image` per i prodotti dei diretti. Se non
   sei sicuro, `models_explore` (`action: "recommend"`). Usa sempre `max_credits` e i link `_min.webp`.
+- **Foto vere prima di tutto**: se il cliente ha caricato foto o ne ha sui suoi canali, gli annunci partono da
+  quelle (migliorate con Higgsfield se serve, senza cambiare cosa mostrano): `officina/FOTO.md`. Le foto generate
+  coprono solo ciò che manca.
 - **Budget** (foto e grafiche insieme): **8 crediti** per `prima`, **18** per `completa`. Prima di generare, controlla il costo con
   `get_cost: true`.
 - Guarda ogni immagine con Read. Se sembra finta (pelle di plastica, mani strane, lettere inventate), rigenerala una

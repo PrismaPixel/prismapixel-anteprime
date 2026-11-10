@@ -80,6 +80,7 @@ Uguale all'agente siti (sezioni 2, 2b, 3 e 4 di `siti/ISTRUZIONI.md`), con quest
   segui la direzione dell'attività; se esiste già un sito PrismaPixel del cliente o i colori del brand, riprendili.
 - **Fase B (`impeccable`)** in modalità **Persuade**: critique, audit, polish. Le regole della casa di taste
   restano.
+- **Foto del cliente prima** (`officina/FOTO.md`), poi le immagini generate.
 - **Immagini Higgsfield**: **3-6 immagini** (revisione 0-2). Per l'advertorial vale lo stile degli annunci
   indiretti (foto vere da telefono, niente rendering, niente prodotto protagonista, niente testo dentro). Se gli
   annunci esistono, riusa i link `_min.webp` delle loro immagini prima di generarne di nuove.

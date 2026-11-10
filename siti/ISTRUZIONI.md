@@ -206,7 +206,8 @@ l'agente `piano_seo`. Salva le stesse ricerche nel progetto OpenSEO con un'etich
   (sezione 2b); la direzione visiva resta tua e nasce dall'inventario.
 - Passo 3: `--have photography,product-photo` perché le immagini le generi tu con Higgsfield.
   Se il cliente ha colori o logo (`materiali_cliente`), usa `--keep palette,type` dove serve.
-- Passo 6, immagini: la fonte principale è **Higgsfield** (sezione 4). Le foto d'archivio
+- Passo 6, immagini: prima le **foto vere del cliente** e dei suoi canali (`officina/FOTO.md`), migliorate se
+  serve; poi **Higgsfield** (sezione 4) per ciò che manca. Le foto d'archivio
   (`assets.mjs`) solo come complemento, e solo se la rete le raggiunge.
 - Passo 9: il movimento è richiesto, con `prefers-reduced-motion`.
 

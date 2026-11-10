@@ -193,7 +193,8 @@ classi `.s-` e i font della scheda di stile.
   parole grandi.
 - **Ultima slide (CTA)**: handle del cliente ben visibile e l'azione in una riga.
 - **Immagini**:
-  - generale solo se i riferimenti scelti usano la foto;
+  - **prima le foto del cliente** e dei suoi canali, poi l'archivio, migliorate se serve: `officina/FOTO.md`;
+  - genera solo se le foto vere non bastano e i riferimenti scelti usano la foto;
   - generale con Higgsfield. Prima usa `models_explore` (`action: "recommend"`) e poi `generate_image`, sempre con
     `max_credits`;
   - budget: **4 crediti** per `prima`, **10 crediti** per `completa`;

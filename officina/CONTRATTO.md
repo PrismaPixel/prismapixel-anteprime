@@ -72,8 +72,8 @@ link privato.
 - Nomi dei file: solo `[a-z0-9-]+\.(html|css|js|svg|json|txt)`, **niente sottocartelle**. La pagina principale
   si chiama sempre `index.html`.
 - Link tra le pagine **relativi** (`camere.html`, `stile.css`). Mai link che iniziano con `/`.
-- **Immagini**: niente file immagine nella tabella. Usa i link diretti di Higgsfield (versione `_min.webp`) o
-  immagini SVG scritte nel codice. Font da Google Fonts.
+- **Immagini**: niente file immagine nella tabella. Prima le foto vere del cliente con i loro link `url`
+  (`officina/FOTO.md`), poi i link diretti di Higgsfield (versione `_min.webp`) o immagini SVG scritte nel codice. Font da Google Fonts.
 - Per correggere un file già salvato basta salvarne una nuova riga con lo stesso token e lo stesso nome:
   vale l'ultima.
 - **Link dell'anteprima** (quello da mettere nell'esito):
