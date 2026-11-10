@@ -45,6 +45,7 @@ Le email partono dal cliente, quindi devono suonare come lui.
 |---|---|---|
 | `prima` | **sequenza di benvenuto di 3 email**: 1) benvenuto, 2) valore, 3) offerta | 20-30 min |
 | `completa` | **piano di comunicazione**: segmenti, automazioni (benvenuto 3 email, richiesta non conclusa o carrello 2, riattivazione 2, dopo l'acquisto con richiesta di recensione 1), una newsletter tipo e il calendario del primo mese. Tutte le email scritte e impaginate | 45-60 min |
+| `mese` (cliente in abbonamento) | **le newsletter di `brief.contenuti`** (2, oppure 4 divise per segmento), scritte e impaginate, con data d'invio consigliata; se richiesto, **1 test sull'oggetto** (due oggetti e come leggere il risultato) e il **report degli invii** del mese precedente con i dati che il cliente ci ha dato. Solo verso chi ha dato il consenso; l'invio lo approva Vincenzo | 40-90 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | 10-20 min |
 
 **La sequenza di benvenuto** (giorno 0, 2 e 5, salvo indicazioni del brief):

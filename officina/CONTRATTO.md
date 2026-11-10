@@ -29,6 +29,10 @@ Il messaggio di avvio contiene un JSON:
 - `deliverable` decide le istruzioni da seguire (tabella in sezione 5). Deliverable sconosciuto o senza
   istruzioni: esito `errore` con note "deliverable non ancora disponibile: <nome>" e fermati.
 - `canale: prova` = lavoro del banco di prova: comportati esattamente come con un cliente vero.
+- `brief.una_tantum` presente = **lavoro venduto** (il cliente ha pagato): fai la versione definitiva, non una bozza da
+  vendere. Parti da ciò che è già stato fatto per lui (Agent OS) e dalle sue foto (`officina/FOTO.md`).
+- `livello: mese` = pacchetto mensile di un cliente in abbonamento: produci esattamente le quantità di
+  `brief.contenuti` (istruzioni del servizio, riga `mese`).
 
 ## 2. Dove lavori
 

@@ -66,6 +66,7 @@ il regalo che sa di già visto, il tavolo che non si trova.
 |---|---|---|---|
 | `prima` | **2 indiretti** (stesso testo, 2 tipi di immagine diversi: il primo test) + **2 diretti come grafiche** (sezione 5b: 2 principi diversi) | percorso, primi 2 test, metriche e regole, prime 4 settimane | 25-35 min |
 | `completa` | **4-5 indiretti** (3 tipi di immagine + 2 attacchi del testo sull'immagine più forte) + **4 grafiche** (diretti e remarketing, una per principio scelto) | strategia completa: pubblici, sequenza dei test, budget in percentuale, convenzione dei nomi, piano di 4 settimane, brief dell'advertorial | 45-60 min |
+| `mese` (cliente in abbonamento) | **le grafiche di `brief.contenuti`** (8 o 16), dirette e indirette, sulle offerte e sui pubblici del mese; prima le foto vere del cliente (`officina/FOTO.md`) | **test A/B del mese** (una variabile) e **nota di ottimizzazione** dai dati del mese (workflow «Dati Meta Ads» se c'è l'accesso; altrimenti scrivi che i dati mancano): cosa spegnere, cosa scalare, cosa provare. Lancio e budget li fa Vincenzo in Meta | 60-120 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | | 10-20 min |
 
 Per ogni creatività:
