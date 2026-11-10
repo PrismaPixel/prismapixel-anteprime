@@ -27,6 +27,7 @@ Tre cose decidono la qualità:
 |---|---|---|
 | `prima` | **1 carosello** (7 slide) + **1 post singolo**, ciascuno con didascalia, per il canale principale; **al massimo 1 adattamento d'esempio** (di solito quello del secondo canale del piano); la griglia "Il tuo feed" | 20-35 min |
 | `completa` | **la prima settimana del piano editoriale**: di solito 3 caroselli (7-9 slide) + 2 post singoli, con didascalie e ora consigliata; **tutti i loro adattamenti** e gli spazi dei canali `dedicato` della settimana; la griglia "Il tuo feed" e la sezione "Il tuo piano editoriale" | 50-80 min |
+| `mese` (cliente in abbonamento) | **il pacchetto del mese**: esattamente i caroselli e i post singoli di `brief.contenuti` (es. 8 caroselli + 6 post), presi dagli spazi del mese del piano editoriale (crealo o aggiornalo se serve), con didascalie, data e ora consigliate, tutti gli adattamenti e la sezione "Il tuo piano editoriale". Prima le foto vere del cliente (`officina/FOTO.md`). Se `brief.contenuti.extra` contiene "risposte ai commenti", aggiungi 10-15 risposte modello per le domande e i commenti tipici del suo pubblico | 2-4 ore, anche in più passaggi |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste`; tieni direzione, palette e testi che il cliente non ha chiesto di cambiare | 10-20 min |
 
 Il formato dipende dal canale e dal suo `modo` nel piano (`officina/PIANO-EDITORIALE.md`, "Canali e adattamenti";

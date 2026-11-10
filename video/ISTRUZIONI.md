@@ -98,6 +98,7 @@ del cliente.
 |---|---|---|
 | `prima` | **2 video**, dai primi 2 spazi video del piano: di solito uno di valore sul dolore principale del pubblico e uno sull'offerta del cliente (di preferenza come Racconto di scoperta) | 20-30 min |
 | `completa` | **5 video**: gli spazi video delle prime due settimane del piano, con la sezione "Il tuo piano editoriale" nella pagina. Almeno uno è un Racconto di scoperta | 40-60 min |
+| `mese` (cliente in abbonamento) | **il numero di copioni di `brief.contenuti`** (es. 2 o 20), dagli spazi video del mese del piano editoriale, con calendario nella pagina. Se il pacchetto è un montaggio (`brief.voce` inizia con `montaggio`), i copioni sono quelli che il cliente girerà per il montaggio del mese | 15-25 min a copione |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | 10-20 min |
 
 Per ogni video consegni:

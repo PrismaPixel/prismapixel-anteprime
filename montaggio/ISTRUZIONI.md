@@ -187,6 +187,7 @@ animate: deve sembrare girato da una persona, non prodotto da un'agenzia. Scegli
 | `prima` | **1 video fino a 45 s**: tagli, didascalie complete, grafiche secondo lo stile (di base nessuna) | bozza 540 × 960 nella pagina; il finale 1080 × 1920 si fa dopo l'ok |
 | `completa` (**a pagamento, 29 €** scalati) | **3 video fino a 60 s** dal girato caricato (anche 3 tagli diversi dello stesso girato: gancio diverso, durata diversa), stile da Pinterest | bozze nella pagina + **finali 1080 × 1920** da scaricare |
 | `lungo` (**a pagamento, 49 €** scalati) | **1 video YouTube 16:9 fino a 8 minuti**: stesso metodo per tagli e sottotitoli; grafiche dalle skill e dalle board di `tein/` (catalogo e controlli loro), esportazione con `tein/tools/export.py`; capitoli e schermata finale | finale 1920 × 1080 |
+| `mese` (cliente in abbonamento) | **i video di `brief.contenuti`** (es. 8 brevi, oppure 12 brevi + 1 YouTube) dal girato caricato nel mese, stile già deciso con il cliente. Se il girato non c'è o non basta, esito `error` con "manca il girato: servono N clip" (il venditore lo chiede al cliente) | finali 1080 × 1920 (e 1920 × 1080 per YouTube) |
 | `revisione` | applica `modifiche_richieste` partendo dal lavoro precedente (`token_precedente`: `DIR` e scena si rifanno dai file salvati nelle note dell'esito precedente) | come il livello d'origine |
 
 I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il venditore). Crediti: nessuno
