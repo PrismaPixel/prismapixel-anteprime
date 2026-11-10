@@ -114,6 +114,22 @@ File da aggiungere:
 - eventi: i link `tel:`, WhatsApp e `mailto:` e i moduli sono già misurati da `eventi.js`; aggiungi
   `data-posizione` (es. `testata`, `piede`) ai pulsanti principali e `data-evento="begin_checkout"` ai pulsanti che
   aprono prenotazione o carrello. Nei moduli nessun dato personale va nel dataLayer;
+- **moduli** (contatto, preventivo, prenotazione a richiesta): si mandano **dall'indirizzo aziendale del cliente**
+  (`brief.email_moduli`, es. `info@cliente.it`, deve essere sul dominio del sito) alla stessa casella, con "Rispondi a"
+  il visitatore. Niente password, niente SMTP, niente servizi esterni da configurare nel sito:
+  - copia `pubblicazione/moduli/moduli.js` nella cartella principale e caricalo prima di `</body>`;
+  - ogni `<form>` ha `data-modulo="contatto"` (o `preventivo`, `prenotazione`…), campi con `name` leggibili in italiano
+    (`Nome`, `Email`, `Telefono`, `Messaggio`), il campo anti-spam
+    `<input name="_hp" tabindex="-1" autocomplete="off" hidden>`, e un `<p data-esito aria-live="polite"></p>` per la
+    risposta. Niente `action` verso altri servizi;
+  - lo script manda il modulo alla funzione Supabase **`modulo`**, che riconosce il sito dal dominio, applica i limiti
+    anti-spam e invia con Resend. Il dominio del cliente lo verifica su Resend il workflow "PrismaPixel · Cloudflare
+    sito" (sezione 4a), che scrive anche i record (DKIM `resend._domainkey`, sottodominio `send`): non toccano MX e
+    SPF della casella del cliente;
+  - senza `brief.email_moduli` (o con un indirizzo su un altro dominio): **bloccante** "indirizzo aziendale per i moduli
+    da chiedere al cliente"; il sito non va online con moduli che non arrivano;
+  - nella privacy del cliente vanno indicati **Resend** (invio dei messaggi dei moduli) e Supabase (registro anti-spam
+    senza contenuti) come fornitori, insieme a Cloudflare;
 - **lato server** solo se il cliente ha **annunci attivi** (servizio Gestione ADS, accesso `meta` con inserzioni,
   Google Ads) o vende online: nel sito non cambia niente, si imposta in GTM (scheda, sezione "Misure"). Negli altri
   casi scrivi nella scheda "lato server: non necessario".
@@ -134,7 +150,7 @@ Controlla in locale prima di salvare: tutti i link interni portano a file che es
 
 - Token nuovo nel formato **`<slug>-online-<6 caratteri casuali>`**: solo questo formato si può scaricare come zip.
 - Una riga per file nella tabella Anteprime, come da contratto sezione 3. Per il kit online sono ammessi anche i nomi
-  `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `immagini.json`, `consenso.js`, `eventi.js`,
+  `_redirects`, `_headers`, `sitemap.xml`, `robots.txt`, `immagini.json`, `consenso.js`, `eventi.js`, `moduli.js`,
   `cookieconsent.umd.js`, `cookieconsent.css`.
 - Link dello zip da caricare su Cloudflare Pages (scarica anche le immagini di `immagini.json`):
   `https://integrazioni.app.n8n.cloud/webhook/689f7b2a-d224-412c-9500-db025a61d096/scarica-sito/<token>`
@@ -247,6 +263,9 @@ dominio, `submit_indexnow_urls` con le pagine nuove e `inspect_urls` su 2-3 pagi
 - il banner compare, prima del consenso non ci sono cookie `_ga` né di pubblicità; nella scheda di Vincenzo: "in GA4
   → Rapporti in tempo reale, dopo 'Accetta tutti', arrivano page_view e un clic su WhatsApp o telefono";
 - `sitemap.xml` e `robots.txt` raggiungibili;
+- **moduli**: nella scheda di Vincenzo "manda un messaggio di prova da ogni modulo del sito e controlla che arrivi a
+  `<email_moduli>` (non in spam)". Se il dominio su Resend non risulta ancora verificato, rilancia "PrismaPixel ·
+  Cloudflare sito": la verifica si ripete e i record già scritti non si duplicano;
 - record `MX`, SPF e `_dmarc` presenti come da scheda (DNS pubblici);
 - se c'è Search Console: le pagine con impressioni del mese (workflow "PrismaPixel · Dati Google") e, nella scheda di
   Vincenzo, il rapporto Indicizzazione → "Non trovata (404)". I 404 trovati diventano nuove righe di `_redirects` in
