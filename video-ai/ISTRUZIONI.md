@@ -39,44 +39,8 @@ riconoscibile (es. una texture, un'atmosfera). Scrivi nelle note perché.
   indizio, non una prova che funzioni. Per gli annunci il piano non vincola: scrivilo nelle note.
 - Scrivi in `/tmp/lavoro/<slug>/base.md`: gli spazi del piano occupati, chi compra e in che situazione, cosa vuole
   ottenere, cosa lo frena, gli hook ricorrenti della nicchia (dalla ricerca del piano), **lo spazio libero**.
-- Il cliente può aver mandato foto vere (prodotto, luogo, persone che hanno dato il consenso): servono come
-  riferimento del **soggetto** (com'è fatto il suo prodotto, il suo locale). Il prodotto nel video deve essere
-  **identico** alla foto. Lo stile, le inquadrature e il ritmo invece vengono dal video modello (sezione 2b).
-
-## 2b. Modalità fedele: un video modello (di default)
-
-Come l'agente caroselli con il pin e l'agente siti con il sito modello: **non inventi la regia da zero, scegli un
-solo video modello del settore e ne ricostruisci la struttura** con il soggetto, i testi e la voce del cliente. Vale
-per ogni video del lotto (un modello per video, o lo stesso modello per una serie).
-1. **Il video modello da analizzare** (in quest'ordine):
-   - un video che **Vincenzo** ha indicato nel brief (`brief.video_modello`): un link YouTube, oppure un file che ha
-     caricato su Higgsfield (`media_id`);
-   - altrimenti uno **Short di YouTube** del settore: `youtube_search_videos` (Manifold, al massimo **4 crediti** per
-     lotto, sempre `max_credits`) con 1-2 ricerche del settore e del formato, `since: "year"`; tieni solo video di
-     **8-60 secondi** con buone visualizzazioni. Scarta video di marchi famosi, con persone famose, contenuti per
-     adulti o pericolosi, e video il cui punto di forza è la faccia o la voce di chi parla.
-   - **TikTok e Instagram** (`tiktok_search_videos`, `instagram_search_posts`) servono solo come **ispirazione
-     scritta**: dai migliori video del settore prendi durata, testo, trascrizione, numero di visualizzazioni e
-     salvataggi, e mettili nelle note. **Non scaricare mai i loro file video** e non usare servizi che li scaricano:
-     le piattaforme non lo permettono. Se uno di questi è il modello migliore, scrivi il link nelle note e chiedi a
-     Vincenzo di caricarlo lui come file per il prossimo lavoro.
-2. **Fai analizzare il modello** a Higgsfield: `video_analysis_create` con `youtube_url` (o con `video_input_id` se
-   Vincenzo ha caricato il file) → `video_analysis_status` ogni 30-60 secondi (3-5 minuti). Se l'analisi fallisce o
-   non c'è un modello analizzabile, lavora senza modello (sezioni 3-5) e scrivilo nelle note.
-3. **Scrivi la ricetta** in `/tmp/lavoro/<slug>/ricetta.md` dalle scene dell'analisi: per ogni scena durata,
-   inquadratura (distanza, altezza, angolo), movimento di camera, cosa succede, transizione verso la successiva, testo
-   a schermo (posizione, grandezza, quando entra, non le parole), luce e colori; poi il ritmo dei tagli, l'hook dei
-   primi 2 secondi (che cosa succede in immagine), la chiusura e uno **stile in inglese** per i prompt (luce, colori,
-   grana, obiettivo), da usare uguale in tutto il video.
-4. **Ricostruisci**: stesso numero di scene, stesse durate, stesse inquadrature e movimenti di camera, stesse
-   transizioni e stesso ritmo del testo a schermo. Cambiano sempre il **soggetto** (prodotto, luogo, persone del
-   cliente o generate), **testi e voce** (copione della sezione 4, mai le parole del modello) e i colori dove il
-   cliente ha un brand. Se una scena del modello non ha senso per il cliente, sostituiscila con una della stessa
-   durata e dello stesso tipo di movimento.
-**Mai dal modello**: persone, voci, musica o audio, testi, loghi, marchi, luoghi riconoscibili. **Mai** passare il
-video modello o i suoi fotogrammi a Higgsfield come riferimento di generazione: si usa solo l'analisi scritta.
-Nelle note: link del video modello, autore, visualizzazioni, e cosa hai cambiato. Il link resta per Vincenzo, non va
-nella pagina del cliente.
+- Il cliente può aver mandato foto vere (prodotto, luogo, persone che hanno dato il consenso): sono i riferimenti
+  più forti. Il prodotto nel video deve essere **identico** alla foto.
 
 ## 3. Formati
 
@@ -117,9 +81,8 @@ Dai a ogni riferimento un nome e un ruolo, e usali sempre con quel nome: `@Luogo
 
 - **Luogo**: inquadratura di tre quarti che mostra lo spazio (dove sta la persona, da dove arriva la luce, cosa c'è
   dietro), tre piani di profondità, una sola luce con una direzione ("luce dalla finestra a sinistra, tardo
-  pomeriggio"), materiali veri e 2-3 dettagli vissuti (un cavo del telefono, un bicchiere). Mai uno showroom. Il luogo è
-  **generato nello stile del video modello**; se il cliente ha foto del luogo vero, passale come riferimento del
-  soggetto, così la disposizione e i materiali restano i suoi.
+  pomeriggio"), materiali veri e 2-3 dettagli vissuti (un cavo del telefono, un bicchiere). Mai uno showroom. Se il
+  cliente ha foto del luogo vero, si parte da quelle e si migliorano solo luce e nitidezza, senza cambiare nulla.
 - **Persona**: prima 3-4 ritratti del volto con la luce del video già dentro, poi una **scheda personaggio** su fondo
   grigio con tre pannelli (primo piano del volto; figura intera di fronte con il volto escluso; figura intera di
   spalle). Il volto deve comparire una sola volta: due volti diversi nella scheda fanno cambiare faccia al
@@ -182,7 +145,7 @@ Costi indicativi di Seedance 2.5 (verificali sempre con `get_cost: true` prima d
 | `prima` | **1-2 video da 5 s in bozza 480p** (se il budget non basta per due, il secondo resta come storyboard di 4-6 fotogrammi con il prompt pronto) + i riferimenti approvati + copione | **massimo 30 crediti** in tutto |
 | `completa` (**a pagamento, 29 €** scalati dal pacchetto video) | 3-5 video da 5-8 s in bozza 480p, ognuno con un formato o un hook diverso; poi i **2 migliori** portati a 1080p (`draft_job_id`). Più le varianti di hook in testo per i test | **massimo 300 crediti** |
 | `lungo` (**a pagamento, 49 €** scalati dal pacchetto video) | **uno spot o annuncio da 15 a 30 secondi** in 1080p: copione approvato prima (formato Spot breve o annuncio PROOF/QUEST), riferimenti completi, poi prima una bozza 480p della durata piena per controllare tempi e continuità, infine la versione 1080p. Se una sola generazione non regge la storia, dividila in 2-3 unità con stacchi pianificati | **massimo 600 crediti** |
-| `mese` (cliente in abbonamento) | **il numero di video di `brief.contenuti`** (es. 4 o 8), dagli spazi video del mese del piano editoriale: bozze 480p per tutti, poi in 1080p quelli indicati ("2 in alta qualità") o, se non indicato, i migliori 2. Ogni video segue un video modello (sezione 2b), con le foto del cliente come riferimento del soggetto e la lista riprese; se il cliente ha già caricato le riprese rifatte, quei video passano al montaggio | **massimo 60 crediti a video**, in tutto non oltre 500 |
+| `mese` (cliente in abbonamento) | **il numero di video di `brief.contenuti`** (es. 4 o 8), dagli spazi video del mese del piano editoriale: bozze 480p per tutti, poi in 1080p quelli indicati ("2 in alta qualità") o, se non indicato, i migliori 2. Prodotti e luoghi dalle foto vere del cliente (`officina/FOTO.md`) | **massimo 60 crediti a video**, in tutto non oltre 500 |
 | `revisione` | si cambia solo il pezzo richiesto (sezione 6) | massimo 20 crediti |
 
 I livelli `completa` e `lungo` partono solo dopo il pagamento (lo verifica il venditore prima di avviare il lavoro): non chiedere conferme, lavora dentro il budget. Se il saldo non basta, fai il massimo possibile (riferimenti + storyboard + prompt pronti) e scrivi chiaramente
