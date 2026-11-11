@@ -3,6 +3,11 @@
 Vale per caroselli e post (`carosello_social`), annunci (`annunci_ads`), landing (`landing_page`), siti (`sito_web`) e
 video AI (`video_ai`). Le foto vere del cliente vengono **sempre prima** di quelle generate.
 
+**Eccezione: caroselli e post (`carosello_social`).** Lì le foto le genera sempre Higgsfield seguendo il pin di
+riferimento, anche se il cliente ha già foto, e il cliente le rifà uguali con la lista scatti
+(`social/ISTRUZIONI.md`, sezione 6). Le sue foto servono come riferimento del soggetto e, quando arrivano quelle
+rifatte, sostituiscono le generate. Il servizio qui sotto (elenco, importa, migliorare) vale anche per loro.
+
 ## Ordine di scelta
 
 1. **Foto del cliente** (`origine`: `cliente`, `drive`, `dropbox`): caricate da lui con il link personale.

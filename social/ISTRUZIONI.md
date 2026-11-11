@@ -27,7 +27,7 @@ Tre cose decidono la qualità:
 |---|---|---|
 | `prima` | **1 carosello** (7 slide) + **1 post singolo**, ciascuno con didascalia, per il canale principale; **al massimo 1 adattamento d'esempio** (di solito quello del secondo canale del piano); la griglia "Il tuo feed" | 20-35 min |
 | `completa` | **la prima settimana del piano editoriale**: di solito 3 caroselli (7-9 slide) + 2 post singoli, con didascalie e ora consigliata; **tutti i loro adattamenti** e gli spazi dei canali `dedicato` della settimana; la griglia "Il tuo feed" e la sezione "Il tuo piano editoriale" | 50-80 min |
-| `mese` (cliente in abbonamento) | **il pacchetto del mese**: esattamente i caroselli e i post singoli di `brief.contenuti` (es. 8 caroselli + 6 post), presi dagli spazi del mese del piano editoriale (crealo o aggiornalo se serve), con didascalie, data e ora consigliate, tutti gli adattamenti e la sezione "Il tuo piano editoriale". Prima le foto vere del cliente (`officina/FOTO.md`). Se `brief.contenuti.extra` contiene "risposte ai commenti", aggiungi 10-15 risposte modello per le domande e i commenti tipici del suo pubblico | 2-4 ore, anche in più passaggi |
+| `mese` (cliente in abbonamento) | **il pacchetto del mese**: esattamente i caroselli e i post singoli di `brief.contenuti` (es. 8 caroselli + 6 post), presi dagli spazi del mese del piano editoriale (crealo o aggiornalo se serve), con didascalie, data e ora consigliate, tutti gli adattamenti e la sezione "Il tuo piano editoriale". Foto generate con Higgsfield seguendo il pin, con la lista scatti per rifarle (sezione 6, "Immagini"); se il cliente ha già caricato le foto rifatte da una lista precedente, usa quelle. Se `brief.contenuti.extra` contiene "risposte ai commenti", aggiungi 10-15 risposte modello per le domande e i commenti tipici del suo pubblico | 2-4 ore, anche in più passaggi |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste`; tieni direzione, palette e testi che il cliente non ha chiesto di cambiare | 10-20 min |
 
 Il formato dipende dal canale e dal suo `modo` nel piano (`officina/PIANO-EDITORIALE.md`, "Canali e adattamenti";
@@ -85,8 +85,9 @@ font, i colori e le foto del cliente. Un modello preciso dà slide più pulite e
 
 1. **Scegli il pin modello** tra i riferimenti con `qualita` 4 o 5:
    - coerente con settore, tono e obiettivo del contenuto;
-   - se il cliente ha foto (`officina/FOTO.md`), preferisci un pin che usa le foto in modo adatto alle sue (a tutta
-     pagina, in cornice, ritagliate); se non ne ha, preferisci un pin tipografico o grafico;
+   - con foto o senza foto del cliente: le foto dei posti foto le genera sempre Higgsfield seguendo il pin (sezione
+     6, "Immagini"), quindi scegli il pin per la qualità dell'impaginazione e delle foto, non in base alle foto che il
+     cliente ha già;
    - scarta i collage di template, i pin di brand famosi riconoscibili e quelli il cui segno distintivo è
      un'illustrazione o una mascotte del creator.
 2. **Chiedi la ricetta** al workflow n8n **"PrismaPixel · Scheda di un pin"** (id **`CHYtGbrzuhvp6xrj`**):
@@ -107,10 +108,9 @@ numeri grandi, fogli, bande) ricostruito in CSS o SVG tuo.
   (serif display con serif display, grotesk con grotesk), mai lo stesso font del pin se è un font di marca;
 - **colori**: ogni ruolo della palette della ricetta (sfondo, testo, accento, evidenziatore) prende il colore del
   brand che fa lo stesso lavoro; se il brand non ha colori, una palette del settore con la stessa struttura;
-- **foto**: nei posti foto vanno le foto del cliente, ritagliate alla proporzione del posto e con lo stesso
-  trattamento (cornice, ombra, bianco e nero…) se sta bene alle sue foto. Senza foto: segui
-  `ricetta.adattamento.senza_foto` (blocco di colore, forma, numero grande, illustrazione semplice in SVG) oppure
-  foto d'archivio o generate secondo `officina/FOTO.md`.
+- **foto**: nei posti foto vanno immagini **generate con Higgsfield seguendo il pin** (stessa proporzione, stesso
+  trattamento, stile di `ricetta.stile_foto`) con il soggetto del cliente. Poi il cliente le rifà uguali con le sue
+  foto vere, seguendo la **lista scatti** (sezione 6, "Immagini"). Vale anche se il cliente ha già foto.
 **Cosa non prendi mai**: testi, illustrazioni, foto, loghi, marchi, mascotte, elementi disegnati a mano dal creator
 (`ricetta.da_non_copiare`). Le slide devono sembrare dello stesso "stile tipografico" del pin, ma del cliente.
 
@@ -192,7 +192,7 @@ Prima di passare al design, rileggi ogni contenuto con la **Checklist QA** (sezi
 
 **Il design nasce dal pin modello (sezione 3a).** Prima di scrivere codice, scrivi in `brief.md` la **scheda di
 stile**: in modalità fedele è la ricetta tradotta per il cliente (font e colori sostituiti, ruolo per ruolo, e quale
-foto del cliente va in ogni posto foto); con il metodo a direzione è ricavata dai riferimenti migliori (qualità 4-5),
+immagine generata va in ogni posto foto); con il metodo a direzione è ricavata dai riferimenti migliori (qualità 4-5),
 scrivendo da quale riferimento viene ogni scelta (es. "rif. 2"):
 1. **idea grafica** che tiene unita la serie (es. cartolina, diario, numeri giganti, foto a tutto campo con testo nel cielo);
 2. **gerarchia e layout**: dove sta il titolo, quanto spazio occupa il testo, rapporto tra testo e immagine, griglia
@@ -205,7 +205,7 @@ scrivendo da quale riferimento viene ogni scelta (es. "rif. 2"):
 6. **segnali di carosello** (numero di slide, barra, freccia, card che spunta): solo quelli che usano i riferimenti.
 
 Ogni scelta deve venire dal pin modello (o, nel metodo a direzione, dai riferimenti). Fanno eccezione font, colori
-e foto del cliente e le regole tecniche qui sotto. Il risultato deve essere riconoscibile come brand del cliente:
+e soggetto delle foto del cliente e le regole tecniche qui sotto. Il risultato deve essere riconoscibile come brand del cliente:
 dal pin si riprende l'impaginazione, mai testi, foto, illustrazioni o loghi.
 
 **Il visore.** `social/_modello/index.html` contiene solo la pagina di anteprima:
@@ -232,8 +232,13 @@ classi `.s-` e i font della scheda di stile.
   parole grandi.
 - **Ultima slide (CTA)**: handle del cliente ben visibile e l'azione in una riga.
 - **Immagini**:
-  - **prima le foto del cliente** e dei suoi canali, poi l'archivio, migliorate se serve: `officina/FOTO.md`;
-  - genera solo se le foto vere non bastano e il pin modello (o i riferimenti) usa la foto;
+  - **le foto le genera sempre Higgsfield seguendo la reference** (il pin modello, o i riferimenti nel metodo a
+    direzione), **anche se il cliente ha già foto**. Le immagini generate sono la guida: poi il cliente rifà le foto
+    uguali e le sue sostituiscono quelle generate. Qui non vale l'ordine di `officina/FOTO.md` (foto del cliente,
+    canali, archivio): vale per gli altri agenti;
+  - le foto che il cliente ha già (`officina/FOTO.md`, azione `elenco`) servono solo come riferimento del **soggetto**
+    (com'è il suo piatto, il suo prodotto, il suo locale): passale a Higgsfield in `medias` come riferimento, così
+    l'immagine guida mostra le sue cose; lo stile resta quello del pin;
   - generale con Higgsfield, **qualità alta**: `generate_image_batch` (una richiesta per posto foto), modello
     **`gpt_image_2_6`**, `resolution: "2k"`, `quality: "high"`, `use_unlim: false`, `aspect_ratio` del posto foto (il
     modello accetta anche `4:5`). Costo circa 2,75 crediti a immagine: controllalo prima con `get_cost: true`.
@@ -251,12 +256,19 @@ classi `.s-` e i font della scheda di stile.
     - spazio per il testo: dove il modello mette il testo sopra la foto (`dove_sta_il_testo`), scrivilo nel prompt
       ("subject in the lower third, clean empty background in the upper half");
     - **mai** passare le slide del pin a Higgsfield come immagine di riferimento: le foto del creator non si copiano;
-  - se le foto del cliente sono poche, prima riusa le sue con ritagli diversi o allargale (`outpaint_image` in
-    `officina/FOTO.md`) e genera solo i posti che restano;
   - budget: al massimo **3 immagini generate** per `prima` (circa 9 crediti) e **8** per `completa` (circa 22 crediti), tentativi compresi;
+    se i posti foto sono di più, riusa un'immagine con un ritaglio diverso o scegli un pin con meno posti foto;
+  - **lista scatti per il cliente**: nella pagina, dopo i contenuti, una sezione "Le foto da rifare" con ogni
+    immagine generata e, accanto, come rifarla uguale col telefono: cosa fotografare, da dove (dall'alto, di lato,
+    altezza), quanto vicino, luce e ora del giorno, sfondo e oggetti in scena, orientamento (verticale 4:5 o
+    quadrato), dove lasciare spazio vuoto per il testo, 1-2 consigli pratici (obiettivo pulito, niente zoom digitale,
+    niente flash). Frasi brevi, una lista per foto. Nelle note per il venditore: il link per caricare le foto
+    (`officina/FOTO.md`; se manca, "chiedere le foto: modulo «Richiedi foto»");
+  - quando il cliente carica le foto rifatte, un lavoro `revisione` le mette al posto di quelle generate negli stessi
+    posti foto, senza cambiare l'impaginazione;
   - usa i link `_min.webp` (contratto, sezione 3);
   - niente persone riconoscibili, niente loghi o marchi altrui, niente testo nelle immagini generate;
-  - le foto generate sono "immagini d'esempio": scrivilo nelle note. Il cliente userà le sue foto vere.
+  - le foto generate sono "immagini guida": scrivilo nelle note e nella pagina. Il cliente le rifà con le sue foto vere.
 - Illustrazioni semplici, icone e forme: SVG scritto nel codice.
 
 **Pagina** (`index.html`):
