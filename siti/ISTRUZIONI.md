@@ -110,14 +110,50 @@ si compra online). Si fa per `livello: completa`; in `revisione` riusi i riferim
 - Se il workflow non risponde o `ok` è `false`: vai avanti con la tabella delle pagine della sezione 1 e scrivilo
   nelle note.
 
-**2. Scheda dei riferimenti.** In `/tmp/lavoro/<slug>/riferimenti.md` scrivi, per i 3-5 siti scelti:
-- l'**ordine delle sezioni** della home e cosa c'è nel primo schermo (frase, immagine, pulsante, ricerca date…);
-- le soluzioni che si ripetono nel settore (es. "la verifica date è sempre nel primo schermo", "il menu è diviso per
-  portate con i prezzi in vista");
-- cosa prendi per questo cliente e cosa no, con il perché.
-Poi la struttura delle pagine (sezione 1) e la composizione della home (fase A) partono da qui. **Lo stile resta
-quello dell'inventario del cliente**: dai riferimenti prendi ordine, gerarchia e soluzioni, mai testi, foto, loghi,
-colori precisi o composizioni copiate.
+**2. Modalità fedele: un sito modello (di default).** Come l'agente caroselli con il pin: **non fai una sintesi di
+più siti, scegli un solo sito modello e ne ricostruisci il design** con i testi, i font, i colori e il soggetto delle
+foto del cliente. Un modello preciso dà pagine più curate e coerenti di un miscuglio.
+1. **Scegli il modello** tra i riferimenti: quello con `qualita` più alta nell'analisi (4 o 5), coerente con settore,
+   tono e obiettivo, con uno screenshot. Scarta i template in vendita e i siti il cui segno distintivo è
+   un'illustrazione, una mascotte o un 3D del brand. Nei settori dove le foto vendono (ospitalità, ristorazione,
+   tour, negozi, e-commerce, studi medici) preferisci un modello con foto; se il modello non ha posti foto
+   (`posti_foto: 0`), le immagini vanno solo dove lo dice `ricetta.adattamento.con_foto_cliente`.
+2. **Chiedi la ricetta** al workflow n8n **"PrismaPixel · Scheda di un sito"** (id **`CP5k9EfPKSQrLUbT`**):
+   `execute_workflow`, `executionMode: "production"`, `triggerNodeName: "Richiesta scheda sito"`,
+   `inputs: { "webhookData": { "method": "POST", "body": { "screenshot": "<riferimenti[n].screenshot>", "sito": "<riferimenti[n].sito>", "nome": "<riferimenti[n].nome>", "settore": "<settore>", "tipo": "sito|landing|advertorial", "foto_cliente": <numero> } } }`.
+   Leggi il nodo `Risultato` con `get_workflow_execution` (circa un minuto e mezzo; riprova finché è `running`,
+   massimo 5 minuti). Ottieni `ricetta`: griglia, palette con i ruoli, tipografia, navigazione, bottoni, elementi
+   ricorrenti con come farli in CSS/SVG, **le sezioni della home in ordine** con layout, blocchi, posti foto e
+   movimento, il ritmo, lo **stile delle foto** (`stile_foto`), come derivare le pagine interne e cosa non copiare.
+   Salvala in `/tmp/lavoro/<slug>/ricetta.json`.
+3. **Se la ricetta non arriva** (`ok: false`) o `qualita_modello` è sotto 4: prova il secondo sito migliore; se va
+   male anche quello, usa il metodo a direzione (sotto) e scrivilo nelle note.
+
+**Cosa riprendi dal modello**: ordine e ruolo delle sezioni della home (adattati alle voci del brief), griglia e
+larghezza del contenuto, gerarchia e misure dei titoli, layout e posizione dei blocchi in ogni sezione, ritmo dei
+fondi, navigazione e forma dei bottoni, il **sistema** di decorazioni ricostruito in CSS o SVG tuo, il trattamento
+delle foto e il movimento. Le pagine interne usano lo stesso sistema (`ricetta.pagine_interne`).
+**Cosa cambia sempre**:
+- **testi**: tutti del cliente (sezione 5), mai una parola del modello;
+- **font**: quelli del brand del cliente; se non ne ha, un font Google della **stessa categoria** della ricetta, mai
+  il font di marca del modello;
+- **colori**: ogni ruolo della palette della ricetta prende il colore del cliente che fa lo stesso lavoro; se il
+  cliente non ha colori, una palette del settore con la stessa struttura;
+- **foto**: tutte **generate con Higgsfield seguendo il modello** (sezione 4), con il soggetto del cliente; poi il
+  cliente le rifà uguali con la lista scatti;
+- **contenuti e funzioni del settore**: le pagine della tabella della sezione 1, i fatti del cliente, Baymard per
+  acquisti e prenotazioni. Se una sezione del modello non ha senso per il cliente (es. loghi di clienti che non ha),
+  toglila o sostituiscila con una sezione vera nello stesso stile.
+**Cosa non prendi mai**: testi, loghi, foto, illustrazioni, mascotte, icone disegnate a mano, nomi di clienti o
+numeri del modello (`ricetta.da_non_copiare`). Il sito deve sembrare dello stesso "studio" del modello, ma del cliente.
+
+Accessibilità, contrasto, leggibilità su telefono e prestazioni (fase B) **vincono sulla ricetta**: se il modello ha
+testi troppo piccoli o contrasti bassi, correggi mantenendo le proporzioni.
+
+**Metodo a direzione (riserva)**, solo se la modalità fedele non è possibile: in `/tmp/lavoro/<slug>/riferimenti.md`
+scrivi per i 3-5 siti scelti l'ordine delle sezioni, cosa c'è nel primo schermo, le soluzioni che si ripetono nel
+settore e cosa prendi; lo stile nasce dall'inventario del cliente; mai testi, foto, loghi, colori precisi o
+composizioni copiate.
 
 **3. Baymard (solo e-commerce o siti con prenotazione/acquisto).** Prima della fase B controlla il sito con questa
 lista, ricavata dalle ricerche pubbliche di Baymard Institute (puoi approfondire un punto leggendo i loro articoli
@@ -138,8 +174,9 @@ gratuiti su baymard.com con `seo_get_page`). Ogni punto che non rispetti va corr
 - **Prenotazioni** (hotel, tour, ristoranti): date e persone nel primo schermo o a un tocco; prezzo totale e
   condizioni di cancellazione prima di confermare.
 
-Nelle note dell'esito: i siti usati come riferimento (nome e indirizzo), cosa hai preso da ciascuno e, per
-gli e-commerce, i punti di Baymard non ancora coperti (es. "spedizioni da confermare con il cliente").
+Nelle note dell'esito: il **sito modello** (nome e indirizzo) e cosa hai cambiato rispetto a lui, gli altri
+riferimenti guardati e, per gli e-commerce, i punti di Baymard non ancora coperti (es. "spedizioni da confermare
+con il cliente").
 
 ## 2c. SEO e GEO: le ricerche vere, prima di scrivere
 
@@ -202,13 +239,17 @@ l'agente `piano_seo`. Salva le stesse ricerche nel progetto OpenSEO con un'etich
   appartengono solo a questo cliente è obbligatorio: nome e cosa significa, città e quartiere, numeri,
   vincoli, materiali, rituali, oggetti stampati del suo mondo. Se il brief è scarno, ricava dalla città e
   dal settore ciò che è vero ovunque (il mare per chi lavora sul mare) e non inventare fatti specifici.
-- Passo 2-3: la composizione della home e l'ordine delle sezioni partono dalla scheda dei riferimenti
-  (sezione 2b); la direzione visiva resta tua e nasce dall'inventario.
+- Passo 2-3: **la direzione e la composizione sono quelle della ricetta del sito modello** (sezione 2b, modalità
+  fedele): non inventarne un'altra. L'inventario serve per i testi, i dettagli veri e il soggetto delle foto. Solo nel
+  metodo a direzione la direzione visiva nasce dall'inventario.
 - Passo 3: `--have photography,product-photo` perché le immagini le generi tu con Higgsfield.
-  Se il cliente ha colori o logo (`materiali_cliente`), usa `--keep palette,type` dove serve.
-- Passo 6, immagini: prima le **foto vere del cliente** e dei suoi canali (`officina/FOTO.md`), migliorate se
-  serve; poi **Higgsfield** (sezione 4) per ciò che manca. Le foto d'archivio
-  (`assets.mjs`) solo come complemento, e solo se la rete le raggiunge.
+  Font e colori: quelli del cliente se li ha (`--keep palette,type`), altrimenti quelli scelti con la regola della
+  modalità fedele.
+- Passo 6, immagini: **tutte generate con Higgsfield seguendo il modello** (sezione 4), anche se il cliente ha già
+  foto; le sue servono come riferimento del soggetto. Niente foto d'archivio.
+- Regole della casa di taste: valgono per tutto ciò che il modello non decide. Se il modello usa un elemento che
+  taste sconsiglia (es. un'etichetta sopra il titolo) ed è parte del suo sistema, tienilo; un FAIL dell'ispettore
+  dovuto a questo si scrive nelle note e non blocca.
 - Passo 9: il movimento è richiesto, con `prefers-reduced-motion`.
 
 **Fase B · Revisione con `impeccable`.** A sito costruito, carica la skill in modalità **Persuade**:
@@ -230,16 +271,29 @@ Guarda gli screenshot a 1440, 768 e 390 px: se qualcosa si vede storto, è stort
 - Prima di generare chiama `get_preferences` di Higgsfield: crea un progetto solo se
   `auto_create_project` è attivo. Non pagare mai con generazioni gratuite/unlimited senza istruzioni
   (`use_unlim: false`).
-- Budget: **sito completo 8-12 immagini** (almeno una per pagina, più il set della home), **revisione 0-4**. Controlla il costo con `get_cost: true`
-  sul primo prompt; se il saldo (`balance`) non basta, genera il minimo indispensabile (2-3) e scrivilo
-  nelle note.
-- Modelli: `gpt_image_2_5` per luoghi, ambienti, dettagli e foto realistiche; `marketing_studio_image`
-  per prodotti e still life da e-commerce; `soul_2` per persone in posa editoriale. Se non sei sicuro,
-  `models_explore` con `action: "recommend"`.
-- Usa `generate_image_batch` per le immagini indipendenti, poi `jobs_wait`, poi recupera i link.
-- Prompt: in inglese, concreti, legati all'inventario (la via, il materiale, la luce della città, il
-  prodotto vero descritto nel brief). Stessa luce, stesso trattamento e stesso rapporto d'aspetto per
-  tutta la serie. Niente testo dentro le immagini, niente loghi inventati.
+- **Le foto le genera sempre Higgsfield seguendo il sito modello**, anche se il cliente ha già foto: sono le
+  **immagini guida**. Poi il cliente le rifà uguali (lista scatti, sotto) e le sue prendono il loro posto. Qui non
+  vale l'ordine di `officina/FOTO.md`. Le foto che il cliente ha già (`officina/FOTO.md`, azione `elenco`) servono
+  solo come riferimento del **soggetto** (il suo locale, il suo prodotto, il suo piatto): passale in `medias`.
+- **Qualità alta**: modello **`gpt_image_2_6`**, `resolution: "2k"`, `quality: "high"`, `use_unlim: false`, circa
+  2,75 crediti a immagine (controlla con `get_cost: true`). `generate_image_batch` con una richiesta per posto foto,
+  poi `jobs_wait`.
+- **Ogni immagine nasce per un posto foto preciso** della ricetta (o della pagina interna costruita con lo stesso
+  sistema): `aspect_ratio` = la proporzione del posto; soggetto = quello del cliente, mai quello del modello;
+  stile = `ricetta.stile_foto.suffisso_prompt_en`, lo stesso per tutto il sito, così sembra un unico servizio
+  fotografico; se il testo sta sopra la foto, scrivi nel prompt dove lasciare lo spazio vuoto. Ogni prompt finisce
+  con `no text, no letters, no logos, no watermark`. **Mai** passare lo screenshot del modello a Higgsfield.
+- Se un'immagine esce sbagliata (testo, mani o oggetti deformati, soggetto dove va il testo), riprova **una volta**
+  con il prompt leggermente cambiato.
+- Budget: **sito completo 8-12 immagini** (circa 22-33 crediti, tentativi compresi), **revisione 0-4**. Se i posti
+  foto sono di più, riusa un'immagine con un ritaglio diverso. Se il saldo (`balance`) non basta, genera il minimo
+  indispensabile (2-3) e scrivilo nelle note.
+- **Lista scatti per il cliente**: una pagina in più, `foto-da-rifare.html`, salvata con lo stesso token ma **fuori
+  dal menu**: per ogni immagine guida, l'immagine e accanto come rifarla uguale col telefono (cosa fotografare, da
+  dove e quanto vicino, luce e ora, sfondo e oggetti, orientamento, dove lasciare spazio per il testo, 1-2 consigli
+  pratici). Il link alla pagina va nella `descrizione` per il venditore e nelle note, con il link per caricare le
+  foto (`officina/FOTO.md`). Quando il cliente carica le foto rifatte, un lavoro `revisione` le mette al posto di
+  quelle generate senza cambiare il design.
 - Onestà: un'immagine generata mostra il mondo del cliente, non viene spacciata per una sua foto reale
   di staff, clienti o recensioni. Persone sì, ma come atmosfera, mai con nomi o citazioni attribuite.
 - Per un set coerente (lo stesso luogo in momenti diversi) genera prima l'immagine principale, poi le

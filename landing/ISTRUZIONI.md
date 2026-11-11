@@ -66,24 +66,30 @@ Uguale all'agente siti (sezioni 2, 2b, 3 e 4 di `siti/ISTRUZIONI.md`), con quest
   - `offerta`: `"<settore> landing page"` più 1-2 ricerche del settore (es. `"dental clinic landing page"`, `"clinic"`);
   - `advertorial`: `"editorial"`, `"magazine"` o `"blog"` più una ricerca del settore, perché la pagina deve
     sembrare un articolo.
-  Nella scheda dei riferimenti conta soprattutto **cosa c'è nel primo schermo** e **l'ordine dalla promessa al
-  pulsante**. I riferimenti sono quasi sempre siti con menu: della loro struttura prendi la sequenza delle sezioni,
-  non la navigazione, che in una landing non c'è.
+  Poi vale la **modalità fedele** dei siti (sezione 2b, punto 2): scegli **una sola pagina modello** e chiedi la
+  ricetta al workflow **"Scheda di un sito"** con `tipo: "landing"` o `"advertorial"`; ricostruisci il suo design
+  con i testi, i font, i colori e il soggetto delle foto del cliente. Conta soprattutto **cosa c'è nel primo schermo**
+  e **l'ordine dalla promessa al pulsante**. I modelli sono quasi sempre siti con menu: della loro struttura prendi
+  sezioni, griglia, tipografia e ritmo, non la navigazione, che in una landing non c'è.
 - **SEO e GEO (sezione 2c dei siti)**: una landing per gli annunci non insegue Google, quindi **niente ricerca di
   parole chiave**. Valgono invece le regole GEO dei fatti in chiaro (chi, cosa, dove, cosa è incluso, come si
   prenota), le FAQ vere e i dati strutturati `LocalBusiness` e `FAQPage` con dati veri.
 - **Baymard**: se l'azione è un acquisto o una prenotazione, applica la parte della lista che riguarda la pagina
   (prezzo totale e costi chiari prima del pulsante, condizioni di cancellazione, pochi campi, pulsante raggiungibile su
   telefono, nessuna sorpresa dopo il clic).
-- **Fase A (`design-taste-frontend`)** sulla pagina principale. Per l'advertorial la direzione è **editoriale**
-  (rivista o giornale locale, tipografia da lettura, foto come in un articolo), non da sito aziendale. Per l'offerta
-  segui la direzione dell'attività; se esiste già un sito PrismaPixel del cliente o i colori del brand, riprendili.
+- **Fase A (`design-taste-frontend`)** sulla pagina principale, con la direzione della ricetta del modello. Per
+  l'advertorial scegli un modello **editoriale** (rivista o giornale locale, tipografia da lettura, foto come in un
+  articolo), non da sito aziendale. Se esiste già un sito PrismaPixel del cliente, i suoi font e colori vincono su
+  quelli scelti dalla ricetta.
 - **Fase B (`impeccable`)** in modalità **Persuade**: critique, audit, polish. Le regole della casa di taste
   restano.
-- **Foto del cliente prima** (`officina/FOTO.md`), poi le immagini generate.
-- **Immagini Higgsfield**: **3-6 immagini** (revisione 0-2). Per l'advertorial vale lo stile degli annunci
-  indiretti (foto vere da telefono, niente rendering, niente prodotto protagonista, niente testo dentro). Se gli
-  annunci esistono, riusa i link `_min.webp` delle loro immagini prima di generarne di nuove.
+- **Immagini come nei siti (sezione 4 dei siti)**: tutte **generate con Higgsfield seguendo il modello**, anche se
+  il cliente ha già foto (le sue servono come riferimento del soggetto), in qualità alta (`gpt_image_2_6`, 2k,
+  `high`), una per posto foto, con la lista scatti in `foto-da-rifare.html`. **3-6 immagini** (revisione 0-2). Per
+  l'advertorial lo stile delle foto è quello degli annunci indiretti (foto vere da telefono, niente rendering,
+  niente prodotto protagonista, niente testo dentro), non `stile_foto` del modello. Se gli annunci dello stesso
+  cliente hanno già immagini guida, riusa i loro link `_min.webp` e la stessa lista scatti prima di generarne di
+  nuove.
 - `lint.mjs` e `inspect.mjs` su ogni pagina, screenshot a 1440, 768 e 390 px, nessun FAIL prima di pubblicare.
   L'assenza di navigazione è voluta: se l'ispettore la segnala, scrivilo nelle note e vai avanti.
 
