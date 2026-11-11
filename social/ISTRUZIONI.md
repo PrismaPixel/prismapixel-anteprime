@@ -234,8 +234,13 @@ classi `.s-` e i font della scheda di stile.
 - **Immagini**:
   - **prima le foto del cliente** e dei suoi canali, poi l'archivio, migliorate se serve: `officina/FOTO.md`;
   - genera solo se le foto vere non bastano e il pin modello (o i riferimenti) usa la foto;
-  - generale con Higgsfield. Prima usa `models_explore` (`action: "recommend"`) e poi `generate_image`, sempre con
-    `max_credits`;
+  - generale con Higgsfield, **qualità alta**: `generate_image_batch` (una richiesta per posto foto), modello
+    **`gpt_image_2_6`**, `resolution: "2k"`, `quality: "high"`, `use_unlim: false`, `aspect_ratio` del posto foto (il
+    modello accetta anche `4:5`). Costo circa 2,75 crediti a immagine: controllalo prima con `get_cost: true`.
+    Attendi con `jobs_wait`;
+  - ogni prompt: soggetto del cliente + suffisso di stile + `no text, no letters, no logos, no watermark`;
+  - se un'immagine fallisce o esce sbagliata (testo, mani o oggetti deformati, soggetto sotto il titolo), riprova
+    **una volta** con il prompt leggermente cambiato, dentro il budget;
   - **in modalità fedele ogni immagine generata nasce per un posto foto preciso** della ricetta:
     - `aspect_ratio` = la proporzione del posto (`slide[n].foto.proporzione`, o w×h del blocco foto), così non
       serve ritagliare;
@@ -248,7 +253,7 @@ classi `.s-` e i font della scheda di stile.
     - **mai** passare le slide del pin a Higgsfield come immagine di riferimento: le foto del creator non si copiano;
   - se le foto del cliente sono poche, prima riusa le sue con ritagli diversi o allargale (`outpaint_image` in
     `officina/FOTO.md`) e genera solo i posti che restano;
-  - budget: **4 crediti** per `prima`, **10 crediti** per `completa`;
+  - budget: al massimo **3 immagini generate** per `prima` (circa 9 crediti) e **8** per `completa` (circa 22 crediti), tentativi compresi;
   - usa i link `_min.webp` (contratto, sezione 3);
   - niente persone riconoscibili, niente loghi o marchi altrui, niente testo nelle immagini generate;
   - le foto generate sono "immagini d'esempio": scrivilo nelle note. Il cliente userà le sue foto vere.
