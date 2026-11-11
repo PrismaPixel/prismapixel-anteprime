@@ -66,7 +66,7 @@ il regalo che sa di già visto, il tavolo che non si trova.
 |---|---|---|---|
 | `prima` | **2 indiretti** (stesso testo, 2 tipi di immagine diversi: il primo test) + **2 diretti come grafiche** (sezione 5b: 2 principi diversi) | percorso, primi 2 test, metriche e regole, prime 4 settimane | 25-35 min |
 | `completa` | **4-5 indiretti** (3 tipi di immagine + 2 attacchi del testo sull'immagine più forte) + **4 grafiche** (diretti e remarketing, una per principio scelto) | strategia completa: pubblici, sequenza dei test, budget in percentuale, convenzione dei nomi, piano di 4 settimane, brief dell'advertorial | 45-60 min |
-| `mese` (cliente in abbonamento) | **le grafiche di `brief.contenuti`** (8 o 16), dirette e indirette, sulle offerte e sui pubblici del mese; prima le foto vere del cliente (`officina/FOTO.md`) | **test A/B del mese** (una variabile) e **nota di ottimizzazione** dai dati del mese (workflow «Dati Meta Ads» se c'è l'accesso; altrimenti scrivi che i dati mancano): cosa spegnere, cosa scalare, cosa provare. Lancio e budget li fa Vincenzo in Meta | 60-120 min |
+| `mese` (cliente in abbonamento) | **le grafiche di `brief.contenuti`** (8 o 16), dirette e indirette, sulle offerte e sui pubblici del mese; immagini guida generate seguendo la reference con la lista scatti, oppure le foto rifatte dal cliente se le ha già caricate (sezione 5) | **test A/B del mese** (una variabile) e **nota di ottimizzazione** dai dati del mese (workflow «Dati Meta Ads» se c'è l'accesso; altrimenti scrivi che i dati mancano): cosa spegnere, cosa scalare, cosa provare. Lancio e budget li fa Vincenzo in Meta | 60-120 min |
 | `revisione` | riparti dall'anteprima `token_precedente` (contratto, sezione 3) e applica `modifiche_richieste` | | 10-20 min |
 
 Per ogni creatività:
@@ -129,9 +129,21 @@ L'annuncio indiretto fallisce nel momento in cui sembra un annuncio o sembra fat
   testo dentro.
 - Modelli: `gpt_image_2_5` per le scene realistiche, `marketing_studio_image` per i prodotti dei diretti. Se non
   sei sicuro, `models_explore` (`action: "recommend"`). Usa sempre `max_credits` e i link `_min.webp`.
-- **Foto vere prima di tutto**: se il cliente ha caricato foto o ne ha sui suoi canali, gli annunci partono da
-  quelle (migliorate con Higgsfield se serve, senza cambiare cosa mostrano): `officina/FOTO.md`. Le foto generate
-  coprono solo ciò che manca.
+- **Le immagini le genera sempre Higgsfield seguendo la reference** (i riferimenti scelti per lo schema e la qualità,
+  sezione 5b), **anche se il cliente ha già foto**: sono le immagini guida. Poi il cliente le rifà uguali e le sue
+  foto prendono il loro posto. Qui non vale l'ordine di `officina/FOTO.md` (foto del cliente, canali, archivio).
+  Le foto che il cliente ha già servono solo come riferimento del **soggetto** (il suo locale, il suo prodotto, il suo
+  piatto): passale a Higgsfield in `medias`, così l'immagine guida mostra le sue cose.
+- **Lista scatti per il cliente**: nella pagina, dopo gli annunci, una sezione "Le foto da rifare" con ogni immagine
+  guida e, accanto, come rifarla uguale col telefono: cosa fotografare, da dove e quanto vicino, luce e ora, sfondo e
+  oggetti, orientamento (verticale 4:5 o quadrato), dove lasciare spazio per titolo e note grafiche, 1-2 consigli
+  pratici. Per gli indiretti "momento rubato" la lista dice anche che deve sembrare una foto da telefono, non
+  curata. Una lista unica se nello stesso periodo ci sono anche caroselli (`social/ISTRUZIONI.md`): stesse foto,
+  una sola sessione. Nelle note per il venditore: il link per caricare le foto (`officina/FOTO.md`).
+- **Immagini guida e annunci veri**: un annuncio con un'immagine generata è una **proposta**, non va online. Diventa
+  pubblicabile quando il cliente ha caricato la foto rifatta e l'hai messa al suo posto (un lavoro `revisione`, o
+  nel `mese` se le foto rifatte ci sono già). Nella pagina e nelle note segna ogni annuncio "immagine guida" o
+  "foto del cliente".
 - **Budget** (foto e grafiche insieme): **8 crediti** per `prima`, **18** per `completa`. Prima di generare, controlla il costo con
   `get_cost: true`.
 - Guarda ogni immagine con Read. Se sembra finta (pelle di plastica, mani strane, lettere inventate), rigenerala una
@@ -329,8 +341,10 @@ Meta"** (id **`rh7c1OwqB1JROzNu`**): `execute_workflow`, `executionMode: "produc
 `triggerNodeName: "Richiesta annunci"`, `inputs: { "webhookData": { "method": "POST", "body": { ... } } }` con:
 - `job_id`: il tuo `job_id`. Account pubblicitario e Pagina li prende il workflow dagli accessi del cliente: **non
   passarli mai tu**;
-- `annunci`: fino a 10, uno per creatività, `{ codice, testo, titolo, descrizione, cta, link, immagine_url |
-  immagine_base64 }`. `testo` è il testo principale intero; `cta` è la scritta del pulsante in italiano
+- `annunci`: fino a 10, uno per creatività, **solo quelli con la foto vera del cliente** (rifatta dalla lista scatti
+  o già sua): gli annunci con un'immagine guida generata **non si caricano mai**, nemmeno in pausa. Se non ce n'è
+  nessuno, non chiamare il workflow e scrivi nelle note "meta: niente da caricare, mancano le foto rifatte".
+  Ogni annuncio: `{ codice, testo, titolo, descrizione, cta, link, immagine_url | immagine_base64 }`. `testo` è il testo principale intero; `cta` è la scritta del pulsante in italiano
   ("Scopri di più", "Prenota", "Contattaci", "Iscriviti", "Acquista", "Richiedi preventivo"); `link` è la pagina vera
   di destinazione (https, con i parametri UTM della convenzione dei nomi). Per le foto passa `immagine_url` col link
   `.png` a piena risoluzione; per le grafiche fatte in HTML esporta il PNG a 1080 px con Playwright e passalo come
