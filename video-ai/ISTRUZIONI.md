@@ -48,17 +48,21 @@ riconoscibile (es. una texture, un'atmosfera). Scrivi nelle note perché.
 Come l'agente caroselli con il pin e l'agente siti con il sito modello: **non inventi la regia da zero, scegli un
 solo video modello del settore e ne ricostruisci la struttura** con il soggetto, i testi e la voce del cliente. Vale
 per ogni video del lotto (un modello per video, o lo stesso modello per una serie).
-1. **Trova il modello** (Manifold, al massimo **4 crediti** per lotto, sempre `max_credits`):
-   `tiktok_search_videos` con `sort: "popular"`, `since: "year"`, 1-2 ricerche del settore e del formato (es.
-   `"<settore> <città o paese>"`, `"<prodotto> asmr"`, `"<settore> behind the scenes"`); se serve
-   `instagram_search_posts` con un hashtag del settore. Tieni solo video di **8-40 secondi** con molte visualizzazioni
-   rispetto ai follower dell'autore (almeno 3 volte) e molti salvataggi. Scarta video di marchi famosi, video con
-   persone famose, contenuti per adulti o pericolosi, video il cui punto di forza è la faccia o la voce di chi parla
-   (quelli non si ricostruiscono).
-2. **Fai analizzare il modello** a Higgsfield: `media_import_url` con il link del file video (campo `media` della
-   riga) → `media_id` → `video_analysis_create` con `video_input_id` (per uno Short di YouTube puoi passare
-   `youtube_url`) → `video_analysis_status` ogni 30-60 secondi (3-5 minuti). Se l'importazione o l'analisi falliscono,
-   prova il secondo video; se va male anche quello, lavora senza modello (sezioni 3-5) e scrivilo nelle note.
+1. **Il video modello da analizzare** (in quest'ordine):
+   - un video che **Vincenzo** ha indicato nel brief (`brief.video_modello`): un link YouTube, oppure un file che ha
+     caricato su Higgsfield (`media_id`);
+   - altrimenti uno **Short di YouTube** del settore: `youtube_search_videos` (Manifold, al massimo **4 crediti** per
+     lotto, sempre `max_credits`) con 1-2 ricerche del settore e del formato, `since: "year"`; tieni solo video di
+     **8-60 secondi** con buone visualizzazioni. Scarta video di marchi famosi, con persone famose, contenuti per
+     adulti o pericolosi, e video il cui punto di forza è la faccia o la voce di chi parla.
+   - **TikTok e Instagram** (`tiktok_search_videos`, `instagram_search_posts`) servono solo come **ispirazione
+     scritta**: dai migliori video del settore prendi durata, testo, trascrizione, numero di visualizzazioni e
+     salvataggi, e mettili nelle note. **Non scaricare mai i loro file video** e non usare servizi che li scaricano:
+     le piattaforme non lo permettono. Se uno di questi è il modello migliore, scrivi il link nelle note e chiedi a
+     Vincenzo di caricarlo lui come file per il prossimo lavoro.
+2. **Fai analizzare il modello** a Higgsfield: `video_analysis_create` con `youtube_url` (o con `video_input_id` se
+   Vincenzo ha caricato il file) → `video_analysis_status` ogni 30-60 secondi (3-5 minuti). Se l'analisi fallisce o
+   non c'è un modello analizzabile, lavora senza modello (sezioni 3-5) e scrivilo nelle note.
 3. **Scrivi la ricetta** in `/tmp/lavoro/<slug>/ricetta.md` dalle scene dell'analisi: per ogni scena durata,
    inquadratura (distanza, altezza, angolo), movimento di camera, cosa succede, transizione verso la successiva, testo
    a schermo (posizione, grandezza, quando entra, non le parole), luce e colori; poi il ritmo dei tagli, l'hook dei
