@@ -95,7 +95,7 @@ font, i colori e le foto del cliente. Un modello preciso dà slide più pulite e
    Leggi il nodo `Risultato` con `get_workflow_execution` (circa un minuto; riprova finché è `running`, massimo 4
    minuti). Ottieni `ricetta`: margini, griglia, palette con i ruoli, tipografia (categoria, peso, misure),
    elementi ricorrenti con come farli in CSS/SVG, **slide per slide** i blocchi con posizione e misura in px su
-   1080×1350, i posti foto, il ritmo, cosa non copiare e come adattarla con o senza foto.
+   1080×1350, i posti foto con lo stile delle foto (`stile_foto`, per Higgsfield), il ritmo, cosa non copiare e come adattarla con o senza foto.
 3. **Se la ricetta non arriva** (`ok: false`) o il modello ha `qualita_modello` sotto 4: prova il secondo pin
    migliore; se va male anche quello, torna al metodo a direzione (sotto) e scrivilo nelle note.
 
@@ -233,9 +233,21 @@ classi `.s-` e i font della scheda di stile.
 - **Ultima slide (CTA)**: handle del cliente ben visibile e l'azione in una riga.
 - **Immagini**:
   - **prima le foto del cliente** e dei suoi canali, poi l'archivio, migliorate se serve: `officina/FOTO.md`;
-  - genera solo se le foto vere non bastano e i riferimenti scelti usano la foto;
+  - genera solo se le foto vere non bastano e il pin modello (o i riferimenti) usa la foto;
   - generale con Higgsfield. Prima usa `models_explore` (`action: "recommend"`) e poi `generate_image`, sempre con
     `max_credits`;
+  - **in modalità fedele ogni immagine generata nasce per un posto foto preciso** della ricetta:
+    - `aspect_ratio` = la proporzione del posto (`slide[n].foto.proporzione`, o w×h del blocco foto), così non
+      serve ritagliare;
+    - soggetto = quello del cliente (il suo piatto, il suo prodotto, il suo tipo di locale), mai il soggetto del pin;
+    - stile = `ricetta.stile_foto.suffisso_prompt_en` (luce, colori, inquadratura, grana), spostato verso la palette
+      del cliente se serve; lo stesso suffisso per **tutte** le immagini della serie, così sembrano un unico servizio
+      fotografico;
+    - spazio per il testo: dove il modello mette il testo sopra la foto (`dove_sta_il_testo`), scrivilo nel prompt
+      ("subject in the lower third, clean empty background in the upper half");
+    - **mai** passare le slide del pin a Higgsfield come immagine di riferimento: le foto del creator non si copiano;
+  - se le foto del cliente sono poche, prima riusa le sue con ritagli diversi o allargale (`outpaint_image` in
+    `officina/FOTO.md`) e genera solo i posti che restano;
   - budget: **4 crediti** per `prima`, **10 crediti** per `completa`;
   - usa i link `_min.webp` (contratto, sezione 3);
   - niente persone riconoscibili, niente loghi o marchi altrui, niente testo nelle immagini generate;
