@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>File da pubblicare</title>
+<!--
+  PAGINA DI ESPORTAZIONE · solo per Vincenzo (ISTRUZIONI.md, sezione 8b)
+  Sostituisci solo le due costanti TOKEN_ANTEPRIMA e NOME_FILE qui sotto, poi salvala con un token suo.
+  Apre l'anteprima del cliente, usa le immagini a piena risoluzione al posto delle _min.webp e scarica
+  ogni tela come PNG a misura reale (1080x1350, 1080x1920…) più le didascalie, in uno zip.
+  Funziona con le anteprime dei caroselli (article.post) e degli annunci (article.ad): per gli annunci con foto
+  esporta la foto con le sue note grafiche a 1080 px di larghezza, più un file con testo, titolo, descrizione e pulsante.
+-->
+<style>
+:root { --bg: #ffffff; --carta: #f4f8f8; --linea: #dce6e6; --ink: #0d1a1b; --tenue: #4a5f60; --teal: #00777b; --ok: #1f7a4d; --err: #b42318; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.pagina { max-width: 980px; margin: 0 auto; padding: 28px 16px 60px; }
+.k { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+h1 { font-size: 28px; line-height: 1.15; margin: 6px 0 8px; }
+.avviso { background: var(--carta); border-left: 3px solid var(--teal); padding: 10px 14px; border-radius: 0 10px 10px 0; color: var(--tenue); font-size: 14px; }
+button { font: inherit; font-weight: 700; background: var(--teal); color: #fff; border: 0; border-radius: 999px; padding: 12px 20px; cursor: pointer; }
+button.secondario { background: #fff; color: var(--teal); border: 1px solid var(--teal); padding: 8px 14px; font-size: 14px; }
+button:disabled { opacity: .45; cursor: default; }
+#stato { margin: 14px 0; font-size: 14px; color: var(--tenue); }
+.gruppo { border-top: 1px solid var(--linea); padding: 18px 0; }
+.gruppo h2 { font-size: 18px; margin: 0 0 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.miniature { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.miniature a { flex: 0 0 auto; display: block; }
+.miniature img { height: 220px; width: auto; border-radius: 8px; border: 1px solid var(--linea); display: block; }
+.miniature span { display: block; font-size: 12px; color: var(--tenue); text-align: center; margin-top: 4px; }
+pre { white-space: pre-wrap; background: var(--carta); border-radius: 10px; padding: 12px; font: 14px/1.5 system-ui, sans-serif; margin: 10px 0 0; }
+.err { color: var(--err); font-weight: 700; }
+iframe { position: absolute; left: -20000px; top: 0; width: 1200px; height: 2400px; border: 0; }
+</style>
+</head>
+<body>
+<main class="pagina">
+  <div class="k">PrismaPixel · file da pubblicare</div>
+  <h1 id="titolo">Contenuti in PNG</h1>
+  <p class="avviso">Pagina solo per te: non inoltrarla al cliente. Le slide vengono create qui nel browser, a misura reale e con le immagini a piena risoluzione.</p>
+  <p><button id="tutto" disabled>Scarica tutto (zip)</button></p>
+  <p id="stato">Preparo le slide…</p>
+  <div id="gruppi"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+const TOKEN_ANTEPRIMA = 'TOKEN_ANTEPRIMA';   // token della pagina del cliente
+const NOME_FILE = 'NOME_FILE';               // slug del cliente, es. trattoria-da-nino
+const LIB = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js';
+
+const stato = document.getElementById('stato');
+const gruppiEl = document.getElementById('gruppi');
+const tutto = document.getElementById('tutto');
+const file = []; // { percorso, blob }
+const attendi = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function caricaScript(doc, src) {
+  return new Promise((ok, ko) => { const s = doc.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => ko(new Error('libreria non caricata')); doc.head.appendChild(s); });
+}
+function piena(url) { return url.replace(/_min\.webp(\?.*)?$/, '.png'); }
+async function immaginiPiene(tela, win) {
+  const attese = [];
+  tela.querySelectorAll('img').forEach((img) => {
+    if (/_min\.webp/.test(img.src)) {
+      img.removeAttribute('srcset'); img.loading = 'eager';
+      img.src = piena(img.src);
+    }
+    attese.push(img.decode ? img.decode().catch(() => null) : Promise.resolve());
+  });
+  tela.querySelectorAll('*').forEach((el) => {
+    const bg = win.getComputedStyle(el).backgroundImage;
+    if (bg && bg.indexOf('_min.webp') >= 0) el.style.backgroundImage = bg.replace(/_min\.webp/g, '.png');
+  });
+  await Promise.all(attese);
+}
+function gruppo(titolo, didascalia) {
+  const g = document.createElement('section'); g.className = 'gruppo';
+  g.innerHTML = '<h2></h2><div class="miniature"></div>';
+  g.querySelector('h2').textContent = titolo;
+  if (didascalia) {
+    const b = document.createElement('button'); b.className = 'secondario'; b.textContent = 'Copia testo';
+    b.onclick = () => navigator.clipboard.writeText(didascalia).then(() => { b.textContent = 'Copiata'; });
+    g.querySelector('h2').appendChild(b);
+    const p = document.createElement('pre'); p.textContent = didascalia; g.appendChild(p);
+  }
+  gruppiEl.appendChild(g);
+  return g.querySelector('.miniature');
+}
+
+async function avvia() {
+  if (/^TOKEN_/.test(TOKEN_ANTEPRIMA)) { stato.innerHTML = '<span class="err">Token dell’anteprima mancante.</span>'; return; }
+  const base = location.href.replace(/[^/]+\/[^/]*$/, '');
+  const fr = document.createElement('iframe');
+  fr.src = base + TOKEN_ANTEPRIMA + '/index.html';
+  document.body.appendChild(fr);
+  await new Promise((r) => { fr.onload = r; });
+  const doc = fr.contentDocument, win = fr.contentWindow;
+  try { await doc.fonts.ready; } catch (_) { /* font di ripiego */ }
+  await caricaScript(doc, LIB);
+  await attendi(400);
+  const h2i = win.htmlToImage;
+  if (!h2i) { stato.innerHTML = '<span class="err">Non riesco a caricare lo strumento di esportazione: ricarica la pagina.</span>'; return; }
+  document.getElementById('titolo').textContent = 'Contenuti in PNG · ' + (doc.title || NOME_FILE);
+
+  const elenco = [];
+  const usate = new Set();
+  let nC = 0, nP = 0, nA = 0;
+  doc.querySelectorAll('article.post').forEach((post) => {
+    const singolo = post.dataset.tipo === 'singolo';
+    const cartella = singolo ? 'post-' + String(++nP).padStart(2, '0') : 'carosello-' + String(++nC).padStart(2, '0');
+    const tele = [...post.querySelectorAll('.cornice > .tela')];
+    tele.forEach((t) => usate.add(t));
+    const testo = (post.querySelector('.didascalia .testo') || {}).innerText || '';
+    elenco.push({ titolo: (singolo ? 'Post singolo ' + nP : 'Carosello ' + nC) + ' · ' + tele.length + (tele.length === 1 ? ' immagine' : ' slide'), cartella, tele, testo });
+  });
+  doc.querySelectorAll('article.ad').forEach((ad) => {
+    const cartella = 'annuncio-' + String(++nA).padStart(2, '0');
+    const media = ad.querySelector('.media');
+    const tela = media && media.querySelector('.tela');
+    const el = tela || media;
+    if (!el) return;
+    usate.add(el);
+    const txt = (sel) => ((ad.querySelector(sel) || {}).innerText || '').replace(/…Altro\s*$/, '').trim();
+    const tutto = (sel) => ((ad.querySelector(sel) || {}).textContent || '').replace(/…Altro\s*$/, '').trim(); // anche la parte nascosta dietro «Altro»
+    const testo = ['ETICHETTE: ' + txt('.etichette').replace(/\n+/g, ' · '), '', 'TESTO PRINCIPALE:', tutto('.testo'), '',
+      'TITOLO: ' + txt('.barra-link .titolo'), 'DESCRIZIONE: ' + txt('.barra-link .descrizione'), 'PULSANTE: ' + txt('.barra-link .cta'),
+      'DOMINIO: ' + txt('.barra-link .dominio')].join('\n');
+    elenco.push({ titolo: 'Annuncio ' + nA + ' · ' + txt('.etichette').replace(/\n+/g, ' · '), cartella, tele: [el], testo, media: !tela });
+  });
+  const altre = [...doc.querySelectorAll('.cornice > .tela')].filter((t) => !usate.has(t) && !t.closest('article.ad'));
+  if (altre.length) elenco.push({ titolo: 'Adattamenti per gli altri canali · ' + altre.length, cartella: 'adattamenti', tele: altre, testo: '' });
+
+  let fatte = 0; const totale = elenco.reduce((s, g) => s + g.tele.length, 0);
+  for (const g of elenco) {
+    const box = gruppo(g.titolo, g.testo);
+    if (g.testo) file.push({ percorso: g.cartella + '/' + (g.cartella.indexOf('annuncio') === 0 ? 'testi.txt' : 'didascalia.txt'), blob: new Blob([g.testo], { type: 'text/plain' }) });
+    for (let i = 0; i < g.tele.length; i++) {
+      const t = g.tele[i];
+      stato.textContent = 'Preparo ' + (fatte + 1) + ' di ' + totale + '…';
+      try {
+        await immaginiPiene(t, win);
+        let w = t.offsetWidth, h = t.offsetHeight, blob;
+        if (g.media) { // foto dell'annuncio con le note grafiche: ingrandita a 1080 px di larghezza
+          const k = 1080 / w;
+          blob = await h2i.toBlob(t, { pixelRatio: k });
+          w = 1080; h = Math.round(h * k);
+        } else {
+          blob = await h2i.toBlob(t, { width: w, height: h, pixelRatio: 1, style: { transform: 'none', left: '0', top: '0' } });
+        }
+        const nome = g.cartella === 'adattamenti' ? 'adattamento-' + String(i + 1).padStart(2, '0') + '-' + w + 'x' + h + '.png'
+          : g.cartella.indexOf('annuncio') === 0 ? 'immagine.png' : 'slide-' + String(i + 1).padStart(2, '0') + '.png';
+        file.push({ percorso: g.cartella + '/' + nome, blob });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = NOME_FILE + '-' + g.cartella + '-' + nome;
+        a.innerHTML = '<img alt=""><span></span>'; a.querySelector('img').src = url; a.querySelector('span').textContent = nome + ' · ' + w + '×' + h;
+        box.appendChild(a);
+      } catch (e) {
+        const s = document.createElement('span'); s.className = 'err'; s.textContent = 'Slide ' + (i + 1) + ' non esportata: ' + (e && e.message || e); box.appendChild(s);
+      }
+      fatte++;
+    }
+  }
+  stato.textContent = 'Pronte ' + fatte + ' immagini. Tocca una miniatura per scaricarla da sola, oppure scarica tutto.';
+  tutto.disabled = !file.length;
+}
+tutto.onclick = async () => {
+  tutto.disabled = true; stato.textContent = 'Preparo lo zip…';
+  const zip = new JSZip();
+  file.forEach((f) => zip.file(f.percorso, f.blob));
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = NOME_FILE + '-png.zip'; a.click();
+  stato.textContent = 'Zip scaricato.'; tutto.disabled = false;
+};
+avvia().catch((e) => { stato.innerHTML = '<span class="err">Errore: ' + (e && e.message || e) + '</span>'; });
+</script>
+</body>
+</html>

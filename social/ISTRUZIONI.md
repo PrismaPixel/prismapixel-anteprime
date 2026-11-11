@@ -287,6 +287,17 @@ Segui il contratto:
 - riga di esito con `fonte: agente_carosello_social` (sezione 4);
 - `officina_inizio` e `officina_fine` (sezione 4b).
 
+**File da pubblicare (solo per Vincenzo).** Dopo aver salvato l'anteprima del cliente:
+1. copia `social/_modello/esporta.html`, sostituisci `TOKEN_ANTEPRIMA` con il token dell'anteprima del cliente e
+   `NOME_FILE` con lo slug;
+2. salvala nella tabella Anteprime come `index.html` con un **token suo**: `<slug>-png-<6 caratteri casuali>`;
+3. il link è `https://integrazioni.app.n8n.cloud/webhook/30f9ffb0-81c6-47ee-b2da-e35b2d3982c2/anteprima/<token-png>/index.html`:
+   aprendolo, Vincenzo scarica ogni slide e ogni post in PNG (più gli adattamenti) con le didascalie a misura reale, con le immagini a piena risoluzione, in uno zip;
+4. **mai** nella pagina del cliente né nella `descrizione` per il venditore: va solo nelle note (`png: <link>`, subito
+   dopo la riga della durata) e in `officina_fine.risultato.png_url`.
+Non serve controllarla con Playwright (la pagina crea i file nel browser di Vincenzo); controlla solo che il token
+dell'anteprima sia giusto.
+
 - `descrizione` (per il venditore, 2-3 frasi): cosa c'è (es. "un carosello di 7 slide sui 5 errori…" + "un post…")
   e i 2 punti più forti per questo cliente, con parole da cliente.
 - `note` (per Vincenzo), in quest'ordine:

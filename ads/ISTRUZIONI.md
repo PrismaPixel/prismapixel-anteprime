@@ -312,6 +312,17 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
   4. per ogni indiretto: la prima riga riprende la domanda dell'immagine? Ci sono le sei tappe dello schema? Il
      testo è tra 150 e 400 parole?
   5. scorri la checklist della sezione 6 (onestà e policy) annuncio per annuncio.
+**File da pubblicare (solo per Vincenzo).** Dopo aver salvato l'anteprima del cliente:
+1. copia `ads/_modello/esporta.html`, sostituisci `TOKEN_ANTEPRIMA` con il token dell'anteprima del cliente e
+   `NOME_FILE` con lo slug;
+2. salvala nella tabella Anteprime come `index.html` con un **token suo**: `<slug>-png-<6 caratteri casuali>`;
+3. il link è `https://integrazioni.app.n8n.cloud/webhook/30f9ffb0-81c6-47ee-b2da-e35b2d3982c2/anteprima/<token-png>/index.html`:
+   aprendolo, Vincenzo scarica ogni creatività in PNG (le foto con le loro note grafiche a 1080 px) con testo, titolo, descrizione e pulsante a misura reale, con le immagini a piena risoluzione, in uno zip;
+4. **mai** nella pagina del cliente né nella `descrizione` per il venditore: va solo nelle note (`png: <link>`, subito
+   dopo la riga della durata) e in `officina_fine.risultato.png_url`.
+Non serve controllarla con Playwright (la pagina crea i file nel browser di Vincenzo); controlla solo che il token
+dell'anteprima sia giusto.
+
 - Pubblicazione, esito e Agent OS come da contratto (sezioni 3, 4 e 4b), con `fonte: agente_annunci_ads`.
   - `descrizione` (per il venditore, 2-3 frasi): quante creatività, il problema scelto per gli indiretti e il primo test.
   - `note`, in quest'ordine:
