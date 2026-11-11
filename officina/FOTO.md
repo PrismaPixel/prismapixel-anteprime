@@ -1,15 +1,17 @@
 # Foto del cliente · come le usano gli agenti
 
 Vale per caroselli e post (`carosello_social`), annunci (`annunci_ads`), landing (`landing_page`), siti (`sito_web`) e
-video AI (`video_ai`). Le foto vere del cliente vengono **sempre prima** di quelle generate.
+video AI (`video_ai`).
 
-**Eccezione: caroselli e post (`carosello_social`), annunci (`annunci_ads`), siti (`sito_web`) e landing
-(`landing_page`).** Lì le foto le genera sempre Higgsfield seguendo la reference (il pin,
-i riferimenti degli annunci, il sito modello), anche se il cliente ha già foto, e il cliente le rifà uguali con la lista scatti
-(`social/ISTRUZIONI.md`, sezione 6; `ads/ISTRUZIONI.md`, sezione 5; `siti/ISTRUZIONI.md`, sezione 4, che vale
-anche per le landing). Negli annunci le immagini generate restano
-proposte: su Meta vanno solo quelli con le foto vere del cliente. Le sue foto servono come riferimento del soggetto e, quando arrivano quelle
-rifatte, sostituiscono le generate. Il servizio qui sotto (elenco, importa, migliorare) vale anche per loro.
+**Regola attuale per tutti questi agenti:** le immagini (e i video) li genera sempre Higgsfield seguendo la
+reference (il pin, i riferimenti degli annunci, il sito modello, il video modello), anche se il cliente ha già foto, e
+il cliente le rifà uguali con la lista scatti o la lista riprese (`social/ISTRUZIONI.md`, sezione 6;
+`ads/ISTRUZIONI.md`, sezione 5; `siti/ISTRUZIONI.md`, sezione 4, che vale anche per le landing;
+`video-ai/ISTRUZIONI.md`, sezioni 2b e 10). Le foto che il cliente ha già servono come **riferimento del soggetto**
+(com'è fatto il suo prodotto, il suo locale); quando arrivano quelle rifatte, sostituiscono le generate. Negli annunci
+le immagini generate restano proposte: su Meta vanno solo quelli con le foto vere del cliente. Il servizio qui sotto
+(elenco, importa, migliorare) resta per leggere le foto del cliente e per mettere al loro posto quelle rifatte;
+l'ordine di scelta che segue vale solo dove un'istruzione lo richiama esplicitamente.
 
 ## Ordine di scelta
 
