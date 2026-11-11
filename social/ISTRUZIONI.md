@@ -78,16 +78,52 @@ Pinterest non è raggiungibile direttamente da qui: lo legge per te il workflow 
 5. Se `ok` è `false` o i riferimenti sono pochi o fuori tema, rifai **una volta** con ricerche diverse. Se va male
    anche la seconda volta, lavora senza riferimenti e scrivilo nelle note: "riferimenti Pinterest non disponibili".
 
-**Cosa prendi dai riferimenti**: gerarchia di lettura, rapporto tra testo e immagine, ritmo tra le slide, contrasto di
-scala, abbinamenti tipografici, uso dell'accento di colore, l'idea grafica che tiene unita la serie (cartolina,
-diario, numeri giganti...).
-**Cosa non prendi mai**: testi, illustrazioni, foto, loghi, marchi, composizioni identiche. Il risultato deve essere
-riconoscibile come brand del cliente, non come il pin.
+## 3a. Modalità fedele: un pin modello (di default)
 
-Scegli **una direzione**: una delle tre proposte, oppure una tua sintesi. Deve partire dai riferimenti con
-`qualita` 4 o 5 ed essere coerente con brand, settore e tono. Se nessun riferimento ha qualità 4 o più, rifai la
-ricerca (punto 5). Scrivila in `brief.md` con i numeri dei riferimenti che la ispirano. Nel livello `completa`
-tutti i contenuti seguono la stessa direzione: la serie deve sembrare un feed coerente.
+Di default **non fai una sintesi di più pin: scegli un solo pin modello e ne ricostruisci l'impaginazione**, con i
+font, i colori e le foto del cliente. Un modello preciso dà slide più pulite e coerenti di un miscuglio.
+
+1. **Scegli il pin modello** tra i riferimenti con `qualita` 4 o 5:
+   - coerente con settore, tono e obiettivo del contenuto;
+   - se il cliente ha foto (`officina/FOTO.md`), preferisci un pin che usa le foto in modo adatto alle sue (a tutta
+     pagina, in cornice, ritagliate); se non ne ha, preferisci un pin tipografico o grafico;
+   - scarta i collage di template, i pin di brand famosi riconoscibili e quelli il cui segno distintivo è
+     un'illustrazione o una mascotte del creator.
+2. **Chiedi la ricetta** al workflow n8n **"PrismaPixel · Scheda di un pin"** (id **`CHYtGbrzuhvp6xrj`**):
+   `execute_workflow` con `triggerNodeName: "Richiesta scheda"` e
+   `inputs: { "webhookData": { "method": "POST", "body": { "pin_id": "<riferimenti[n].pin_id>", "immagini": <riferimenti[n].slide_tutte>, "settore": "<settore>", "foto_cliente": <numero di foto utilizzabili> } } }`.
+   Leggi il nodo `Risultato` con `get_workflow_execution` (circa un minuto; riprova finché è `running`, massimo 4
+   minuti). Ottieni `ricetta`: margini, griglia, palette con i ruoli, tipografia (categoria, peso, misure),
+   elementi ricorrenti con come farli in CSS/SVG, **slide per slide** i blocchi con posizione e misura in px su
+   1080×1350, i posti foto, il ritmo, cosa non copiare e come adattarla con o senza foto.
+3. **Se la ricetta non arriva** (`ok: false`) o il modello ha `qualita_modello` sotto 4: prova il secondo pin
+   migliore; se va male anche quello, torna al metodo a direzione (sotto) e scrivilo nelle note.
+
+**Cosa riprendi dal modello**: griglia e margini, gerarchia, posizione e misura dei blocchi, numero e ruolo delle
+slide (adattati all'argomento), ritmo tra copertina e interne, il **sistema** di decorazioni (strisce, cornici,
+numeri grandi, fogli, bande) ricostruito in CSS o SVG tuo.
+**Cosa cambia sempre**:
+- **font**: quelli del brand del cliente; se non ne ha, un font Google della **stessa categoria** della ricetta
+  (serif display con serif display, grotesk con grotesk), mai lo stesso font del pin se è un font di marca;
+- **colori**: ogni ruolo della palette della ricetta (sfondo, testo, accento, evidenziatore) prende il colore del
+  brand che fa lo stesso lavoro; se il brand non ha colori, una palette del settore con la stessa struttura;
+- **foto**: nei posti foto vanno le foto del cliente, ritagliate alla proporzione del posto e con lo stesso
+  trattamento (cornice, ombra, bianco e nero…) se sta bene alle sue foto. Senza foto: segui
+  `ricetta.adattamento.senza_foto` (blocco di colore, forma, numero grande, illustrazione semplice in SVG) oppure
+  foto d'archivio o generate secondo `officina/FOTO.md`.
+**Cosa non prendi mai**: testi, illustrazioni, foto, loghi, marchi, mascotte, elementi disegnati a mano dal creator
+(`ricetta.da_non_copiare`). Le slide devono sembrare dello stesso "stile tipografico" del pin, ma del cliente.
+
+Le regole tecniche della sezione 6 (leggibilità, margini, contrasto) **vincono sulla ricetta**: se il modello ha
+testi più piccoli di 38 px o margini sotto 64 px, ingrandisci e sposta mantenendo le proporzioni tra i blocchi.
+Nel livello `completa` e `mese` tutti i contenuti seguono lo stesso modello: la serie deve sembrare un feed coerente.
+Nelle note per Vincenzo: link del pin modello (`pagina`) e cosa hai cambiato.
+
+**Metodo a direzione (riserva)**, solo se la modalità fedele non è possibile: scegli una delle tre direzioni
+proposte, o una tua sintesi, partendo dai riferimenti con `qualita` 4 o 5, e scrivila in `brief.md` con i numeri dei
+riferimenti che la ispirano. Da più riferimenti prendi gerarchia di lettura, rapporto tra testo e immagine, ritmo,
+contrasto di scala, abbinamenti tipografici, uso dell'accento, l'idea grafica della serie; mai testi, illustrazioni,
+foto, loghi, marchi o composizioni identiche.
 
 ## 3b. Piano editoriale e ricerca di viralità
 
@@ -154,9 +190,10 @@ Prima di passare al design, rileggi ogni contenuto con la **Checklist QA** (sezi
 
 ## 6. Design delle slide
 
-**Il design nasce dai riferimenti, non da un modello.** Prima di scrivere codice, scrivi in `brief.md` una
-**scheda di stile** ricavata dai riferimenti migliori (qualità 4-5) della direzione scelta. Nella scheda va scritto
-da quale riferimento viene ogni scelta (es. "rif. 2"):
+**Il design nasce dal pin modello (sezione 3a).** Prima di scrivere codice, scrivi in `brief.md` la **scheda di
+stile**: in modalità fedele è la ricetta tradotta per il cliente (font e colori sostituiti, ruolo per ruolo, e quale
+foto del cliente va in ogni posto foto); con il metodo a direzione è ricavata dai riferimenti migliori (qualità 4-5),
+scrivendo da quale riferimento viene ogni scelta (es. "rif. 2"):
 1. **idea grafica** che tiene unita la serie (es. cartolina, diario, numeri giganti, foto a tutto campo con testo nel cielo);
 2. **gerarchia e layout**: dove sta il titolo, quanto spazio occupa il testo, rapporto tra testo e immagine, griglia
    delle slide interne, come cambia la copertina;
@@ -167,8 +204,9 @@ da quale riferimento viene ogni scelta (es. "rif. 2"):
 5. **elementi grafici**: texture, forme, cornici, icone, segni a mano che i riferimenti usano;
 6. **segnali di carosello** (numero di slide, barra, freccia, card che spunta): solo quelli che usano i riferimenti.
 
-Ogni scelta deve venire dai riferimenti. Fanno eccezione i colori del brand e le regole tecniche qui sotto. Il
-risultato deve essere riconoscibile come brand del cliente, e nessuna slide deve essere la copia di un pin.
+Ogni scelta deve venire dal pin modello (o, nel metodo a direzione, dai riferimenti). Fanno eccezione font, colori
+e foto del cliente e le regole tecniche qui sotto. Il risultato deve essere riconoscibile come brand del cliente:
+dal pin si riprende l'impaginazione, mai testi, foto, illustrazioni o loghi.
 
 **Il visore.** `social/_modello/index.html` contiene solo la pagina di anteprima:
 - card stile Instagram, scorrimento con dito, trascinamento, frecce e puntini;
