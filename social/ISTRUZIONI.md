@@ -64,10 +64,7 @@ Pinterest non è raggiungibile direttamente da qui: lo legge per te il workflow 
    - una per il settore con "instagram carousel" (es. `boat tour instagram carousel`, `dental clinic instagram carousel`);
    - una per lo stile che il brief suggerisce (es. `editorial instagram carousel design`, `minimal luxury instagram post`);
    - una per il tipo di contenuto (es. `educational carousel design`, `travel tips carousel`);
-   - per i post singoli, se servono, aggiungi `instagram post design <settore>`;
-   - **se il cliente non ha foto utilizzabili** (`officina/FOTO.md`: nessuna foto sua o dei suoi canali), una delle
-     ricerche è per caroselli che stanno in piedi senza foto: `typography instagram carousel <settore>` o
-     `text based carousel design`. Così tra i riferimenti c'è un pin modello che non dipende dalle foto.
+   - per i post singoli, se servono, aggiungi `instagram post design <settore>`.
 2. Avvia il workflow con lo strumento n8n `execute_workflow`:
    - `workflowId: "1oek9PrhT8PB9Oa5"`, `executionMode: "production"`, `triggerNodeName: "Richiesta riferimenti"`;
    - `inputs: { "webhookData": { "method": "POST", "body": { "queries": [...], "formato": "carosello|post|entrambi", "settore": "<settore in italiano>", "n": 8 } } }`.
