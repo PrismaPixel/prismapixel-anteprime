@@ -323,6 +323,26 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
 Non serve controllarla con Playwright (la pagina crea i file nel browser di Vincenzo); controlla solo che il token
 dell'anteprima sia giusto.
 
+**Annunci in pausa su Meta (solo clienti con l'account collegato).** Per `completa` e `mese`, dopo aver registrato
+l'esito come `pronta`, carica gli annunci su Meta **in pausa** con il workflow n8n **"PrismaPixel · Annunci in pausa su
+Meta"** (id **`rh7c1OwqB1JROzNu`**): `execute_workflow`, `executionMode: "production"`,
+`triggerNodeName: "Richiesta annunci"`, `inputs: { "webhookData": { "method": "POST", "body": { ... } } }` con:
+- `job_id`: il tuo `job_id`. Account pubblicitario e Pagina li prende il workflow dagli accessi del cliente: **non
+  passarli mai tu**;
+- `annunci`: fino a 10, uno per creatività, `{ codice, testo, titolo, descrizione, cta, link, immagine_url |
+  immagine_base64 }`. `testo` è il testo principale intero; `cta` è la scritta del pulsante in italiano
+  ("Scopri di più", "Prenota", "Contattaci", "Iscriviti", "Acquista", "Richiedi preventivo"); `link` è la pagina vera
+  di destinazione (https, con i parametri UTM della convenzione dei nomi). Per le foto passa `immagine_url` col link
+  `.png` a piena risoluzione; per le grafiche fatte in HTML esporta il PNG a 1080 px con Playwright e passalo come
+  `immagine_base64`;
+- `budget_giornaliero_eur` solo se il cliente l'ha deciso (altrimenti il workflow mette 5 € come segnaposto e lo
+  dice); `paesi` (codici ISO, predefinito `["IT"]`).
+Il workflow crea campagna (obiettivo traffico), un gruppo e gli annunci **tutti in pausa**: non parte nessuna spesa.
+Avvisa Vincenzo su Telegram con il link a Gestione inserzioni; pubblico, posizionamenti, budget e accensione li decide
+lui. Leggi il nodo `Risultato` (o `Errore`) con `get_workflow_execution` e scrivi nelle note
+`meta: <n> annunci in pausa, campagna <id>` oppure il motivo per cui non è stato fatto (es. "account Meta del cliente
+non collegato"). Una seconda chiamata per lo stesso lavoro viene rifiutata: non ripetere.
+
 - Pubblicazione, esito e Agent OS come da contratto (sezioni 3, 4 e 4b), con `fonte: agente_annunci_ads`.
   - `descrizione` (per il venditore, 2-3 frasi): quante creatività, il problema scelto per gli indiretti e il primo test.
   - `note`, in quest'ordine:
