@@ -130,7 +130,10 @@ campi vuoti e cosa serve per riempirli. Rifai i calcoli in Python.
 **Tetti per gli annunci**: dal CAC sostenibile ricava il tetto di costo per contatto (es. 1 cliente ogni 5 contatti e
 CAC sostenibile 60 € → contatto sotto 12 €) e la regola di prova di `100m-leads` (un annuncio in test può spendere fino
 a 2 volte quanto paga un cliente nei primi 30 giorni, se porta contatti; si spegne prima di 1 volta se non ne porta).
-Passano all'agente `annunci_ads` in `risultato.numeri`.
+Passano all'agente `annunci_ads` in `risultato.numeri`. Salva anche la prima riga dei conti del cliente, che report
+e annunci aggiorneranno con i dati veri: `select numeri_salva('<job_id>', '{"ltgp": …, "cac": …, "cac_sostenibile": …,
+"tetto_costo_contatto": …, "clienti_nuovi": …, "fonte": {"consulenza": "dati del cliente|ipotesi|riferimento"}}');`
+(solo i numeri che hai, in euro senza simboli; per un numero `[ipotesi]` scrivilo nella `fonte`).
 
 Nella pagina: una tabella (voce · valore · da dove viene), il **piano di una pagina** di `100m-leads` (cosa si cerca,
 impegno quotidiano, lista delle azioni del giorno, il numero da guardare ogni settimana, quando delegare) e due frasi

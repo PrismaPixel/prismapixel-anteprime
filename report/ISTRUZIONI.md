@@ -112,6 +112,56 @@ nel blocco Siti/ADS visite e conversioni di GA4, con il canale che porta più co
 stesso con 2a e 2b, e chiude con una riga gentile: "Se ci colleghi Google Analytics e Search Console, dal prossimo mese
 vedi anche visite e contatti".
 
+### 2d. I conti degli annunci (solo per chi paga Gestione ADS)
+
+Servono a dire al cliente se gli annunci **rendono**, non solo quanto costano. Si costruiscono con tre fonti: i
+**dati Meta** del mese (sopra), i **numeri che il cliente ci ha dato** (clienti nuovi, quanti dagli annunci, quanto
+hanno speso) e i **numeri della consulenza strategica** (valore di un cliente, costo sostenibile, tetti).
+
+1. Leggi tutto con `execute_sql`: `select numeri_per_lavoro('<job_id del report>');`. Ottieni:
+   - `questo_mese`: la riga del mese (con `clienti_nuovi`, `clienti_da_annunci`, `ricavo_nuovi` se il cliente li ha
+     inviati: `dichiarati: true`);
+   - `consulenza`: i `numeri` dell'ultima consulenza (`ltv`/LTGP, `cac_sostenibile`, `tetto_costo_contatto`, …) e la
+     data;
+   - `storico`: i mesi precedenti (massimo 12), per il confronto e per aggiornare i tetti;
+   - `link_cliente`: il link personale per inviare i numeri, se **non** li ha ancora mandati.
+   I numeri li chiede Vincenzo al cliente il 1° del mese (workflow "Numeri del cliente"): non scrivere tu al cliente.
+2. **Calcola in Python** (mai a mente), solo con i numeri che ci sono:
+   - **contatti del mese** = risultati Meta che sono contatti veri (conversazioni avviate, contatti, contatti dal sito,
+     prenotazioni, registrazioni), senza contare due volte lo stesso tipo (`lead` e `contatti dal sito` sono spesso lo
+     stesso contatto: prendi il maggiore);
+   - **costo per contatto** = spesa ÷ contatti;
+   - **costo per cliente dagli annunci** (CAC degli annunci) = spesa ÷ `clienti_da_annunci`; se il cliente non sa
+     quanti arrivano dagli annunci, non calcolarlo e scrivilo;
+   - **scontrino medio dei clienti nuovi** = `ricavo_nuovi` ÷ `clienti_nuovi`;
+   - **contatti che diventano clienti** = `clienti_da_annunci` ÷ contatti;
+   - **rapporto valore:costo** = LTGP della consulenza ÷ CAC degli annunci (riferimento: almeno 3 a 1);
+   - **ROAS di Meta** = `valore_acquisti` ÷ spesa, solo se Meta lo dà (e-commerce con Pixel).
+3. **Confronta con le soglie** della consulenza (o, se ci sono almeno 3 mesi di dati veri, con le soglie aggiornate
+   sotto): costo per contatto contro `tetto_costo_contatto`, CAC degli annunci contro `cac_sostenibile`. Ogni
+   confronto dice da dove viene la soglia ("dalla consulenza di settembre, su stime del cliente").
+4. **Diagnosi**, con le parole della consulenza: contatti buoni ma pochi clienti → il problema è la **vendita**, non
+   l'annuncio; CAC nella norma ma margini bassi → la leva è il **modello** (prezzo, offerte aggiuntive, ritorni);
+   pochi contatti o troppo cari → è l'**acquisizione** (creatività, pubblico, offerta). Una sola diagnosi, quella
+   che i numeri sostengono.
+5. **Soglie aggiornate**: se nello `storico` più questo mese ci sono almeno **3 mesi** con contatti e
+   `clienti_da_annunci`, ricalcola il tetto per contatto con la percentuale vera di contatti che diventano clienti
+   (`cac_sostenibile` × clienti dagli annunci ÷ contatti, sui 3 mesi) e salvalo: da quel momento vale quello, non la
+   stima della consulenza. Scrivilo nelle note per Vincenzo.
+6. **Salva** sempre la riga del mese: `select numeri_salva('<job_id>', '{"spesa_ads": …, "contatti": …,
+   "acquisti_meta": …, "valore_acquisti_meta": …, "costo_contatto": …, "cac_annunci": …, "scontrino_medio": …,
+   "roas": …, "ltgp": …, "rapporto": …, "cac_sostenibile": …, "tetto_costo_contatto": …, "fonte": {"tetti":
+   "consulenza|ricalcolati su 3 mesi"}}');`. Metti solo i numeri che hai davvero (niente zeri al posto dei vuoti). I
+   numeri dichiarati dal cliente non si toccano.
+
+**Nella pagina**, dentro il blocco Gestione ADS, una parte **"I conti degli annunci"**: al massimo 4 numeri (costo per
+contatto, costo per cliente dagli annunci, scontrino medio, rapporto valore:costo), ognuno con la soglia accanto
+("sotto il tetto di 12 €": meglio/peggio con parola e colore) e il mese prima; poi "Cosa vuol dire" con la diagnosi
+e la decisione del mese prossimo (spegnere, scalare, cambiare offerta, lavorare sulla vendita). Senza dati del
+cliente mostra solo spesa, contatti e costo per contatto, e in **"Cosa ci serve da te"** scrivi: "Quanti clienti
+nuovi hai avuto a <mese>, e quanti dagli annunci? Ci vuole un minuto: <link_cliente>". Niente gergo: CAC diventa
+"quanto ci costa un cliente nuovo", LTGP "quanto ti fa guadagnare un cliente nel tempo".
+
 ## 3. Struttura della pagina
 
 1. **Il mese in breve**: 3 frasi. La cosa più importante fatta, il risultato più chiaro, la priorità del mese
@@ -160,6 +210,7 @@ suo sito o del profilo social, sobri.
     In `migliori` vanno i contenuti del mese che hanno reso almeno il doppio della mediana del cliente: diventano i
     vincitori del piano editoriale (`officina/PIANO-EDITORIALE.md`, sezione 4b). Se nel mese sono uscite delle
     **riprese**, scrivi la loro resa in `"riprese": [{"url": "...", "vincitore": "<url originale>", "resa": 1.2}]`;
+  - in `misure.annunci` copia i conti del mese (gli stessi salvati con `numeri_salva`);
   - `fatti`: 1-3 risultati verificati del mese (`tipo: "risultato"`), ad esempio "In ottobre è passato dal 12° al 7°
     posto per «pizzeria bari centro»";
   - `ecosistema`: aggiorna le aree dei servizi seguiti, con quello che hai verificato;
