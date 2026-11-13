@@ -289,13 +289,7 @@ Sezione "La strategia" della pagina, in linguaggio da cliente:
    clic verso l'offerta, richieste o vendite), non solo sui clic. Un indiretto può avere meno clic di un diretto e
    vincere lo stesso. Va lasciato correre qualche giorno: il pubblico freddo decide più lentamente del remarketing.
    Mai spegnere un indiretto al secondo giorno perché non converte come il remarketing.
-4. **Tetti di costo**: leggi `select numeri_per_lavoro('<job_id>');`. Le soglie valgono in quest'ordine: quelle
-   **ricalcolate sui dati veri** nelle righe più recenti (`questo_mese` o `storico`, `fonte.tetti = "ricalcolati su 3
-   mesi"`), poi quelle della **consulenza** (`consulenza.numeri`: `tetto_costo_contatto`, `cac_sostenibile`,
-   `tetto_test_annuncio`), citandone sempre la fonte. Usale per decidere cosa spegnere e cosa scalare (punti 6 e 7).
-   Nel livello `mese` la nota di ottimizzazione usa anche quanti contatti diventano clienti (`clienti_da_annunci`
-   dello storico): se i contatti costano poco ma pochi comprano, il problema è la vendita e lo scrivi; se il cliente
-   non ha ancora inviato i numeri, scrivi che manca questa informazione.
+4. **Tetti di costo**: se nel contesto c'è una consulenza (`roadmap`) con `risultato.numeri`, usa `tetto_costo_contatto` e `cac_sostenibile` come soglie per decidere cosa spegnere e cosa scalare (punti 6 e 7), citandone la fonte.
 5. **Budget**: ripartizione in **percentuale** tra scoperta, remarketing e test. Cifre in euro solo se il brief indica
    un budget.
 6. **Le tre fasi della spesa** (da `100m-leads`): **tracciare** prima di spendere (Pixel, eventi, UTM); **pagare per
