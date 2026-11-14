@@ -90,7 +90,10 @@ Leggi il risultato con `get_workflow_execution` (`includeData: true`, `nodeNames
 - `senza_inserzioni: true`: nel mese non è girata nessuna inserzione. Scrivilo così ("questo mese le campagne erano
   ferme"), non come risultati a zero.
 - La spesa è nella valuta dell'account. Nel report mostra spesa, risultati e costo per risultato (spesa ÷ risultati,
-  calcolato da te); clic e CTR solo se aiutano a spiegare. Per il pubblico dei social organici restano i dati pubblici
+  calcolato da te); clic e CTR solo se aiutano a spiegare. Se c'è `conversioni_pixel` (Pixel installato nel sito),
+  usa quelle come risultato principale: contatti, prenotazioni e acquisti dal sito con il loro costo per risultato,
+  valore degli acquisti e ROAS (valore ÷ spesa). Nella consulenza strategica il costo per contatto e per acquisto
+  dal sito è il costo di acquisizione degli annunci Meta. Per il pubblico dei social organici restano i dati pubblici
   di 2b.
 
 **Insights social.** Avvia con `execute_workflow`: `workflowId: "UAvE9NVsNXxnaW42"`, `executionMode: "production"`,

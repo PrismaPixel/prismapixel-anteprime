@@ -37,11 +37,36 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
      impostazioni di quel tag.
   3. **Dati forniti dagli utenti** (raccolta automatica di email, telefono, indirizzo dai moduli): GTM la accende da
      solo, il workflow la **spegne**. Non riaccenderla.
-  3. Pixel di Meta e tag di Google Ads **solo se ci sono annunci**, con controllo del consenso `ad_storage`.
+  3. Pixel di Meta e tag di Google Ads **solo se ci sono annunci**, con controllo del consenso `ad_storage`. Il Pixel
+     lo aggiunge il workflow "Meta Pixel nel sito" (sezione 1b), non a mano.
   4. Impostazioni del contenitore → **Panoramica del consenso** attiva; i tag Google usano il consenso integrato,
      gli altri richiedono `ad_storage` o `analytics_storage`.
 - Prova con **Anteprima** (Tag Assistant): senza consenso nessun cookie `_ga`; dopo "Accetta tutti" gli eventi arrivano
   in GA4 → Rapporti in tempo reale.
+
+## 1b. Pixel di Meta (clienti con annunci Meta)
+
+- Il Pixel è **del cliente**: lo crea lui nel suo Business Manager (Gestione eventi → Collega origini dati → Web) e
+  dà a PrismaPixel l'accesso partner. Va verificato anche il dominio (Impostazioni dell'azienda → Domini).
+- In accessi: fonte `meta_pixel`, riferimento = ID numerico del Pixel (si registra con `accesso_registra`).
+- Workflow n8n **"PrismaPixel · Meta Pixel nel sito"** (id `s66NpdnaJO3PO66t`): `execute_workflow`,
+  `executionMode: "production"`, `triggerNodeName: "Richiesta Pixel"`,
+  `inputs: { "webhookData": { "method": "POST", "body": { "client_id": <id> } } }`. Richiede il contenitore GTM nell'account
+  di PrismaPixel (fonte `gtm`). In una nuova area di lavoro crea:
+  - **Meta Pixel · base (PageView)** su tutte le pagine e sull'evento `consenso_aggiornato` (chi accetta dopo);
+  - **Lead** su `generate_lead`, **Contact** su `click_whatsapp`/`click_telefono`/`click_email`, **Schedule** su
+    `prenotazione` (moduli con `data-modulo="prenotazione"`), **InitiateCheckout** su `begin_checkout`, **Purchase** su
+    `purchase` con `valore` e `valuta` del dataLayer;
+  - tutti con controllo del consenso `ad_storage`: senza "Accetta" marketing non parte niente. Ogni evento ha un
+    `eventID` per la futura Conversions API;
+  - poi crea e pubblica la versione e scrive "installato in GTM …" negli accessi.
+- **Settore sanitario** (cliniche, studi medici, dentisti, fisioterapisti, psicologi, farmacie…): solo PageView, Lead
+  e Contact. Meta limita i dati dei siti di salute: negli indirizzi delle pagine e nei titoli niente nomi di malattie o
+  condizioni (`/servizi/visite`, non `/cura-dell-acne`).
+- Esito: `ok`, `tag`, `versione`, `errori`. Se dice "già installato", non serve rifarlo. Se il contenitore non è
+  nell'account di PrismaPixel, il Pixel va aggiunto da chi gestisce quel GTM.
+- Prova: Meta → Gestione eventi → Test eventi, apri il sito, accetta i cookie di marketing, invia un modulo di prova.
+- La **cookie policy** del cliente deve citare il Pixel di Meta.
 
 ## 2. Lato server (solo per clienti con annunci attivi o e-commerce)
 

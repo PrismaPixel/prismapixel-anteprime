@@ -59,6 +59,14 @@ il regalo che sa di già visto, il tavolo che non si trova.
 4. **Tracciamento**: avvia la **Scansione sito** (workflow n8n `wpWXlrLMafvO1viE`, come nell'audit, sezione 1) se il
    cliente ha un sito. Se non c'è il Meta Pixel (`riepilogo.tracciamento`), la prima cosa della strategia è
    installarlo, insieme agli eventi di conversione. Senza tracciamento i test non si possono leggere.
+   Per i clienti con accesso: se negli accessi c'è `meta_pixel` e il sito è nostro (GTM di PrismaPixel), il Pixel lo
+   installa il workflow "PrismaPixel · Meta Pixel nel sito" (`pubblicazione/tracciamento/IMPOSTAZIONE.md`, 1b);
+   se manca `meta_pixel`, nelle note chiedi a Vincenzo di farsi dare l'ID del Pixel dal cliente. Con il Pixel
+   installato avvia anche **"PrismaPixel · Pubblici Meta"** (id `eicK9RdCyCYpiDQG`, `triggerNodeName: "Richiesta
+   pubblici"`, body `{ "client_id": <id> }`): crea visitatori 30 e 180 giorni, contatti e acquirenti 180 giorni e i
+   simili all'1% in Italia (settore sanitario: solo visitatori). Usali nel piano: retargeting sui visitatori,
+   esclusione di chi ha già lasciato il contatto o comprato, simili per i nuovi clienti. Se risponde che mancano i
+   termini dei pubblici personalizzati, scrivi a Vincenzo il link che restituisce.
 
 ## 3. Cosa produrre
 
@@ -351,7 +359,11 @@ Meta"** (id **`rh7c1OwqB1JROzNu`**): `execute_workflow`, `executionMode: "produc
   `immagine_base64`;
 - `budget_giornaliero_eur` solo se il cliente l'ha deciso (altrimenti il workflow mette 5 € come segnaposto e lo
   dice); `paesi` (codici ISO, predefinito `["IT"]`).
-Il workflow crea campagna (obiettivo traffico), un gruppo e gli annunci **tutti in pausa**: non parte nessuna spesa.
+- `obiettivo`: `contatti` (evento `LEAD`, o `CONTACT` / `SCHEDULE` in `evento`), `vendite` (`PURCHASE` o
+  `INITIATED_CHECKOUT`) o `traffico`; predefinito `auto` = contatti. Il workflow ottimizza sull'evento del Pixel
+  **solo se il Pixel è installato nel sito**; altrimenti, e sempre per il settore sanitario, fa una campagna sul
+  traffico e lo spiega nell'avviso.
+Il workflow crea campagna, un gruppo e gli annunci **tutti in pausa**: non parte nessuna spesa.
 Avvisa Vincenzo su Telegram con il link a Gestione inserzioni; pubblico, posizionamenti, budget e accensione li decide
 lui. Leggi il nodo `Risultato` (o `Errore`) con `get_workflow_execution` e scrivi nelle note
 `meta: <n> annunci in pausa, campagna <id>` oppure il motivo per cui non è stato fatto (es. "account Meta del cliente

@@ -13,6 +13,10 @@
   }, true);
   document.addEventListener('submit', function (e) {
     var f = e.target;
-    if (f && f.tagName === 'FORM' && !f.hasAttribute('data-no-evento')) invia(f.dataset.evento || 'generate_lead', { modulo: f.id || f.getAttribute('name') || 'modulo' });
+    if (!f || f.tagName !== 'FORM' || f.hasAttribute('data-no-evento')) return;
+    var modulo = f.id || f.getAttribute('name') || 'modulo';
+    invia(f.dataset.evento || 'generate_lead', { modulo: modulo });
+    // Le richieste di prenotazione contano anche come prenotazione (Pixel di Meta: Schedule)
+    if ((f.dataset.modulo || '') === 'prenotazione') invia('prenotazione', { modulo: modulo });
   }, true);
 })();

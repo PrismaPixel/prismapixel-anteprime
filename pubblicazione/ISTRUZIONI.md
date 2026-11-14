@@ -102,6 +102,9 @@ File da aggiungere:
 - **prima** avvia il workflow **"PrismaPixel · Crea tracciamento"** (`IMPOSTAZIONE.md`, sezione 1): crea GA4 e GTM
   negli account di PrismaPixel e ti restituisce l'ID `GTM-…` (se ci sono già, li restituisce). Se risponde con
   `errori` o senza `gtm`, scrivili nelle note e nella scheda come bloccante ("tracciamento da completare");
+- **Pixel di Meta**: se negli accessi del cliente c'è la fonte `meta_pixel` (ID del Pixel del suo Business Manager),
+  dopo Crea tracciamento avvia **"PrismaPixel · Meta Pixel nel sito"** (`IMPOSTAZIONE.md`, sezione 1b). Non si
+  incolla mai il codice del Pixel nelle pagine: passa solo da GTM, con il consenso marketing;
 - in ogni pagina, prima cosa dentro `<head>`, il blocco di `pubblicazione/tracciamento/testa.html` (consenso negato
   all'avvio, Consent Mode v2, GTM) con quell'ID; subito dopo `<body>` il `noscript` di GTM; prima di `</body>` i tre
   script. Senza ID lascia `GTM-XXXXXXX`: è un **bloccante** della scheda;
