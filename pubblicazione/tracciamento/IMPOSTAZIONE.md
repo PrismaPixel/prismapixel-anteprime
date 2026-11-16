@@ -68,6 +68,21 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
 - Prova: Meta → Gestione eventi → Test eventi, apri il sito, accetta i cookie di marketing, invia un modulo di prova.
 - La **cookie policy** del cliente deve citare il Pixel di Meta.
 
+## 1c. Conversions API leggera (moduli del sito → Meta, senza server)
+
+- Quando un modulo arriva bene, la funzione Supabase `modulo` registra l'evento **Lead** (e **Schedule** per
+  `data-modulo="prenotazione"`) in `conversioni_meta`, **solo se** il visitatore ha accettato i cookie di marketing,
+  il Pixel del cliente è installato dal workflow (1b) e il cliente non è del settore sanitario.
+- Dati mandati: IP, browser, cookie `_fbp`/`_fbc`, email e telefono **solo codificati** (SHA-256), pagina senza
+  parametri. Mai il testo del modulo. `event_id` uguale a quello del Pixel (eventi.js): Meta conta una volta sola.
+- Il workflow n8n **"PrismaPixel · Conversions API Meta"** (id `4jQSs3QDTH8PbXDK`) li manda ogni 5 minuti con la
+  credenziale "Facebook Graph account 2": il Pixel deve essere **assegnato a quell'utente** nel Business Manager di
+  PrismaPixel (Impostazioni → Origini dati → Set di dati → Assegna). Se Meta rifiuta, avviso su Telegram (uno al
+  giorno per Pixel), 5 tentativi, poi l'evento resta in errore. Le righe si cancellano dopo 7 giorni dall'invio.
+- Prova: Gestione eventi → Panoramica del Pixel, gli eventi Lead mostrano "Browser e server" e la deduplicazione.
+- Privacy e cookie policy del cliente: citare la Conversions API di Meta (invio dal server degli eventi dei moduli,
+  con email e telefono codificati, solo con consenso marketing).
+
 ## 2. Lato server (solo per clienti con annunci attivi o e-commerce)
 
 - **Perché**: le conversioni arrivano ad annunci e GA4 anche con blocchi del browser e cookie brevi di Safari; i dati

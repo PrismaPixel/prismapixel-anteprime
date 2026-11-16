@@ -132,7 +132,9 @@ File da aggiungere:
   - senza `brief.email_moduli` (o con un indirizzo su un altro dominio): **bloccante** "indirizzo aziendale per i moduli
     da chiedere al cliente"; il sito non va online con moduli che non arrivano;
   - nella privacy del cliente vanno indicati **Resend** (invio dei messaggi dei moduli) e Supabase (registro anti-spam
-    senza contenuti) come fornitori, insieme a Cloudflare;
+    senza contenuti) come fornitori, insieme a Cloudflare; se c'è il Pixel di Meta, anche la **Conversions API**
+    (`tracciamento/IMPOSTAZIONE.md`, sezione 1c): `moduli.js` ed `eventi.js` vanno copiati **tutti e due** e
+    `eventi.js` caricato prima di `moduli.js`;
 - **lato server** solo se il cliente ha **annunci attivi** (servizio Gestione ADS, accesso `meta` con inserzioni,
   Google Ads) o vende online: nel sito non cambia niente, si imposta in GTM (scheda, sezione "Misure"). Negli altri
   casi scrivi nella scheda "lato server: non necessario".

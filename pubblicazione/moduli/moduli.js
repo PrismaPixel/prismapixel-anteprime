@@ -8,6 +8,11 @@
   var OK = 'Grazie! Abbiamo ricevuto il tuo messaggio e ti rispondiamo al più presto.';
   var KO = 'Non siamo riusciti a inviare il messaggio. Riprova tra poco oppure contattaci per telefono.';
 
+  function biscotto(nome) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + nome + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
   function esito(form, testo, ok) {
     var el = form.querySelector('[data-esito]');
     if (!el) { el = document.createElement('p'); el.setAttribute('data-esito', ''); form.appendChild(el); }
@@ -27,10 +32,21 @@
       if (k === '_hp') { hp = String(v); return; }
       if (typeof v === 'string') campi[k] = v;
     });
+    // Conversions API di Meta: solo con il consenso ai cookie di marketing (banner consenso.js)
+    var mkt = false;
+    try { mkt = !!(window.CookieConsent && CookieConsent.acceptedCategory('marketing')); } catch (e) { mkt = false; }
+    var extra = { consenso_marketing: mkt, event_id: form.dataset.eventId || '' };
+    if (mkt) {
+      extra.url = location.href;
+      extra.fbp = biscotto('_fbp');
+      extra.fbc = biscotto('_fbc');
+      var clid = new URLSearchParams(location.search).get('fbclid');
+      if (!extra.fbc && clid) extra.fbc = 'fb.1.' + Date.now() + '.' + clid;
+    }
     fetch(URL_FUNZIONE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: form.getAttribute('data-modulo') || 'contatto', campi: campi, _hp: hp, pagina: location.pathname })
+      body: JSON.stringify(Object.assign({ tipo: form.getAttribute('data-modulo') || 'contatto', campi: campi, _hp: hp, pagina: location.pathname }, extra))
     }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, j: j }; }); })
       .then(function (x) {
         if (x.ok) { form.reset(); esito(form, OK, true); }

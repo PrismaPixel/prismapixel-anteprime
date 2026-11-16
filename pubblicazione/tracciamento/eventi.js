@@ -15,8 +15,11 @@
     var f = e.target;
     if (!f || f.tagName !== 'FORM' || f.hasAttribute('data-no-evento')) return;
     var modulo = f.id || f.getAttribute('name') || 'modulo';
-    invia(f.dataset.evento || 'generate_lead', { modulo: modulo });
+    // Stesso identificativo per il Pixel (browser) e la Conversions API (moduli.js → server): Meta conta l'evento una volta sola
+    var id = 'pp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    f.dataset.eventId = id;
+    invia(f.dataset.evento || 'generate_lead', { modulo: modulo, event_id: id });
     // Le richieste di prenotazione contano anche come prenotazione (Pixel di Meta: Schedule)
-    if ((f.dataset.modulo || '') === 'prenotazione') invia('prenotazione', { modulo: modulo });
+    if ((f.dataset.modulo || '') === 'prenotazione') invia('prenotazione', { modulo: modulo, event_id: id + '-s' });
   }, true);
 })();
