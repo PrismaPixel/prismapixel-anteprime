@@ -146,6 +146,10 @@ File da aggiungere:
 - **P.IVA** e ragione sociale nel piè di pagina di tutte le pagine (obbligatorio per chi ha partita IVA);
 - pagina o link alla **privacy** del cliente; se il sito usa strumenti che tracciano (Analytics, pixel di Meta,
   mappe o video incorporati) serve anche il **banner dei cookie** con rifiuto facile come l'accetto;
+- **privacy e cookie policy aggiornate con gli strumenti installati**: segui `pubblicazione/tracciamento/POLICY.md`.
+  Se le pagine sono nostre, inserisci tu i blocchi (GA4, GTM, Meta Pixel, Conversions API, moduli, server di misura:
+  solo quelli attivi). Se la policy è del cliente (iubenda, consulente), metti nella scheda il testo da aggiungere.
+  Nella scheda sempre "policy da far approvare al cliente";
 - telefono, email e indirizzo solo dal brief: i segnaposto ("da inserire") rimasti sono bloccanti.
 
 Controlla in locale prima di salvare: tutti i link interni portano a file che esistono, nessun riferimento a
@@ -231,7 +235,9 @@ lavoro di Vincenzo, in ordine, con caselle da spuntare. Sobria, leggibile da tel
    - email: tabella dei record da avere (sezione 6).
 4b. **Misure** (`pubblicazione/tracciamento/IMPOSTAZIONE.md`): GA4 e contenitore GTM del cliente con i tag e gli eventi
    elencati, prova con Anteprima di GTM; **lato server** su Cloud Run solo se indicato, con il costo da comunicare al
-   cliente; `misure.<dominio>` su Cloudflare senza proxy; la cookie policy aggiornata con gli strumenti usati.
+   cliente; `misure.<dominio>` su Cloudflare senza proxy; privacy e cookie policy aggiornate con gli strumenti usati
+   (`pubblicazione/tracciamento/POLICY.md`). Se il Pixel arriva **dopo** la pubblicazione, il lavoro di aggiornamento
+   del sito rifà solo questo passo e ripubblica.
    Il progetto Replit (sezione 4b) con il comando per ripubblicare.
 5. **Subito dopo** (entro 1 ora): sito raggiungibile in HTTPS, 10 reindirizzamenti più importanti provati a mano,
    una mail di prova inviata e ricevuta dal cliente, **Search Console**: la avvia da solo il Regista quando i

@@ -66,7 +66,7 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
 - Esito: `ok`, `tag`, `versione`, `errori`. Se dice "già installato", non serve rifarlo. Se il contenitore non è
   nell'account di PrismaPixel, il Pixel va aggiunto da chi gestisce quel GTM.
 - Prova: Meta → Gestione eventi → Test eventi, apri il sito, accetta i cookie di marketing, invia un modulo di prova.
-- La **cookie policy** del cliente deve citare il Pixel di Meta.
+- La **cookie policy** del cliente deve citare il Pixel di Meta: blocchi pronti in `POLICY.md`.
 
 ## 1c. Conversions API leggera (moduli del sito → Meta, senza server)
 
