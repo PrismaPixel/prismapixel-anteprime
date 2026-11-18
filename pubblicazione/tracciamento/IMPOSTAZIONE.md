@@ -79,7 +79,17 @@ già non crea niente. Dopo, nella scheda resta solo da collegare Search Console 
   credenziale "Facebook Graph account 2": il Pixel deve essere **assegnato a quell'utente** nel Business Manager di
   PrismaPixel (Impostazioni → Origini dati → Set di dati → Assegna). Se Meta rifiuta, avviso su Telegram (uno al
   giorno per Pixel), 5 tentativi, poi l'evento resta in errore. Le righe si cancellano dopo 7 giorni dall'invio.
+- **Acquisti** (e-commerce fatti da noi): nella pagina di conferma dell'ordine metti
+  `<div data-acquisto data-ordine="<numero ordine>" data-valore="<totale>" data-valuta="EUR" data-email="<email del
+  cliente>" hidden></div>` (email e `data-telefono` facoltativi, compilati dal carrello). `eventi.js` manda `purchase` nel
+  dataLayer (GA4 e Pixel, `event_id` `pp-ord-<ordine>`) e, solo con il consenso marketing, lo stesso acquisto alla
+  funzione Supabase `acquisto` → `conversioni_meta` → Conversions API. Una volta per ordine anche se la pagina si
+  ricarica. Il sito deve essere registrato in `siti_moduli` (lo fa la pubblicazione dei moduli).
+  E-commerce **non nostri** (Shopify, WooCommerce, PrestaShop): si usa l'integrazione ufficiale Meta della piattaforma,
+  che ha già la Conversions API; il nostro Pixel in GTM va tolto per non contare due volte.
 - Prova: Gestione eventi → Panoramica del Pixel, gli eventi Lead mostrano "Browser e server" e la deduplicazione.
+  Per vederli in **Test eventi** anche dal server: copia il codice di prova (TEST12345) e apri il sito con
+  `?pp_test=TEST12345` nell'indirizzo; moduli e acquisti di quella sessione arrivano come eventi di prova.
 - Privacy e cookie policy del cliente: citare la Conversions API di Meta (invio dal server degli eventi dei moduli,
   con email e telefono codificati, solo con consenso marketing).
 

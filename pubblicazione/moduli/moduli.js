@@ -36,6 +36,7 @@
     var mkt = false;
     try { mkt = !!(window.CookieConsent && CookieConsent.acceptedCategory('marketing')); } catch (e) { mkt = false; }
     var extra = { consenso_marketing: mkt, event_id: form.dataset.eventId || '' };
+    try { extra.test_code = sessionStorage.getItem('pp_test') || ''; } catch (e) { extra.test_code = ''; }
     if (mkt) {
       extra.url = location.href;
       extra.fbp = biscotto('_fbp');
